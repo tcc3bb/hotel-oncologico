@@ -1,0 +1,355 @@
+USUÁRIOS:
+
+
+
+
+ADMIN
+
+
+
+PACIENTES:
+CREATE TABLE IF NOT EXISTS `pacientes` (
+  -- 🔹 Identificação básica
+  `paciente_id` INT NOT NULL AUTO_INCREMENT,
+  `usuario_id` INT NOT NULL, 
+  `paciente_nome` VARCHAR(255) NOT NULL,
+  `paciente_rg` VARCHAR(20) DEFAULT NULL,
+  `paciente_cpf` VARCHAR(14) NOT NULL UNIQUE,
+`paciente_nacionalidade` VARCHAR(100) DEFAULT 'Brasileira',
+  `paciente_foto_perfil` VARCHAR(255) DEFAULT NULL, -- Caminho da imagem de perfil
+
+  -- 🔹 Dados pessoais
+  `paciente_data_nascimento` DATE DEFAULT NULL,
+  `paciente_sexo` ENUM('Masculino','Feminino','Outro') DEFAULT NULL,
+  `paciente_estado_civil` ENUM('Solteiro','Casado','Divorciado','Viúvo','Outro') DEFAULT NULL,
+  `paciente_altura` DECIMAL(5,2) DEFAULT NULL,
+  `paciente_peso` DECIMAL(5,2) DEFAULT NULL,
+  `paciente_tipo_sanguineo` VARCHAR(5) DEFAULT NULL,
+  `paciente_profissao` VARCHAR(100) DEFAULT NULL,
+
+  -- 🔹 Contato e endereço
+  `paciente_telefone` VARCHAR(20) DEFAULT NULL,
+  `paciente_email` VARCHAR(100) DEFAULT NULL,
+  `paciente_logradouro` VARCHAR(255) DEFAULT NULL,
+  `paciente_numero` VARCHAR(10) DEFAULT NULL,
+  `paciente_bairro` VARCHAR(100) DEFAULT NULL,
+  `paciente_cidade` VARCHAR(100) DEFAULT NULL,
+  `paciente_estado` VARCHAR(50) DEFAULT NULL,
+  `paciente_cep` VARCHAR(10) DEFAULT NULL,
+
+  -- 🔹 Informações de hospedagem / internação
+  `paciente_data_checkin` DATE NOT NULL,
+  `paciente_data_checkout_previsto` DATE NOT NULL,
+  `paciente_acomodacao_atual` VARCHAR(50) DEFAULT NULL,
+  `paciente_acompanhante_nome` VARCHAR(255) DEFAULT NULL,
+  `paciente_acompanhante_telefone` VARCHAR(20) DEFAULT NULL,
+    `paciente_acompanhante_email` VARCHAR(100) DEFAULT NULL,
+  `paciente_preferencia_quarto` ENUM('Individual','Duplo','Coletivo') DEFAULT NULL,
+  `paciente_necessidades_especiais_hospedagem` TEXT,
+  `paciente_restricoes_mobilidade` TEXT,
+  `paciente_restricoes_alimentares` TEXT,
+
+  -- 🔹 Contatos de emergência e responsável
+  `paciente_contato_emergencia_1_nome` VARCHAR(255) NOT NULL,
+  `paciente_contato_emergencia_1_parentesco` VARCHAR(50) NOT NULL,
+  `paciente_contato_emergencia_1_telefone` VARCHAR(20) NOT NULL,
+  `paciente_contato_emergencia_2_nome` VARCHAR(255) DEFAULT NULL,
+  `paciente_contato_emergencia_2_parentesco` VARCHAR(50) DEFAULT NULL,
+  `paciente_contato_emergencia_2_telefone` VARCHAR(20) DEFAULT NULL,
+  `paciente_responsavel_legal_nome` VARCHAR(255) DEFAULT NULL,
+  `paciente_responsavel_legal_parentesco` VARCHAR(100) DEFAULT NULL,
+  `paciente_responsavel_legal_telefone` VARCHAR(20) DEFAULT NULL,
+  `paciente_contato_emergencia_email` VARCHAR(100) DEFAULT NULL,
+
+  -- 🔹 Dados clínicos e tratamento
+  `paciente_centro_tratamento_nome` VARCHAR(255) DEFAULT NULL,
+`paciente_medico_assistente_nome` VARCHAR(255) DEFAULT NULL,
+  `paciente_diagnostico` TEXT,
+  `paciente_fase_tratamento` VARCHAR(100) DEFAULT NULL,
+  `paciente_tipo_tratamento` VARCHAR(100) DEFAULT NULL,
+  `paciente_tempo_tratamento` VARCHAR(100) DEFAULT NULL,
+  `paciente_data_ultima_sessao` DATE DEFAULT NULL,
+  `paciente_historico_medico_resumido` TEXT,
+  `paciente_alergias_risco` TEXT,
+  `paciente_alergias_medicamentosas_detalhe` TEXT,
+  `paciente_medicamentos_uso_essenciais` TEXT,
+  `paciente_vulnerabilidade_imunossupressao` TINYINT(1) DEFAULT '0',
+  `paciente_restricoes_fisicas` TEXT,
+
+  -- 🔹 Convênio e seguro
+  `paciente_plano_saude_nome` VARCHAR(100) DEFAULT NULL,
+  `paciente_numero_carteirinha` VARCHAR(50) DEFAULT NULL,
+
+  -- 🔹 Preferências e observações gerais
+  `paciente_preferencia_horario_refeicao` ENUM('Manhã','Tarde','Noite','Indiferente') DEFAULT 'Indiferente',
+  `paciente_observacoes_enfermagem` TEXT,
+  `paciente_observacoes_gerais` TEXT,
+
+  PRIMARY KEY (`paciente_id`),
+  CONSTRAINT `fk_paciente_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
+) 
+ENGINE=InnoDB 
+DEFAULT CHARSET=utf8mb4 
+COLLATE=utf8mb4_0900_ai_ci 
+COMMENT='Tabela de pacientes com dados pessoais, clínicos, administrativos e de conformidade LGPD';
+
+
+
+ACOMPANHANTES:
+
+
+
+VOLUNTÁRIOS:
+
+
+
+DOADORES:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `acompanhantes` (
+  `acompanhante_id` INT NOT NULL AUTO_INCREMENT,
+  `usuario_id` INT NOT NULL,
+  `acompanhante_nome` VARCHAR(255) NOT NULL,
+  `acompanhante_cpf` VARCHAR(14) NOT NULL UNIQUE,
+  `acompanhante_rg` VARCHAR(20) DEFAULT NULL,
+  `acompanhante_data_nascimento` DATE DEFAULT NULL,
+  `acompanhante_sexo` ENUM('Masculino','Feminino','Outro') DEFAULT NULL,
+  `acompanhante_telefone` VARCHAR(20) DEFAULT NULL,
+  `acompanhante_email` VARCHAR(255) DEFAULT NULL,
+  `acompanhante_parentesco` VARCHAR(100) DEFAULT NULL,
+  `acompanhante_endereco` VARCHAR(255) DEFAULT NULL,
+  `acompanhante_cidade` VARCHAR(100) DEFAULT NULL,
+  `acompanhante_estado` VARCHAR(2) DEFAULT NULL,
+  `paciente_email` VARCHAR(255) DEFAULT NULL,
+`acompanhante_observacoes` TEXT,
+  `acompanhante_data_cadastro` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`acompanhante_id`),
+  KEY `usuario_id` (`usuario_id`),
+  CONSTRAINT `fk_paciente_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  KEY `paciente_email` (`paciente_email`),
+  CONSTRAINT `acompanhantes_ibfk_2` FOREIGN KEY (`paciente_email`) REFERENCES `usuarios` (`email`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- ... (o resto do arquivo permanece exatamente igual) ... -->
+
+
+
+            <!-- Exemplo seção: Gestão de Reservas -->
+      
+
+
+
+
+
+
+
+
+
+            <!-- Gestão de Respostas -->
+            <section id="respostas" class="conteudo">
+                <h2 class="section-title">Gestão de Respostas</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pergunta</th>
+                            <th>Conteúdo</th>
+                            <th>Autor</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% respostas.forEach(function(r) { %>
+                            <tr>
+                                <td>
+                                    <%= r.pergunta %>
+                                </td>
+                                <td>
+                                    <%= r.conteudo %>
+                                </td>
+                                <td>
+                                    <%= r.autor %>
+                                </td>
+                                <td>
+                                    <%= r.data_criacao.toLocaleString() %>
+                                </td>
+                                <td class="acoes">
+                                    <form action="/admin/respostas/<%= r.id %>/delete" method="POST"
+                                        style="display:inline;">
+                                        <button type="submit" class="delete"
+                                            onclick="return confirm('Excluir resposta?')">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        © 2024 ApoiCancer - Todos os direitos reservados
+    </footer>
+
+
+
+    <!-- Modal de edição -->
+    <div id="modalEdicao" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitulo"
+        aria-modal="true">
+        <div class="modal-content">
+            <button class="close-modal" onclick="fecharModalEdicao()" aria-label="Fechar modal">&times;</button>
+            <h2 id="modalTitulo">Editar Usuário</h2>
+            <form id="formEdicao" method="POST">
+                <input type="hidden" name="id" id="usuarioId" />
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required />
+                </div>
+                <div>
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required />
+                </div>
+                <div>
+                    <label for="tipo">Tipo de Perfil:</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="paciente">Paciente</option>
+                        <option value="acompanhante">Acompanhante</option>
+                        <option value="voluntario">Voluntário</option>
+                        <option value="doador">Doador</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Novo Artigo -->
+    <div id="modalNovo" class="modal" aria-hidden="true" role="dialog">
+        <div class="modal-content">
+            <button class="close-modal" onclick="fecharModalNovo()" aria-label="Fechar modal">&times;</button>
+            <h2>Criar Novo Artigo</h2>
+
+            <form action="/artigos" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label for="titulo">Título</label>
+                    <input type="text" id="tituloNovo" name="titulo" required>
+                </div>
+
+                <div>
+                    <label for="conteudo">Conteúdo</label>
+                    <textarea id="conteudoNovo" name="conteudo" rows="6" required></textarea>
+                </div>
+
+                <div>
+                    <label for="imagem">Imagem (opcional)</label>
+                    <input type="file" id="imagemNovo" name="imagem" accept="image/*">
+                </div>
+
+                <button type="submit" class="btn-primary">Publicar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal Editar Artigo -->
+    <div id="modalEditarArtigo" class="modal" aria-hidden="true" role="dialog">
+        <div class="modal-content">
+            <button class="close-modal" onclick="fecharModalEditarArtigo()" aria-label="Fechar modal">&times;</button>
+            <h2>Editar Artigo</h2>
+
+            <form id="formEditarArtigo" method="POST">
+                <input type="hidden" name="id" id="artigoId">
+
+                <div>
+                    <label for="titulo">Título</label>
+                    <input type="text" id="tituloEditar" name="titulo" required>
+                </div>
+
+                <div>
+                    <label for="conteudo">Conteúdo</label>
+                    <textarea id="conteudoEditar" name="conteudo" rows="6" required></textarea>
+                </div>
+
+                <div>
+                    <label for="imagem">Nova Imagem (opcional)</label>
+                    <input type="file" id="imagemEditar" name="imagem" accept="image/*">
+                </div>
+
+                <button type="submit" class="btn-primary">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+

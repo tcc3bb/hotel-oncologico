@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/usuarios/style_login.css" />
+</head>
+
+<body>
+
+                <main class="container">
+                    <h1>Redefinir senha</h1>
+
+                    <% if (erro) { %>
+                        <div class="alert alert-error">
+                            <%= erro %>
+                        </div>
+                        <% } %>
+
+                            <% if (sucesso) { %>
+                                <div class="alert alert-success">
+                                    <%= sucesso %>
+                                </div>
+                                <p><a href="/usuarios/login">Ir para login</a></p>
+                                <% } else if (token) { %>
+                                    <form action="/resetar-senha" method="post">
+                                        <input type="hidden" name="token" value="<%= token %>">
+                                        <label for="senha">Nova senha</label>
+                                        <input id="senha" name="senha" type="password" required minlength="6" />
+                                        <label for="confirmar">Confirmar nova senha</label>
+                                        <input id="confirmar" name="confirmar" type="password" required minlength="6" />
+                                        <button type="submit">Atualizar senha</button>
+                                    </form>
+                                    <% } else { %>
+                                        <p>Token inválido ou expirado. Volte e solicite um novo link.</p>
+                                        <p><a href="/esqueci-senha">Solicitar novo link</a></p>
+                                        <% } %>
+
+                                            <p><a href="/">Voltar</a></p>
+                </main>
+</body>
+
+</html>

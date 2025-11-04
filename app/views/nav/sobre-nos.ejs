@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav/style_sobre_nos.css">
+</head>
+
+<body>
+    <nav>
+        <a href="/">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+    <main class="main-content">
+
+        <!-------  NOSSA HISTÓRIA     ------->
+        <section class="nossa-historia">
+            <div class="historia-texto">
+                <h1>Nossa História</h1>
+            </div>
+            <div class="historia-imagem">
+                <img src="/image/sobre-nos/fachada.jpg"
+                    alt="Fachada de um casarão antigo, visto frontalmente em dia claro, com uma fonte de pedra e lagoa verde em primeiro plano, e árvores ao lado direito.">
+            </div>
+            <br>
+            <p>
+                O Hotel Oncológico nasceu de um sonho: o de oferecer mais do que hospedagem, oferecer acolhimento,
+                conforto e esperança a quem enfrenta um dos momentos mais delicados da vida.
+                A ideia surgiu a partir da vivência de familiares e profissionais que compreenderam as dificuldades
+                enfrentadas por pacientes em tratamento oncológico, especialmente aqueles que precisam se deslocar para
+                outras cidades em busca de cuidados especializados.
+            </p>
+            <p>
+                Foi com base nessa empatia e desejo de transformar realidades que o projeto tomou forma. Cada espaço do
+                hotel foi planejado com carinho para proporcionar bem-estar, tranquilidade e apoio emocional. Aqui, cada
+                hóspede é recebido com um sorriso, um olhar acolhedor e a certeza de que não está sozinho nessa jornada.
+                Mais do que um local de estadia, o Hotel Oncológico se tornou um refúgio — um lar temporário onde a fé,
+                o amor e o cuidado andam de mãos dadas.
+            </p>
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot dark"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+
+        <!-------  MISSÃO     ------->
+        <section class="missao-section">
+            <h2 class="title">Nossa <span class="highlight-title">Missão</span></h2>
+            <div class="missao-block">
+                <img src="/image/sobre-nos/atividade_com_crianca.webp" alt="Atividade com crianças"
+                    class="missao-img-left" />
+                <p>
+                    Nossa missão é oferecer mais do que hospedagem — é oferecer um lar temporário onde o amor, o
+                    respeito e a esperança sejam a base de cada dia. No Hotel Oncológico, acreditamos que o acolhimento
+                    é parte essencial do tratamento. Por isso, criamos um espaço pensado com carinho em cada detalhe:
+                    desde o conforto dos quartos até o calor humano da equipe, tudo é planejado para que nossos hóspedes
+                    se sintam seguros, cuidados e amparados. Queremos que cada pessoa que passa por aqui encontre um
+                    ambiente de paz, serenidade e empatia, capaz de aliviar o peso do momento e renovar as forças para
+                    seguir em frente com fé e coragem.
+                </p>
+            </div>
+            <div class="missao-block invert">
+                <img src="/image/sobre-nos/mulheres_de_rosa.jpg" alt="Grupo de mulheres vestindo rosa"
+                    class="missao-img-right" />
+                <p>
+                    Mais do que atender necessidades físicas, nossa missão é cuidar de almas. Buscamos transformar o
+                    período de tratamento em uma experiência mais leve e humana, onde o afeto e o respeito caminham lado
+                    a lado com a dedicação profissional. Acreditamos que cada sorriso compartilhado, cada palavra de
+                    incentivo e cada gesto de gentileza têm o poder de curar um pouco mais do que os olhos podem ver. No
+                    Hotel Oncológico, nossa missão é ser abrigo, conforto e esperança — um lugar onde a vida continua
+                    sendo vivida com amor, mesmo em meio aos desafios.
+                </p>
+            </div>
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot dark"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+
+        <!-------  VISÃO     ------->
+        <section class="visao-section">
+            <h2 class="title">Nossa <span class="highlight-title">Visão</span></h2>
+            <div class="visao-content">
+                <div class="visao-image-text">
+                    <img src="/image/sobre-nos/medica_e_paciente.jpg" alt="Imagem representando visão" />
+                </div>
+                <div class="visao-text-image">
+                    <p>
+                        Ser referência em acolhimento humanizado significa muito mais do que apenas oferecer atendimento
+                        de qualidade: é criar um espaço onde cada pessoa se sinta verdadeiramente vista, ouvida e
+                        amparada. É construir um ambiente em que o amor, o respeito e a empatia caminham lado a lado com
+                        o cuidado à saúde, promovendo não apenas o bem-estar físico, mas também a tranquilidade
+                        emocional e espiritual.
+
+                        Queremos ser muito mais do que um local de passagem; almejamos ser um verdadeiro lar temporário,
+                        um refúgio de conforto e esperança onde pacientes e familiares possam encontrar força nos
+                        momentos de fragilidade, serenidade nos dias de incerteza e fé na capacidade de cada um de
+                        superar os desafios. 
+                    </p>
+                </div>
+            </div>
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot dark"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+        <!-------  VALORES     ------->
+        <section class="valores-section">
+            <h2 class="title">Nossos <span class="highlight-title">Valores</span></h2>
+            <div class="valores-content">
+                <ul class="valores-list">
+                    <li class="green"><span class="bullet bullet-green"></span> Humanização</li>
+                    <li class="dark-green"><span class="bullet bullet-dark-green"></span> Empatia</li>
+                    <li class="green"><span class="bullet bullet-green"></span> Esperança</li>
+                    <li class="dark-green"><span class="bullet bullet-dark-green"></span> Respeito</li>
+                    <li class="green"><span class="bullet bullet-green"></span> Dedicação.</li>
+                </ul>
+                <div class="valores-image-container">
+                    <img src="/image/sobre-nos/paciente_e_medico.png" alt="Paciente e médico" />
+                </div>
+            </div>
+            <br>
+            <p>
+                Vivemos nossos valores diariamente, em cada gesto e em cada palavra. Para nós, o cuidado vai além do
+                atendimento — é um compromisso de alma. Acreditamos que o amor cura, que a empatia transforma e que
+                pequenos gestos podem mudar o dia de alguém.
+                Aqui, tratamos cada hóspede como parte da nossa família. Sabemos que cada história é única, e é por isso
+                que oferecemos não apenas um espaço físico, mas um ambiente de afeto, segurança e esperança. O Hotel
+                Oncológico é um lembrete de que, mesmo nos momentos mais desafiadores, é possível encontrar aconchego,
+                carinho e força para seguir em frente.
+            </p>
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot dark"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

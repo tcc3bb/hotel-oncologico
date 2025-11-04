@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/home/style_index.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        thead {
+            background-color: #f4f4f4;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px 0;
+            background-color: #5cb85c;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #4cae4c;
+        }
+
+        .btn-delete {
+            background-color: #d9534f;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            /* Ajuste o tamanho da fonte */
+        }
+
+        .btn-delete:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ======================================================================================================================-->
+    <!--===================================================== MENU ============================================================-->
+    <!--====================================================================================================================== -->
+    <nav>
+        <a href="/" class="img">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+
+    <h2>Lista de Reservas</h2>
+    <a href="/reservas/nova" class="btn">+ Nova Reserva</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Paciente</th>
+                <th>Quarto</th>
+                <th>Status</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reservas.forEach(r=> { %>
+                <tr>
+                    <td>
+                        <%= r.reserva_id %>
+                    </td>
+                    <td>
+                        <%= r.paciente_nome %>
+                    </td>
+                    <td>
+                        <%= r.quarto_numero %>
+                    </td>
+                    <td>
+                        <%= r.reserva_status %>
+                    </td>
+                    <td>
+                        <%= r.reserva_data_checkin_previsto.toLocaleDateString() %>
+                    </td>
+                    <td>
+                        <%= r.reserva_data_checkout_previsto.toLocaleDateString() %>
+                    </td>
+                    <td>
+                        <a href="/reservas/editar/<%= r.reserva_id %>">Editar</a> |
+                        <a href="/reservas/deletar/<%= r.reserva_id %>"
+                            onclick="return confirm('Excluir reserva?')">Excluir</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
+
+    <!-- ======================================================================================================================-->
+    <!--==================================================== FOOTER ===========================================================-->
+    <!--====================================================================================================================== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

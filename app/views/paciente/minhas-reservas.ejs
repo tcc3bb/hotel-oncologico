@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Instituto Vita</title>
+   <link rel="icon" href="/image/logo.png">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+      rel="stylesheet">
+   <link rel="stylesheet" href="/css/paciente/style_minhas_reservas.css">
+</head>
+
+<body>
+   <!-- ======================================================================================================================-->
+   <!--===================================================== MENU ============================================================-->
+   <!--====================================================================================================================== -->
+   <nav>
+      <a href="/" class="img">
+         <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+      </a>
+      <a href="/nav/sobre-nos">Sobre nós</a>
+      <a href="/nav/sobre-cancer">Sobre o câncer</a>
+      <a href="/nav/acomodacoes">Acomodações</a>
+      <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+      <a href="/nav/localizacao">Localizações</a>
+      <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+      <% if (!user) { %>
+         <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+         <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+         <% } else { %>
+            <% if (user.tipo==='paciente' ) { %>
+               <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+               <% } else if (user.tipo==='acompanhante' ) { %>
+                  <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
+                  <% } else if (user.tipo==='voluntario' ) { %>
+                     <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
+                     <% } else if (user.tipo==='doador' ) { %>
+                        <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                        <% } else if (user.tipo==='admin' ) { %>
+                           <a href="/admin/painel" class="btn-nav">Configurações</a>
+                           <% } else { %>
+                              <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                              <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                              <% } %>
+                                 <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                 <% } %>
+   </nav>
+
+   <!-- ======================================================================================================================-->
+   <!--=================================================== SIDEBAR ===========================================================-->
+   <!--====================================================================================================================== -->
+   <div class="painel-container">
+      <aside class="sidebar">
+         <div class="sidebar-item active" data-target="conta" tabindex="0">
+            <span class="icon" aria-hidden="true">👤</span>
+            <span>Minha Conta</span>
+         </div>
+         <div class="sidebar-item" data-target="reservas" tabindex="0">
+            <span class="icon" aria-hidden="true">📅</span>
+            <span>Reservas Atuais</span>
+         </div>
+         <div class="sidebar-item" data-target="chat" tabindex="0">
+            <span class="icon" aria-hidden="true">💬</span>
+            <span>Chat e Suporte</span>
+         </div>
+         <div class="sidebar-item" data-target="historico" tabindex="0">
+            <span class="icon" aria-hidden="true">📜</span>
+            <span>Histórico</span>
+         </div>
+         <div class="sidebar-item" data-target="documentos" tabindex="0">
+            <span class="icon" aria-hidden="true">📂</span>
+            <span>Documentos</span>
+         </div>
+         <div class="sidebar-item" data-target="saude" tabindex="0">
+            <span class="icon" aria-hidden="true">❤️</span>
+            <span>Perfil de Saúde</span>
+         </div>
+         <div class="sidebar-item" data-target="alimentacao" tabindex="0">
+            <span class="icon" aria-hidden="true">🍽️</span>
+            <span>Alimentação</span>
+         </div>
+         <div class="sidebar-item" data-target="avaliacao" tabindex="0">
+            <span class="icon" aria-hidden="true">🌸</span>
+            <span>Avaliação</span>
+         </div>
+      </aside>
+
+      <main>
+         <!-- ======================================================================================================================-->
+         <!--============================================== SECTION MINHA CONTA ====================================================-->
+         <!--====================================================================================================================== -->
+         <section id="conta" class="conteudo ativo">
+            <h2 class="section-title">👤 Minha Conta</h2>
+
+            <form id="formConta" class="info-form">
+               <div class="info-card">
+                  <h3 class="section-subtitle">Conta</h3>
+
+                  <div class="campo">
+                     <label>Email:</label>
+                     <input type="email" name="usuario_email" value="<%= usuario.usuario_email %>" disabled>
+                  </div>
+
+                  <div class="campo">
+                     <label>Senha:</label>
+                     <input type="text" name="usuario_senha" value="<%= usuario.usuario_senha %>" disabled>
+                  </div>
+               </div>
+               <div class="info-card">
+                  <h3 class="section-subtitle">Informações Pessoais</h3>
+
+                  <div class="campo">
+                     <label>Nome Completo:</label>
+                     <input type="text" name="paciente_nome" value="<%= paciente.paciente_nome || '' %>" disabled>
+                  </div>
+
+                  <div class="campo-duplo">
+                     <div>
+                        <label>CPF:</label>
+                        <input type="text" name="paciente_cpf" value="<%= paciente.paciente_cpf || '' %>" disabled>
+                     </div>
+                     <div>
+                        <label>RG:</label>
+                        <input type="text" name="paciente_rg" value="<%= paciente.paciente_rg || '' %>" disabled>
+                     </div>
+                  </div>
+
+                  <div class="campo-duplo">
+                     <div>
+                        <label>Data de Nascimento:</label>
+                        <input type="date" name="paciente_data_nascimento"
+                           value="<%= paciente.paciente_data_nascimento ? paciente.paciente_data_nascimento.toString().substring(0,10) : '' %>"
+                           disabled>
+                     </div>
+                     <div>
+                        <label>Sexo:</label>
+                        <input type="text" name="paciente_sexo" value="<%= paciente.paciente_sexo || '' %>" disabled>
+                     </div>
+                  </div>
+
+                  <div class="campo">
+                     <label>Estado Civil:</label>
+                     <input type="text" name="paciente_estado_civil" value="<%= paciente.paciente_estado_civil || '' %>"
+                        disabled>
+                  </div>
+
+                  <div class="campo">
+                     <label>Tipo Sanguíneo:</label>
+                     <input type="text" name="paciente_tipo_sanguineo"
+                        value="<%= paciente.paciente_tipo_sanguineo || '' %>" disabled>
+                  </div>
+
+                  <div class="campo">
+                     <label>Profissão:</label>
+                     <input type="text" name="paciente_profissao" value="<%= paciente.paciente_profissao || '' %>"
+                        disabled>
+                  </div>
+               </div>
+
+               <div class="info-card">
+                  <h3 class="section-subtitle">Endereço e Contato</h3>
+
+                  <div class="campo">
+                     <label>Telefone:</label>
+                     <input type="text" name="paciente_telefone" value="<%= paciente.paciente_telefone || '' %>"
+                        disabled>
+                  </div>
+
+                  <div class="campo">
+                     <label>Endereço:</label>
+                     <input type="text" name="paciente_logradouro" value="<%= paciente.paciente_logradouro || '' %>"
+                        disabled>
+                  </div>
+
+                  <div class="campo-trio">
+                     <div>
+                        <label>Número:</label>
+                        <input type="text" name="paciente_numero" value="<%= paciente.paciente_numero || '' %>"
+                           disabled>
+                     </div>
+                     <div>
+                        <label>Bairro:</label>
+                        <input type="text" name="paciente_bairro" value="<%= paciente.paciente_bairro || '' %>"
+                           disabled>
+                     </div>
+                     <div>
+                        <label>CEP:</label>
+                        <input type="text" name="paciente_cep" value="<%= paciente.paciente_cep || '' %>" disabled>
+                     </div>
+                  </div>
+
+                  <div class="campo-duplo">
+                     <div>
+                        <label>Cidade:</label>
+                        <input type="text" name="paciente_cidade" value="<%= paciente.paciente_cidade || '' %>"
+                           disabled>
+                     </div>
+                     <div>
+                        <label>Estado:</label>
+                        <input type="text" name="paciente_estado" value="<%= paciente.paciente_estado || '' %>"
+                           disabled>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="botoes">
+                  <button type="button" id="btnEditar" class="btn-primary">Editar Informações</button>
+                  <button type="submit" id="btnSalvar" class="btn-success" style="display:none;">Salvar
+                     Alterações</button>
+                  <button type="button" class="delete" id="btnExcluir">Excluir Conta</button>
+               </div>
+            </form>
+
+            <script>
+               document.getElementById('btnEditar').addEventListener('click', () => {
+                  document.querySelectorAll('#formConta input, #formConta textarea').forEach(inp => inp.disabled = false);
+                  document.getElementById('btnEditar').style.display = 'none';
+                  document.getElementById('btnSalvar').style.display = 'inline-block';
+               });
+
+               document.getElementById('formConta').addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const data = Object.fromEntries(formData.entries());
+
+                  const resp = await fetch('/paciente/atualizar', {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify(data)
+                  });
+
+                  const result = await resp.json();
+                  alert(result.mensagem);
+                  if (result.ok) location.reload();
+               });
+
+               document.getElementById('btnExcluir').addEventListener('click', async () => {
+                  if (!confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')) return;
+
+                  const resp = await fetch('/paciente/excluir', { method: 'DELETE' });
+                  const result = await resp.json();
+                  alert(result.mensagem);
+                  if (result.ok) window.location.href = '/';
+               });
+            </script>
+         </section>
+
+
+
+         <!-- ======================================================================================================================-->
+         <!--============================================= SECTION MINHAS RESERVAS =================================================-->
+         <!--====================================================================================================================== -->
+         <section id="reservas" class="conteudo">
+            <h2 class="section-title">Reservas Atuais</h2>
+            <p class="subtitle">Veja seus agendamentos ativos (consultas, hospedagens, exames).</p>
+            <div class="card card-reservas">
+               <div class="table-responsive">
+                  <table>
+                     <thead>
+                        <tr>
+                           <th>Serviço</th>
+                           <th>Data</th>
+                           <th>Hora</th>
+                           <th>Local/Profissional</th>
+                           <th>Status</th>
+                           <th>Ações</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td><span class="badge badge-service">Hospedagem</span></td>
+                           <td>15/01/2025</td>
+                           <td>Check-in: 14:00</td>
+                           <td>Ala Girassol - Quarto 302</td>
+                           <td><span class="badge badge-success">Confirmada</span></td>
+                           <td class="acoes">
+                              <button class="btn-sm btn-secondary" type="button">Detalhes</button>
+                              <button class="btn-sm btn-danger" type="button">Cancelar</button>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td><span class="badge badge-service">Consulta</span></td>
+                           <td>20/01/2025</td>
+                           <td>10:30</td>
+                           <td>Dr(a). Maria Silva (Oncologia)</td>
+                           <td><span class="badge badge-warning">Pendente</span></td>
+                           <td class="acoes">
+                              <button class="btn-sm btn-secondary" type="button">Detalhes</button>
+                              <button class="btn-sm btn-danger" type="button">Cancelar</button>
+                           </td>
+                        </tr>
+                        <% reservas.forEach(r=> { %>
+                           <tr>
+                              <td><span class="badge badge-service">
+                                    <%= r.servico %>
+                                 </span></td>
+                              <td>
+                                 <%= r.data %>
+                              </td>
+                              <td>
+                                 <%= r.hora %>
+                              </td>
+                              <td>
+                                 <%= r.local %>
+                              </td>
+                              <td><span
+                                    class="badge badge-<%= r.status === 'Confirmada' ? 'success' : r.status === 'Pendente' ? 'warning' : 'danger' %>">
+                                    <%= r.status %>
+                                 </span></td>
+                              <td class="acoes">
+                                 <button class="btn-sm btn-secondary" type="button">Ver Detalhes</button>
+                                 <button class="btn-sm btn-danger" type="button">Cancelar</button>
+                              </td>
+                           </tr>
+                           <% }) %>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </section>
+
+         <!-- ======================================================================================================================-->
+         <!--================================================= SECTION CHAT ========================================================-->
+         <!--====================================================================================================================== -->
+         <section id="chat" class="conteudo">
+            <h2 class="section-title">Chat e Suporte</h2>
+            <p class="subtitle">Converse diretamente com as equipes do Instituto Vita.</p>
+
+            <div class="painel-dashboard chat-cards">
+               <div class="card card-chat">
+                  <span class="chat-icon">🧑‍🤝‍🧑</span>
+                  <h4 class="card-title">Acompanhantes e Familiares</h4>
+                  <p>Comunique-se com seu acompanhante ou outros familiares cadastrados.</p>
+                  <button class="btn-primary-block">Iniciar Chat</button>
+               </div>
+               <div class="card card-chat">
+                  <span class="chat-icon">🩺</span>
+                  <h4 class="card-title">Equipe de Saúde</h4>
+                  <p>Dúvidas rápidas com enfermeiros, médicos ou equipe de apoio clínico.</p>
+                  <button class="btn-primary-block">Acessar Suporte Clínico</button>
+               </div>
+               <div class="card card-chat">
+                  <span class="chat-icon">🤝</span>
+                  <h4 class="card-title">Voluntários</h4>
+                  <p>Peça ajuda ou converse com voluntários disponíveis para apoio emocional.</p>
+                  <button class="btn-primary-block">Chamar Voluntário</button>
+               </div>
+            </div>
+         </section>
+
+         <!-- ======================================================================================================================-->
+         <!--=============================================== SECTION HISTÓRICO =====================================================-->
+         <!--====================================================================================================================== -->
+         <section id="historico" class="conteudo">
+            <h2 class="section-title">Histórico Completo</h2>
+            <p class="subtitle">Acompanhe todos os seus registros passados de serviços e interações.</p>
+
+            <div class="card card-historico">
+               <div class="historico-filtros">
+                  <label for="filtro-tipo">Filtrar por Tipo:</label>
+                  <select id="filtro-tipo">
+                     <option>Todos</option>
+                     <option>Consultas</option>
+                     <option>Hospedagens</option>
+                     <option>Exames</option>
+                  </select>
+                  <button class="btn-secondary" type="button">Buscar</button>
+                  <button class="btn-download" type="button">Exportar PDF</button>
+               </div>
+
+               <ul class="lista-historico">
+                  <li class="historico-item">
+                     <span class="historico-data">01/12/2024</span>
+                     <span class="historico-desc">Consulta de rotina com Dra. Ana</span>
+                     <span class="historico-tag badge badge-info">Consulta</span>
+                     <button class="btn-sm btn-secondary">Ver Resumo</button>
+                  </li>
+                  <li class="historico-item">
+                     <span class="historico-data">10/11/2024</span>
+                     <span class="historico-desc">Check-out de Hospedagem (5 dias)</span>
+                     <span class="historico-tag badge badge-service">Hospedagem</span>
+                     <button class="btn-sm btn-secondary">Detalhes Acomodação</button>
+                  </li>
+               </ul>
+            </div>
+         </section>
+
+         <!-- ======================================================================================================================-->
+         <!--============================================== SECTION DOCUMENTOS =====================================================-->
+         <!--====================================================================================================================== -->
+         <section id="documentos" class="conteudo">
+            <h2 class="section-title">Documentos e Resultados</h2>
+            <p class="subtitle">Gerencie seus arquivos médicos, exames e laudos.</p>
+
+            <div class="card card-documentos">
+               <h3 class="card-title">Meus Arquivos</h3>
+               <div class="lista-arquivos">
+                  <div class="arquivo-item">
+                     <span class="file-icon">📄</span>
+                     <span class="file-name">Resultado Biópsia_15_12_2024.pdf</span>
+                     <span class="file-size">2.3 MB</span>
+                     <button class="btn-sm btn-secondary">Baixar</button>
+                     <button class="btn-sm btn-danger">Excluir</button>
+                  </div>
+                  <div class="arquivo-item">
+                     <span class="file-icon">🖼️</span>
+                     <span class="file-name">Raio X Tórax_05_01_2025.jpg</span>
+                     <span class="file-size">1.1 MB</span>
+                     <button class="btn-sm btn-secondary">Baixar</button>
+                     <button class="btn-sm btn-danger">Excluir</button>
+                  </div>
+               </div>
+
+               <h3 class="card-title mt-4">Enviar Novo Documento</h3>
+               <div class="upload-area">
+                  <label for="upload" class="upload-label">
+                     Clique para selecionar ou arraste arquivos aqui. (Máx: 10MB)
+                  </label>
+                  <input type="file" id="upload" multiple style="display: none;">
+                  <button class="btn-primary" type="button">Enviar Arquivos</button>
+               </div>
+            </div>
+         </section>
+
+         <!-- ======================================================================================================================-->
+         <!--================================================= SECTION SAÚDE =======================================================-->
+         <!--====================================================================================================================== -->
+         <section id="saude" class="conteudo">
+            <h2 class="section-title">Perfil de Saúde</h2>
+            <p class="subtitle">Suas informações clínicas vitais e plano de tratamento atual.</p>
+
+            <div class="painel-dashboard saude-cards">
+               <div class="card card-metricas">
+                  <h4 class="card-title">Diagnóstico Principal</h4>
+                  <p class="value-destaque">Câncer de Mama - Estágio II</p>
+                  <span class="badge badge-info">Ativo</span>
+               </div>
+               <div class="card card-metricas">
+                  <h4 class="card-title">Alergias Conhecidas</h4>
+                  <p class="value-destaque">Penicilina, Amendoim</p>
+                  <span class="badge badge-danger">Atenção</span>
+               </div>
+               <div class="card card-plano">
+                  <h4 class="card-title">Plano de Tratamento</h4>
+                  <ul class="plano-list">
+                     <li><span class="list-icon">✅</span> Quimioterapia (Ciclo 4 de 6)</li>
+                     <li><span class="list-icon">💊</span> Medicação X (Diária, 8h e 20h)</li>
+                     <li><span class="list-icon">🗓️</span> Próxima Cirurgia: 01/03/2025</li>
+                  </ul>
+                  <button class="btn-secondary mt-3">Ver Detalhes do Plano</button>
+               </div>
+            </div>
+         </section>
+
+         <!-- ======================================================================================================================-->
+         <!--============================================== SECTION ALIMENTAÇÃO ====================================================-->
+         <!--====================================================================================================================== -->
+         <section id="alimentacao" class="conteudo">
+            <h2 class="section-title">Alimentação e Refeições</h2>
+            <p class="subtitle">Confira o cardápio e personalize sua dieta.</p>
+
+            <div class="card card-alimentacao">
+               <h3 class="card-title">Cardápio do Dia - <%= new Date().toLocaleDateString('pt-BR', { weekday: 'long' ,
+                     day: 'numeric' , month: 'long' }) %>
+               </h3>
+               <div class="cardapio-grid">
+                  <div class="refeicao-item">
+                     <h4>Café da Manhã (8:00)</h4>
+                     <p>Pão integral, Queijo branco, Suco de laranja natural.</p>
+                  </div>
+                  <div class="refeicao-item">
+                     <h4>Almoço (12:00)</h4>
+                     <p>Arroz, Feijão, Frango grelhado, Purê de batata, Salada mista.</p>
+                  </div>
+                  <div class="refeicao-item">
+                     <h4>Jantar (19:00)</h4>
+                     <p>Sopa de legumes, Torradas integrais.</p>
+                  </div>
+               </div>
+
+               <h3 class="card-title mt-4">Minha Dieta Especial</h3>
+               <p><strong>Restrições:</strong> Sem glúten, Sem lactose.</p>
+               <p>Seus pedidos especiais estão sendo atendidos. Caso precise de alteração, solicite abaixo.</p>
+               <button class="btn-primary mt-3">Solicitar Alteração de Dieta</button>
+            </div>
+         </section>
+
+         <!-- ======================================================================================================================-->
+         <!--=============================================== SECTION AVALIAÇÃO =====================================================-->
+         <!--====================================================================================================================== -->
+         <section id="avaliacao" class="conteudo">
+            <h2 class="section-title">Avaliação e Feedback</h2>
+            <p class="subtitle">Sua opinião é fundamental para aprimorarmos o cuidado.</p>
+
+            <div class="card card-avaliacao">
+               <h3 class="card-title">Avaliação Geral do Instituto Vita</h3>
+               <div class="estrelas">
+                  <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span
+                     class="star">⭐</span><span class="star-vazia">⭐</span>
+               </div>
+               <label for="feedback-text" class="label mt-3">Comentário Detalhado:</label>
+               <textarea id="feedback-text" placeholder="Deixe aqui seu comentário sobre sua experiência recente..."
+                  rows="5"></textarea>
+               <button class="btn-primary mt-3" type="button">Enviar Avaliação</button>
+            </div>
+         </section>
+      </main>
+   </div>
+
+   <footer>
+      <div class="footer-container">
+         <div class="footer-about">
+            <h3>Sobre a Empresa</h3>
+            <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+               familiares.</p>
+         </div>
+         <div class="footer-contact">
+            <h3>Contato</h3>
+            <p>Email: contato@empresa.com.br</p>
+            <p>Telefone: (11) 1234-5678</p>
+            <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+         </div>
+         <div class="footer-links">
+            <h3>Links Úteis</h3>
+            <a href="#">Política de Privacidade</a><br>
+            <a href="#">Termos de Uso</a><br>
+            <a href="#">Ajuda</a>
+         </div>
+      </div>
+      <div class="footer-bottom">
+         <p>© 2024 Empresa. Todos os direitos reservados.</p>
+      </div>
+   </footer>
+
+
+   <script>
+      const sidebarItems = document.querySelectorAll('.sidebar-item');
+      const contents = document.querySelectorAll('.conteudo');
+
+      sidebarItems.forEach(item => {
+         item.addEventListener('click', () => {
+            sidebarItems.forEach(i => i.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('ativo'));
+            item.classList.add('active');
+            const targetId = item.dataset.target;
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+               targetContent.classList.add('ativo');
+            }
+         });
+      });
+
+      // Inicializar a primeira aba ao carregar a página
+      if (document.querySelector('.sidebar-item.active')) {
+         const initialTarget = document.querySelector('.sidebar-item.active').dataset.target;
+         const initialContent = document.getElementById(initialTarget);
+         if (initialContent) {
+            initialContent.classList.add('ativo');
+         }
+      } else if (sidebarItems.length > 0) {
+         // Se nenhuma estiver ativa, ative a primeira (ou 'conta')
+         sidebarItems[0].classList.add('active');
+         document.getElementById(sidebarItems[0].dataset.target).classList.add('ativo');
+      }
+   </script>
+
+
+</body>
+
+</html>

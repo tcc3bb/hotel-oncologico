@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap');
+
+:root {
+    --color-primary: #9ABCA7; /* Verde Principal (Claro) */
+    --color-secondary: #4A7C59; /* Verde Secundário (Escuro) */
+    --color-light: #F9F9F9; /* Fundo/Campos */
+    --color-text-dark: #333333; /* Texto Principal */
+    --color-text-light: #FFFFFF; /* Texto Claro */
+    --font-heading: 'Cinzel Decorative', serif;
+    --font-body: 'EB Garamond', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--color-light);
+}
+
+/* =============================================================================================================================== */
+/* =================================================== CONTAINER PRINCIPAL ======================================================= */
+/* =============================================================================================================================== */
+.container {
+    display: flex;
+    width: 70%;
+    max-width: 1100px;
+    height: 570px; /* Aumentado ligeiramente para acomodar mais campos */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* =============================================================================================================================== */
+/* ================================================ PAINEL DE LOGIN (ESQUERDA) =================================================== */
+/* =============================================================================================================================== */
+.left {
+    flex: 1;
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.left h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.left p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.left button {
+    background-color: var(--color-primary); 
+    color: var(--color-text-light);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.left button:hover {
+    background-color: #89AD98;
+}
+
+/* =============================================================================================================================== */
+/* ============================================= FORMULÁRIO DE CADASTRO (DIREITA) ================================================ */
+/* =============================================================================================================================== */
+.right {
+    flex: 1;
+    background-color: var(--color-light);
+    color: var(--color-text-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px; 
+    text-align: center;
+}
+
+.right h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 5px;
+}
+
+.right small {
+    font-size: 1.1rem;
+    color: var(--color-secondary);
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+.right form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 400px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-text-light);
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    padding: 0 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group:focus-within {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 5px rgba(74, 124, 89, 0.5);
+}
+
+.input-group i {
+    color: var(--color-secondary);
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+/* Inputs e Select */
+.right input[type="text"],
+.right input[type="email"],
+.right input[type="password"],
+.right select {
+    flex-grow: 1;
+    padding: 15px 0;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: transparent; 
+    color: var(--color-text-dark);
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
+}
+
+.right input::placeholder {
+    color: #A0A0A0;
+}
+
+/* =============================================================================================================================== */
+/* ========================================================== BOTÕES ============================================================= */
+/* =============================================================================================================================== */
+.right button {
+    padding: 12px 20px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.right button[type="submit"] {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    margin-top: 20px; 
+}
+
+.right button[type="submit"]:hover {
+    background-color: #3C6649;
+}
+
+.right button:last-of-type {
+    background-color: transparent;
+    border: 2px solid var(--color-secondary);
+    color: var(--color-secondary);
+    box-shadow: none;
+}
+
+.right button:last-of-type:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+}
+
+/* =============================================================================================================================== */
+/* ====================================================== RESPONSIVIDADE ========================================================= */
+/* =============================================================================================================================== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .left {
+        order: 2; 
+        padding: 30px 20px;
+        border-radius: 0 0 20px 20px;
+    }
+    .right {
+        order: 1; 
+        padding: 40px 20px 30px;
+        border-radius: 20px 20px 0 0;
+    }
+    .right h1 {
+        font-size: 2rem;
+    }
+    .right form {
+        width: 100%;
+        max-width: none;
+    }
+}

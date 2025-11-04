@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav/style_apoio_paciente.css">
+</head>
+
+<body>
+    <nav>
+        <a href="/">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+    <!--<header>
+        <div class="header-text">
+            <h1>Apoio ao<br>Paciente</h1>
+            <p>Amar, porque nada melhor para<br>
+                a saúde que um amor correspondido.<br>
+                <em>Vinicius de Moraes.</em>
+            </p>
+        </div>
+
+        <div class="header-images">
+            <img src="/image/apoio-paciente/paciente.jpg" alt="Paciente sorrindo" class="header-image1">
+            <img src="/image/apoio-paciente/maos.jpg" alt="Mãos dadas">
+            <img src="/image/apoio-paciente/coracao.jpg" alt="Mãos segurando coração">
+        </div>
+    </header>
+
+    <div class="indicators">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <main>
+
+        <section class="apoio-psicologico-section">
+            <div class="apoio-psicologico-container">
+                <div class="content">
+                    <div class="images-text-wrapper">
+                        <div class="images">
+                            <div class="image-circle image1">
+                                <img src="/image/apoio-paciente/maos_segurando.jpg" alt="Mãos se segurando">
+                            </div>
+                            <div class="image-circle image2">
+                                <img src="/image/apoio-paciente/pessoa_sorrindo.jpg" alt="Pessoa sorrindo">
+                            </div>
+                        </div>
+                        <div class="text-highlight-wrapper">
+                            <p class="highlight-text">
+                                Apoio emocional <br>dedicado para <br>transformar
+                                <br>desafios em <br>esperança.
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="description-column">
+                        <p class="description">
+                            Na nossa casa de apoio, entendemos que o tratamento oncológico
+                            vai muito além do cuidado físico:
+                            ele também envolve emoções, sentimentos e desafios que podem
+                            pesar na mente e no coração.
+                            Pensando nisso, oferecemos apoio psicológico especializado, com
+                            a ajuda de profissionais
+                            capacitados e experientes que acompanham cada hóspede com
+                            atenção, respeito e empatia.
+                        </p>
+                        <p class="description">
+                            As sessões podem ser individuais ou em grupo, proporcionando um
+                            espaço seguro para expressar
+                            emoções, compartilhar vivências e fortalecer a autoestima
+                            durante o processo de tratamento. O
+                            objetivo é auxiliar pacientes e familiares a enfrentarem as
+                            dificuldades com mais serenidade,
+                            reduzindo a ansiedade e promovendo qualidade de vida.
+                        </p>
+                        <p class="description">
+                            Nosso time de psicólogos e terapeutas está à disposição para
+                            orientar, acolher e apoiar,
+                            ajudando cada pessoa a encontrar caminhos de esperança e
+                            equilíbrio emocional. Aqui, o cuidado é
+                            integral: corpo, mente e coração.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>-->
+
+
+
+    <main>
+        <div class="container">
+            <img src="/image/logo.png" class="logo">
+            <div class="message-box">
+                <h1>PÁGINA EM DESENVOLVIMENTO</h1>
+                <p>Nosso hotel oncológico está sendo cuidadosamente preparado para recebê-lo!</p>
+            </div>
+        </div>
+    </main>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

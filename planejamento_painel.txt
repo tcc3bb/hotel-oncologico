@@ -1,0 +1,359 @@
+- pacientes
+    
+    ## 🩺 **Painel do Paciente – “Minha Jornada”**
+    
+    O objetivo central é reunir, em um só lugar, **as informações médicas, emocionais, sociais e logísticas** que envolvem a estadia e o tratamento do paciente.
+    
+    O painel deve ser **intuitivo, acolhedor e informativo**, com ícones claros, linguagem simples e acesso rápido às principais ações.
+    
+    ### 🗓️ **1. Minha conta**
+    
+    > Gerenciamento completo de todas as informações do paciente
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Lista de informações:** contém todas as informações do paciente (que estão no banco de dados)
+    - Botão para alterar as informações, sempre pedindo a senha antes de qualquer alteração.
+    - Botão para excluir a conta (registro de tabelas no banco)
+    
+    ---
+    
+    ### 🗓️ 2**. Reservas Atuais**
+    
+    > Gerenciamento completo das consultas, hospedagens e procedimentos.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Lista de reservas:** exibe nome do serviço (consulta, sessão, exame, hospedagem), data, hora, status (confirmado, pendente, concluído).
+    - **Botão “Ver Detalhes”:** abre local, profissional responsável, instruções e observações.
+    - **Cancelar ou remarcar:** ação rápida com justificativa opcional.
+    - **Lembretes automáticos:** notificações por e-mail ou app um dia antes.
+    - **Mapa do local:** integração com o mapa interno do hotel (sala, andar, bloco).
+    
+    ---
+    
+    ### 💬 **3. Chat e Suporte**
+    
+    > Comunicação direta com pessoas e setores que fazem parte do cuidado.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Chat com acompanhante:** canal privado para troca rápida de mensagens.
+    - **Chat com voluntários:** suporte emocional e ajuda prática (passeios, leitura, companhia).
+    - **Chat com equipe de saúde:** dúvidas sobre consultas, medicamentos ou instruções.
+    - **Chat com recepção/admin:** para questões de hospedagem, alimentação, transporte.
+    - **Notificações instantâneas:** alertas quando há nova mensagem.
+    
+    ### 📜 3**. Histórico de Consultas e Hospedagens**
+    
+    > Um registro acessível da jornada de tratamento.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Lista cronológica de atendimentos anteriores.**
+    - **Filtros por tipo (médico, psicológico, fisioterapia, exames, hospedagem).**
+    - **Campo de observações médicas:** visualização de comentários dos profissionais.
+    - **Anexar documentos pessoais (exames, laudos, receitas).**
+    - **Opção de exportar em PDF** o histórico completo para acompanhamento externo.
+    
+    ---
+    
+    ### 📂 **4. Documentos e Resultados**
+    
+    > Organização digital dos arquivos pessoais e médicos.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Upload e armazenamento seguro** de exames, relatórios e receitas.
+    - **Classificação automática por tipo (exame, laudo, receita, documento pessoal).**
+    - **Visualizador interno de PDF/imagens.**
+    - **Opção de compartilhar com médico ou acompanhante.**
+    - **Validação de documentos pendentes (ex.: comprovantes, autorizações).**
+    
+    ---
+    
+    ### ❤️ **5. Perfil de Saúde**
+    
+    > Centraliza informações essenciais para a equipe médica e de apoio.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Dados clínicos básicos:** alergias, doenças pré-existentes, medicamentos em uso.
+    - **Plano de tratamento resumido:** etapas, médicos responsáveis, próximos passos.
+    - **Histórico de internações.**
+    - **Preferências alimentares e restrições.**
+    - **Contato de emergência e informações do acompanhante.**
+    - **Upload de carteira do convênio e documentos médicos.**
+    
+    ---
+    
+    ### 🍽️ **6. Alimentação e Refeições**
+    
+    > Área voltada à nutrição durante a estadia.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Cardápio diário:** refeições servidas no refeitório do hotel.
+    - **Solicitar dieta especial:** opção para informar restrições ou alergias.
+    - **Avaliar refeição:** feedback para a equipe de nutrição.
+    - **Histórico nutricional:** registro das dietas e sugestões personalizadas.
+    
+    ---
+    
+    ### 🌸 7**. Avaliação e Feedback**
+    
+    > Canal para aprimorar a experiência do paciente.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Avaliar serviços (hospedagem, alimentação, equipe, atividades).**
+    - **Enviar comentários ou sugestões anônimas.**
+    - **Pontuar voluntários e profissionais (opcional).**
+    
+    ---
+    
+
+
+
+
+
+- acompanhante
+    
+    ## 💬 **Painel do Acompanhante — “Apoio ao Paciente”**
+    
+    O objetivo é oferecer um **ambiente informativo, acolhedor e funcional**, que permita ao acompanhante **acompanhar o tratamento, cuidar da logística e buscar apoio emocional**, tanto para si quanto para o paciente.
+    
+    ---
+    
+    ### 👩‍⚕️ **1. Paciente Vinculado**
+    
+    > Centraliza as informações do paciente sob responsabilidade do acompanhante.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Ficha do paciente:** dados básicos (nome, idade, diagnóstico, médico responsável, quarto) - NÃO PODE FAZER ALTERAÇÕES.
+    - **Situação atual:** status de internação, andamento do tratamento e observações gerais.
+    - **Reservas do paciente:** visualização de consultas, hospedagem e exames vinculados.
+    - **Plano de tratamento:** cronograma resumido com as etapas previstas (exames, sessões, terapias).
+    - **Autorização de Acesso:** opção para o paciente liberar ou limitar o compartilhamento de informações sensíveis.
+    - **Upload de documentos do paciente:** atestados, autorizações médicas, relatórios.
+    
+    ---
+    
+    ### 📅 **2. Agenda do Paciente**
+    
+    > Permite acompanhar o cronograma completo de atividades e compromissos do paciente.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Calendário sincronizado:** mostra consultas, exames, terapias e atividades recreativas.
+    - **Avisos automáticos:** lembretes de horários e notificações de alterações.
+    - **Visualização semanal/mensal:** com cores diferentes para cada tipo de compromisso.
+    - **Botão “Acompanhar”:** marcar presença junto ao paciente em determinada atividade.
+    - **Exportar agenda:** opção para baixar em PDF ou sincronizar com Google Calendar.
+    - **Integração com transporte:** indica quando há traslado agendado.
+    
+    ---
+    
+    ### 💬 **3. Comunicação e Chat**
+    
+    > Facilita o contato direto com todos os envolvidos no cuidado do paciente.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Chat com voluntários:** para solicitar companhia, ajuda prática ou informações.
+    - **Chat com equipe médica/enfermagem:** canal seguro para dúvidas sobre tratamento e cuidados.
+    - **Chat com recepção/gestão do hotel:** para resolver questões administrativas ou de hospedagem.
+    - **Chat com outros acompanhantes (moderado):** espaço de troca de experiências entre familiares.
+    - **Atendimento rápido (FAQ interativo):** chatbot ou menu com respostas automáticas para dúvidas frequentes.
+    
+    ### 📘 3**. Orientações e Recursos**
+    
+    > Apoio informativo e emocional para o acompanhante.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Guias educativos:** PDFs e vídeos sobre como cuidar do paciente, alimentação, higiene, medicação e transporte.
+    - **Apoio psicológico:** acesso a materiais sobre autocuidado, estresse e luto.
+    - **Listas de contatos úteis:** assistentes sociais, psicólogos, nutricionistas, grupos de apoio.
+    - **Protocolos de emergência:** instruções para situações médicas urgentes.
+    
+    ---
+    
+    ### 📝 **8. Feedback e Avaliações**
+    
+    > Espaço para o acompanhante expressar opiniões e ajudar na melhoria dos serviços.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Avaliar serviços do hotel:** hospedagem, alimentação, transporte, atendimento.
+    - **Enviar relato de experiência:** texto livre com ou sem identificação.
+    - **Avaliar voluntários e profissionais (com sigilo).**
+    - **Formulários de satisfação periódicos.**
+
+
+
+
+    
+- doador
+    
+    ### 💰 **1. Histórico de Doações**
+    
+    > Acompanhe tudo o que já foi doado — valores, datas, tipo e destino.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Lista completa de doações:** data, valor, tipo (financeira, produto, serviço), campanha vinculada.
+    - **Filtro por período ou tipo:** ver doações mensais, anuais ou recorrentes.
+    - **Status da doação:** concluída, em processamento, entregue, pendente de confirmação.
+    - **Comprovante automático:** download do recibo de cada doação.
+    - **Resumo total:** total doado no mês, no ano e histórico geral.
+    - **Ranking pessoal:** posição simbólica entre os doadores (gamificação opcional).
+    
+    ---
+    
+    ### ➕ **2. Nova Doação**
+    
+    > Espaço para realizar novas contribuições com facilidade e segurança.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Escolha do tipo de doação:**
+        - 💵 **Financeira:** via PIX, cartão ou boleto.
+        - 🎁 **Em produtos:** roupas, alimentos, livros, itens de higiene.
+        - 💼 **Em serviços:** palestras, transporte, suporte profissional.
+    - **Escolha do destino:** apoiar pacientes, atividades de bem-estar, manutenção do hotel ou campanhas específicas.
+    - **Opção de doação recorrente:** mensal, trimestral ou anual.
+    - **Agendamento de retirada de doação física.**
+    - **Cálculo do impacto estimado:** “Com R$50, você ajuda X pacientes por dia”.
+    - **Confirmação imediata e mensagem de agradecimento personalizada.**
+    
+    ---
+    
+    ### 🌱 **3. Impacto das Doações**
+    
+    > Mostra de forma clara e inspiradora como as contribuições estão sendo usadas.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Painel de impacto visual:** gráficos e fotos mostrando onde o dinheiro foi aplicado.
+    - **Relatos reais:** histórias de pacientes beneficiados (com autorização).
+    - **Transparência financeira:** relatórios públicos das campanhas, com valores arrecadados e gastos.
+    - **Indicadores de resultado:** número de refeições servidas, atendimentos realizados, quartos mantidos, etc.
+    - **Vídeos e depoimentos:** equipe e pacientes agradecendo as doações.
+    - **Meta de campanha:** barra de progresso com o quanto falta para atingir o objetivo.
+    
+    ---
+    
+    ### 🧾 **4. Certificados e Recibos**
+    
+    > Geração e armazenamento de comprovantes de doações.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Emissão automática de recibos individuais e anuais.**
+    - **Certificados de reconhecimento:** por metas atingidas (ex.: “Doador Ouro”, “Amigo do Hotel”).
+    - **Personalização com nome e data.**
+    - **Opção de compartilhar nas redes sociais (com selo do projeto).**
+    - **Envio automático por e-mail após cada doação.**
+    
+    ---
+    
+    ### 📢 **5. Campanhas Ativas**
+    
+    > Espaço dedicado às campanhas em andamento e oportunidades de ajudar.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Lista de campanhas abertas:** título, objetivo, descrição, valor arrecadado até o momento.
+    - **Botão “Doar Agora”:** acesso direto ao sistema de pagamento.
+    - **Filtros por tipo:** saúde, alimentação, infraestrutura, recreação.
+    - **Campanhas urgentes:** destaque visual para situações emergenciais.
+    - **Acompanhamento em tempo real:** progresso da meta.
+    - **Possibilidade de patrocínio de campanha:** empresas ou pessoas físicas podem “adotar” uma causa.
+    
+    ---
+    
+- voluntario
+    
+    ## 🤝 **Painel do Voluntário — “Área do Voluntário”**
+    
+    O objetivo é fornecer **uma central completa de gestão de atividades, comunicação e aprendizado**, permitindo que o voluntário organize seu tempo, se conecte com pacientes e acompanhantes, e acompanhe o impacto do seu trabalho.
+    
+    ---
+    
+    ### 📋 **1. Minhas Atividades**
+    
+    > Lista detalhada de eventos, visitas ou atendimentos voluntários.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Agenda de atividades:** consulta de todas as tarefas agendadas (data, hora, local, paciente envolvido).
+    - **Detalhes da atividade:** descrição, objetivo, duração, responsável da equipe.
+    - **Confirmar presença ou desistir:** botão rápido para indicar disponibilidade.
+    - **Histórico de atividades passadas:** com estatísticas de participação (número de atendimentos, horas de voluntariado).
+    - **Avaliação da atividade:** espaço para feedback sobre a experiência.
+    - **Notificações:** lembrete automático antes do início de cada atividade.
+    
+    ---
+    
+    ### 📅 **2. Disponibilidade**
+    
+    > Calendário para marcar horários livres e gerenciar compromissos.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Visualização semanal/mensal:** horários bloqueados ou disponíveis.
+    - **Solicitação de horários extras:** possibilidade de abrir disponibilidade temporária.
+    - **Integração com Minhas Atividades:** mostra sobreposições ou conflitos de agenda.
+    - **Sincronização opcional com calendário pessoal (Google/Outlook).**
+    
+    ---
+    
+    ### 💬 **3. Chat com Pacientes e Acompanhantes**
+    
+    > Canal direto de comunicação para suporte emocional e orientação.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Chat individual:** com pacientes específicos, mediante autorização.
+    - **Chat com acompanhantes:** para orientar, tirar dúvidas ou combinar atividades.
+    - **Chat em grupo (moderação):** comunicação rápida com a equipe de voluntários ou profissionais de apoio.
+    - **Templates de mensagens:** mensagens rápidas para lembretes ou orientações frequentes.
+    - **Notificações em tempo real** sobre novas mensagens ou solicitações.
+    
+    ---
+    
+    ### 📊 **5. Relatórios de Participação**
+    
+    > Controle das horas e impacto do trabalho voluntário.
+    > 
+    
+    **Funcionalidades detalhadas:**
+    
+    - **Histórico detalhado:** lista de todas as atividades realizadas, com data, hora e paciente atendido.
+    - **Resumo de horas acumuladas:** por semana, mês e total geral.
+    - **Gráficos de desempenho:** participação em tipos de atividades (visitas, recreação, apoio emocional, transporte).
+    - **Certificados de voluntariado:** geração automática baseada nas horas acumuladas.
+    - **Feedback da equipe e pacientes:** avaliação das ações realizadas.

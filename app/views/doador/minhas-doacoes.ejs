@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Doações - Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/doador/style_minhas_doacoes.css">
+</head>
+
+<body>
+    <!-- ======================================================================================================================-->
+    <!--===================================================== MENU ============================================================-->
+    <!--====================================================================================================================== -->
+    <nav>
+        <a href="/" class="img">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/nav/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+    <!-- ======================================================================================================================-->
+    <!--=================================================== SIDEBAR ===========================================================-->
+    <!--====================================================================================================================== -->
+    <div class="painel-container">
+        <aside class="sidebar">
+            <div class="sidebar-item active" data-target="historico-doacoes" tabindex="0">
+                <span class="icon" aria-hidden="true">💰</span>
+                <span>Histórico de Doações</span>
+            </div>
+            <div class="sidebar-item" data-target="nova-doacao" tabindex="0">
+                <span class="icon" aria-hidden="true">➕</span>
+                <span>Nova Doação</span>
+            </div>
+            <div class="sidebar-item" data-target="impacto" tabindex="0">
+                <span class="icon" aria-hidden="true">🌱</span>
+                <span>Impacto das Doações</span>
+            </div>
+            <div class="sidebar-item" data-target="certificados" tabindex="0">
+                <span class="icon" aria-hidden="true">🧾</span>
+                <span>Certificados e Recibos</span>
+            </div>
+            <div class="sidebar-item" data-target="campanhas" tabindex="0">
+                <span class="icon" aria-hidden="true">📢</span>
+                <span>Campanhas Ativas</span>
+            </div>
+        </aside>
+
+        <main>
+            <!-- ======================================================================================================================-->
+            <!--============================================== SECTION HISTÓRICO DE DOAÇÕES =============================================-->
+            <!--====================================================================================================================== -->
+            <section id="historico-doacoes" class="conteudo ativo">
+                <h2 class="section-title">💰 Histórico de Doações</h2>
+                <p class="subtitle">Acompanhe tudo o que já foi doado — valores, datas, tipo e destino.</p>
+                <div class="card">
+                    <h3 class="card-title">Lista Completa de Doações</h3>
+                    <div class="historico-filtros">
+                        <label for="filtro-periodo">Filtrar por Período:</label>
+                        <select id="filtro-periodo">
+                            <option>Todos</option>
+                            <option>Mensal</option>
+                            <option>Anual</option>
+                            <option>Recorrentes</option>
+                        </select>
+                        <label for="filtro-tipo">Tipo:</label>
+                        <select id="filtro-tipo">
+                            <option>Todos</option>
+                            <option>Financeira</option>
+                            <option>Produto</option>
+                            <option>Serviço</option>
+                        </select>
+                        <button class="btn-secondary" type="button">Buscar</button>
+                        <button class="btn-download" type="button">Exportar PDF</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Valor/Tipo</th>
+                                    <th>Campanha</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>15/01/2025</td>
+                                    <td>R$ 100,00 (Financeira)</td>
+                                    <td>Apoio Pacientes</td>
+                                    <td><span class="badge badge-success">Concluída</span></td>
+                                    <td class="acoes">
+                                        <button class="btn-sm btn-secondary" type="button">Comprovante</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10/12/2024</td>
+                                    <td>Roupa (Produto)</td>
+                                    <td>Doação Itens</td>
+                                    <td><span class="badge badge-warning">Em Processamento</span></td>
+                                    <td class="acoes">
+                                        <button class="btn-sm btn-secondary" type="button">Comprovante</button>
+                                    </td>
+                                </tr>
+                                <!-- Adicionar mais linhas conforme dados dinâmicos -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="resumo-total">
+                        <p><strong>Total Doado no Mês:</strong> R$ 500,00</p>
+                        <p><strong>Total Doado no Ano:</strong> R$ 2.000,00</p>
+                        <p><strong>Total Geral:</strong> R$ 5.000,00</p>
+                        <p><strong>Ranking Pessoal:</strong> Top 10% dos Doadores</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================================================================================================================-->
+            <!--============================================== SECTION NOVA DOAÇÃO =====================================================-->
+            <!--====================================================================================================================== -->
+            <section id="nova-doacao" class="conteudo">
+                <h2 class="section-title">➕ Nova Doação</h2>
+                <p class="subtitle">Espaço para realizar novas contribuições com facilidade e segurança.</p>
+                <div class="card">
+                    <h3 class="card-title">Escolha o Tipo de Doação</h3>
+                    <div class="doacao-opcoes">
+                        <div class="opcao-item">
+                            <span class="opcao-icon">💵</span>
+                            <h4>Financeira</h4>
+                            <p>Via PIX, cartão ou boleto.</p>
+                            <button class="btn-primary" type="button">Doar Financeiro</button>
+                        </div>
+                        <div class="opcao-item">
+                            <span class="opcao-icon">🎁</span>
+                            <h4>Em Produtos</h4>
+                            <p>Roupas, alimentos, livros, itens de higiene.</p>
+                            <button class="btn-primary" type="button">Doar Produtos</button>
+                        </div>
+                        <div class="opcao-item">
+                            <span class="opcao-icon">💼</span>
+                            <h4>Em Serviços</h4>
+                            <p>Palestras, transporte, suporte profissional.</p>
+                            <button class="btn-primary" type="button">Oferecer Serviço</button>
+                        </div>
+                    </div>
+                    <div class="doacao-detalhes">
+                        <label for="destino">Destino:</label>
+                        <select id="destino">
+                            <option>Apoiar Pacientes</option>
+                            <option>Atividades de Bem-Estar</option>
+                            <option>Manutenção do Hotel</option>
+                            <option>Campanhas Específicas</option>
+                        </select>
+                        <label for="recorrente">Doação Recorrente:</label>
+                        <select id="recorrente">
+                            <option>Única</option>
+                            <option>Mensal</option>
+                            <option>Trimestral</option>
+                            <option>Anual</option>
+                        </select>
+                        <p><strong>Impacto Estimado:</strong> Com R$50, você ajuda 5 pacientes por dia.</p>
+                        <button class="btn-primary" type="button">Agendar Retirada (se físico)</button>
+                        <button class="btn-primary" type="button">Confirmar Doação</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================================================================================================================-->
+            <!--============================================== SECTION IMPACTO DAS DOAÇÕES =============================================-->
+            <!--====================================================================================================================== -->
+            <section id="impacto" class="conteudo">
+                <h2 class="section-title">🌱 Impacto das Doações</h2>
+                <p class="subtitle">Mostra de forma clara e inspiradora como as contribuições estão sendo usadas.</p>
+                <div class="card">
+                    <h3 class="card-title">Painel de Impacto Visual</h3>
+                    <div class="impacto-graficos">
+                        <div class="grafico-item">
+                            <h4>Refeições Servidas</h4>
+                            <p>1.200 refeições este mês</p>
+                            <div class="barra-progresso" style="width: 80%;"></div>
+                        </div>
+                        <div class="grafico-item">
+                            <h4>Atendimentos Realizados</h4>
+                            <p>500 atendimentos este ano</p>
+                            <div class="barra-progresso" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <h3 class="card-title mt-4">Relatos Reais</h3>
+                    <div class="relatos">
+                        <div class="relato-item">
+                            <p>"Graças às doações, pude receber tratamento sem custos extras." - Paciente João</p>
+                        </div>
+                    </div>
+                    <h3 class="card-title mt-4">Transparência Financeira</h3>
+                    <p>Relatórios disponíveis: <a href="#">Ver Relatório Anual</a></p>
+                    <h3 class="card-title mt-4">Vídeos e Depoimentos</h3>
+                    <div class="videos">
+                        <iframe width="300" height="200" src="https://www.youtube.com/embed/exemplo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================================================================================================================-->
+            <!--============================================== SECTION CERTIFICADOS E RECIBOS =========================================-->
+            <!--====================================================================================================================== -->
+            <section id="certificados" class="conteudo">
+                <h2 class="section-title">🧾 Certificados e Recibos</h2>
+                <p class="subtitle">Geração e armazenamento de comprovantes de doações.</p>
+                <div class="card">
+                    <h3 class="card-title">Emissão de Recibos</h3>
+                    <button class="btn-primary" type="button">Emitir Recibo Individual</button>
+                    <button class="btn-primary" type="button">Emitir Recibo Anual</button>
+                    <h3 class="card-title mt-4">Certificados de Reconhecimento</h3>
+                    <p>Você é um <strong>Doador Ouro</strong>! <button class="btn-secondary" type="button">Baixar Certificado</button></p>
+                    <button class="btn-secondary" type="button">Compartilhar nas Redes Sociais</button>
+                    <h3 class="card-title mt-4">Envio Automático</h3>
+                    <p>Recibos são enviados automaticamente por e-mail após cada doação.</p>
+                </div>
+            </section>
+
+            <!-- ======================================================================================================================-->
+            <!--============================================== SECTION CAMPANHAS ATIVAS ================================================-->
+            <!--====================================================================================================================== -->
+            <section id="campanhas" class="conteudo">
+                <h2 class="section-title">📢 Campanhas Ativas</h2>
+                <p class="subtitle">Espaço dedicado às campanhas em andamento e oportunidades de ajudar.</p>
+                <div class="card">
+                    <h3 class="card-title">Campanhas Abertas</h3>
+                    <div class="campanhas-lista">
+                        <div class="campanha-item">
+                            <h4>Campanha Saúde Mental</h4>
+                            <p>Objetivo: R$ 10.000</p>
+                            <p>Arrecadado: R$ 7.500</p>
+                            <div class="barra-progresso" style="width: 75%;"></div>
+                            <button class="btn-primary" type="button">Doar Agora</button>
+                        </div>
+                        <div class="campanha-item urgente">
+                            <h4>Emergência Alimentar</h4>
+                            <p>Objetivo: R$ 5.000</p>
+                            <p>Arrecadado: R$ 3.000</p>
+                            <div class="barra-progresso" style="width: 60%;"></div>
+                            <button class="btn-primary" type="button">Doar Agora</button>
+                        </div>
+                    </div>
+                    <h3 class="card-title mt-4">Filtros</h3>
+                    <select>
+                        <option>Todas</option>
+                        <option>Saúde</option>
+                        <option>Alimentação</option>
+                        <option>Infraestrutura</option>
+                        <option>Recreação</option>
+                    </select>
+                    <button class="btn-secondary" type="button">Patrocinar Campanha</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer> 
+        <div class="footer-container"> 
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        const contents = document.querySelectorAll('.conteudo');
+
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('ativo'));
+                item.classList.add('active');
+                const targetId = item.dataset.target;
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('ativo');
+                }
+            });
+        });
+
+        // Inicializar a primeira aba ao carregar a página
+        if (document.querySelector('.sidebar-item.active')) {
+            const initialTarget = document.querySelector('.sidebar-item.active').dataset.target;
+            const initialContent = document.getElementById(initialTarget);
+            if (initialContent) {
+                initialContent.classList.add('ativo');
+            }
+        } else if (sidebarItems.length > 0) {
+            // Se nenhuma estiver ativa, ative a primeira
+            sidebarItems[0].classList.add('active');
+            document.getElementById(sidebarItems[0].dataset.target).classList.add('ativo');
+        }
+    </script>
+</body>
+</html>

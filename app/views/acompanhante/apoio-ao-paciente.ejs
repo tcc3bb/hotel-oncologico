@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel do Acompanhante - Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="stylesheet" href="/css/acompanhante/style_apoio_ao_paciente.css">
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="img"><img src="/image/logo.png" alt="Logo" class="img-logo"></a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao Paciente</a>
+        <a href="/nav/localizacao">Localização</a>
+        <a href="/perguntas/perguntas-frequentes">FAQ</a>
+        <a href="/usuarios/logout" class="btn-logout">Sair</a>
+    </nav>
+
+    <div class="painel-container">
+        <aside class="sidebar">
+            <div class="sidebar-item active" data-target="paciente"><span class="icon">👩‍⚕️</span> Paciente Vinculado</div>
+            <div class="sidebar-item" data-target="agenda"><span class="icon">📅</span> Agenda do Paciente</div>
+            <div class="sidebar-item" data-target="chat"><span class="icon">💬</span> Comunicação</div>
+            <div class="sidebar-item" data-target="orientacoes"><span class="icon">📘</span> Orientações e Recursos</div>
+            <div class="sidebar-item" data-target="feedback"><span class="icon">📝</span> Feedback e Avaliações</div>
+        </aside>
+
+        <main>
+
+            <!-- PACIENTE VINCULADO -->
+            <section id="paciente" class="conteudo ativo">
+                <h2 class="section-title">👩‍⚕️ Paciente Vinculado</h2>
+                <div class="card">
+                    <h3 class="card-title">Ficha do Paciente</h3>
+                    <p><strong>Nome:</strong> João da Silva</p>
+                    <p><strong>Idade:</strong> 58 anos</p>
+                    <p><strong>Diagnóstico:</strong> Câncer de Próstata (Estágio II)</p>
+                    <p><strong>Médico responsável:</strong> Dr. Ricardo Costa</p>
+                    <p><strong>Quarto:</strong> Ala Girassol - 304</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Situação Atual</h3>
+                    <p><strong>Status:</strong> Internado</p>
+                    <p><strong>Tratamento:</strong> Quimioterapia - Ciclo 2 de 6</p>
+                    <p><strong>Observações:</strong> Evoluindo bem ao tratamento, com boa resposta clínica.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Plano de Tratamento</h3>
+                    <ul class="plano-list">
+                        <li><span class="list-icon">💉</span> Sessão de Quimioterapia — 24/10/2025</li>
+                        <li><span class="list-icon">📊</span> Exame de Controle — 01/11/2025</li>
+                        <li><span class="list-icon">🧘‍♂️</span> Fisioterapia Oncológica — 03/11/2025</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Upload de Documentos</h3>
+                    <div class="upload-area">
+                        <label class="upload-label">Arraste ou selecione arquivos (PDF, JPG, PNG)</label>
+                        <input type="file" multiple style="display:none;">
+                        <button class="btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AGENDA -->
+            <section id="agenda" class="conteudo">
+                <h2 class="section-title">📅 Agenda do Paciente</h2>
+                <p class="subtitle">Visualize as próximas atividades e compromissos.</p>
+                <div class="card">
+                    <h3 class="card-title">Próximos Eventos</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Data</th><th>Horário</th><th>Atividade</th><th>Local</th><th>Ações</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>24/10/2025</td><td>09:00</td><td>Quimioterapia</td><td>Sala 02</td>
+                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td></tr>
+                            <tr><td>26/10/2025</td><td>14:30</td><td>Consulta médica</td><td>Consultório 3</td>
+                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td></tr>
+                        </tbody>
+                    </table>
+                    <button class="btn-download mt-3">Exportar Agenda (PDF)</button>
+                </div>
+            </section>
+
+            <!-- COMUNICAÇÃO -->
+            <section id="chat" class="conteudo">
+                <h2 class="section-title">💬 Comunicação e Chat</h2>
+                <div class="chat-cards">
+                    <div class="card card-chat">
+                        <span class="chat-icon">🩺</span>
+                        <h4 class="card-title">Equipe Médica</h4>
+                        <p>Envie dúvidas sobre o tratamento ou sintomas.</p>
+                        <button class="btn-primary-block">Abrir Chat</button>
+                    </div>
+                    <div class="card card-chat">
+                        <span class="chat-icon">🤝</span>
+                        <h4 class="card-title">Voluntários</h4>
+                        <p>Solicite apoio emocional e companhia no período de internação.</p>
+                        <button class="btn-primary-block">Conversar Agora</button>
+                    </div>
+                    <div class="card card-chat">
+                        <span class="chat-icon">🏨</span>
+                        <h4 class="card-title">Recepção e Hotel</h4>
+                        <p>Para dúvidas sobre hospedagem, transporte e horários.</p>
+                        <button class="btn-primary-block">Falar com Recepção</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ORIENTAÇÕES -->
+            <section id="orientacoes" class="conteudo">
+                <h2 class="section-title">📘 Orientações e Recursos</h2>
+                <div class="card">
+                    <h3 class="card-title">Guias Educativos</h3>
+                    <ul>
+                        <li><a href="#">🧾 Cuidados Diários do Paciente (PDF)</a></li>
+                        <li><a href="#">🥗 Alimentação Saudável Durante o Tratamento</a></li>
+                        <li><a href="#">🚗 Transporte Seguro e Logística de Deslocamento</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Apoio Psicológico</h3>
+                    <p>Materiais para lidar com o estresse e ansiedade durante o tratamento:</p>
+                    <ul>
+                        <li><a href="#">🧘 Técnicas de Relaxamento</a></li>
+                        <li><a href="#">💬 Grupo de Apoio Familiar</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Contatos Úteis</h3>
+                    <p><strong>Psicóloga:</strong> Ana Lúcia — (11) 99999-9999</p>
+                    <p><strong>Assistente Social:</strong> Marcos — (11) 98888-8888</p>
+                    <p><strong>Emergência:</strong> 192 (SAMU) / 193 (Bombeiros)</p>
+                </div>
+            </section>
+
+            <!-- FEEDBACK -->
+            <section id="feedback" class="conteudo">
+                <h2 class="section-title">📝 Feedback e Avaliações</h2>
+                <div class="card card-avaliacao">
+                    <h3 class="card-title">Avalie sua Experiência</h3>
+                    <div class="estrelas">⭐ ⭐ ⭐ ⭐ ☆</div>
+                    <textarea placeholder="Conte como foi sua experiência no Instituto Vita..." rows="4"></textarea>
+                    <button class="btn-primary">Enviar Avaliação</button>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Relato de Experiência</h3>
+                    <textarea placeholder="Deseja compartilhar algo com nossa equipe?" rows="4"></textarea>
+                    <button class="btn-secondary">Enviar Relato</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Instituto Vita</h3>
+                <p>Hospedagem humanizada e apoio integral a pacientes e acompanhantes.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@institutovita.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2025 Instituto Vita. Todos os direitos reservados.</div>
+    </footer>
+
+    <script>
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        const contents = document.querySelectorAll('.conteudo');
+
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('ativo'));
+                item.classList.add('active');
+                document.getElementById(item.dataset.target).classList.add('ativo');
+            });
+        });
+    </script>
+
+</body>
+</html>

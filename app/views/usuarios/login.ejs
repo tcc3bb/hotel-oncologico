@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/usuarios/style_login.css" />
+</head>
+
+<body>
+    <div class="container" role="main" aria-label="OncoHotel login form">
+        <div class="left-panel">
+            <h2>Ainda não tem uma conta?</h2>
+            <p class="subtitle">Crie uma conta para ter acesso aos nossos serviços</p>
+            <button class="btn-create-account" aria-label="Criar Conta"
+                onclick="window.location.href='/usuarios/cadastro'">Criar Conta</button>
+        </div>
+        <div class="right-panel">
+            <% if (erro) { %>
+                <p class="error-message">
+                    <%= erro %>
+                </p>
+                <% } %> 
+
+                    <h2>Entrar</h2>
+                    <p class="subtitle">Faça seu login</p>
+                    <form method="POST" action="/usuarios/login">
+                        <label for="email" class="sr-only">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="E-mail" autocomplete="username"
+                            required />
+
+                        <label for="password" class="sr-only">Senha</label>
+                        <input type="password" id="password" name="password" placeholder="Senha"
+                            autocomplete="current-password" required />
+
+                        <a href="/usuarios/esqueci-senha" class="forgot-password">Esqueceu sua senha?</a>
+
+                        <button type="submit" aria-label="Entrar no OncoHotel">Entrar</button>
+                        <button onclick="window.location.href='/'">Voltar</button>
+                    </form>
+        </div>
+    </div>
+</body>
+
+</html>

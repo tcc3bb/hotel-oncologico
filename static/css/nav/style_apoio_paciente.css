@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* =============================================================================================================================== */
+/* =========================================================== MENU ============================================================== */
+/* =============================================================================================================================== */
+nav {
+    background-color: #699b80;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 100%;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 6px 10px;
+    font-size: 1em;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background-color: #83aa89;
+}
+
+.img {
+    padding: 0;
+}
+
+.img-logo {
+    height: 8vh;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.btn-entrar,
+.btn-cadastrar,
+.btn-nav {
+    padding: 8px 18px;
+    background-color: #3b4a3b;
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-entrar:hover,
+.btn-cadastrar:hover {
+    background-color: #83aa89;
+}
+
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+/* =============================================================================================================================== */
+/* ========================================================== HEADER ============================================================= */
+/* =============================================================================================================================== */
+header {
+    background-color: #1e5a3c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 250px 40px 250px;
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+}
+
+.header-text {
+    max-width: 40%;
+}
+
+.header-text h1 {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.header-text p {
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+.header-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    max-width: 500px;
+}
+
+.header-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.header-images img:first-child {
+    grid-row: span 2;
+}
+
+.indicators {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.indicators span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #1e5a3c;
+    border-radius: 50%;
+}
+
+.indicators span.active {
+    background-color: #1b4a32;
+}
+
+/* =============================================================================================================================== */
+/* =========================================================== MAIN ============================================================== */
+/* =============================================================================================================================== */
+main {
+    padding: 50px 10%;
+    font-family: Arial, sans-serif;
+}
+
+/* =============================================================================================================================== */
+/* ==================================================== APOIO PSICOLÓGICO ======================================================== */
+/* =============================================================================================================================== */
+.apoio-psicologico-section {
+    padding: 2rem 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.apoio-psicologico-container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: nowrap;
+}
+
+.images-text-wrapper {
+    flex: 0 0 35%;
+    position: relative;
+    padding-top: 1rem;
+}
+
+.images {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 2rem;
+}
+
+.image-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image1 {
+    top: 0;
+    left: 0;
+}
+
+.image2 {
+    width: 170px;
+    height: 170px;
+    top: 90px;
+    left: 80px;
+    transform: translateX(-50%);
+}
+
+.image1::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #699b80;
+    border-radius: 50%;
+    top: -15px;
+    left: -20px;
+    z-index: -1;
+    transform: scale(1.15);
+    box-shadow:
+        10px 10px 0 0 #62a37c,
+        -5px -5px 0 0 #62a37c;
+}
+
+.image2::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #4ca9c0;
+    border-radius: 50%;
+    top: 10px;
+    left: 15px;
+    z-index: -1;
+    transform: scale(1.1);
+    box-shadow:
+        -10px -10px 0 0 #4ca9c0,
+        5px 5px 0 0 #4ca9c0;
+}
+
+.text-highlight-wrapper {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 3;
+    max-width: 250px;
+}
+
+.highlight-text {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #1e5a3c;
+    line-height: 1.1;
+    text-align: right;
+}
+
+.description-column {
+    flex: 1;
+    padding-left: 2rem;
+    max-width: 60%;
+}
+
+.description {
+    font-size: 1rem;
+    text-align: justify;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .images-text-wrapper {
+        flex: auto;
+        width: 100%;
+        max-width: 500px;
+        height: 300px;
+    }
+    .images {
+        margin: 0 auto;
+    }
+    .image1 {
+        top: 0;
+        left: 50px;
+    }
+    .image2 {
+        top: 80px;
+        left: 150px;
+    }
+    .text-highlight-wrapper {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        text-align: center;
+        margin-top: 2rem;
+        max-width: 100%;
+    }
+    .highlight-text {
+        font-size: 2rem;
+        text-align: center;
+    }
+    .description-column {
+        padding-left: 0;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .highlight-text {
+        font-size: 1.8rem;
+    }
+    .image-circle {
+        width: 120px;
+        height: 120px;
+    }
+    .image2 {
+        width: 140px;
+        height: 140px;
+        top: 70px;
+        left: 120px;
+    }
+}
+
+/* =============================================================================================================================== */
+/* ========================================================== FOOTER ============================================================= */
+/* =============================================================================================================================== */
+footer {
+    background-color: #699b80;
+    color: #fff;
+    padding: 30px 20px 15px 20px;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-container>div {
+    flex: 1 1 250px;
+    min-width: 220px;
+}
+
+.footer-container h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #c9d6c5;
+}
+
+.footer-container p,
+.footer-container a {
+    color: #d4d9d4;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #5a6a5a;
+    padding-top: 12px;
+    font-size: 0.85rem;
+    color: #aeb5ab;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============================================================================================================================== */
+/* =================================================== PÁGINA EM CONSTRUÇÃO ====================================================== */
+/* =============================================================================================================================== */
+.container {
+    text-align: center;
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    width: 90px;
+    height: 90px;
+}
+
+.message-box {
+    background-color: #699b80;
+    color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.message-box h1 {
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+}
+
+.message-box p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    font-weight: 400;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .message-box h1 {
+        font-size: 1.8em;
+    }
+    .message-box p {
+        font-size: 1em;
+    }
+    .footer-icon {
+        bottom: 10px;
+        right: 10px;
+    }
+}

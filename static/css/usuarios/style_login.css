@@ -1,0 +1,252 @@
+/* Importação das fontes e Estilos Globais */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap');
+
+:root {
+    --color-primary: #9ABCA7; /* Verde Principal (Claro) */
+    --color-secondary: #4A7C59; /* Verde Secundário (Escuro) */
+    --color-light: #F9F9F9; /* Fundo/Campos */
+    --color-text-dark: #333333; /* Texto Principal */
+    --color-text-light: #FFFFFF; /* Texto Claro */
+    --color-error: #D9534F; /* Mensagem de Erro */
+    --font-heading: 'Cinzel Decorative', serif;
+    --font-body: 'EB Garamond', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--color-light);
+}
+
+/* 1. Layout do Container Principal */
+.container {
+    display: flex;
+    width: 70%; /* Largura otimizada */
+    max-width: 1100px;
+    height: 450px; /* Altura fixa para Desktop */
+    border-radius: 20px; /* Borda arredondada suave */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra sutil */
+    overflow: hidden;
+}
+
+/* 2. Painel Esquerdo: Login (Fundo Escuro) */
+.left-panel {
+    flex: 1; /* Ocupa 50% da largura */
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.left-panel h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.left-panel .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* Botão do Painel Esquerdo (Criar Conta) */
+.btn-create-account {
+    background-color: var(--color-primary); /* Destaque com o verde mais claro */
+    color: var(--color-text-light);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-create-account:hover {
+    background-color: #89AD98; /* Tom mais escuro no hover */
+}
+
+/* 3. Painel Direito: Cadastro (Fundo Claro) */
+.right-panel {
+    flex: 1; /* Ocupa 50% da largura */
+    background-color: var(--color-light);
+    color: var(--color-text-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.right-panel h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 5px;
+}
+
+.right-panel .subtitle {
+    font-size: 1.1rem;
+    color: var(--color-secondary);
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
+
+/* Formulário de Login */
+.right-panel form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 350px;
+}
+
+/* Inputs (E-mail e Senha) */
+.right-panel input[type="email"],
+.right-panel input[type="password"] {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: var(--color-light); /* Fundo claro para campos */
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.right-panel input:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 5px rgba(74, 124, 89, 0.5);
+}
+
+/* Link Esqueceu a Senha */
+.forgot-password {
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    text-decoration: none;
+    margin-bottom: 25px;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* Botões de Ação (Entrar e Voltar) */
+.right-panel button {
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão Entrar (Principal) */
+.right-panel button[type="submit"] {
+    background-color: var(--color-secondary); /* Verde escuro */
+    color: var(--color-text-light);
+}
+
+.right-panel button[type="submit"]:hover {
+    background-color: #3C6649; /* Tom mais escuro no hover */
+}
+
+/* Botão Voltar (Secundário) */
+.right-panel button:last-of-type {
+    background-color: transparent;
+    border: 2px solid var(--color-secondary);
+    color: var(--color-secondary);
+    box-shadow: none;
+}
+
+.right-panel button:last-of-type:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+}
+
+/* Mensagem de Erro */
+.error-message {
+    background-color: #F9E5E5;
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 350px;
+    font-size: 0.95rem;
+}
+
+/* Acessibilidade - Screen Reader Only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Media Queries para Responsividade (Mobile) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Painel Esquerdo (Criar Conta) no topo em Mobile */
+    .left-panel {
+        order: 2; /* Coloca o "Criar Conta" para baixo */
+        padding: 30px 20px;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .left-panel h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Painel Direito (Login) no topo em Mobile */
+    .right-panel {
+        order: 1; /* Coloca o "Login" para cima */
+        padding: 40px 20px 30px;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .right-panel h2 {
+        font-size: 2rem;
+    }
+
+    .right-panel form,
+    .error-message {
+        width: 100%;
+        max-width: none;
+    }
+}

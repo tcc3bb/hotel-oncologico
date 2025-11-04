@@ -1,0 +1,680 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+main {
+    max-width: 58rem;
+    margin: 2.5rem auto 5rem;
+    padding: 0 1.25rem;
+    text-align: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #444;
+    line-height: 1.6;
+}
+
+p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: #61967e;
+    margin-bottom: 1.8rem;
+}
+
+.highlight-title {
+    color: #2a684e;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #61967e;
+}
+
+.dot.dark {
+    background-color: #2a684e;
+}
+
+
+
+/*-----     NAVBAR     -----*/
+nav {
+    background-color: #699b80;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 100%;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 6px 10px;
+    font-size: 1em;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background-color: #83aa89;
+}
+
+.img{
+    padding: 0;
+}
+
+.img-logo {
+    height: 8vh; 
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.btn-entrar,
+.btn-cadastrar,
+.btn-nav {
+    padding: 0.5rem 1.2rem;
+    background: #3b4a3b;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-entrar:hover,
+.btn-cadastrar:hover {
+    background: #83aa89;
+}
+
+.btn-logout {
+    background: #e74c3c;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    margin-left: 0.6rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+    background: #c0392b;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----------     HOSPITAIS PRÓXIMOS     ----------*/
+.hospitais-section {
+    max-width: 100%;
+}
+
+.hospitais-section h2 {
+    text-align: center;
+    font-size: 32px;
+    color: #1e5a3c;
+    margin-bottom: 10px;
+}
+
+.descricao {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card {
+    display: flex;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card img {
+    width: 40%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.card-content h3 {
+    font-size: 20px;
+    color: #1e5a3c;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mapa-btn {
+    background-color: #1e5a3c;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.mapa-btn:hover {
+    background-color: #17472e;
+}
+
+.tag {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.publico {
+    background-color: #1e5a3c;
+}
+
+.privado {
+    background-color: #c94a4a;
+}
+
+
+
+
+/*----------     FARMÁCIAS PRÓXIMAS     ----------*/
+.farmacias-section {
+    width: 100%;
+    padding: 2rem 1rem;
+    font-family: Arial, sans-serif;
+}
+
+.farmacias-container {
+    background-color: #6aa986;
+    padding: 2rem 1rem;
+    color: #fff;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 0 auto 2rem auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.farmacias-container h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.farmacias-container p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.farmacias-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.farmacia-card {
+    background-color: #2a684e;
+    border-radius: 1rem;
+    overflow: hidden;
+    flex: 1 1 20rem;
+    max-width: 22rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    max-height: 30rem;
+
+}
+
+.farmacia-card:hover {
+    transform: translateY(-5px);
+}
+
+.farmacia-card img {
+    width: 100%;
+    height: 65%;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.farmacia-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.farmacia-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.tag {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.tag span {
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.comum {
+    background-color: #e0e0e0;
+    color: #444;
+}
+
+.alto-custo {
+    background-color: #f5a623;
+    color: #fff;
+}
+
+.mapa {
+    font-size: 0.8rem;
+    text-decoration: none;
+    background-color: #6aa986;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+}
+
+/* ---- CARROSSEL FARMÁCIAS ---- */
+.farmacias-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.farmacias-track {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.farmacias-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(30, 90, 60, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.3s;
+}
+
+.carousel-btn:hover {
+    background: #1e5a3c;
+}
+
+.carousel-btn.prev {
+    left: 0.5rem;
+}
+
+.carousel-btn.next {
+    right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .carousel-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .farmacias-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .farmacia-card {
+        max-width: 90%;
+    }
+}
+
+
+
+
+/*----------     CLÍNICAS PRÓXIMAS     ----------*/
+.clinicas-section {
+    width: 100%;
+    padding: 2rem 1rem;
+    font-family: Arial, sans-serif;
+}
+
+.clinicas-container {
+    background-color: #6aa986;
+    padding: 2rem 1rem;
+    color: #fff;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 0 auto 2rem auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.clinicas-container h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.clinicas-container p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---- BOTÃO MAPA SOBRE IMAGEM ---- */
+.mapa-sobre-img {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(30, 90, 60, 0.85);
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s;
+}
+
+.mapa-sobre-img:hover {
+    background: #1e5a3c;
+}
+
+/* ---- MODAL ---- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2rem;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #1e5a3c;
+}
+
+.fechar:hover {
+    color: #c94a4a;
+}
+
+/* ---- CARROSSEL FARMÁCIAS ---- */
+.farmacias-carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.farmacias-track {
+    display: flex;
+    gap: 1rem;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.farmacia-card {
+    position: relative;
+    flex: 0 0 20rem;
+}
+
+/* ---- BOTÃO CARREGAR MAIS ---- */
+.btn-carregar {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.75rem 1.5rem;
+    background: #1e5a3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-carregar:hover {
+    background: #2a684e;
+}
+
+/* Corrige cards clicáveis */
+.card,
+.farmacia-card {
+    position: relative;
+    cursor: pointer;
+}
+
+
+/* ---- BOTÃO SCROLL PARA TOPO ---- */
+#scrollTop {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: #2a684e;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 0.8rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+}
+
+#scrollTop:hover {
+    background: #1e5a3c;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-----     FOOTER     -----*/
+footer {
+    background: #699b80;
+    color: #fff;
+    padding: 2rem 1.25rem 1rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 68.75rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-container>div {
+    flex: 1 1 15rem;
+    min-width: 13.75rem;
+}
+
+.footer-container h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #c9d6c5;
+}
+
+.footer-container p,
+.footer-container a {
+    color: #d4d9d4;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1.25rem;
+    border-top: 1px solid #5a6a5a;
+    padding-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #aeb5ab;
+}
+
+
+
+
+
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 15px;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Vita - Cadastro de Voluntário</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="stylesheet" href="/css/questionarios/style_voluntario.css">
+
+</head>
+
+<body>
+    <div class="form-wrapper">
+        <h2>Cadastro de Voluntário</h2>
+
+        <!-- Simulação de erro -->
+        <p class="error-message" style="display: none;">Ocorreu um erro ao processar o cadastro.</p>
+        <!-- Fim da simulação -->
+
+        <form method="POST">
+
+            <input type="hidden" name="usuario_id">
+
+            <!-- Agrupamento 1: Dados Pessoais -->
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+                <div class="field-group">
+
+                    <div class="form-control">
+                        <label for="voluntario_nome">Nome completo:</label>
+                        <input type="text" id="voluntario_nome" name="voluntario_nome">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_cpf">CPF:</label>
+                        <input type="text" id="voluntario_cpf" name="voluntario_cpf" maxlength="14"
+                            placeholder="000.000.000-00">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_rg">RG:</label>
+                        <input type="text" id="voluntario_rg" name="voluntario_rg" maxlength="20">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_data_nascimento">Data de nascimento:</label>
+                        <input type="date" id="voluntario_data_nascimento" name="voluntario_data_nascimento">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_sexo">Sexo:</label>
+                        <select id="voluntario_sexo" name="voluntario_sexo">
+                            <option value="">Selecione</option>
+                            <option selected>Masculino</option>
+                            <option>Feminino</option>
+                            <option>Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_estado_civil">Estado civil:</label>
+                        <select id="voluntario_estado_civil" name="voluntario_estado_civil">
+                            <option value="">Selecione</option>
+                            <option selected>Solteiro(a)</option>
+                            <option>Casado(a)</option>
+                            <option>Divorciado(a)</option>
+                            <option>Viúvo(a)</option>
+                            <option>Outro</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Agrupamento 2: Contato e Localização -->
+            <fieldset>
+                <legend>Contato e Localização</legend>
+                <div class="field-group">
+                    <div class="form-control">
+                        <label for="voluntario_telefone">Telefone:</label>
+                        <input type="tel" id="voluntario_telefone" name="voluntario_telefone" maxlength="20"
+                            placeholder="(00) 00000-0000">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_endereco">Endereço:</label>
+                        <input type="text" id="voluntario_endereco" name="voluntario_endereco" maxlength="255">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_cidade">Cidade:</label>
+                        <input type="text" id="voluntario_cidade" name="voluntario_cidade" maxlength="100">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_estado">Estado:</label>
+                        <input type="text" id="voluntario_estado" name="voluntario_estado" maxlength="50">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Agrupamento 3: Experiência e Disponibilidade -->
+            <fieldset>
+                <legend>Experiência e Disponibilidade</legend>
+                <div class="field-group">
+                    <div class="form-control">
+                        <label for="voluntario_area_atuacao">Área de atuação:</label>
+                        <input type="text" id="voluntario_area_atuacao" name="voluntario_area_atuacao" maxlength="150">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_disponibilidade">Disponibilidade:</label>
+                        <select id="voluntario_disponibilidade" name="voluntario_disponibilidade">
+                            <option value="">Selecione</option>
+                            <option>Integral</option>
+                            <option>Parcial</option>
+                            <option>Fins de Semana</option>
+                            <option >Eventual</option>
+                        </select>
+                    </div>
+
+                    <div class="form-control" style="grid-column: 1 / -1;">
+                        <label for="voluntario_habilidades">Habilidades:</label>
+                        <textarea id="voluntario_habilidades" name="voluntario_habilidades"
+                            rows="3"></textarea>
+                    </div>
+
+                    <div class="form-control" style="grid-column: 1 / -1;">
+                        <label for="voluntario_horarios_disponiveis">Horários disponíveis:</label>
+                        <textarea id="voluntario_horarios_disponiveis" name="voluntario_horarios_disponiveis"
+                            rows="2"></textarea>
+                    </div>
+
+                    <div class="form-control" style="grid-column: 1 / -1;">
+                        <label for="voluntario_experiencia_previa">Experiência prévia:</label>
+                        <textarea id="voluntario_experiencia_previa" name="voluntario_experiencia_previa"
+                            rows="3"></textarea>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="voluntario_certificado">Possui certificado? (Marque se sim)</label>
+                        <input type="checkbox" id="voluntario_certificado" name="voluntario_certificado">
+                    </div>
+                </div>
+
+                <div class="form-control" style="margin-top: 20px;">
+                    <label for="voluntario_observacoes">Observações:</label>
+                    <textarea id="voluntario_observacoes" name="voluntario_observacoes"
+                        rows="3"></textarea>
+                </div>
+            </fieldset>
+
+
+            <button type="submit">Enviar Cadastro</button>
+        </form>
+    </div>
+</body>
+
+</html>

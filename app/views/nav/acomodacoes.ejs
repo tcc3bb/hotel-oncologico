@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav/style_acomodacoes.css">
+</head>
+
+<body>
+    <nav>
+        <a href="/">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+    <!-- =================== HEADER =================== -->
+    <header class="header" role="banner">
+        <div class="header-title">
+            <h1>Acomodações</h1>
+            <p>Infraestrutura e Serviços</p>
+        </div>
+    </header>
+
+    <!-- =================== SERVIÇOS =================== -->
+    <section class="services" role="region" aria-label="Serviços e Infraestrutura">
+        <div class="service-item" tabindex="0">
+            <div class="circle-img">
+                <img src="/image/acomodacoes/quartos.jpg"
+                    alt="Quartos: imagem de um quarto simples com cama arrumada e janela com cortina branca"
+                    onerror="this.style.display='none';" class="img-service" />
+            </div>
+            Quartos
+        </div>
+        <div class="service-item" tabindex="0">
+            <div class="circle-img">
+                <img src="/image/acomodacoes/refeicoes.webp"
+                    alt="Refeições: mãe e filha sorrindo e comendo frutas em cozinha clara e acolhedora"
+                    onerror="this.style.display='none';" class="img-service" />
+            </div>
+            Refeições
+        </div>
+        <div class="service-item" tabindex="0">
+            <div class="circle-img">
+                <img src="/image/acomodacoes/areas_comuns.webp"
+                    alt="Áreas comuns: parque com árvores, bancos e céu azul em ambiente aberto e ensolarado"
+                    onerror="this.style.display='none';" class="img-service" />
+            </div>
+            Áreas comuns
+        </div>
+        <div class="service-item" tabindex="0">
+            <div class="circle-img">
+                <img src="/image/acomodacoes/lavanderia.jpg"
+                    alt="Lavanderia: interior de lavanderia com máquinas de lavar e armários em parede azul clara"
+                    onerror="this.style.display='none';" class="img-service" />
+            </div>
+            Lavanderia
+        </div>
+    </section>
+
+    <!-- =================== POLÍTICA DE HOSPEDAGEM =================== -->
+    <div class="button-container">
+        <button class="btn-policy" type="button" aria-label="Política de Hospedagem">Política de Hospedagem</button>
+    </div>
+
+    <main>
+        <!-- =================== QUARTOS =================== -->
+        <section class="quartos-section">
+            <h2 class="title-quartos">Quartos</h2>
+            <div class="quarto-card">
+                <img src="/image/acomodacoes/quartos.jpg" alt="Quarto Comum" class="quarto-img">
+                <div class="quarto-info">
+                    <h3>Comum (acompanhantes)</h3>
+                    <p>O quarto do acompanhante segue a mesma filosofia, oferecendo poltrona ou cama confortável, espaço
+                        para pertences e atmosfera tranquila, permitindo apoio próximo ao paciente em um ambiente seguro
+                        e acolhedor.</p>
+                    <button class="btn-reservar">Reservar</button>
+                </div>
+            </div>
+            <div class="quarto-card reverse">
+                <img src="/image/acomodacoes/leito.jpeg" alt="Quarto Leito" class="quarto-img">
+                <div class="quarto-info">
+                    <h3>Leito (pacientes)</h3>
+                    <p>O leito do paciente foi projetado para oferecer conforto, segurança e bem-estar, com cama
+                        ajustável, iluminação suave e móveis aconchegantes, garantindo privacidade e um ambiente
+                        acolhedor durante a internação.</p>
+                    <button class="btn-reservar">Reservar</button>
+                </div>
+            </div>
+
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot dark"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+
+        <!-- =================== ÁREA COMUM =================== -->
+        <section class="area-comum-section">
+            <h1 class="title-area-comum">Área Comum</h1>
+            <div class="image-area"
+                aria-label="Área comum de lazer com brinquedos coloridos sobre grama verde e paredes coloridas ao fundo, sob céu azul com poucas nuvens">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d9f1be9-b5dc-42d8-bd4a-3db63ec7fa2d.png"
+                    alt="Área comum externa para crianças com brinquedos coloridos: túnel amarelo e azul, brinquedo triangular para escalada, bolas espalhadas no gramado verde artificial. Ao fundo, muros com painéis nas cores azul, verde e cinza, e uma árvore com folhagem amarela e verde" />
+            </div>
+            <div>
+                <p>A área comum da Casa de Apoio foi cuidadosamente planejada para oferecer conforto, acolhimento e
+                    um ambiente que promova tanto o descanso quanto a socialização entre os moradores. Ao
+                    entrar nesse espaço, a sensação é de leveza e tranquilidade: cores suaves predominam na decoração,
+                    transmitindo calma e serenidade, enquanto detalhes em tons vibrantes reforçam a esperança e a
+                    vitalidade.</p>
+                <p>O espaço é amplo e iluminado, com grandes janelas que permitem a entrada de luz natural durante o
+                    dia, além de uma vista para o jardim, trazendo a natureza para dentro da casa. O piso em
+                    tom claro facilita a mobilidade e a limpeza, enquanto os móveis foram escolhidos priorizando o
+                    conforto
+                    ergonômico, essencial para pessoas em tratamento. Sofás macios, poltronas reclináveis e almofadas
+                    aconchegantes estão dispostos de forma a criar pequenos cantos de convivência, permitindo tanto
+                    momentos
+                    de conversa quanto de descanso individual.</p>
+            </div>
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot dark"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+        <!-- =================== REFEIÇÕES =================== -->
+        <section class="refeicao-section" aria-labelledby="refeicoes-title">
+            <div class="refeicao-item">
+                <h1 id="refeicoes-title">Refeições</h1>
+                <div class="image-container-refeicao" aria-hidden="true">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3a94fd1b-6e98-447b-aae4-5aa4ba19fe3d.png"
+                        alt="Prato de comida saudável com filé de frango grelhado, arroz branco, brócolis cozido e salada fresca colorida, ao lado um vidro com suco de laranja"
+                        onerror="this.onerror=null; this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2194ec0f-5b4e-4f8b-95f1-688c2161f531.png';" />
+                </div>
+                <div class="text-container">
+                    <p>
+                        No nosso hotel oncológico, as refeições são preparadas com muito carinho e atenção às
+                        necessidades
+                        nutricionais dos pacientes em tratamento. Sabemos que a alimentação desempenha um papel
+                        fundamental
+                        no processo de recuperação, por isso, oferecemos menus balanceados, com ingredientes frescos e
+                        opções personalizadas que respeitam as restrições alimentares de cada paciente.
+                    </p>
+                    <p>
+                        Tudo isso acompanhados por uma equipe de nutricionistas especializados, garantimos que cada
+                        refeição
+                        seja não apenas nutritiva, mas também saborosa, proporcionando conforto e bem-estar durante a
+                        jornada de cura.
+                    </p>
+                </div>
+            </div>
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot dark"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+        <!-- =================== LAVANDERIA =================== -->
+        <section class="lavanderia-section">
+            <div class="lavanderia-container">
+                <h1 class="title-lavanderia">Lavanderia</h1>
+                <div class="items-lavanderia-row">
+                    <div class="item-lavanderia">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/07d71aee-4863-4a55-b277-c526e9141fbe.png"
+                            alt="Tábua de passar roupa cinza moderna encostada em parede clara iluminada"
+                            onerror="this.style.display='none'" />
+                    </div>
+                    <div class="item-lavanderia">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/019df921-a24c-42ab-9fa1-9073bb7b3795.png"
+                            alt="Pessoa colocando roupa branca na máquina de lavar branca em lavanderia"
+                            onerror="this.style.display='none'" />
+                    </div>
+                    <div class="item-lavanderia">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8f3d2076-fc9a-4673-94ac-b2b25c7156c5.png"
+                            alt="Mãos dobrando roupa de cama com listras em tecido branco e bege em ambiente claro"
+                            onerror="this.style.display='none'" />
+                    </div>
+                </div>
+                <div class="titles">
+                    <span class="text-lavanderia">Tábua de passar</span>
+                    <span class="text-lavanderia">Maquina de lavar</span>
+                    <span class="text-lavanderia">Roupa de cama</span>
+                </div>
+                <div class="description">
+                    <p>
+                        Pensando na comodidade e autonomia dos nossos pacientes, oferecemos um espaço de lavanderia
+                        totalmente equipado, onde você pode lavar suas roupas com total facilidade e privacidade.
+                        O ambiente é seguro, confortável e disponibiliza todos os utensílios
+                    </p>
+                    <p>
+                        necessários, como máquinas de lavar, secadoras e detergentes adequados.
+                        Assim, você tem a liberdade de cuidar da sua rotina sem sair de perto do ambiente acolhedor do
+                        hotel, com total conforto e praticidade durante o seu tratamento.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =================== FOOTER =================== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Conteúdo extra para cada serviço
+        const serviceDetails = {
+            "Quartos": "Nossos quartos são projetados para oferecer conforto, privacidade e um ambiente acolhedor. Disponibilizamos opções individuais e coletivas, sempre com limpeza e organização.",
+            "Refeições": "Servimos refeições balanceadas, nutritivas e preparadas com cuidado. Oferecemos cardápios adaptados a diferentes necessidades alimentares.",
+            "Áreas comuns": "Espaços amplos e aconchegantes para convivência, lazer e descanso. Incluem salas de estar, jardins e áreas externas seguras.",
+            "Lavanderia": "Serviço de lavanderia disponível para pacientes e acompanhantes, garantindo praticidade e comodidade durante a estadia."
+        };
+
+        // Criação do modal (apenas uma vez)
+        const modal = document.createElement("div");
+        modal.id = "serviceModal";
+        modal.style.position = "fixed";
+        modal.style.top = "0";
+        modal.style.left = "0";
+        modal.style.width = "100%";
+        modal.style.height = "100%";
+        modal.style.backgroundColor = "rgba(0,0,0,0.6)";
+        modal.style.display = "none";
+        modal.style.justifyContent = "center";
+        modal.style.alignItems = "center";
+        modal.style.zIndex = "1000";
+
+        modal.innerHTML = `
+        <div style="
+            background:#fff;
+            max-width:500px;
+            width:90%;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.3);
+            text-align:center;
+        ">
+            <h2 id="modalTitle" style="margin-bottom:15px; font-family: 'EB Garamond', serif;"></h2>
+            <p id="modalContent" style="margin-bottom:20px; line-height:1.6;"></p>
+            <button id="closeModal" style="
+                background:#699b;
+                color:#fff;
+                border:none;
+                padding:10px 20px;
+                border-radius:6px;
+                cursor:pointer;
+                font-size:16px;
+            ">Fechar</button>
+        </div>
+    `;
+        document.body.appendChild(modal);
+
+        const modalTitle = document.getElementById("modalTitle");
+        const modalContent = document.getElementById("modalContent");
+        const closeModal = document.getElementById("closeModal");
+
+        // Abrir modal ao clicar em um item de serviço
+        document.querySelectorAll(".service-item").forEach(item => {
+            item.addEventListener("click", () => {
+                const serviceName = item.innerText.trim();
+                modalTitle.textContent = serviceName;
+                modalContent.textContent = serviceDetails[serviceName] || "Mais informações em breve.";
+                modal.style.display = "flex";
+            });
+        });
+
+        // Fechar modal no botão
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Fechar modal clicando fora do conteúdo
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+
+</script>
+
+
+</html>

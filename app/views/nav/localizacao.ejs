@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav/style_localizacao.css">
+    <script src="https://kit.fontawesome.com/7df7a5cfa1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
+</head>
+
+<body>
+    <nav>
+        <a href="/">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+
+    <main>
+        <!-- HOSPITAIS -->
+        <section class="hospitais-section">
+            <h2>Hospitais Próximos</h2>
+            <p class="descricao">
+                Esses são os hospitais mais próximos da nossa casa de apoio, oferecendo atendimento
+                comum e especializado no tratamento do câncer.
+            </p>
+
+            <div class="cards-container hospitais-cards">
+                <!-- 3 iniciais -->
+                <div class="card"
+                    data-info="Hospital do Câncer de São Paulo é referência nacional no tratamento oncológico."
+                    data-lat="-23.5565" data-lng="-46.6601">
+                    <img src="/image/apoio-paciente/hospital1.jpg" alt="Hospital do Câncer de São Paulo">
+                    <button class="mapa-sobre-img">Mapa</button>
+                    <div class="card-content">
+                        <h3>Hospital do Câncer de São Paulo</h3>
+                        <p> R. Dr. Arnaldo, 251, Cerqueira Cezar, São Paulo, SP</p>
+                    </div>
+                </div>
+
+                <div class="card"
+                    data-info="Santa Casa é uma instituição filantrópica com atendimento gratuito e especializado.">
+                    <img src="/image/apoio-paciente/hospital2.png" alt="Santa Casa de Misericórdia de São Paulo">
+                    <button class="mapa-sobre-img">Mapa</button>
+                    <div class="card-content">
+                        <h3>Santa Casa de Misericórdia de São Paulo</h3>
+                        <p>Av. Santa de Carvalho Aguiar, 255, Cerqueira César, São Paulo, SP</p>
+                    </div>
+                </div>
+
+                <div class="card" data-info="Hospital Oswaldo Cruz é referência em oncologia privada.">
+                    <img src="/image/apoio-paciente/hospital3.jpg" alt="Hospital Alemão Oswaldo Cruz">
+                    <button class="mapa-sobre-img">Mapa</button>
+                    <div class="card-content">
+                        <h3>Hospital Alemão Oswaldo Cruz</h3>
+                        <p>Rua das Três Irmãs, 100, Paraíso, São Paulo, SP</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-carregar" data-target="hospitais-cards">Carregar mais</button>
+        </section>
+
+        <!-- FARMÁCIAS -->
+        <section class="farmacias-section">
+            <div class="farmacias-container">
+                <h2>Farmácias Próximas</h2>
+                <p>Essas são as farmácias mais próximas da nossa casa de apoio.</p>
+            </div>
+
+            <div class="farmacias-carousel">
+                <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+
+                <div class="farmacias-track">
+                    <div class="farmacia-card" data-info="Drogasil possui ampla variedade de medicamentos.">
+                        <img src="/image/apoio-paciente/farmacia1.jpg" alt="Drogasil">
+                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                        <h3>Drogasil</h3>
+                        <p>R. Br. de Itapetininga, 40 - Centro, São Paulo, SP</p>
+                    </div>
+
+                    <div class="farmacia-card" data-info="Ambulatório especializado em medicamentos de alto custo.">
+                        <img src="/image/apoio-paciente/farmacia2.jpg" alt="Ambulatório Dr. Geraldo Bourroul">
+                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                        <h3>Ambulatório Dr. Geraldo Bourroul</h3>
+                        <p>Rua Martins Fontes, 208, São Paulo, SP</p>
+                    </div>
+
+                    <div class="farmacia-card" data-info="Ame Marsz Zélia - atendimento público e gratuito.">
+                        <img src="/image/apoio-paciente/farmacia3.jpg" alt="Ame Marsz Zélia">
+                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                        <h3>Ame Marsz Zélia</h3>
+                        <p>R. Jequitinhonha, 368 - Belenzinho</p>
+                    </div>
+
+                    <div class="farmacia-card" data-info="Pague Menos - ampla rede de farmácias.">
+                        <img src="/image/apoio-paciente/farmacia1.jpg" alt="Pague Menos">
+                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                        <h3>Pague Menos</h3>
+                        <p>Av. Paulista, 1010</p>
+                    </div>
+
+                    <div class="farmacia-card" data-info="Ultrafarma - descontos em medicamentos genéricos.">
+                        <img src="/image/apoio-paciente/farmacia2.jpg" alt="Ultrafarma">
+                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                        <h3>Ultrafarma</h3>
+                        <p>Rua das Flores, 55</p>
+                    </div>
+
+                    <div class="farmacia-card" data-info="Droga Raia - atendimento 24 horas.">
+                        <img src="/image/apoio-paciente/farmacia3.jpg" alt="Droga Raia">
+                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                        <h3>Droga Raia</h3>
+                        <p>Av. Consolação, 500</p>
+                    </div>
+                </div>
+
+                <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- CLÍNICAS -->
+        <section class="clinicas-section">
+            <div class="clinicas-container">
+                <h2>Clínicas Próximas</h2>
+                <p>Essas são as clínicas mais próximas da nossa casa de apoio.</p>
+            </div>
+
+            <div class="cards-container clinicas-cards">
+                <div class="card" data-info="Atendimento especializado em oncologia.">
+                    <img src="/image/apoio-paciente/hospital1.jpg" alt="Clínica Oncológica São Camilo">
+                    <button class="mapa-sobre-img">Mapa</button>
+                    <div class="card-content">
+                        <h3>Clínica Oncológica São Camilo</h3>
+                        <p>Av. Albert Einstein, 627, Morumbi, São Paulo, SP</p>
+                    </div>
+                </div>
+
+                <div class="card" data-info="Consultas populares em diversas especialidades.">
+                    <img src="/image/apoio-paciente/hospital2.png" alt="Clínica da Cidade">
+                    <button class="mapa-sobre-img">Mapa</button>
+                    <div class="card-content">
+                        <h3>Clínica da Cidade</h3>
+                        <p>Av. Brigadeiro Luís Antônio, 483</p>
+                    </div>
+                </div>
+
+                <div class="card" data-info="Rede Dr. Consulta - consultas e exames rápidos.">
+                    <img src="/image/apoio-paciente/hospital3.jpg" alt="Dr. Consulta">
+                    <button class="mapa-sobre-img">Mapa</button>
+                    <div class="card-content">
+                        <h3>Dr. Consulta</h3>
+                        <p>R. Brg. Tobias, 600 - Centro</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-carregar" data-target="clinicas-cards">Carregar mais</button>
+        </section>
+    </main>
+
+    <!-- MODAL -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <span class="fechar">&times;</span>
+            <h3 id="modalTitulo"></h3>
+            <p id="modalDescricao"></p>
+        </div>
+    </div>
+
+    <!-- MODAL DO MAPA -->
+    <div class="modal" id="mapModal">
+        <div class="modal-content">
+            <span class="fechar" id="fecharMapa">&times;</span>
+            <h3 id="tituloMapa"></h3>
+            <div id="map" style="height:400px; width:100%; border-radius:10px;"></div>
+        </div>
+    </div>
+
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+<script>
+    // MODAL
+    const modal = document.getElementById('infoModal');
+    const modalTitulo = document.getElementById('modalTitulo');
+    const modalDescricao = document.getElementById('modalDescricao');
+    const fechar = document.querySelector('.fechar');
+
+    document.querySelectorAll('.card, .farmacia-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            // se o clique for no botão de mapa, ignora o modal de info
+            if (e.target.classList.contains('mapa-sobre-img') || e.target.closest('.mapa-sobre-img')) {
+                return;
+            }
+
+            modalTitulo.textContent = card.querySelector('h3').textContent;
+            modalDescricao.textContent = card.dataset.info || 'Mais informações indisponíveis.';
+            modal.style.display = 'flex';
+        });
+    });
+
+
+    fechar.onclick = () => modal.style.display = 'none';
+    window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; }
+
+    // CARREGAR MAIS
+    document.querySelectorAll('.btn-carregar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = document.querySelector(`.${btn.dataset.target}`);
+            for (let i = 0; i < 3; i++) {
+                const novo = target.children[i].cloneNode(true);
+                target.appendChild(novo);
+            }
+            btn.style.display = 'none';
+        });
+    });
+
+    // CARROSSEL PARADO COM SETAS
+    const track = document.querySelector('.farmacias-track');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+
+    let scrollAmount = 0;
+    const cardWidth = 300; // Largura aproximada dos cards
+
+    nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    });
+    prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    });
+
+
+    // MODAL DO MAPA
+    const mapModal = document.getElementById('mapModal');
+    const fecharMapa = document.getElementById('fecharMapa');
+    const tituloMapa = document.getElementById('tituloMapa');
+    let map; // variável global para o mapa
+
+    document.querySelectorAll('.mapa-sobre-img').forEach(botao => {
+        botao.addEventListener('click', async (e) => {
+            e.stopPropagation();
+
+            const card = botao.closest('.card, .farmacia-card');
+            const nome = card.querySelector('h3').textContent;
+            const endereco = card.querySelector('p').textContent;
+
+            tituloMapa.textContent = nome;
+            mapModal.style.display = 'flex';
+
+            // Remove o mapa anterior antes de criar o novo
+            const mapContainer = document.getElementById('map');
+            if (map) {
+                map.remove();
+                map = null;
+            }
+            mapContainer.innerHTML = ''; // limpa o container por completo
+
+            // Busca as coordenadas
+            const coords = await getCoordinates(endereco);
+            if (!coords) {
+                tituloMapa.textContent = `${nome} - Endereço não encontrado`;
+                return;
+            }
+
+            // Cria um novo mapa do zero
+            map = L.map(mapContainer).setView([coords.lat, coords.lng], 16);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            L.marker([coords.lat, coords.lng])
+                .addTo(map)
+                .bindPopup(nome)
+                .openPopup();
+        });
+    });
+
+
+
+    // Fechar o modal
+    fecharMapa.onclick = () => mapModal.style.display = 'none';
+    window.onclick = e => { if (e.target === mapModal) mapModal.style.display = 'none'; }
+
+    // Função para buscar coordenadas automaticamente com base no endereço
+    // Função para buscar coordenadas automaticamente com base no endereço
+    async function getCoordinates(address) {
+        try {
+            // Remove prefixos como "Endereço:" e caracteres problemáticos
+            let cleanAddress = address
+                .replace(/Endereço:/gi, '')
+                .replace(/[–—]/g, '-') // substitui travessões por hífen
+                .trim();
+
+            // Adiciona cidade e estado se não estiverem presentes
+            if (!cleanAddress.toLowerCase().includes('são paulo')) {
+                cleanAddress += ', São Paulo, SP';
+            }
+
+            // Monta a URL da busca no Nominatim
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cleanAddress)}&addressdetails=1&limit=1`;
+
+            const response = await fetch(url, {
+                headers: { 'User-Agent': 'InstitutoVita/1.0 (contato@institutovita.org)' }
+            });
+
+            const data = await response.json();
+
+            if (data && data.length > 0) {
+                return {
+                    lat: parseFloat(data[0].lat),
+                    lng: parseFloat(data[0].lon)
+                };
+            } else {
+                console.warn("Endereço não encontrado:", cleanAddress);
+                return null;
+            }
+        } catch (error) {
+            console.error("Erro ao buscar coordenadas:", error);
+            return null;
+        }
+    }
+
+
+
+</script>
+
+</html>

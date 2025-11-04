@@ -1,0 +1,143 @@
+<!--https://github.com/tcc3bb/hotel-oncologico.git-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/home/style_index.css">
+</head>
+
+<body>
+    <!-- ======================================================================================================================-->
+    <!--===================================================== MENU ============================================================-->
+    <!--====================================================================================================================== -->
+    <nav>
+        <a href="/" class="img">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+    <!-- ======================================================================================================================-->
+    <!--==================================================== BANNER ===========================================================-->
+    <!--====================================================================================================================== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hospedagem com amor, cuidado e dignidade.</h1>
+            <div class="hero-buttons">
+                <a href="/doacoes" class="btn">Quero contribuir</a>
+                <a href="/voluntariado" class="btn">Quero me voluntariar</a>
+                <a href="/reservas/nova" class="btn">Quero reservar</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- ======================================================================================================================-->
+        <!--================================================== SOBRE NÓS ==========================================================-->
+        <!--====================================================================================================================== -->
+        <section aria-labelledby="sobre-nos-title">
+            <h2 id="sobre-nos-title">Sobre nós</h2>
+            <p>No Hotel Oncológico, acreditamos que o cuidado vai muito além do tratamento. Nosso propósito é acolher,
+                confortar e oferecer um espaço onde o amor e a empatia sejam parte essencial da jornada de cada hóspede.
+                Sabemos que o caminho da recuperação pode ser delicado e desafiador, e é por isso que criamos um
+                ambiente pensado com o coração — um refúgio de paz, carinho e esperança.
+
+                Cada detalhe do hotel foi cuidadosamente planejado para proporcionar conforto, segurança e bem-estar.
+                Desde os ambientes tranquilos e acolhedores até a dedicação da nossa equipe, tudo foi idealizado para
+                que pacientes e familiares se sintam verdadeiramente em casa. Aqui, cada sorriso é valorizado, cada
+                história é respeitada e cada pessoa é tratada com dignidade e afeto.
+            </p>
+        </section>
+
+        <!-- ======================================================================================================================-->
+        <!--================================================== LOCALIZAÇÃO ========================================================-->
+        <!--====================================================================================================================== -->
+        <section class="location-section" aria-labelledby="localizacao-title">
+            <div class="location-text">
+                <h2 id="localizacao-title">Localização</h2>
+                <p> Estamos localizados em uma área tranquila, segura e de fácil acesso, próximos aos principais centros
+                    de tratamento oncológico da cidade. Essa localização foi escolhida com muito cuidado para oferecer
+                    praticidade aos nossos hóspedes, facilitando o deslocamento para consultas, exames e sessões de
+                    tratamento.</p>
+                <p> Além disso, o entorno do hotel conta com farmácias, restaurantes, supermercados e espaços verdes,
+                    garantindo que tudo o que você precisa esteja sempre por perto. Nosso objetivo é que cada estadia
+                    seja repleta de conforto, segurança e praticidade, para que você possa focar no que realmente
+                    importa: o seu bem-estar.</p>
+            </div>
+
+            <div class="location-image" role="img"
+                aria-label="Foto ilustrativa de exterior de uma casa de hospedagem confortável, com jardim verde, dias claros e ambiente tranquilo">
+                <img src="/image/location.jpg">
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================================================================================================================-->
+    <!--==================================================== FOOTER ===========================================================-->
+    <!--====================================================================================================================== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

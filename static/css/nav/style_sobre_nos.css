@@ -1,0 +1,433 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+main {
+    max-width: 58rem;
+    margin: 2.5rem auto 5rem;
+    padding: 0 1.25rem;
+    text-align: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #444;
+    line-height: 1.6;
+} 
+
+p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: #61967e;
+    margin-bottom: 1.8rem;
+}
+
+.highlight-title {
+    color: #2a684e;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #61967e;
+}
+
+.dot.dark {
+    background-color: #2a684e;
+}
+
+
+
+/*-----     NAVBAR     -----*/
+nav {
+    background-color: #699b80;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 100%;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 6px 10px;
+    font-size: 1em;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background-color: #83aa89;
+}
+
+.img{
+    padding: 0;
+}
+
+.img-logo {
+    height: 8vh; 
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.btn-entrar,
+.btn-cadastrar,
+.btn-nav {
+    padding: 0.5rem 1.2rem;
+    background: #3b4a3b;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-entrar:hover,
+.btn-cadastrar:hover {
+    background: #83aa89;
+}
+
+.btn-logout {
+    background: #e74c3c;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    margin-left: 0.6rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+    background: #c0392b;
+}
+
+
+
+
+
+/* -----     NOSSA HISTÓRIA     ----- */
+.nossa-historia {
+    position: relative;
+    max-width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.historia-texto {
+    position: absolute;
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.75rem 0.75rem 2rem 0.25rem;
+    z-index: 2;
+}
+
+.historia-texto h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2d694d;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.historia-imagem img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 1rem;
+}
+
+
+
+
+
+/*-----     MISSÃO     ----- */
+.missao-section {
+    max-width: 100%;
+}
+
+.missao-title {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #9a9a9a;
+    margin-bottom: 2.5rem;
+    font-family: 'EB Garamond', serif;
+}
+
+.highlight-missao {
+    color: #699b80;
+}
+
+.missao-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.missao-block.invert {
+    flex-direction: row-reverse;
+}
+
+.missao-img-left {
+    width: 14rem;
+    height: 15rem;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50% 50% 0 0;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+}
+
+.missao-img-right {
+    width: 20rem;
+    height: 15rem;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50% 35% 55% 40%;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+}
+
+
+
+@media (max-width: 768px) {
+    .missao-block {
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
+        gap: 1.25rem;
+    }
+
+    .missao-img-left,
+    .missao-img-right {
+        width: 8.75rem;
+        height: 8.75rem;
+    }
+
+    .missao-text-left,
+    .missao-text-right {
+        text-align: center;
+    }
+}
+
+
+
+
+
+/*-----     VISÃO     -----*/
+.visao-section {
+    max-width: 100%;
+}
+
+.visao-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: nowrap;
+}
+
+.visao-image-text img {
+    width: 14rem;
+    height: 15rem;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50% 50% 0 0;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+}
+
+.visao-text-image img {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .visao-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .visao-text-image img {
+        display: block;
+        margin-top: 1.25rem;
+        width: 8.75rem;
+        height: 8.75rem;
+        border-radius: 50%;
+    }
+}
+
+
+
+
+
+/*-----     VALORES     -----*/
+.valores-section {
+    max-width: 62rem;
+
+}
+
+.valores-content {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.valores-list {
+    list-style: none;
+    flex: 1 1 45%;
+    font-size: 1rem;
+    color: #6b6b99;
+}
+
+.valores-list li {
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+li {
+    font-size: 1.2rem;
+}
+
+.green {
+    color: #61967e;
+}
+
+.dark-green {
+    color: #2e6b51;
+}
+
+.bullet {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+}
+
+.bullet-green {
+    background: #61967e;
+}
+
+.bullet-dark-green {
+    background: #2e6b51;
+}
+
+.valores-image-container {
+    flex: 1 1 45%;
+    text-align: center;
+}
+
+.valores-image-container img {
+    width: 20rem;
+    height: 15rem;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50% 65% 45% 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+}
+
+@media (max-width: 768px) {
+    .valores-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .valores-list,
+    .valores-image-container {
+        flex: 1 1 100%;
+    }
+
+    .valores-description {
+        text-align: center;
+    }
+}
+
+
+
+
+
+/*-----     FOOTER     -----*/
+footer {
+    background: #699b80;
+    color: #fff;
+    padding: 2rem 1.25rem 1rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 68.75rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-container>div {
+    flex: 1 1 15rem;
+    min-width: 13.75rem;
+}
+
+.footer-container h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #c9d6c5;
+}
+
+.footer-container p,
+.footer-container a {
+    color: #d4d9d4;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1.25rem;
+    border-top: 1px solid #5a6a5a;
+    padding-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #aeb5ab;
+}

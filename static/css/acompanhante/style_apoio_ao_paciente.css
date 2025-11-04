@@ -1,0 +1,141 @@
+/* =========================
+   Ajustes e utilitários específicos para o Painel do Acompanhante
+   (colar ao final de style_minhas_reservas.css)
+   ========================= */
+
+/* Utilitários rápidos */
+.mt-3 { margin-top: 1rem; }
+.mb-3 { margin-bottom: 1rem; }
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+
+/* Sidebar: acessibilidade e detalhes visuais */
+.sidebar-item {
+    outline: none;
+}
+.sidebar-item[tabindex]:focus {
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Ícone e label da sidebar com espaçamento mais preciso */
+.sidebar-item .icon {
+    font-size: 20px;
+    width: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Conteúdo ativo - animação suave (aplica quando a classe 'ativo' é adicionada) */
+.conteudo.ativo {
+    animation: fadeIn 0.35s ease both;
+}
+
+/* Links dentro de cards (guias/recursos) */
+.card a {
+    color: var(--cor-principal);
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+.card a:hover {
+    text-decoration: underline;
+    color: var(--cor-acento-vibrante);
+}
+
+/* Upload area: tornar label clicável e mais clara */
+.upload-area {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+}
+.upload-area .upload-label {
+    text-align: left;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: var(--borda-arredondada-md);
+    border: 1px dashed var(--cor-secundaria);
+    background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 100%);
+}
+.upload-area input[type="file"] { display: none; }
+
+/* Botão de exportar / download no card */
+.btn-download {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 18px;
+}
+.btn-download:active { transform: translateY(1px); }
+
+/* Tabela: responsividade e overflow com padding interno */
+.table-responsive { overflow-x: auto; padding-bottom: 8px; }
+table tbody td { vertical-align: middle; }
+
+/* Estrelas de avaliação: melhor espaçamento e cursor */
+.card-avaliacao .estrelas { letter-spacing: 6px; cursor: pointer; }
+.card-avaliacao .estrelas span { display: inline-block; transition: transform .12s ease; }
+.card-avaliacao .estrelas span:hover { transform: scale(1.15); }
+
+/* Card-chat: equalizar altura e alinhar botões */
+.card-chat { display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; }
+.card-chat .card-title { margin-bottom: 6px; }
+.card-chat p { margin-bottom: 12px; }
+
+/* Plano de tratamento: realce de datas */
+.plano-list li { padding: 10px 12px; border-radius: 8px; background: rgba(35,84,59,0.03); }
+.plano-list li + li { margin-top: 8px; }
+
+/* Feedback: textarea com altura mínima coerente */
+.card textarea { min-height: 110px; }
+
+/* Badge pequeno para status em linhas de tabela */
+.badge-inline {
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:0.8rem;
+    text-transform:none;
+}
+
+/* Estilos para estado 'Acompanhar' convertido em ação importante */
+.btn-secondary.acompanhar {
+    background: linear-gradient(90deg, var(--cor-acento-vibrante), var(--cor-secundaria));
+    color: white;
+    border: none;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+/* Hover micro-interaction para qualquer botão principal */
+.btn-primary, .btn-primary-block, .btn-secondary, .btn-download {
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary:hover, .btn-primary-block:hover, .btn-secondary:hover, .btn-download:hover {
+    transform: translateY(-2px);
+}
+
+/* Pequena responsividade: empilhar sidebar acima no mobile */
+@media (max-width: 880px) {
+    .painel-container { flex-direction: column; padding: 16px; }
+    .sidebar { width: 100%; display:flex; flex-wrap:wrap; gap:10px; padding:12px; }
+    .sidebar-item { flex: 1 1 calc(50% - 10px); text-align: center; }
+    main { padding: 18px; }
+    .chat-cards { grid-template-columns: 1fr; }
+    .saude-cards { grid-template-columns: 1fr; }
+    .card-plano { grid-column: auto; }
+}
+
+/* Caso use utilitários .ativo vs .ativo-alt (compatibilidade) */
+.conteudo.ativo, .conteudo.ativo-alt { display: block; }
+
+/* Pequeno ajuste do footer para mobile */
+@media (max-width: 520px) {
+    .footer-container { flex-direction: column; gap: 16px; padding: 12px; }
+    .img-logo { height: 6vh; }
+}
