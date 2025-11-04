@@ -67,7 +67,15 @@ app.use(express.static('app/public'));
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 
-// Servidor
-app.listen(3000, function(){
+// Servidor Laragon
+/*app.listen(3000, function(){
     console.log('Servidor Rodando!');
+});*/
+
+// Servidor Render
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
 });
+
+//mysql -h switchback.proxy.rlwy.net -u root -p aMMHZfHXBatNlkjOObUGbMzyPNEXjFqn --port 51074 --protocol=TCP railway
