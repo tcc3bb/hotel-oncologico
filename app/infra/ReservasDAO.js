@@ -7,24 +7,82 @@ function ReservasDAO(connection) {
 }
 
 /* =========================
-    LISTAR TODAS AS RESERVAS (COM JOIN DE INFORMAÇÕES RELACIONADAS)
-    ========================= */
+   BUSCAR ID DO PACIENTE PELO ID DO USUÁRIO
+   ========================= */
+ReservasDAO.prototype.buscarPacienteIdPorUsuarioId = function (usuarioId, callback) {
+    const sql = `SELECT paciente_id FROM paciente WHERE usuario_id = ?`;
+    this._connection.query(sql, [usuarioId], (erro, resultados) => {
+        if (erro) {
+            return callback(erro);
+        }
+        if (resultados.length === 0) {
+            return callback(new Error('Paciente não encontrado para este usuário.'));
+        }
+        // Retorna apenas o paciente_id
+        callback(null, resultados[0].paciente_id);
+    });
+};
+
+/* =========================
+    BUSCAR ACOMPANHANTE_ID PELO E-MAIL
+   ========================= */
+/**
+ * Busca o acompanhante_id a partir do e-mail informado,
+ * usando o vínculo entre as tabelas usuario → acompanhante.
+ */
+ReservasDAO.prototype.buscarAcompanhanteIdPorEmail = function (email, callback) {
+    const sql = `
+        SELECT a.acompanhante_id
+        FROM acompanhante a
+        JOIN usuario u ON a.usuario_id = u.usuario_id
+        WHERE u.usuario_email = ? AND u.usuario_tipo = 'acompanhante'
+        LIMIT 1;
+    `;
+    this._connection.query(sql, [email], (erro, resultados) => {
+        if (erro) return callback(erro);
+        if (resultados.length === 0) return callback(null, null);
+        callback(null, resultados[0].acompanhante_id);
+    });
+};
+
+
+/* =========================
+   LISTAR TODAS AS RESERVAS (COM JOIN DE INFORMAÇÕES RELACIONADAS)
+   ========================= */
 ReservasDAO.prototype.listar = function (callback) {
     const sql = `
-        SELECT r.*, 
-            p.paciente_nome, 
-            a.acompanhante_nome, 
+        SELECT 
+            r.reserva_id,
+            r.paciente_id,
+            p.paciente_nome,
+            r.acompanhante_id,
+            a.acompanhante_nome,
+            r.quarto_id,
             q.quarto_numero,
-            ad.admin_nome
+            r.reserva_status,
+            r.reserva_data_checkin_previsto,
+            r.reserva_data_checkout_previsto,
+            r.reserva_motivo,
+            r.reserva_data_criacao
         FROM reserva r
         LEFT JOIN paciente p ON r.paciente_id = p.paciente_id
         LEFT JOIN acompanhante a ON r.acompanhante_id = a.acompanhante_id
         LEFT JOIN quarto q ON r.quarto_id = q.quarto_id
-        LEFT JOIN admin ad ON r.admin_id = ad.admin_id
         ORDER BY r.reserva_data_criacao DESC;
     `;
-    this._connection.query(sql, callback);
+
+    console.log('Executando SQL listar reservas...');
+    this._connection.query(sql, (erro, resultados) => {
+        if (erro) {
+            console.error('❌ Erro SQL listar reservas:', erro.sqlMessage || erro);
+            return callback(erro);
+        }
+        console.log(`✅ ${resultados.length} reservas encontradas.`);
+        callback(null, resultados);
+    });
 };
+
+
 
 /* =========================
     BUSCAR PRIMEIRO QUARTO DISPONÍVEL
