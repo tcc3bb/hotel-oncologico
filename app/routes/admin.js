@@ -283,7 +283,7 @@ module.exports = function (painelAdminDAO) {
                 return res.status(500).send('Erro ao excluir artigo');
             }
             res.redirect('/admin/painel');
-        });
+        }); 
     });
 
 
