@@ -179,14 +179,27 @@ module.exports = (connectionFactory) => {
 
     router.post('/acompanhante/:id', (req, res) => {
         const { id } = req.params;
-        const { acompanhante_nome, acompanhante_cpf, acompanhante_rg, acompanhante_data_nascimento, acompanhante_sexo, acompanhante_parentesco, acompanhante_telefone, acompanhante_endereco, acompanhante_cidade, acompanhante_estado, acompanhante_observacoes, paciente_email } = req.body;
+        const { acompanhante_nome, acompanhante_email, acompanhante_cpf, acompanhante_rg, acompanhante_data_nascimento, acompanhante_sexo, acompanhante_parentesco, acompanhante_telefone, acompanhante_endereco, acompanhante_cidade, acompanhante_estado, acompanhante_observacoes, paciente_email } = req.body;
 
         console.log('POST /acompanhante ->', req.body);
 
-        const sqlInsert = `
+        // Passo 1: Consulta para pegar o e-mail do usuário logado
+        connection.query('SELECT usuario_email FROM usuario WHERE usuario_id = ?', [id], (err, rows) => {
+            if (err) {
+                console.error('Erro ao buscar e-mail do usuário:', err);
+                return res.status(500).render('questionarios/paciente', {
+                    erro: 'Erro ao buscar e-mail do usuário. Verifique os logs.',
+                    usuarioId: id
+                });
+            }
+
+            const email = rows[0].usuario_email; // Pegando o e-mail do usuário
+
+            const sqlInsert = `
         INSERT INTO acompanhante (
             usuario_id,  
             acompanhante_nome, 
+            acompanhante_email, 
             acompanhante_cpf, 
             acompanhante_rg,
             acompanhante_data_nascimento, 
@@ -201,30 +214,32 @@ module.exports = (connectionFactory) => {
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-        connection.query(sqlInsert, [
-            id,
-            acompanhante_nome,
-            acompanhante_cpf,
-            acompanhante_rg,
-            acompanhante_data_nascimento,
-            acompanhante_sexo,
-            acompanhante_parentesco,
-            acompanhante_telefone,
-            acompanhante_endereco,
-            acompanhante_cidade,
-            acompanhante_estado,
-            acompanhante_observacoes,
-            paciente_email,
-        ], (err) => {
-            if (err) {
-                console.error('Erro ao inserir acompanhante:', err);
-                return res.status(500).render('questionarios/acompanhante', {
-                    erro: 'Erro ao salvar dados. Verifique os dados informados.',
-                    usuarioId: id
-                });
-            }
+            connection.query(sqlInsert, [
+                id,
+                acompanhante_nome,
+                acompanhante_email,
+                acompanhante_cpf,
+                acompanhante_rg,
+                acompanhante_data_nascimento,
+                acompanhante_sexo,
+                acompanhante_parentesco,
+                acompanhante_telefone,
+                acompanhante_endereco,
+                acompanhante_cidade,
+                acompanhante_estado,
+                acompanhante_observacoes,
+                paciente_email,
+            ], (err) => {
+                if (err) {
+                    console.error('Erro ao inserir acompanhante:', err);
+                    return res.status(500).render('questionarios/acompanhante', {
+                        erro: 'Erro ao salvar dados. Verifique os dados informados.',
+                        usuarioId: id
+                    });
+                }
 
-            res.redirect('/usuarios/login');
+                res.redirect('/usuarios/login');
+            });
         });
     });
 
