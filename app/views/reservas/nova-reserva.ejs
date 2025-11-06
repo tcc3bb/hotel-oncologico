@@ -62,72 +62,106 @@
                 <%= flashMessage %>
             </div>
             <% } %>
-        
-        <form action="/reservas/nova" method="POST" class="card p-4 shadow-sm bg-white">
-            <div class="quartos-grid">
-                <% if (quartos && quartos.length> 0) { %>
-                    <% quartos.forEach(quarto=> { %>
-                        <div class="col">
-                            <div class="quarto-card">
-                                <% if (quarto.fotos && quarto.fotos.length> 0) { %>
-                                    <img class="main-img" id="main-img-<%= quarto.quarto_id %>"
-                                        src="<%= quarto.fotos[0].foto_caminho %>" alt="Imagem principal do quarto">
-                                    <div class="thumbnails">
-                                        <% quarto.fotos.forEach(foto=> { %>
-                                            <img src="<%= foto.foto_caminho %>"
-                                                data-target="main-img-<%= quarto.quarto_id %>" alt="miniatura">
-                                            <% }) %>
+
+                <form action="/reservas/nova" method="POST" class="card p-4 shadow-sm bg-white">
+                    <div class="quartos-grid">
+                        <% if (quartos && quartos.length> 0) { %>
+                            <% quartos.forEach(quarto=> { %>
+                                <div class="col">
+                                    <div class="quarto-card">
+                                        <% if (quarto.fotos && quarto.fotos.length> 0) { %>
+                                            <img class="main-img" id="main-img-<%= quarto.quarto_id %>"
+                                                src="<%= quarto.fotos[0].foto_caminho %>"
+                                                alt="Imagem principal do quarto">
+                                            <div class="thumbnails">
+                                                <% quarto.fotos.forEach(foto=> { %>
+                                                    <img src="<%= foto.foto_caminho %>"
+                                                        data-target="main-img-<%= quarto.quarto_id %>" alt="miniatura">
+                                                    <% }) %>
+                                            </div>
+                                            <% } else { %>
+                                                <img class="main-img" src="/img/quartos/sem-imagem.jpg"
+                                                    alt="Sem imagem disponível">
+                                                <% } %>
+                                                    <div class="card-body">
+                                                        <h5>
+                                                            <%= quarto.tipo_quarto_nome %>
+                                                        </h5>
+                                                        <p>
+                                                            <%= quarto.tipo_quarto_descricao %>
+                                                        </p>
+                                                        <p><strong>Número:</strong>
+                                                            <%= quarto.quarto_numero %>
+                                                        </p>
+                                                        <p><strong>Andar:</strong>
+                                                            <%= quarto.quarto_andar %>
+                                                        </p>
+                                                    </div>
+                                                    <div class="card-footer bg-transparent">
+                                                        <input type="radio" name="quarto_id"
+                                                            value="<%= quarto.quarto_id %>"
+                                                            id="quarto_<%= quarto.quarto_id %>" required>
+                                                        <label for="quarto_<%= quarto.quarto_id %>">Selecionar este
+                                                            quarto</label>
+                                                    </div>
                                     </div>
+                                </div>
+                                <% }) %>
                                     <% } else { %>
-                                        <img class="main-img" src="/img/quartos/sem-imagem.jpg"
-                                            alt="Sem imagem disponível">
+                                        <p class="text-center w-100">Nenhum quarto disponível no momento. Tente
+                                            novamente mais
+                                            tarde.</p>
                                         <% } %>
-                                        <div class="card-body">
-                                            <h5>
-                                                <%= quarto.tipo_quarto_nome %>
-                                            </h5>
-                                            <p>
-                                                <%= quarto.tipo_quarto_descricao %>
-                                            </p>
-                                            <p><strong>Número:</strong>
-                                                <%= quarto.quarto_numero %>
-                                            </p>
-                                            <p><strong>Andar:</strong>
-                                                <%= quarto.quarto_andar %>
-                                            </p>
-                                        </div>
-                                        <div class="card-footer bg-transparent">
-                                            <input type="radio" name="quarto_id" value="<%= quarto.quarto_id %>"
-                                                id="quarto_<%= quarto.quarto_id %>" required>
-                                            <label for="quarto_<%= quarto.quarto_id %>">Selecionar este quarto</label>
-                                        </div>
-                            </div>
-                        </div>
-                        <% }) %>
-                            <% } else { %>
-                                <p class="text-center w-100">Nenhum quarto disponível no momento. Tente novamente mais
-                                    tarde.</p>
-                                <% } %>
-            </div>
-            <h3 class="mt-5 mb-3">Detalhes da Reserva</h3>
-            <div class="mb-3">
-                <label class="form-label">Data de Check-in (Previsão):</label>
-                <input type="datetime-local" class="form-control" name="reserva_data_checkin_previsto" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Data de Check-out (Previsão):</label>
-                <input type="datetime-local" class="form-control" name="reserva_data_checkout_previsto" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Motivo da estadia:</label>
-                <textarea class="form-control" name="reserva_motivo" placeholder="Descreva o motivo da estadia"
-                    required></textarea>
-            </div>
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-success btn-lg px-4">Confirmar Reserva</button>
-            </div>
-        </form>
+                    </div>
+                    <h3 class="mt-5 mb-3">Detalhes da Reserva</h3>
+                    <div class="mb-3">
+                        <label class="form-label">Selecione o período da estadia:</label>
+                        <input type="text" id="dateRange" class="form-control"
+                            placeholder="Escolha as datas" required>
+                        <input type="hidden" name="reserva_data_checkin_previsto" id="checkin">
+                        <input type="hidden" name="reserva_data_checkout_previsto" id="checkout">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Motivo da estadia:</label>
+                        <textarea class="form-control" name="reserva_motivo" placeholder="Descreva o motivo da estadia"
+                            required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">E-mail do acompanhante (opcional):</label>
+                        <input type="email" class="form-control" name="acompanhante_email"
+                            placeholder="Digite o e-mail do acompanhante (se houver)">
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg px-4">Confirmar Reserva</button>
+                    </div>
+                </form>
     </div>
+
+    <!-- FLATPICKR -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr("#dateRange", {
+                mode: "range",
+                dateFormat: "Y-m-d",
+                locale: "pt",
+                minDate: "today",
+                onChange: function (selectedDates) {
+                    if (selectedDates.length === 2) {
+                        const checkin = selectedDates[0];
+                        const checkout = selectedDates[1];
+                        document.getElementById("checkin").value = checkin.toISOString().slice(0, 19).replace('T', ' ');
+                        document.getElementById("checkout").value = checkout.toISOString().slice(0, 19).replace('T', ' ');
+                    }
+                }
+            });
+        });
+    </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -138,11 +172,11 @@
                 img.addEventListener('click', () => {
                     const targetId = img.getAttribute('data-target');
                     const mainImg = document.getElementById(targetId);
-                    
+
                     if (mainImg) {
-                         // Troca a imagem principal
-                        mainImg.src = img.src; 
-                        
+                        // Troca a imagem principal
+                        mainImg.src = img.src;
+
                         // Opcional: Adicionar ou remover classes de seleção visual nas miniaturas
                         const thumbnailsContainer = img.closest('.thumbnails');
                         thumbnailsContainer.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
