@@ -33,59 +33,112 @@ router.get('/reservas/nova', verificaLogin, (req, res) => {
             console.error('Erro ao buscar quartos:', erro);
             return res.status(500).send('Erro ao carregar quartos disponíveis: ' + erro.message);
         }
-        const flashMessage = req.flash('erro') || req.flash('sucesso'); 
-        res.render('reservas/nova-reserva', { 
-            user: req.session.user, 
+        const flashMessage = req.flash('erro') || req.flash('sucesso');
+        res.render('reservas/nova-reserva', {
+            user: req.session.user,
             quartos: quartos,
-            flashMessage: flashMessage 
+            flashMessage: flashMessage
         });
     });
 });
 
 // =======================
-// SALVAR NOVA RESERVA - CORRIGIDO (Adicionado tratamento de erro/sucesso para flash)
+// SALVAR NOVA RESERVA - CORRIGIDO (COM BUSCA DO ID DO PACIENTE)
 // =======================
-// reservas.js - Dentro de router.post('/reservas/nova', ...)
 router.post('/reservas/nova', verificaLogin, (req, res) => {
     const connection = connectionFactory();
     const dao = new ReservasDAO(connection);
     const reserva = req.body;
-    
-    console.log('Dados do usuário na sessão:', req.session.user); // Adicione este log!
 
-    if (req.session.user.tipo === 'paciente') {
-        reserva.paciente_id = req.session.user.id;
-        console.log('ID do Paciente a ser salvo:', reserva.paciente_id); // Adicione este log!
-    } else {
-        // Lidar com casos onde o usuário logado não é paciente, se necessário
+    console.log('Dados do usuário na sessão:', req.session.user);
+
+    if (req.session.user.tipo !== 'paciente') {
         console.error('Usuário logado não é um paciente para fazer a reserva.');
         req.flash('erro', 'Apenas pacientes podem fazer reservas.');
         connection.end();
         return res.redirect('/reservas/nova');
     }
+
     // Campos obrigatórios que devem ser passados pelo form
     if (!reserva.quarto_id || !reserva.reserva_data_checkin_previsto || !reserva.reserva_data_checkout_previsto) {
         req.flash('erro', 'Todos os campos obrigatórios (quarto e datas) devem ser preenchidos.');
         connection.end();
         return res.redirect('/reservas/nova');
     }
-    // Valores padrão ou calculados que faltavam no seu POST, mas são not null no BD
-    reserva.reserva_status = 'pendente'; // Status inicial de uma reserva feita pelo paciente
-    reserva.reserva_num_hospedes = 1; // Padrão, ajuste se necessário
-    reserva.reserva_valor_diaria = 0.00; // Padrão, ajuste se necessário
-    reserva.reserva_valor_servicos = 0.00; // Padrão, ajuste se necessário
-    reserva.reserva_valor_total = 0.00; // Padrão, ajuste se necessário
-    reserva.reserva_desconto = 0.00; // Padrão, ajuste se necessário
-    reserva.reserva_admin_aprovou = 0; // Padrão, até que um admin aprove
-    dao.salvar(reserva, (erro) => {
-        connection.end();
-        if (erro) {
-            console.error('Erro ao salvar reserva:', erro.message);
-            req.flash('erro', `Erro ao salvar a reserva: ${erro.message}`);
+
+    // 1. BUSCAR O paciente_id CORRETO USANDO O usuario_id DA SESSÃO
+    dao.buscarPacienteIdPorUsuarioId(req.session.user.id, (erroBusca, pacienteId) => {
+        if (erroBusca) {
+            console.error('Erro ao buscar paciente_id:', erroBusca.message);
+            req.flash('erro', `Erro interno: ${erroBusca.message}`);
+            connection.end();
             return res.redirect('/reservas/nova');
         }
-        req.flash('sucesso', 'Reserva criada com sucesso e aguardando confirmação!');
-        res.redirect('/paciente/minhas-reservas'); 
+
+        reserva.paciente_id = pacienteId;
+        console.log('ID do Paciente CORRETO a ser salvo:', reserva.paciente_id);
+
+        const acompanhanteEmail = reserva.acompanhante_email;
+
+        // Buscar acompanhante, se informado
+        if (acompanhanteEmail && acompanhanteEmail.trim() !== '') {
+            dao.buscarAcompanhanteIdPorEmail(acompanhanteEmail, (erroAcomp, acompanhanteId) => {
+                if (erroAcomp) {
+                    console.error('Erro ao buscar acompanhante por e-mail:', erroAcomp.message);
+                    req.flash('erro', `Erro ao buscar acompanhante: ${erroAcomp.message}`);
+                    connection.end();
+                    return res.redirect('/reservas/nova');
+                }
+
+                if (!acompanhanteId && acompanhanteEmail) {
+                    console.warn('E-mail de acompanhante informado não encontrado:', acompanhanteEmail);
+                    req.flash('erro', 'Nenhum acompanhante encontrado com o e-mail informado.');
+                    connection.end();
+                    return res.redirect('/reservas/nova');
+                }
+
+                reserva.acompanhante_id = acompanhanteId || null;
+                salvarReserva();
+
+            });
+        } else {
+            reserva.acompanhante_id = null;
+            salvarReserva();
+        }
+
+        function salvarReserva() {
+            // Remove campos que não pertencem à tabela 'reserva'
+            delete reserva.reserva_periodo;
+            delete reserva.acompanhante_email; // ✅ Remove o campo do formulário que não existe no banco
+
+            // Define os campos obrigatórios
+            reserva.reserva_status = 'pendente';
+            reserva.reserva_num_hospedes = 1;
+            reserva.reserva_valor_diaria = 0.00;
+            reserva.reserva_valor_servicos = 0.00;
+            reserva.reserva_valor_total = 0.00;
+            reserva.reserva_desconto = 0.00;
+            reserva.reserva_admin_aprovou = 0;
+
+            // Validação de datas
+            if (!reserva.reserva_data_checkin_previsto || !reserva.reserva_data_checkout_previsto) {
+                req.flash('erro', 'Você deve selecionar as datas de check-in e check-out.');
+                connection.end();
+                return res.redirect('/reservas/nova');
+            }
+
+            // Agora salva corretamente no banco
+            dao.salvar(reserva, (erroSalvar) => {
+                connection.end();
+                if (erroSalvar) {
+                    console.error('Erro ao salvar reserva:', erroSalvar.message);
+                    req.flash('erro', `Erro ao salvar a reserva: ${erroSalvar.message}`);
+                    return res.redirect('/reservas/nova');
+                }
+                req.flash('sucesso', 'Reserva criada com sucesso e aguardando confirmação!');
+                res.redirect('/paciente/minhas-reservas');
+            });
+        }
     });
 });
 
