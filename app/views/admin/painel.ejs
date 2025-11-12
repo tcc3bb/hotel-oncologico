@@ -1,1 +1,696 @@
-git add app/views/admin/painel.ejs
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundação Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin/style_painel.css">
+</head>
+
+<body>
+    <!-- ======================================================================================================================-->
+    <!--===================================================== MENU ============================================================-->
+    <!--====================================================================================================================== -->
+    <nav>
+        <a href="/">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+    <div class="painel-container">
+        <!-- ======================================================================================================================-->
+        <!--==================================================== SIDEBAR ==========================================================-->
+        <!--====================================================================================================================== -->
+        <aside class="sidebar">
+            <div class="sidebar-item active" tabindex="0" data-target="usuarios">
+                <span class="icon" aria-hidden="true">👥</span>
+                <span>Gestão de Usuários</span>
+            </div>
+            <div class="sidebar-item" tabindex="0" data-target="reservas">
+                <span class="icon" aria-hidden="true">📅</span>
+                <span>Gestão de Reservas</span>
+            </div>
+            <div class="sidebar-item" tabindex="0" data-target="conteudos">
+                <span class="icon" aria-hidden="true">📝</span>
+                <span>Controle de Conteúdo</span>
+            </div>
+            <div class="sidebar-item" tabindex="0" data-target="chat">
+                <span class="icon">❓</span>
+                <span>Gestão do Chat</span>
+            </div>
+        </aside>
+
+        <main>
+            <!-- ======================================================================================================================-->
+            <!--============================================== GESTÃO DE USUÁRIOS =====================================================-->
+            <!--====================================================================================================================== -->
+            <section id="usuarios" class="conteudo ativo">
+                <h2 class="section-title">Gestão de Usuários</h2>
+                <button class="btn-primary" type="button" onclick="location.href='/usuarios/cadastro'">
+                    Adicionar usuário
+                </button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>E-mail</th>
+                            <th>Perfil</th>
+                            <th>Estado</th>
+                            <th>Data de Criação</th>
+                            <th>Último Login</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% usuarios.forEach(function(usuario) { %>
+                            <tr>
+                                <td>
+                                    <%= usuario.email %>
+                                </td>
+                                <td>
+                                    <%= usuario.tipo.charAt(0).toUpperCase() + usuario.tipo.slice(1) %>
+                                </td>
+                                <td>
+                                    <%= usuario.estado==='ativo' ? 'Ativo' : 'Inativo' %>
+                                </td>
+                                <td>
+                                    <%= usuario.data_criacao || '-' %>
+                                </td>
+                                <td>
+                                    <%= usuario.ultimo_login || '-' %>
+                                </td>
+                                <td class="acoes">
+                                    <button type="button" class="btn-editar" data-id="<%= usuario.usuario_id %>"
+                                        data-email="<%= usuario.email %>" data-tipo="<%= usuario.tipo %>"
+                                        data-estado="<%= usuario.estado %>"
+                                        onclick="abrirModalEdicao(this.dataset.id, this.dataset.email, this.dataset.tipo, this.dataset.estado)">
+                                        ✏️
+                                    </button>
+                                    <form action="/admin/usuarios/<%= usuario.usuario_id %>/delete" method="POST"
+                                        style="display:inline;">
+                                        <button type="button" class="delete"
+                                            onclick="confirmDelete('<%= usuario.usuario_id %>', '<%= usuario.email %>')">
+                                            🗑️
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </section>
+            <!-- ======================================================================================================================-->
+            <!--================================================= MODAL: EDITAR USUÁRIO ========================================================-->
+            <!--====================================================================================================================== -->
+            <div id="modalEdicao" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close" onclick="fecharModalEdicao()">&times;</span>
+                    <h3>Editar Usuário</h3>
+                    <form id="formEdicao" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="usuarioIdEdicao" name="id">
+
+                        <label for="tipoEdicao">Tipo de Usuário:</label>
+                        <select id="tipoEdicao" name="tipo" required>
+                            <option value="admin">Admin</option>
+                            <option value="paciente">Paciente</option>
+                            <option value="acompanhante">Acompanhante</option>
+                            <option value="voluntario">Voluntário</option>
+                            <option value="doador">Doador</option>
+                        </select>
+
+                        <label for="estadoEdicao">Estado:</label>
+                        <select id="estadoEdicao" name="estado" required>
+                            <option value="ativo">Ativo</option>
+                            <option value="inativo">Inativo</option>
+                        </select>
+
+                        <label for="fotoPerfilEdicao">Foto de Perfil:</label>
+                        <input type="file" id="fotoPerfilEdicao" name="foto_perfil" accept="image/*">
+
+                        <div id="previewFoto" style="margin-top:10px;">
+                            <img id="fotoPreviewImg" src="" alt="Prévia da foto"
+                                style="max-width:100px; display:none; border-radius:8px;">
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="margin-top:15px;">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+            <script>
+                function abrirModalEdicao(id, tipo, estado) {
+                    document.getElementById('usuarioIdEdicao').value = id;
+                    document.getElementById('tipoEdicao').value = tipo;
+                    document.getElementById('estadoEdicao').value = estado;
+                    document.getElementById('fotoPerfilEdicao').value = '';
+                    document.getElementById('fotoPreviewImg').style.display = 'none';
+                    const form = document.getElementById('formEdicao');
+                    form.action = `/admin/usuarios/${id}/editar`;
+                    document.getElementById('modalEdicao').style.display = 'block';
+                }
+                function fecharModalEdicao() {
+                    document.getElementById('modalEdicao').style.display = 'none';
+                }
+                // Pré-visualização da foto
+                document.getElementById('fotoPerfilEdicao').addEventListener('change', function (event) {
+                    const file = event.target.files[0];
+                    const imgPreview = document.getElementById('fotoPreviewImg');
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = e => {
+                            imgPreview.src = e.target.result;
+                            imgPreview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        imgPreview.style.display = 'none';
+                    }
+                });
+            </script>
+
+            <!-- ======================================================================================================================-->
+            <!--========================================== MODAL: SENHA PARA EXCLUIR ==================================================-->
+            <!--====================================================================================================================== -->
+            <div id="modalSenha" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h3>Confirme sua senha</h3>
+                    <p>Para excluir o usuário, digite sua senha:</p>
+                    <form id="formDelete" method="POST">
+                        <input type="password" name="senha" id="senhaAdmin" placeholder="Senha do admin" required>
+                        <button type="submit">Confirmar</button>
+                    </form>
+                    <p id="erroSenha" style="color:red; display:none;">Senha incorreta</p>
+                </div>
+            </div>
+            <script>
+                let usuarioExcluirId = null;
+                function confirmDelete(usuarioId, usuarioEmail) {
+                    usuarioExcluirId = usuarioId;
+                    document.getElementById('senhaAdmin').value = '';
+                    document.getElementById('erroSenha').style.display = 'none';
+                    document.getElementById('formDelete').action = `/admin/usuarios/${usuarioId}/delete`;
+                    document.getElementById('modalSenha').style.display = 'block';
+                }
+                function closeModal() {
+                    document.getElementById('modalSenha').style.display = 'none';
+                }
+            </script>
+
+            <!-- ======================================================================================================================-->
+            <!--============================================== GESTÃO DE RESERVAS =====================================================-->
+            <!--====================================================================================================================== -->
+<section id="reservas" class="conteudo">
+    <h2 class="section-title">Gestão de Reservas</h2>
+
+    <!-- Botão para abrir modal de nova reserva -->
+    <button class="btn-primary" type="button" id="btnNovaReserva">+ Nova reserva</button>
+
+    <!-- Filtros -->
+    <div class="filtros" aria-label="Filtros de reservas">
+        <label for="data-reserva">Data:</label>
+        <input type="date" id="data-reserva" name="data-reserva" />
+
+        <label for="status-reserva">Status:</label>
+        <select id="status-reserva" name="status-reserva">
+            <option value="">Todos</option>
+            <option value="confirmada">Confirmada</option>
+            <option value="pendente">Pendente</option>
+            <option value="cancelada">Cancelada</option>
+            <option value="em_andamento">Em andamento</option>
+            <option value="concluida">Concluída</option>
+        </select>
+
+        <label for="usuario-reserva">Usuário:</label>
+        <input type="text" id="usuario-reserva" name="usuario-reserva" placeholder="Nome do paciente" />
+    </div>
+
+    <!-- Lista de Reservas -->
+    <table id="tabelaReservas">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Paciente</th>
+                <th>Quarto</th>
+                <th>Status</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reservas.forEach(r => { %>
+            <tr>
+                <td><%= r.reserva_id %></td>
+                <td><%= r.paciente_nome %></td>
+                <td><%= r.quarto_numero %></td>
+                <td><%= r.reserva_status %></td>
+                <td><%= r.reserva_data_checkin_previsto.toLocaleDateString() %></td>
+                <td><%= r.reserva_data_checkout_previsto.toLocaleDateString() %></td>
+                <td class="acoes">
+                    <button class="btnEditar" 
+                        data-id="<%= r.reserva_id %>"
+                        data-status="<%= r.reserva_status %>"
+                        data-paciente="<%= r.paciente_id %>"
+                        data-quarto="<%= r.quarto_id %>"
+                        data-checkin="<%= r.reserva_data_checkin_previsto.toISOString().slice(0,16) %>"
+                        data-checkout="<%= r.reserva_data_checkout_previsto.toISOString().slice(0,16) %>"
+                        data-motivo="<%= r.reserva_motivo || '' %>">
+                        ✏️
+                    </button>
+                    <a href="/reservas/deletar/<%= r.reserva_id %>" class="btn-delete" onclick="return confirm('Excluir reserva?')">🗑️</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <!-- ============== MODAL: NOVA RESERVA ================= -->
+    <div id="modalNovaReserva" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Nova Reserva</h3>
+            <form action="/reservas/nova" method="POST">
+                <label>Paciente ID:</label>
+                <input type="number" name="paciente_id" required>
+
+                <label>Quarto ID:</label>
+                <input type="number" name="quarto_id" required>
+
+                <label>Check-in previsto:</label>
+                <input type="datetime-local" name="reserva_data_checkin_previsto" required>
+
+                <label>Check-out previsto:</label>
+                <input type="datetime-local" name="reserva_data_checkout_previsto" required>
+
+                <label>Motivo da estadia:</label>
+                <textarea name="reserva_motivo"></textarea>
+
+                <button type="submit" class="btn-primary">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============== MODAL: EDITAR RESERVA ================= -->
+    <div id="modalEditarReserva" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Editar Reserva</h3>
+            <form id="formEditarReserva" method="POST">
+                <label>Status:</label>
+                <select name="reserva_status">
+                    <option value="pendente">Pendente</option>
+                    <option value="confirmada">Confirmada</option>
+                    <option value="em_andamento">Em andamento</option>
+                    <option value="concluida">Concluída</option>
+                    <option value="cancelada">Cancelada</option>
+                </select>
+
+                <label>Check-in previsto:</label>
+                <input type="datetime-local" name="reserva_data_checkin_previsto" required>
+
+                <label>Check-out previsto:</label>
+                <input type="datetime-local" name="reserva_data_checkout_previsto" required>
+
+                <label>Motivo:</label>
+                <textarea name="reserva_motivo"></textarea>
+
+                <button type="submit" class="btn-primary">Salvar alterações</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ============== ESTILO BÁSICO DOS MODAIS ================= -->
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        padding-top: 80px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background: #fff;
+        margin: auto;
+        padding: 25px;
+        border-radius: 10px;
+        width: 400px;
+        max-width: 90%;
+    }
+
+    .close {
+        float: right;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .btn-delete {
+        background: #d9534f;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<!-- ============== SCRIPT DOS MODAIS ================= -->
+<script>
+    // Abrir e fechar modais
+    const modalNova = document.getElementById("modalNovaReserva");
+    const modalEditar = document.getElementById("modalEditarReserva");
+    const btnNova = document.getElementById("btnNovaReserva");
+    const closeButtons = document.querySelectorAll(".close");
+
+    btnNova.onclick = () => modalNova.style.display = "block";
+    closeButtons.forEach(btn => btn.onclick = () => {
+        modalNova.style.display = "none";
+        modalEditar.style.display = "none";
+    });
+
+    window.onclick = (event) => {
+        if (event.target === modalNova) modalNova.style.display = "none";
+        if (event.target === modalEditar) modalEditar.style.display = "none";
+    };
+
+    // Preencher modal de edição dinamicamente
+    document.querySelectorAll(".btnEditar").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            const form = document.getElementById("formEditarReserva");
+            form.action = `/reservas/editar/${id}`;
+            form.reserva_status.value = btn.dataset.status;
+            form.reserva_data_checkin_previsto.value = btn.dataset.checkin;
+            form.reserva_data_checkout_previsto.value = btn.dataset.checkout;
+            form.reserva_motivo.value = btn.dataset.motivo;
+            modalEditar.style.display = "block";
+        });
+    });
+</script>
+
+
+            <!-- ======================================================================================================================-->
+            <!--============================================== GESTÃO DE CONTEÚDOS ====================================================-->
+            <!--====================================================================================================================== -->
+            <section id="conteudos" class="conteudo">
+                <h2 class="section-title">Gestão de Conteúdo</h2>
+                <% if (user && user.tipo==='admin' ) { %>
+                    <button class="btn-primary" type="button" onclick="abrirModalNovo()">➕ Novo Artigo</button>
+                    <% } %>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Categoria</th>
+                                    <th>Status</th>
+                                    <th>Data Publicação</th>
+                                    <th>Visualizações</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% artigos.forEach(artigo=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= artigo.artigo_titulo %>
+                                        </td>
+                                        <td>
+                                            <%= artigo.artigo_categoria || '-' %>
+                                        </td>
+                                        <td>
+                                            <%= artigo.artigo_status %>
+                                        </td>
+                                        <td>
+                                            <%= artigo.artigo_data_publicacao ? new
+                                                Date(artigo.artigo_data_publicacao).toLocaleDateString() : '-' %>
+                                        </td>
+                                        <td>
+                                            <%= artigo.artigo_visualizacoes || 0 %>
+                                        </td>
+                                        <td class="acoes">
+                                            <button class="btn-primary" type="button" data-id="<%= artigo.artigo_id %>"
+                                                onclick="abrirModalEditarArtigo(this.dataset.id)">✏️</button>
+                                            <form action="/admin/artigos/<%= artigo.artigo_id %>/delete" method="post"
+                                                style="display:inline">
+                                                <button type="submit" class="delete" title="Excluir">🗑️</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+            </section>
+            <!-- ======================================================================================================================-->
+            <!--=============================================== MODAL: NOVO ARTIGO ====================================================-->
+            <!--====================================================================================================================== -->
+            <div id="modalNovoArtigo" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close" onclick="fecharModalNovo()">&times;</span>
+                    <h3>Novo Artigo</h3>
+
+                    <form id="formNovoArtigo" action="/admin/artigos/novo" method="POST" enctype="multipart/form-data">
+                        <label for="artigo_titulo">Título:</label>
+                        <input type="text" id="artigo_titulo" name="artigo_titulo" required>
+
+                        <label for="artigo_subtitulo">Subtítulo:</label>
+                        <input type="text" id="artigo_subtitulo" name="artigo_subtitulo">
+
+                        <label for="artigo_categoria">Categoria:</label>
+                        <input type="text" id="artigo_categoria" name="artigo_categoria"
+                            placeholder="Ex: Saúde, Psicologia...">
+
+                        <label for="artigo_resumo">Resumo:</label>
+                        <textarea id="artigo_resumo" name="artigo_resumo" rows="3" required></textarea>
+
+                        <label for="artigo_conteudo">Conteúdo completo:</label>
+                        <textarea id="artigo_conteudo" name="artigo_conteudo" rows="8" required></textarea>
+
+                        <label for="artigo_palavras_chave">Palavras-chave:</label>
+                        <input type="text" id="artigo_palavras_chave" name="artigo_palavras_chave"
+                            placeholder="separadas por vírgula">
+
+                        <label for="artigo_slug">Slug (URL amigável):</label>
+                        <input type="text" id="artigo_slug" name="artigo_slug" placeholder="ex: cuidados-pos-cirurgia">
+
+                        <label for="artigo_imagem_capa">Imagem de capa:</label>
+                        <input type="file" id="artigo_imagem_capa" name="artigo_imagem_capa" accept="image/*">
+
+                        <div id="previewCapa" style="margin-top:10px;">
+                            <img id="capaPreviewImg" src="" alt="Prévia da capa"
+                                style="max-width:150px; display:none; border-radius:8px;">
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="margin-top:15px;">Salvar Artigo</button>
+                    </form>
+                </div>
+            </div>
+            <script>
+                /* =========================================================================================================== */
+                /* ======================================== SCRIPT: NOVO ARTIGO ============================================== */
+                /* =========================================================================================================== */
+                // Abrir modal de novo artigo
+                function abrirModalNovo() {
+                    document.getElementById('modalNovoArtigo').style.display = 'block';
+                    document.getElementById('formNovoArtigo').reset();
+                    document.getElementById('capaPreviewImg').style.display = 'none';
+                }
+                // Fechar modal
+                function fecharModalNovo() {
+                    document.getElementById('modalNovoArtigo').style.display = 'none';
+                }
+                // Pré-visualização da imagem de capa
+                document.getElementById('artigo_imagem_capa').addEventListener('change', function (event) {
+                    const file = event.target.files[0];
+                    const imgPreview = document.getElementById('capaPreviewImg');
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = e => {
+                            imgPreview.src = e.target.result;
+                            imgPreview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        imgPreview.style.display = 'none';
+                    }
+                });
+                // Fechar o modal clicando fora dele
+                window.addEventListener('click', function (event) {
+                    const modal = document.getElementById('modalNovoArtigo');
+                    if (event.target === modal) {
+                        fecharModalNovo();
+                    }
+                });
+            </script>
+            <script>
+                /* =========================================================================================================== */
+                /* ======================================= SCRIPT: EDITAR ARTIGO ============================================= */
+                /* =========================================================================================================== */
+                async function abrirModalEditarArtigo(id) {
+                    try {
+                        const response = await fetch(`/admin/artigos/${id}`);
+                        if (!response.ok) throw new Error('Erro ao buscar o artigo.');
+                        const artigo = await response.json();
+
+                        // Abre o modal
+                        const modal = document.getElementById('modalNovoArtigo');
+                        modal.style.display = 'block';
+                        modal.querySelector('h3').innerText = 'Editar Artigo';
+
+                        // Preenche os campos
+                        document.getElementById('artigo_titulo').value = artigo.artigo_titulo || '';
+                        document.getElementById('artigo_subtitulo').value = artigo.artigo_subtitulo || '';
+                        document.getElementById('artigo_categoria').value = artigo.artigo_categoria || '';
+                        document.getElementById('artigo_resumo').value = artigo.artigo_resumo || '';
+                        document.getElementById('artigo_palavras_chave').value = artigo.artigo_palavras_chave || '';
+                        document.getElementById('artigo_slug').value = artigo.artigo_slug || '';
+
+                        // 🔹 Espera o TinyMCE estar pronto antes de setar o conteúdo
+                        const editor = tinymce.get('artigo_conteudo');
+                        if (editor) {
+                            editor.setContent(artigo.artigo_conteudo || '');
+                        } else {
+                            tinymce.once('AddEditor', () => {
+                                tinymce.get('artigo_conteudo').setContent(artigo.artigo_conteudo || '');
+                            });
+                        }
+
+                        // Mostra a imagem de capa, se existir
+                        const preview = document.getElementById('capaPreviewImg');
+                        if (artigo.artigo_imagem_capa) {
+                            preview.src = artigo.artigo_imagem_capa;
+                            preview.style.display = 'block';
+                        } else {
+                            preview.style.display = 'none';
+                        }
+
+                        // Define o action do formulário como PUT
+                        const form = document.getElementById('formNovoArtigo');
+                        form.action = `/admin/artigos/${id}?_method=PUT`;
+
+                    } catch (err) {
+                        console.error('Erro ao abrir modal de edição:', err);
+                        alert('Não foi possível carregar o artigo para edição.');
+                    }
+                }
+            </script>
+
+            <script
+                src="https://cdn.tiny.cloud/1/dap6c3mpzxaz4rfmtgm5rr0za2vkn7k17uwv3zsqfpn908g1/tinymce/6/tinymce.min.js"
+                referrerpolicy="origin"></script>
+            <script>
+                tinymce.init({
+                    selector: '#artigo_conteudo',
+                    height: 400,
+                    menubar: false,
+                    plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount',
+                    toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                });
+            </script>
+
+            <!-- ======================================================================================================================-->
+            <!--================================================ GESTÃO DO CHAT =======================================================-->
+            <!--====================================================================================================================== -->
+            <section id="chat" class="conteudo">
+                <h2 class="section-title">Gestão do Chat</h2>
+                <% if (perguntas && perguntas.length> 0) { %>
+                    <% perguntas.forEach(function(p) { %>
+                        <div class="chat-pergunta">
+                            <p><strong>P:</strong>
+                                <%= p.pergunta_titulo %>
+                            </p>
+                            <p>
+                                <%= p.pergunta_conteudo %>
+                            </p>
+                            <small>Por <%= p.autor_nome %> em <%= p.pergunta_data_criacao %></small>
+                            <% if (p.respostas && p.respostas.length> 0) { %>
+                                <div class="chat-respostas" style="margin-left:20px; margin-top:10px;">
+                                    <% p.respostas.forEach(function(r) { %>
+                                        <p><strong>R:</strong>
+                                            <%= r.resposta_conteudo %>
+                                        </p>
+                                        <small>Por <%= r.autor_nome %> em <%= r.resposta_data_criacao %></small>
+                                        <% }) %>
+                                </div>
+                                <% } else { %>
+                                    <p style="margin-left:20px; color:gray;">Sem respostas</p>
+                                    <% } %>
+                                        <hr>
+                        </div>
+                        <% }) %>
+                            <% } else { %>
+                                <p>Nenhuma pergunta cadastrada.</p>
+                                <% } %>
+            </section>
+
+            <script>
+                /* =============================================================================================================================== */
+                /* ===================================================== MOSTRAR O SIDEBAR ======================================================= */
+                /* =============================================================================================================================== */
+                document.addEventListener('DOMContentLoaded', () => {
+                    const sidebarItems = document.querySelectorAll('.sidebar-item');
+                    const sections = document.querySelectorAll('.conteudo');
+                    sidebarItems.forEach(item => {
+                        item.addEventListener('click', function () {
+                            // 1. Remover 'active' de todos os itens da sidebar e remover 'ativo' de todas as seções
+                            sidebarItems.forEach(i => i.classList.remove('active'));
+                            sections.forEach(s => s.classList.remove('ativo'));
+                            // 2. Adicionar 'active' ao item clicado na sidebar
+                            this.classList.add('active');
+                            // 3. Obter o alvo (ID da seção)
+                            const targetId = this.getAttribute('data-target');
+                            // 4. Encontrar e adicionar 'ativo' à seção alvo
+                            const targetSection = document.getElementById(targetId);
+                            if (targetSection) {
+                                targetSection.classList.add('ativo');
+                            }
+                        });
+                    });
+                });
+            </script>
+
+</body>
+
+</html>
