@@ -94,160 +94,151 @@
          <!--============================================== SECTION MINHA CONTA ====================================================-->
          <!--====================================================================================================================== -->
          <section id="conta" class="conteudo ativo">
-            <h2 class="section-title">👤 Minha Conta</h2>
+   <h2 class="section-title">👤 Minha Conta</h2>
 
-            <form id="formConta" class="info-form">
-               <div class="info-card">
-                  <h3 class="section-subtitle">Conta</h3>
+   <form id="formConta" class="info-form">
+      <div class="info-card">
+         <h3 class="section-subtitle">Conta</h3>
+         <div class="campo">
+            <label>Email:</label>
+            <input type="email" name="usuario_email" value="<%= usuario.usuario_email %>" readonly>
+         </div>
 
-                  <div class="campo">
-                     <label>Email:</label>
-                     <input type="email" name="usuario_email" value="<%= usuario.usuario_email %>" disabled>
-                  </div>
+         <div class="campo">
+            <label>Senha:</label>
+            <input type="text" name="usuario_senha" value="<%= usuario.usuario_senha %>" readonly>
+         </div>
+      </div>
 
-                  <div class="campo">
-                     <label>Senha:</label>
-                     <input type="text" name="usuario_senha" value="<%= usuario.usuario_senha %>" disabled>
-                  </div>
-               </div>
-               <div class="info-card">
-                  <h3 class="section-subtitle">Informações Pessoais</h3>
+      <div class="info-card">
+         <h3 class="section-subtitle">Informações Pessoais</h3>
+         <div class="campo">
+            <label>Nome Completo:</label>
+            <input type="text" name="paciente_nome" value="<%= paciente.paciente_nome || '' %>" readonly>
+         </div>
 
-                  <div class="campo">
-                     <label>Nome Completo:</label>
-                     <input type="text" name="paciente_nome" value="<%= paciente.paciente_nome || '' %>" disabled>
-                  </div>
+         <div class="campo-duplo">
+            <div>
+               <label>CPF:</label>
+               <input type="text" name="paciente_cpf" value="<%= paciente.paciente_cpf || '' %>" readonly>
+            </div>
+            <div>
+               <label>RG:</label>
+               <input type="text" name="paciente_rg" value="<%= paciente.paciente_rg || '' %>" readonly>
+            </div>
+         </div>
 
-                  <div class="campo-duplo">
-                     <div>
-                        <label>CPF:</label>
-                        <input type="text" name="paciente_cpf" value="<%= paciente.paciente_cpf || '' %>" disabled>
-                     </div>
-                     <div>
-                        <label>RG:</label>
-                        <input type="text" name="paciente_rg" value="<%= paciente.paciente_rg || '' %>" disabled>
-                     </div>
-                  </div>
+         <div class="campo-duplo">
+            <div>
+               <label>Data de Nascimento:</label>
+               <input type="date" name="paciente_data_nascimento"
+                  value="<%= paciente.paciente_data_nascimento ? paciente.paciente_data_nascimento.toString().substring(0,10) : '' %>"
+                  readonly>
+            </div>
+            <div>
+               <label>Sexo:</label>
+               <input type="text" name="paciente_sexo" value="<%= paciente.paciente_sexo || '' %>" readonly>
+            </div>
+         </div>
 
-                  <div class="campo-duplo">
-                     <div>
-                        <label>Data de Nascimento:</label>
-                        <input type="date" name="paciente_data_nascimento"
-                           value="<%= paciente.paciente_data_nascimento ? paciente.paciente_data_nascimento.toString().substring(0,10) : '' %>"
-                           disabled>
-                     </div>
-                     <div>
-                        <label>Sexo:</label>
-                        <input type="text" name="paciente_sexo" value="<%= paciente.paciente_sexo || '' %>" disabled>
-                     </div>
-                  </div>
+         <div class="campo">
+            <label>Estado Civil:</label>
+            <input type="text" name="paciente_estado_civil" value="<%= paciente.paciente_estado_civil || '' %>" readonly>
+         </div>
 
-                  <div class="campo">
-                     <label>Estado Civil:</label>
-                     <input type="text" name="paciente_estado_civil" value="<%= paciente.paciente_estado_civil || '' %>"
-                        disabled>
-                  </div>
+         <div class="campo">
+            <label>Tipo Sanguíneo:</label>
+            <input type="text" name="paciente_tipo_sanguineo" value="<%= paciente.paciente_tipo_sanguineo || '' %>" readonly>
+         </div>
 
-                  <div class="campo">
-                     <label>Tipo Sanguíneo:</label>
-                     <input type="text" name="paciente_tipo_sanguineo"
-                        value="<%= paciente.paciente_tipo_sanguineo || '' %>" disabled>
-                  </div>
+         <div class="campo">
+            <label>Profissão:</label>
+            <input type="text" name="paciente_profissao" value="<%= paciente.paciente_profissao || '' %>" readonly>
+         </div>
+      </div>
 
-                  <div class="campo">
-                     <label>Profissão:</label>
-                     <input type="text" name="paciente_profissao" value="<%= paciente.paciente_profissao || '' %>"
-                        disabled>
-                  </div>
-               </div>
+      <div class="info-card">
+         <h3 class="section-subtitle">Endereço e Contato</h3>
 
-               <div class="info-card">
-                  <h3 class="section-subtitle">Endereço e Contato</h3>
+         <div class="campo">
+            <label>Telefone:</label>
+            <input type="text" name="paciente_telefone" value="<%= paciente.paciente_telefone || '' %>" readonly>
+         </div>
 
-                  <div class="campo">
-                     <label>Telefone:</label>
-                     <input type="text" name="paciente_telefone" value="<%= paciente.paciente_telefone || '' %>"
-                        disabled>
-                  </div>
+         <div class="campo">
+            <label>Endereço:</label>
+            <input type="text" name="paciente_logradouro" value="<%= paciente.paciente_logradouro || '' %>" readonly>
+         </div>
 
-                  <div class="campo">
-                     <label>Endereço:</label>
-                     <input type="text" name="paciente_logradouro" value="<%= paciente.paciente_logradouro || '' %>"
-                        disabled>
-                  </div>
+         <div class="campo-trio">
+            <div>
+               <label>Número:</label>
+               <input type="text" name="paciente_numero" value="<%= paciente.paciente_numero || '' %>" readonly>
+            </div>
+            <div>
+               <label>Bairro:</label>
+               <input type="text" name="paciente_bairro" value="<%= paciente.paciente_bairro || '' %>" readonly>
+            </div>
+            <div>
+               <label>CEP:</label>
+               <input type="text" name="paciente_cep" value="<%= paciente.paciente_cep || '' %>" readonly>
+            </div>
+         </div>
 
-                  <div class="campo-trio">
-                     <div>
-                        <label>Número:</label>
-                        <input type="text" name="paciente_numero" value="<%= paciente.paciente_numero || '' %>"
-                           disabled>
-                     </div>
-                     <div>
-                        <label>Bairro:</label>
-                        <input type="text" name="paciente_bairro" value="<%= paciente.paciente_bairro || '' %>"
-                           disabled>
-                     </div>
-                     <div>
-                        <label>CEP:</label>
-                        <input type="text" name="paciente_cep" value="<%= paciente.paciente_cep || '' %>" disabled>
-                     </div>
-                  </div>
+         <div class="campo-duplo">
+            <div>
+               <label>Cidade:</label>
+               <input type="text" name="paciente_cidade" value="<%= paciente.paciente_cidade || '' %>" readonly>
+            </div>
+            <div>
+               <label>Estado:</label>
+               <input type="text" name="paciente_estado" value="<%= paciente.paciente_estado || '' %>" readonly>
+            </div>
+         </div>
+      </div>
 
-                  <div class="campo-duplo">
-                     <div>
-                        <label>Cidade:</label>
-                        <input type="text" name="paciente_cidade" value="<%= paciente.paciente_cidade || '' %>"
-                           disabled>
-                     </div>
-                     <div>
-                        <label>Estado:</label>
-                        <input type="text" name="paciente_estado" value="<%= paciente.paciente_estado || '' %>"
-                           disabled>
-                     </div>
-                  </div>
-               </div>
+      <!-- Botão fixo -->
+      <div class="botoes-fixas">
+         <button type="submit" id="btnSalvar" class="btn-success">Salvar Alterações</button>
+         <button type="button" class="delete" id="btnExcluir">Excluir Conta</button>
+      </div>
+   </form>
 
-               <div class="botoes">
-                  <button type="button" id="btnEditar" class="btn-primary">Editar Informações</button>
-                  <button type="submit" id="btnSalvar" class="btn-success" style="display:none;">Salvar
-                     Alterações</button>
-                  <button type="button" class="delete" id="btnExcluir">Excluir Conta</button>
-               </div>
-            </form>
+   <script>
+      // Tornar campo editável ao clicar
+      document.querySelectorAll('#formConta input').forEach(input => {
+         input.addEventListener('focus', () => input.removeAttribute('readonly'));
+      });
 
-            <script>
-               document.getElementById('btnEditar').addEventListener('click', () => {
-                  document.querySelectorAll('#formConta input, #formConta textarea').forEach(inp => inp.disabled = false);
-                  document.getElementById('btnEditar').style.display = 'none';
-                  document.getElementById('btnSalvar').style.display = 'inline-block';
-               });
+      // Salvamento com confirmação
+      document.getElementById('formConta').addEventListener('submit', async (e) => {
+         e.preventDefault();
+         if (!confirm('Tem certeza de que deseja salvar estas alterações?')) return;
 
-               document.getElementById('formConta').addEventListener('submit', async (e) => {
-                  e.preventDefault();
-                  const formData = new FormData(e.target);
-                  const data = Object.fromEntries(formData.entries());
+         const formData = new FormData(e.target);
+         const data = Object.fromEntries(formData.entries());
 
-                  const resp = await fetch('/paciente/atualizar', {
-                     method: 'POST',
-                     headers: { 'Content-Type': 'application/json' },
-                     body: JSON.stringify(data)
-                  });
+         const resp = await fetch('/paciente/atualizar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+         });
 
-                  const result = await resp.json();
-                  alert(result.mensagem);
-                  if (result.ok) location.reload();
-               });
+         const result = await resp.json();
+         alert(result.mensagem);
+         if (result.ok) location.reload();
+      });
 
-               document.getElementById('btnExcluir').addEventListener('click', async () => {
-                  if (!confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')) return;
-
-                  const resp = await fetch('/paciente/excluir', { method: 'DELETE' });
-                  const result = await resp.json();
-                  alert(result.mensagem);
-                  if (result.ok) window.location.href = '/';
-               });
-            </script>
-         </section>
+      // Exclusão
+      document.getElementById('btnExcluir').addEventListener('click', async () => {
+         if (!confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')) return;
+         const resp = await fetch('/paciente/excluir', { method: 'DELETE' });
+         const result = await resp.json();
+         alert(result.mensagem);
+         if (result.ok) window.location.href = '/';
+      });
+   </script>
+</section>
 
 
 
