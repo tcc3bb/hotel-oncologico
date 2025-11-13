@@ -155,59 +155,7 @@
                 </div>
             </fieldset>
 
-            <!-- 2. DADOS DE INTERNAÇÃO -->
-            <fieldset>
-                <legend>Internação</legend>
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="paciente_data_checkin">Data do check-in:</label>
-                        <input type="date" id="paciente_data_checkin" name="paciente_data_checkin">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_data_checkout_previsto">Data prevista de check-out:</label>
-                        <input type="date" id="paciente_data_checkout_previsto" name="paciente_data_checkout_previsto">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_acomodacao_atual">Acomodação atual:</label>
-                        <input type="text" id="paciente_acomodacao_atual" name="paciente_acomodacao_atual">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_preferencia_quarto">Preferência de quarto:</label>
-                        <select id="paciente_preferencia_quarto" name="paciente_preferencia_quarto">
-                            <option value="">Selecione</option>
-                            <option value="Individual">Individual</option>
-                            <option value="Duplo">Duplo</option>
-                            <option value="Coletivo">Coletivo</option>
-                        </select>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- 3. ACOMPANHANTE -->
-            <fieldset>
-                <legend>Informações do Acompanhante</legend>
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="paciente_acompanhante_nome">Nome:</label>
-                        <input type="text" id="paciente_acompanhante_nome" name="paciente_acompanhante_nome">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_acompanhante_telefone">Telefone:</label>
-                        <input type="tel" id="paciente_acompanhante_telefone" name="paciente_acompanhante_telefone">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_acompanhante_email">Email:</label>
-                        <input type="email" id="paciente_acompanhante_email" name="paciente_acompanhante_email">
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- 4. CONTATOS DE EMERGÊNCIA -->
+            <!-- 2. CONTATOS DE EMERGÊNCIA -->
             <fieldset>
                 <legend>Contatos de Emergência</legend>
                 <div class="field-group">
@@ -218,27 +166,27 @@
                     </div>
 
                     <div class="form-control">
-                        <label for="paciente_contato_emergencia_1_parentesco">Contato 1 - Parentesco:</label>
-                        <input type="text" id="paciente_contato_emergencia_1_parentesco"
-                            name="paciente_contato_emergencia_1_parentesco" required>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_contato_emergencia_1_telefone">Contato 1 - Telefone:</label>
-                        <input type="tel" id="paciente_contato_emergencia_1_telefone"
-                            name="paciente_contato_emergencia_1_telefone" required>
-                    </div>
-
-                    <div class="form-control">
                         <label for="paciente_contato_emergencia_2_nome">Contato 2 - Nome:</label>
                         <input type="text" id="paciente_contato_emergencia_2_nome"
                             name="paciente_contato_emergencia_2_nome">
                     </div>
 
                     <div class="form-control">
+                        <label for="paciente_contato_emergencia_1_parentesco">Contato 1 - Parentesco:</label>
+                        <input type="text" id="paciente_contato_emergencia_1_parentesco"
+                            name="paciente_contato_emergencia_1_parentesco" required>
+                    </div>
+
+                    <div class="form-control">
                         <label for="paciente_contato_emergencia_2_parentesco">Contato 2 - Parentesco:</label>
                         <input type="text" id="paciente_contato_emergencia_2_parentesco"
                             name="paciente_contato_emergencia_2_parentesco">
+                    </div>
+
+                    <div class="form-control">
+                        <label for="paciente_contato_emergencia_1_telefone">Contato 1 - Telefone:</label>
+                        <input type="tel" id="paciente_contato_emergencia_1_telefone"
+                            name="paciente_contato_emergencia_1_telefone" required>
                     </div>
 
                     <div class="form-control">
@@ -263,16 +211,10 @@
                         <input type="tel" id="paciente_responsavel_legal_telefone"
                             name="paciente_responsavel_legal_telefone">
                     </div>
-
-                    <div class="form-control full-width">
-                        <label for="paciente_contato_emergencia_email">Email para contato de emergência:</label>
-                        <input type="email" id="paciente_contato_emergencia_email"
-                            name="paciente_contato_emergencia_email">
-                    </div>
                 </div>
             </fieldset>
 
-            <!-- 5. TRATAMENTO -->
+            <!-- 3. TRATAMENTO -->
             <fieldset>
                 <legend>Dados do Tratamento</legend>
                 <div class="field-group">
@@ -321,19 +263,13 @@
                 </div>
             </fieldset>
 
-            <!-- 6. SAÚDE -->
+            <!-- 4. SAÚDE -->
             <fieldset>
                 <legend>Saúde e Observações</legend>
                 <div class="field-group full-width">
                     <div class="form-control">
                         <label for="paciente_alergias_risco">Alergias e riscos:</label>
                         <textarea id="paciente_alergias_risco" name="paciente_alergias_risco" rows="2"></textarea>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_alergias_medicamentosas_detalhe">Detalhe alergias medicamentosas:</label>
-                        <textarea id="paciente_alergias_medicamentosas_detalhe"
-                            name="paciente_alergias_medicamentosas_detalhe" rows="2"></textarea>
                     </div>
 
                     <div class="form-control">
@@ -369,13 +305,6 @@
                         <label for="paciente_restricoes_mobilidade">Restrições de mobilidade:</label>
                         <textarea id="paciente_restricoes_mobilidade" name="paciente_restricoes_mobilidade"
                             rows="2"></textarea>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_necessidades_especiais_hospedagem">Necessidades especiais de
-                            hospedagem:</label>
-                        <textarea id="paciente_necessidades_especiais_hospedagem"
-                            name="paciente_necessidades_especiais_hospedagem" rows="2"></textarea>
                     </div>
 
                     <div class="form-control">
