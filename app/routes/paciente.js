@@ -19,7 +19,7 @@ module.exports = (connectionFactory) => {
             }
 
             // Nenhum paciente encontrado
-            if (!resultados.length) { 
+            if (!resultados.length) {
                 return res.render('paciente/minhas-reservas', {
                     user: req.session.user,
                     paciente: {},
@@ -29,18 +29,18 @@ module.exports = (connectionFactory) => {
             }
 
 
-            const paciente = resultados[0]; 
-            const reservas = []; 
+            const paciente = resultados[0];
+            const reservas = [];
 
             return res.render('paciente/minhas-reservas', {
                 user: req.session.user,
                 paciente,
+                reservas: [],
                 usuario: {
+                    usuario_id: paciente.usuario_id,
                     usuario_email: paciente.usuario_email,
                     usuario_senha: paciente.usuario_senha
-                },
-                reservas,
-                usuario: req.session.user
+                }
             });
         });
     });
@@ -83,7 +83,7 @@ module.exports = (connectionFactory) => {
 
         const usuarioId = req.session.user.id;
         const connection = connectionFactory();
-        const pacienteDAO = new PacienteDAO(connection); 
+        const pacienteDAO = new PacienteDAO(connection);
 
         pacienteDAO.excluirConta(usuarioId, (err) => {
             if (err) {
