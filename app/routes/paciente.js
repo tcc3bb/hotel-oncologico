@@ -83,7 +83,7 @@ module.exports = (connectionFactory) => {
 
         const usuarioId = req.session.user.id;
         const connection = connectionFactory();
-        const pacienteDAO = new PacienteDAO(connection);
+        const pacienteDAO = new PacienteDAO(connection); 
 
         pacienteDAO.excluirConta(usuarioId, (err) => {
             if (err) {
