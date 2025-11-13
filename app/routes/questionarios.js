@@ -53,10 +53,6 @@ module.exports = (connectionFactory) => {
                 paciente_cidade,
                 paciente_cep,
 
-                paciente_acompanhante_nome,
-                paciente_acompanhante_telefone,
-                paciente_acompanhante_email,
-
                 paciente_contato_emergencia_1_nome,
                 paciente_contato_emergencia_1_parentesco,
                 paciente_contato_emergencia_1_telefone,
@@ -85,7 +81,7 @@ module.exports = (connectionFactory) => {
                 paciente_observacoes_enfermagem,
                 paciente_observacoes_gerais
             ) VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
             )
         `;
 
@@ -95,28 +91,23 @@ module.exports = (connectionFactory) => {
                 body.paciente_nome,
                 body.paciente_cpf,
                 body.paciente_rg,
-                body.paciente_nacionalidade,
                 body.paciente_data_nascimento,
                 body.paciente_sexo,
                 body.paciente_estado_civil,
+                body.paciente_profissao,
+                body.paciente_nacionalidade,
+                body.paciente_tipo_sanguineo,
                 body.paciente_altura,
                 body.paciente_peso,
-                body.paciente_tipo_sanguineo,
-                body.paciente_profissao,
                 body.paciente_telefone,
                 body.paciente_logradouro,
                 body.paciente_numero,
                 body.paciente_bairro,
-                body.paciente_cidade,
                 body.paciente_estado,
+                body.paciente_cidade,
                 body.paciente_cep,
-                body.paciente_acompanhante_nome,
-                body.paciente_acompanhante_telefone,
-                body.paciente_acompanhante_email,
-                body.paciente_preferencia_quarto,
-                body.paciente_necessidades_especiais_hospedagem,
-                body.paciente_restricoes_mobilidade,
-                body.paciente_restricoes_alimentares,
+
+
                 body.paciente_contato_emergencia_1_nome,
                 body.paciente_contato_emergencia_1_parentesco,
                 body.paciente_contato_emergencia_1_telefone,
@@ -126,7 +117,7 @@ module.exports = (connectionFactory) => {
                 body.paciente_responsavel_legal_nome,
                 body.paciente_responsavel_legal_parentesco,
                 body.paciente_responsavel_legal_telefone,
-                body.paciente_contato_emergencia_email,
+
                 body.paciente_centro_tratamento_nome,
                 body.paciente_medico_assistente_nome,
                 body.paciente_diagnostico,
@@ -135,13 +126,13 @@ module.exports = (connectionFactory) => {
                 body.paciente_tempo_tratamento,
                 body.paciente_data_ultima_sessao,
                 body.paciente_historico_medico_resumido,
+
                 body.paciente_alergias_risco,
-                body.paciente_alergias_medicamentosas_detalhe,
                 body.paciente_medicamentos_uso_essenciais,
                 body.paciente_vulnerabilidade_imunossupressao,
-                body.paciente_restricoes_fisicas,
-                body.paciente_numero_carteirinha,
                 body.paciente_preferencia_horario_refeicao,
+                body.paciente_restricoes_mobilidade,
+                body.paciente_restricoes_alimentares,
                 body.paciente_observacoes_enfermagem,
                 body.paciente_observacoes_gerais
             ];
