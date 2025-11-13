@@ -141,20 +141,30 @@
             </div>
          </div>
 
+         <div class="campo-duplo">
+            <div>
+               <label>Peso:</label>
+               <input type="text" name="paciente_peso"
+                  value="<%= paciente.paciente_peso  || '' %>" readonly>
+            </div>
+            <div>
+               <label>Altura:</label>
+               <input type="text" name="paciente_altura" value="<%= paciente.paciente_altura || '' %>" readonly>
+            </div>
+         </div>
+
          <div class="campo">
             <label>Estado Civil:</label>
             <input type="text" name="paciente_estado_civil" value="<%= paciente.paciente_estado_civil || '' %>" readonly>
          </div>
 
          <div class="campo">
-            <label>Tipo Sanguíneo:</label>
-            <input type="text" name="paciente_tipo_sanguineo" value="<%= paciente.paciente_tipo_sanguineo || '' %>" readonly>
-         </div>
-
-         <div class="campo">
             <label>Profissão:</label>
             <input type="text" name="paciente_profissao" value="<%= paciente.paciente_profissao || '' %>" readonly>
          </div>
+
+         
+
       </div>
 
       <div class="info-card">
