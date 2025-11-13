@@ -5,35 +5,36 @@ class PacienteDAO {
 
     buscarDadosCompletos(usuarioId, callback) {
         const sql = `
-        SELECT  
-            u.usuario_id,
-            u.usuario_email,
-            u.usuario_senha,
-            u.usuario_tipo,
-            p.paciente_id,
-            p.paciente_email,
-            p.paciente_nome,
-            p.paciente_cpf,
-            p.paciente_rg,
-            p.paciente_nacionalidade,
-            p.paciente_data_nascimento,
-            p.paciente_sexo,
-            p.paciente_estado_civil,
-            p.paciente_altura,
-            p.paciente_peso,
-            p.paciente_tipo_sanguineo,
-            p.paciente_profissao,
-            p.paciente_telefone,
-            p.paciente_logradouro,
-            p.paciente_numero,
-            p.paciente_bairro,
-            p.paciente_cidade,
-            p.paciente_estado,
-            p.paciente_cep
-        FROM paciente p
-        INNER JOIN usuario u ON p.usuario_id = u.usuario_id
-        WHERE u.usuario_id = ?
-    `;
+    SELECT  
+        u.usuario_id,
+        u.usuario_email,
+        u.usuario_senha,
+        u.usuario_tipo,
+        pac.paciente_id,
+        pac.paciente_email,
+        pac.paciente_nome,
+        pac.paciente_cpf,
+        pac.paciente_rg,
+        pac.paciente_nacionalidade,
+        pac.paciente_data_nascimento,
+        pac.paciente_sexo,
+        pac.paciente_estado_civil,
+        pac.paciente_altura,
+        pac.paciente_peso,
+        pac.paciente_tipo_sanguineo,
+        pac.paciente_profissao,
+        pac.paciente_telefone,
+        pac.paciente_logradouro,
+        pac.paciente_numero,
+        pac.paciente_bairro,
+        pac.paciente_cidade,
+        pac.paciente_estado,
+        pac.paciente_cep
+    FROM usuario u
+    LEFT JOIN paciente pac ON pac.usuario_id = u.usuario_id
+    WHERE u.usuario_id = ?
+`;
+
 
         this._connection.query(sql, [usuarioId], (err, results) => {
             if (err) return callback(err);
