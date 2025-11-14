@@ -20,7 +20,6 @@
     --cor-aviso: #FFC107;
     --cor-perigo: #E91E63;
     --cor-info: #2196F3;
-    --cor-service: #9C27B0;
     --sombra-elevada: 0 4px 12px rgba(0, 0, 0, 0.08);
     --borda-arredondada-lg: 12px;
     --borda-arredondada-md: 8px;
@@ -521,6 +520,7 @@ main {
     background-color: var(--cor-acento-claro);
     color: var(--cor-principal);
     border: 1px solid var(--cor-secundaria);
+    margin-left: 25px;
 }
 
 .btn-secondary:hover {
@@ -643,9 +643,7 @@ tbody td {
     background-color: var(--cor-info);
 }
 
-.badge-service {
-    background-color: var(--cor-service);
-}
+
 
 
 /* -------------------- Chat Section -------------------- */
@@ -1084,6 +1082,24 @@ input[readonly] {
 input:not([readonly]) {
     border: 2px solid #2ecc71;
     background: #fff;
+}
+
+/* =============================================================================================================================== */
+/* ===================================================== MINHAS RESERVAS ========================================================= */
+/* =============================================================================================================================== */
+
+.btn {
+    background-color: #699b80;
+    border: none;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    text-decoration: none;
 }
 
 /* =============================================================================================================================== */
