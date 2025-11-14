@@ -82,7 +82,48 @@ ReservasDAO.prototype.listar = function (callback) {
     });
 };
 
+// Buscar tipos de quarto com pelo menos 1 quarto disponível
+ReservasDAO.prototype.buscarTiposDisponiveis= function (callback) {
+    const sql = `
+        SELECT 
+            tq.tipo_quarto_id,
+            tq.tipo_quarto_nome,
+            tq.tipo_quarto_descricao,
+            COUNT(q.quarto_id) AS total_quartos,
+            SUM(q.quarto_status = 'disponivel') AS quartos_disponiveis
+        FROM tipo_quarto tq
+        LEFT JOIN quarto q 
+            ON q.tipo_quarto_id = tq.tipo_quarto_id
+        WHERE tq.tipo_quarto_status = 'ativo'
+        GROUP BY tq.tipo_quarto_id
+        HAVING quartos_disponiveis > 0
+    `;
+    this._connection.query(sql, callback);
+}
 
+ReservasDAO.prototype.buscarFotosPorTipo = function (callback) {
+    const sql = `
+        SELECT 
+            tipo_quarto_id,
+            foto_caminho,
+            foto_ordem
+        FROM quarto_fotos
+        ORDER BY foto_ordem ASC
+    `;
+    this._connection.query(sql, callback);
+}
+
+ReservasDAO.prototype.buscarQuartoDisponivelPorTipo = function (tipoId, callback) {
+    const sql = `
+        SELECT quarto_id 
+        FROM quarto 
+        WHERE tipo_quarto_id = ? 
+        AND quarto_status = 'disponivel'
+        ORDER BY quarto_id ASC
+        LIMIT 1
+    `;
+    this._connection.query(sql, [tipoId], callback);
+}
 
 /* =========================
     BUSCAR PRIMEIRO QUARTO DISPONÍVEL
