@@ -102,7 +102,8 @@ router.post('/reservas/nova', verificaLogin, (req, res) => {
                     req.flash('erro', `Erro ao buscar acompanhante: ${erroAcomp.message}`);
                     connection.end();
                     return res.redirect('/reservas/nova');
-                }
+                }git commit -m "Atualiza reservas.js: implementa busca dinâmica de quarto disponível por tipo e corrige fluxo de criação da reserva"
+
 
                 if (!acompanhanteId) {
                     req.flash('erro', 'Nenhum acompanhante encontrado com o e-mail informado.');
