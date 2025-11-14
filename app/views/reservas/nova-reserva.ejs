@@ -65,59 +65,52 @@
 
                 <form action="/reservas/nova" method="POST" class="card p-4 shadow-sm bg-white">
                     <div class="quartos-grid">
-                        <% if (quartos && quartos.length> 0) { %>
-                            <% quartos.forEach(quarto=> { %>
+                        <% if (tipos && tipos.length> 0) { %>
+                            <% tipos.forEach(tipo=> { %>
                                 <div class="col">
                                     <div class="quarto-card">
-                                        <% if (quarto.fotos && quarto.fotos.length> 0) { %>
-                                            <img class="main-img" id="main-img-<%= quarto.quarto_id %>"
-                                                src="<%= quarto.fotos[0].foto_caminho %>"
-                                                alt="Imagem principal do quarto">
+                                        <% if (tipo.fotos.length> 0) { %>
+                                            <img class="main-img" id="main-img-<%= tipo.tipo_quarto_id %>"
+                                                src="<%= tipo.fotos[0].foto_caminho %>">
+
                                             <div class="thumbnails">
-                                                <% quarto.fotos.forEach(foto=> { %>
+                                                <% tipo.fotos.forEach(foto=> { %>
                                                     <img src="<%= foto.foto_caminho %>"
-                                                        data-target="main-img-<%= quarto.quarto_id %>" alt="miniatura">
+                                                        data-target="main-img-<%= tipo.tipo_quarto_id %>">
                                                     <% }) %>
                                             </div>
                                             <% } else { %>
-                                                <img class="main-img" src="/img/quartos/sem-imagem.jpg"
-                                                    alt="Sem imagem disponível">
+                                                <img class="main-img" src="/img/quartos/sem-imagem.jpg">
                                                 <% } %>
+
                                                     <div class="card-body">
                                                         <h5>
-                                                            <%= quarto.tipo_quarto_nome %>
+                                                            <%= tipo.tipo_quarto_nome %>
                                                         </h5>
                                                         <p>
-                                                            <%= quarto.tipo_quarto_descricao %>
-                                                        </p>
-                                                        <p><strong>Número:</strong>
-                                                            <%= quarto.quarto_numero %>
-                                                        </p>
-                                                        <p><strong>Andar:</strong>
-                                                            <%= quarto.quarto_andar %>
+                                                            <%= tipo.tipo_quarto_descricao %>
                                                         </p>
                                                     </div>
+
                                                     <div class="card-footer bg-transparent">
-                                                        <input type="radio" name="quarto_id"
-                                                            value="<%= quarto.quarto_id %>"
-                                                            id="quarto_<%= quarto.quarto_id %>" required>
-                                                        <label for="quarto_<%= quarto.quarto_id %>">Selecionar este
-                                                            quarto</label>
+                                                        <input type="radio" name="tipo_quarto_id"
+                                                            value="<%= tipo.tipo_quarto_id %>" required>
+                                                        <label>Selecionar este tipo de quarto</label>
                                                     </div>
+
                                     </div>
                                 </div>
                                 <% }) %>
+
                                     <% } else { %>
-                                        <p class="text-center w-100">Nenhum quarto disponível no momento. Tente
-                                            novamente mais
-                                            tarde.</p>
+                                        <p class="text-center w-100">Nenhum tipo de quarto disponível no momento.</p>
                                         <% } %>
                     </div>
+
                     <h3 class="mt-5 mb-3">Detalhes da Reserva</h3>
                     <div class="mb-3">
                         <label class="form-label">Selecione o período da estadia:</label>
-                        <input type="text" id="dateRange" class="form-control"
-                            placeholder="Escolha as datas" required>
+                        <input type="text" id="dateRange" class="form-control" placeholder="Escolha as datas" required>
                         <input type="hidden" name="reserva_data_checkin_previsto" id="checkin">
                         <input type="hidden" name="reserva_data_checkout_previsto" id="checkout">
                     </div>
