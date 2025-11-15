@@ -64,41 +64,49 @@
             <% } %>
 
                 <form action="/reservas/nova" method="POST" class="card p-4 shadow-sm bg-white">
-                    <div class="quartos-grid">
+                    <div class="tipos-container">
                         <% if (tipos && tipos.length> 0) { %>
+
                             <% tipos.forEach(tipo=> { %>
-                                <div class="col">
-                                    <div class="quarto-card">
-                                        <% if (tipo.fotos.length> 0) { %>
-                                            <img class="main-img" id="main-img-<%= tipo.tipo_quarto_id %>"
-                                                src="<%= tipo.fotos[0].foto_caminho %>">
+                                <div class="tipo-card">
 
-                                            <div class="thumbnails">
-                                                <% tipo.fotos.forEach(foto=> { %>
-                                                    <img src="<%= foto.foto_caminho %>"
-                                                        data-target="main-img-<%= tipo.tipo_quarto_id %>">
-                                                    <% }) %>
-                                            </div>
-                                            <% } else { %>
-                                                <img class="main-img" src="/img/quartos/sem-imagem.jpg">
-                                                <% } %>
+                                    <% if (tipo.fotos.length> 0) { %>
+                                        <!-- Imagem principal -->
+                                        <img class="main-img" id="main-img-<%= tipo.tipo_quarto_id %>"
+                                            src="<%= tipo.fotos[0].foto_caminho %>">
 
-                                                    <div class="card-body">
-                                                        <h5>
-                                                            <%= tipo.tipo_quarto_nome %>
-                                                        </h5>
-                                                        <p>
-                                                            <%= tipo.tipo_quarto_descricao %>
-                                                        </p>
-                                                    </div>
+                                        <!-- Thumbnails -->
+                                        <div class="thumbnails mt-2 px-3 pb-2">
+                                            <% tipo.fotos.forEach(foto=> { %>
+                                                <img src="<%= foto.foto_caminho %>"
+                                                    data-target="main-img-<%= tipo.tipo_quarto_id %>"
+                                                    class="thumbnail-img">
+                                                <% }) %>
+                                        </div>
 
-                                                    <div class="card-footer bg-transparent">
+                                        <% } else { %>
+                                            <img class="main-img" src="/img/quartos/sem-imagem.jpg">
+                                            <% } %>
+
+                                                <!-- Conteúdo -->
+                                                <div class="tipo-card-conteudo">
+                                                    <h3>
+                                                        <%= tipo.tipo_quarto_nome %>
+                                                    </h3>
+                                                    <p>
+                                                        <%= tipo.tipo_quarto_descricao %>
+                                                    </p>
+                                                </div>
+
+                                                <!-- Seleção -->
+                                                <div class="px-3 pb-3">
+                                                    <label class="select-label">
                                                         <input type="radio" name="tipo_quarto_id"
                                                             value="<%= tipo.tipo_quarto_id %>" required>
-                                                        <label>Selecionar este tipo de quarto</label>
-                                                    </div>
+                                                        Selecionar este tipo de quarto
+                                                    </label>
+                                                </div>
 
-                                    </div>
                                 </div>
                                 <% }) %>
 
@@ -107,18 +115,26 @@
                                         <% } %>
                     </div>
 
+
+                    <!-- ====================================================== -->
+                    <!-- DADOS DA RESERVA                                        -->
+                    <!-- ====================================================== -->
+
                     <h3 class="mt-5 mb-3">Detalhes da Reserva</h3>
+
                     <div class="mb-3">
                         <label class="form-label">Selecione o período da estadia:</label>
                         <input type="text" id="dateRange" class="form-control" placeholder="Escolha as datas" required>
                         <input type="hidden" name="reserva_data_checkin_previsto" id="checkin">
                         <input type="hidden" name="reserva_data_checkout_previsto" id="checkout">
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Motivo da estadia:</label>
                         <textarea class="form-control" name="reserva_motivo" placeholder="Descreva o motivo da estadia"
                             required></textarea>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">E-mail do acompanhante (opcional):</label>
                         <input type="email" class="form-control" name="acompanhante_email"

@@ -1,3 +1,9 @@
+Bom, agora vamos para a parte das reservas. O paciente vai poder reservar um quarto de hotel (a parte de cadastro de reservas já está feita e funcionando) e eu quero que ele tenha acesso a todas as reservas dele em uma seção do painel do paciente. As reservas são feitas em nome do ID do paciente que está logado, e elas são armazenadas na tabela Reserva.      
+
+No EJS já tem um exemplo de como eu quero que fique mais ou menos a tabela de reservas. (No botão 'detalhes' ao ser clicado, deve exibir um modal com todas as informações do quarto escolhido, incluindo as fotos)
+
+
+
 🔧Sempre que quiser atualizar o projeto:
     1. Editar localmente o código e o banco no Laragon.
     2. Testar tudo localmente (localhost).
@@ -16,7 +22,6 @@ EXEMPLO DE CÓDIGOS DO TERMINAL:
     git add app/infra/connectionFactory.js
     git commit -m "Corrige connectionFactory removendo connectMYSQL"
     git push origin main
-
 
 
 KEY (Nome da Variável)      VALUE (Valor)
