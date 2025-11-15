@@ -102,7 +102,7 @@ router.post('/reservas/nova', verificaLogin, (req, res) => {
                     req.flash('erro', `Erro ao buscar acompanhante: ${erroAcomp.message}`);
                     connection.end();
                     return res.redirect('/reservas/nova');
-                }git commit -m "Atualiza reservas.js: implementa busca dinâmica de quarto disponível por tipo e corrige fluxo de criação da reserva"
+                }
 
 
                 if (!acompanhanteId) {
@@ -142,20 +142,20 @@ router.post('/reservas/nova', verificaLogin, (req, res) => {
         // ============================================
         // SALVA A RESERVA
         // ============================================
-        function salvarReserva() {
+function salvarReserva() {
 
-            delete reserva.reserva_periodo;
-            delete reserva.acompanhante_email;
+    delete reserva.reserva_periodo;
+    delete reserva.acompanhante_email;
+    delete reserva.tipo_quarto_id;  
+    reserva.reserva_status = 'pendente';
+    reserva.reserva_num_hospedes = 1;
+    reserva.reserva_valor_diaria = 0.00;
+    reserva.reserva_valor_servicos = 0.00;
+    reserva.reserva_valor_total = 0.00;
+    reserva.reserva_desconto = 0.00;
+    reserva.reserva_admin_aprovou = 0;
 
-            reserva.reserva_status = 'pendente';
-            reserva.reserva_num_hospedes = 1;
-            reserva.reserva_valor_diaria = 0.00;
-            reserva.reserva_valor_servicos = 0.00;
-            reserva.reserva_valor_total = 0.00;
-            reserva.reserva_desconto = 0.00;
-            reserva.reserva_admin_aprovou = 0;
-
-            dao.salvar(reserva, (erroSalvar) => {
+    dao.salvar(reserva, (erroSalvar) => {
                 connection.end();
                 if (erroSalvar) {
                     req.flash('erro', `Erro ao salvar a reserva: ${erroSalvar.message}`);
