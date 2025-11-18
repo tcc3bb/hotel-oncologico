@@ -101,12 +101,7 @@
                   <h3 class="section-subtitle">Conta</h3>
                   <div class="campo">
                      <label>Email:</label>
-                     <input type="email" name="usuario_email" value="<%= usuario.usuario_email %>" readonly>
-                  </div>
-
-                  <div class="campo">
-                     <label>Senha:</label>
-                     <input type="password" name="usuario_senha" value="<%= usuario.usuario_senha %>" readonly>
+                     <input type="email" name="usuario_email" value="<%= user.email %>" readonly>
                   </div>
                </div>
 
@@ -266,12 +261,13 @@
          <section id="reservas" class="conteudo">
             <h2 class="section-title">Reservas Atuais</h2>
             <a href="/reservas/nova" class="btn">Nova reserva</a>
+
             <div class="card card-reservas">
                <div class="table-responsive">
                   <table>
                      <thead>
                         <tr>
-                           <th>Chek-in</th>
+                           <th>Check-in</th>
                            <th>Check-out</th>
                            <th>Quarto</th>
                            <th>Status</th>
@@ -279,48 +275,90 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr>
-
-                           <td>15/01/2025</td>
-                           <td>Check-in: 14:00</td>
-                           <td>Ala Girassol - Quarto 302
-                              <button class="btn-sm btn-secondary" type="button">Detalhes</button>
-                           </td>
-                           <td><span class="badge badge-success">Confirmada</span></td>
-                           <td class="acoes">
-                              <button class="btn-sm btn-danger" type="button">Cancelar</button>
-                           </td>
-                        </tr>
-
-                        <% reservas.forEach(r=> { %>
-                           <tr>
-                              <td><span class="badge badge-service">
-                                    <%= r.servico %>
-                                 </span></td>
-                              <td>
-                                 <%= r.data %>
-                              </td>
-                              <td>
-                                 <%= r.hora %>
-                              </td>
-                              <td>
-                                 <%= r.local %>
-                              </td>
-                              <td><span
-                                    class="badge badge-<%= r.status === 'Confirmada' ? 'success' : r.status === 'Pendente' ? 'warning' : 'danger' %>">
-                                    <%= r.status %>
-                                 </span></td>
-                              <td class="acoes">
-                                 <button class="btn-sm btn-secondary" type="button">Ver Detalhes</button>
-                                 <button class="btn-sm btn-danger" type="button">Cancelar</button>
-                              </td>
-                           </tr>
-                           <% }) %>
+                        <% if (reservas && reservas.length> 0) { %>
+                           <% reservas.forEach(r=> { %>
+                              <tr>
+                                 <td>
+                                    <%= new Date(r.reserva_data_checkin_previsto).toLocaleString('pt-BR') %>
+                                 </td>
+                                 <td>
+                                    <%= new Date(r.reserva_data_checkout_previsto).toLocaleString('pt-BR') %>
+                                 </td>
+                                 <td>
+                                    <%= r.quarto_numero %>
+                                       <button class="btn-sm btn-secondary" type="button" data-id="<%= r.reserva_id %>"
+                                          onclick="abrirModal('<%= r.reserva_id %>')">
+                                          Detalhes
+                                       </button>
+                                 </td>
+                                 <td>
+                                    <span class="badge badge-<%= 
+                                    r.reserva_status === 'confirmada' ? 'success' :
+                                    r.reserva_status === 'pendente' ? 'warning' :
+                                    r.reserva_status === 'cancelada' ? 'danger' : 'secondary'
+                                 %>">
+                                       <%= r.reserva_status %>
+                                    </span>
+                                 </td>
+                                 <td class="acoes">
+                                    <% if (r.reserva_status !=='cancelada' ) { %>
+                                       <button class="btn-sm btn-danger"
+                                          onclick="cancelarReserva('<%= r.reserva_id %>')">Cancelar</button>
+                                       <% } %>
+                                 </td>
+                              </tr>
+                              <% }) %>
+                                 <% } else { %>
+                                    <tr>
+                                       <td colspan="5">Nenhuma reserva encontrada.</td>
+                                    </tr>
+                                    <% } %>
                      </tbody>
                   </table>
                </div>
             </div>
          </section>
+
+         <!-- ============= MODAL COM DETALHES ============= -->
+         <div id="modalReserva" class="modal">
+            <div class="modal-content">
+               <span class="close" onclick="fecharModal()">&times;</span>
+               <h3>Detalhes da Reserva</h3>
+               <div id="conteudoModal"></div>
+            </div>
+         </div>
+
+         <script>
+            function abrirModal(id) {
+               fetch(`/reservas/detalhes/${id}`)
+                  .then(res => res.json())
+                  .then(reserva => {
+                     document.getElementById('conteudoModal').innerHTML = `
+                  <p><b>Paciente:</b> ${reserva.paciente_nome}</p>
+                  <p><b>Acompanhante:</b> ${reserva.acompanhante_nome || 'Nenhum'}</p>
+                  <p><b>Quarto:</b> ${reserva.quarto_numero}</p>
+                  <p><b>Status:</b> ${reserva.reserva_status}</p>
+                  <p><b>Check-in previsto:</b> ${new Date(reserva.reserva_data_checkin_previsto).toLocaleString('pt-BR')}</p>
+                  <p><b>Check-out previsto:</b> ${new Date(reserva.reserva_data_checkout_previsto).toLocaleString('pt-BR')}</p>
+                  <p><b>Motivo:</b> ${reserva.reserva_motivo || 'Não informado'}</p>
+                  <p><b>Necessidades especiais:</b> ${reserva.reserva_necessidades_especiais || 'Nenhuma'}</p>
+               `;
+                     document.getElementById('modalReserva').style.display = 'block';
+                  });
+            }
+
+            function fecharModal() {
+               document.getElementById('modalReserva').style.display = 'none';
+            }
+
+            function cancelarReserva(id) {
+               if (!confirm("Deseja realmente cancelar esta reserva?")) return;
+               fetch(`/reservas/cancelar/${id}`, { method: "POST" })
+                  .then(() => location.reload());
+            }
+         </script>
+
+
 
          <!-- ======================================================================================================================-->
          <!--================================================= SECTION CHAT ========================================================-->

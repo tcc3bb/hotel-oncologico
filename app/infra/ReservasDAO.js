@@ -110,7 +110,7 @@ ReservasDAO.prototype.buscarFotosPorTipo = function (callback) {
         FROM quarto_fotos
         ORDER BY foto_ordem ASC
     `;
-    this._connection.query(sql, callback);
+    this._connection.query(sql, callback); 
 }
 
 ReservasDAO.prototype.buscarQuartoDisponivelPorTipo = function (tipoId, callback) {
@@ -241,12 +241,59 @@ ReservasDAO.prototype.atualizar = function (id, reserva, callback) {
     this._connection.query(sql, [reserva, id], callback);
 };
 
-/* =========================
-DELETAR RESERVA
-========================= */
-ReservasDAO.prototype.deletar = function (id, callback) {
-    const sql = `DELETE FROM reserva WHERE reserva_id = ?`;
+// Buscar detalhes completos da reserva
+ReservasDAO.prototype.buscarDetalhes = function(id, callback) {
+    const sql = `
+        SELECT 
+            r.*, 
+            p.paciente_nome,
+            a.acompanhante_nome,
+            q.quarto_numero
+        FROM reserva r
+        LEFT JOIN paciente p ON r.paciente_id = p.paciente_id
+        LEFT JOIN acompanhante a ON r.acompanhante_id = a.acompanhante_id
+        LEFT JOIN quarto q ON r.quarto_id = q.quarto_id
+        WHERE r.reserva_id = ?
+        LIMIT 1;
+    `;
     this._connection.query(sql, [id], callback);
 };
+
+
+// Atualizar status da reserva
+ReservasDAO.prototype.atualizarStatus = function(id, status, callback) {
+    const sql = `UPDATE reserva SET reserva_status = ? WHERE raeserva_id = ?`;
+    this._connection.query(sql, [status, id], callback);
+};
+
+/* =========================
+LISTAR RESERVAS POR PACIENTE
+========================= */
+ReservasDAO.prototype.listarPorPaciente = function (pacienteId, callback) {
+    const sql = `
+        SELECT 
+            r.reserva_id,
+            r.paciente_id,
+            p.paciente_nome,
+            r.acompanhante_id,
+            a.acompanhante_nome,
+            r.quarto_id,
+            q.quarto_numero,
+            r.reserva_status,
+            r.reserva_data_checkin_previsto,
+            r.reserva_data_checkout_previsto,
+            r.reserva_motivo,
+            r.reserva_data_criacao
+        FROM reserva r
+        LEFT JOIN paciente p ON r.paciente_id = p.paciente_id
+        LEFT JOIN acompanhante a ON r.acompanhante_id = a.acompanhante_id
+        LEFT JOIN quarto q ON r.quarto_id = q.quarto_id
+        WHERE r.paciente_id = ?
+        ORDER BY r.reserva_data_criacao DESC
+    `;
+
+    this._connection.query(sql, [pacienteId], callback);
+};
+
 
 module.exports = ReservasDAO;
