@@ -162,6 +162,7 @@ nav a:hover {
     font-size: 1rem;
     transition: background-color 0.3s ease;
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .btn:hover {

@@ -17,8 +17,8 @@
 </head>
 
 <body>
-    <nav>
-        <a href="/">
+        <nav>
+        <a href="/" class="img">
             <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
         </a>
         <a href="/nav/sobre-nos">Sobre nós</a>
@@ -36,9 +36,9 @@
                 <% if (user.tipo==='paciente' ) { %>
                     <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
                     <% } else if (user.tipo==='acompanhante' ) { %>
-                        <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
+                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
                         <% } else if (user.tipo==='voluntario' ) { %>
-                            <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
+                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
                             <% } else if (user.tipo==='doador' ) { %>
                                 <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
                                 <% } else if (user.tipo==='admin' ) { %>

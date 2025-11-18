@@ -1,196 +1,340 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Painel do Acompanhante - Instituto Vita</title>
-    <link rel="icon" href="/image/logo.png">
-    <link rel="stylesheet" href="/css/acompanhante/style_apoio_ao_paciente.css">
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Voluntário - Instituto Vita</title>
+    <link rel="stylesheet" href="/css/voluntario/style_area_do_voluntario.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
     <nav>
-        <a href="/" class="img"><img src="/image/logo.png" alt="Logo" class="img-logo"></a>
+        <a href="/" class="img">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
         <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
         <a href="/nav/acomodacoes">Acomodações</a>
-        <a href="/nav/apoio-paciente">Apoio ao Paciente</a>
-        <a href="/nav/localizacao">Localização</a>
-        <a href="/perguntas/perguntas-frequentes">FAQ</a>
-        <a href="/usuarios/logout" class="btn-logout">Sair</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
     </nav>
 
     <div class="painel-container">
         <aside class="sidebar">
-            <div class="sidebar-item active" data-target="paciente"><span class="icon">👩‍⚕️</span> Paciente Vinculado</div>
-            <div class="sidebar-item" data-target="agenda"><span class="icon">📅</span> Agenda do Paciente</div>
-            <div class="sidebar-item" data-target="chat"><span class="icon">💬</span> Comunicação</div>
-            <div class="sidebar-item" data-target="orientacoes"><span class="icon">📘</span> Orientações e Recursos</div>
-            <div class="sidebar-item" data-target="feedback"><span class="icon">📝</span> Feedback e Avaliações</div>
+            <div class="sidebar-item active" data-target="conta" tabindex="0">
+                <span class="icon" aria-hidden="true">👤</span>
+                <span>Minha Conta</span>
+            </div>
+            <div class="sidebar-item " data-target="atividades" tabindex="0">
+                <span class="icon" aria-hidden="true">📋</span>
+                <span>Minhas Atividades</span>
+            </div>
+            <div class="sidebar-item" data-target="disponibilidade" tabindex="0">
+                <span class="icon" aria-hidden="true">📅</span>
+                <span>Disponibilidade</span>
+            </div>
+            <div class="sidebar-item" data-target="chat" tabindex="0">
+                <span class="icon" aria-hidden="true">💬</span>
+                <span>Chat e Suporte</span>
+            </div>
+            <div class="sidebar-item" data-target="relatorios" tabindex="0">
+                <span class="icon" aria-hidden="true">📊</span>
+                <span>Relatórios</span>
+            </div>
         </aside>
 
         <main>
 
-            <!-- PACIENTE VINCULADO -->
-            <section id="paciente" class="conteudo ativo">
-                <h2 class="section-title">👩‍⚕️ Paciente Vinculado</h2>
-                <div class="card">
-                    <h3 class="card-title">Ficha do Paciente</h3>
-                    <p><strong>Nome:</strong> João da Silva</p>
-                    <p><strong>Idade:</strong> 58 anos</p>
-                    <p><strong>Diagnóstico:</strong> Câncer de Próstata (Estágio II)</p>
-                    <p><strong>Médico responsável:</strong> Dr. Ricardo Costa</p>
-                    <p><strong>Quarto:</strong> Ala Girassol - 304</p>
+            <section id="conta" class="conteudo ativo">
+                <h2 class="section-title">👤 Minha Conta</h2>
+                <p class="subtitle">Gerencie suas informações pessoais e credenciais de voluntário.</p>
+
+                <div class="info-card">
+                    <h3 class="section-subtitle">Informações de Voluntariado</h3>
+                    <div class="campo">
+                        <label>Credencial ID:</label>
+                        <input type="text" value="VOL-2025-0042" readonly>
+                    </div>
+                    <div class="campo-duplo">
+                        <div>
+                            <label>Data de Início:</label>
+                            <input type="date" value="2024-08-15" readonly>
+                        </div>
+                        <div>
+                            <label>Área Principal:</label>
+                            <input type="text" value="Apoio Emocional" readonly>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">Situação Atual</h3>
-                    <p><strong>Status:</strong> Internado</p>
-                    <p><strong>Tratamento:</strong> Quimioterapia - Ciclo 2 de 6</p>
-                    <p><strong>Observações:</strong> Evoluindo bem ao tratamento, com boa resposta clínica.</p>
+                <div class="info-card">
+                    <h3 class="section-subtitle">Contato</h3>
+                    <div class="campo">
+                        <label>Email:</label>
+                        <input type="email" value="voluntario.exemplo@vita.org" readonly>
+                    </div>
+                    <div class="campo">
+                        <label>Telefone:</label>
+                        <input type="text" value="(11) 99887-7665" readonly>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">Plano de Tratamento</h3>
-                    <ul class="plano-list">
-                        <li><span class="list-icon">💉</span> Sessão de Quimioterapia — 24/10/2025</li>
-                        <li><span class="list-icon">📊</span> Exame de Controle — 01/11/2025</li>
-                        <li><span class="list-icon">🧘‍♂️</span> Fisioterapia Oncológica — 03/11/2025</li>
-                    </ul>
+                <div class="botoes-fixas" style="justify-content: flex-start;">
+                    <button type="button" class="btn-success">Editar Perfil</button>
+                    <button type="button" class="delete">Excluir Conta</button>
                 </div>
+            </section>
 
-                <div class="card">
-                    <h3 class="card-title">Upload de Documentos</h3>
-                    <div class="upload-area">
-                        <label class="upload-label">Arraste ou selecione arquivos (PDF, JPG, PNG)</label>
-                        <input type="file" multiple style="display:none;">
-                        <button class="btn-primary">Enviar</button>
+            <section id="atividades" class="conteudo">
+                <h2 class="section-title">📋 Minhas Atividades</h2>
+                <p class="subtitle">Lista detalhada de seus eventos, visitas ou atendimentos voluntários agendados.</p>
+
+                <button class="btn-primary" type="button">Solicitar Nova Atividade</button>
+
+                <div class="card card-atividades">
+                    <h3 class="card-title">Agenda de Atividades Próximas</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data / Hora</th>
+                                    <th>Paciente</th>
+                                    <th>Tipo</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>20/12/2025 - 14:00</td>
+                                    <td>Ana C. Silva</td>
+                                    <td>Apoio Emocional</td>
+                                    <td>
+                                        <span class="badge badge-warning">Pendente Conf.</span>
+                                    </td>
+                                    <td class="acoes">
+                                        <button class="btn-sm btn-success">Confirmar</button>
+                                        <button class="btn-sm btn-secondary"
+                                            onclick="mostrarDetalhes('1')">Detalhes</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>22/12/2025 - 09:30</td>
+                                    <td>João P. Souza</td>
+                                    <td>Recreação</td>
+                                    <td>
+                                        <span class="badge badge-success">Confirmada</span>
+                                    </td>
+                                    <td class="acoes">
+                                        <button class="btn-sm btn-delete">Desistir</button>
+                                        <button class="btn-sm btn-secondary"
+                                            onclick="mostrarDetalhes('2')">Detalhes</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>15/12/2025 - 16:00</td>
+                                    <td>Maria E. Reis</td>
+                                    <td>Transporte</td>
+                                    <td>
+                                        <span class="badge badge-info">Concluída</span>
+                                    </td>
+                                    <td class="acoes">
+                                        <button class="btn-sm btn-primary">Avaliar</button>
+                                        <button class="btn-sm btn-secondary"
+                                            onclick="mostrarDetalhes('3')">Histórico</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
+            <section id="disponibilidade" class="conteudo">
+                <h2 class="section-title">📅 Disponibilidade</h2>
+                <p class="subtitle">Gerencie seu calendário e marque horários livres para agendamentos.</p>
 
-            <!-- AGENDA -->
-            <section id="agenda" class="conteudo">
-                <h2 class="section-title">📅 Agenda do Paciente</h2>
-                <p class="subtitle">Visualize as próximas atividades e compromissos.</p>
-                <div class="card">
-                    <h3 class="card-title">Próximos Eventos</h3>
-                    <table>
-                        <thead>
-                            <tr><th>Data</th><th>Horário</th><th>Atividade</th><th>Local</th><th>Ações</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>24/10/2025</td><td>09:00</td><td>Quimioterapia</td><td>Sala 02</td>
-                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td></tr>
-                            <tr><td>26/10/2025</td><td>14:30</td><td>Consulta médica</td><td>Consultório 3</td>
-                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td></tr>
-                        </tbody>
-                    </table>
-                    <button class="btn-download mt-3">Exportar Agenda (PDF)</button>
+                <div class="card card-disponibilidade">
+                    <h3 class="card-title">Calendário Mensal</h3>
+                    <div class="calendario-simples">
+                        <div class="info-card" style="text-align: center;">
+                            <h4 class="section-subtitle">Dezembro 2025</h4>
+                            <p><strong>Bloqueado:</strong> Dias 24 e 25.</p>
+                            <p><strong>Disponível:</strong> Segundas e Quartas (Manhã), Sextas (Tarde).</p>
+                        </div>
+                    </div>
+
+                    <h3 class="card-subtitle mt-4">Marcar Disponibilidade</h3>
+                    <form class="info-form">
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Data:</label>
+                                <input type="date" value="2025-12-23">
+                            </div>
+                            <div>
+                                <label>Horário:</label>
+                                <input type="time" value="10:00">
+                            </div>
+                        </div>
+                        <div class="campo">
+                            <label>Observações (Opcional):</label>
+                            <input type="text" placeholder="Disponibilidade extra, tipo de ajuda preferencial, etc.">
+                        </div>
+                        <div class="botoes" style="justify-content: flex-start;">
+                            <button class="btn-primary" type="submit">Salvar Disponibilidade</button>
+                            <button class="btn-secondary" type="button">Sincronizar Google Calendar</button>
+                        </div>
+                    </form>
                 </div>
             </section>
-
-            <!-- COMUNICAÇÃO -->
             <section id="chat" class="conteudo">
-                <h2 class="section-title">💬 Comunicação e Chat</h2>
-                <div class="chat-cards">
+                <h2 class="section-title">💬 Chat e Comunicação</h2>
+                <p class="subtitle">Canal direto com pacientes, acompanhantes e outros voluntários.</p>
+
+                <div class="painel-dashboard chat-cards">
                     <div class="card card-chat">
-                        <span class="chat-icon">🩺</span>
-                        <h4 class="card-title">Equipe Médica</h4>
-                        <p>Envie dúvidas sobre o tratamento ou sintomas.</p>
-                        <button class="btn-primary-block">Abrir Chat</button>
+                        <span class="chat-icon">🧑‍🦽</span>
+                        <h4 class="card-title">Pacientes Ativos</h4>
+                        <p>Inicie um chat individual com pacientes vinculados a você (mediante autorização).</p>
+                        <button class="btn-primary-block">Ver Pacientes</button>
                     </div>
                     <div class="card card-chat">
-                        <span class="chat-icon">🤝</span>
-                        <h4 class="card-title">Voluntários</h4>
-                        <p>Solicite apoio emocional e companhia no período de internação.</p>
-                        <button class="btn-primary-block">Conversar Agora</button>
+                        <span class="chat-icon">👨‍👩‍👧‍👦</span>
+                        <h4 class="card-title">Acompanhantes</h4>
+                        <p>Comunicação para orientações ou ajustes em visitas agendadas.</p>
+                        <button class="btn-primary-block">Acessar Chat</button>
                     </div>
                     <div class="card card-chat">
-                        <span class="chat-icon">🏨</span>
-                        <h4 class="card-title">Recepção e Hotel</h4>
-                        <p>Para dúvidas sobre hospedagem, transporte e horários.</p>
-                        <button class="btn-primary-block">Falar com Recepção</button>
+                        <span class="chat-icon">👥</span>
+                        <h4 class="card-title">Grupo de Voluntários</h4>
+                        <p>Comunicação rápida e suporte com a equipe de voluntariado e coordenação.</p>
+                        <button class="btn-primary-block">Acessar Chat em Grupo</button>
                     </div>
                 </div>
-            </section>
 
-            <!-- ORIENTAÇÕES -->
-            <section id="orientacoes" class="conteudo">
-                <h2 class="section-title">📘 Orientações e Recursos</h2>
-                <div class="card">
-                    <h3 class="card-title">Guias Educativos</h3>
-                    <ul>
-                        <li><a href="#">🧾 Cuidados Diários do Paciente (PDF)</a></li>
-                        <li><a href="#">🥗 Alimentação Saudável Durante o Tratamento</a></li>
-                        <li><a href="#">🚗 Transporte Seguro e Logística de Deslocamento</a></li>
+                <div class="card mt-4">
+                    <h3 class="card-title">Templates de Mensagens Rápidas</h3>
+                    <p>Use mensagens pré-definidas para agilizar lembretes e confirmações.</p>
+                    <button class="btn-primary btn-sm mt-2" type="button">Criar Novo Template</button>
+                </div>
+            </section>
+            <section id="relatorios" class="conteudo">
+                <h2 class="section-title">📊 Relatórios de Participação</h2>
+                <p class="subtitle">Controle suas horas de voluntariado e acompanhe o impacto do seu trabalho.</p>
+
+                <div class="painel-dashboard saude-cards">
+                    <div class="card card-metricas">
+                        <h4 class="card-title">Horas Acumuladas (Mês)</h4>
+                        <p class="value-destaque">32 Horas</p>
+                        <span class="badge badge-success">Meta Atingida</span>
+                    </div>
+                    <div class="card card-metricas">
+                        <h4 class="card-title">Atividades Concluídas</h4>
+                        <p class="value-destaque">18</p>
+                        <span class="badge badge-info">Desde o Início</span>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <h3 class="card-title">Histórico de Ações</h3>
+                    <div class="historico-filtros">
+                        <label for="filtro-mes">Filtrar por Mês:</label>
+                        <select id="filtro-mes">
+                            <option>Dezembro/2025</option>
+                            <option>Novembro/2025</option>
+                        </select>
+                        <button class="btn-secondary btn-sm" type="button">Buscar</button>
+                        <button class="btn-download btn-sm" type="button">Gerar Certificado (PDF)</button>
+                    </div>
+
+                    <ul class="lista-historico">
+                        <li class="historico-item">
+                            <span class="historico-data">10/12/2025 - 2h</span>
+                            <span class="historico-desc">Visita Recreativa ao Paciente Ana C.</span>
+                            <span class="historico-tag badge badge-info">Recreação</span>
+                            <button class="btn-sm btn-secondary">Ver Feedback</button>
+                        </li>
+                        <li class="historico-item">
+                            <span class="historico-data">05/12/2025 - 4h</span>
+                            <span class="historico-desc">Apoio em evento institucional</span>
+                            <span class="historico-tag badge badge-success">Evento</span>
+                            <button class="btn-sm btn-secondary">Detalhes</button>
+                        </li>
                     </ul>
                 </div>
-
-                <div class="card">
-                    <h3 class="card-title">Apoio Psicológico</h3>
-                    <p>Materiais para lidar com o estresse e ansiedade durante o tratamento:</p>
-                    <ul>
-                        <li><a href="#">🧘 Técnicas de Relaxamento</a></li>
-                        <li><a href="#">💬 Grupo de Apoio Familiar</a></li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Contatos Úteis</h3>
-                    <p><strong>Psicóloga:</strong> Ana Lúcia — (11) 99999-9999</p>
-                    <p><strong>Assistente Social:</strong> Marcos — (11) 98888-8888</p>
-                    <p><strong>Emergência:</strong> 192 (SAMU) / 193 (Bombeiros)</p>
-                </div>
             </section>
-
-            <!-- FEEDBACK -->
-            <section id="feedback" class="conteudo">
-                <h2 class="section-title">📝 Feedback e Avaliações</h2>
-                <div class="card card-avaliacao">
-                    <h3 class="card-title">Avalie sua Experiência</h3>
-                    <div class="estrelas">⭐ ⭐ ⭐ ⭐ ☆</div>
-                    <textarea placeholder="Conte como foi sua experiência no Instituto Vita..." rows="4"></textarea>
-                    <button class="btn-primary">Enviar Avaliação</button>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Relato de Experiência</h3>
-                    <textarea placeholder="Deseja compartilhar algo com nossa equipe?" rows="4"></textarea>
-                    <button class="btn-secondary">Enviar Relato</button>
-                </div>
-            </section>
+            
 
         </main>
     </div>
 
     <footer>
-        <div class="footer-container">
-            <div class="footer-about">
-                <h3>Instituto Vita</h3>
-                <p>Hospedagem humanizada e apoio integral a pacientes e acompanhantes.</p>
-            </div>
-            <div class="footer-contact">
-                <h3>Contato</h3>
-                <p>Email: contato@institutovita.com.br</p>
-                <p>Telefone: (11) 1234-5678</p>
-            </div>
-        </div>
-        <div class="footer-bottom">© 2025 Instituto Vita. Todos os direitos reservados.</div>
     </footer>
 
     <script>
+        // Lógica de ativação da Sidebar (igual ao ejs original)
         const sidebarItems = document.querySelectorAll('.sidebar-item');
         const contents = document.querySelectorAll('.conteudo');
-
         sidebarItems.forEach(item => {
             item.addEventListener('click', () => {
                 sidebarItems.forEach(i => i.classList.remove('active'));
                 contents.forEach(c => c.classList.remove('ativo'));
                 item.classList.add('active');
-                document.getElementById(item.dataset.target).classList.add('ativo');
+                const targetId = item.dataset.target;
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('ativo');
+                }
             });
         });
-    </script>
 
+        // Inicializar a primeira aba ao carregar a página
+        if (document.querySelector('.sidebar-item.active')) {
+            const initialTarget = document.querySelector('.sidebar-item.active').dataset.target;
+            const initialContent = document.getElementById(initialTarget);
+            if (initialContent) {
+                initialContent.classList.add('ativo');
+            }
+        } else if (sidebarItems.length > 0) {
+            sidebarItems[0].classList.add('active');
+            document.getElementById(sidebarItems[0].dataset.target).classList.add('ativo');
+        }
+
+        // Exemplo de função para exibir detalhes (a ser implementada no backend)
+        function mostrarDetalhes(id) {
+            alert(`Exibindo detalhes da Atividade ID: ${id}. Isso abriria um modal real.`);
+        }
+    </script>
 </body>
+
 </html>

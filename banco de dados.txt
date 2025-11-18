@@ -1,6 +1,4 @@
-Bom, agora vamos para a parte das reservas. O paciente vai poder reservar um quarto de hotel (a parte de cadastro de reservas já está feita e funcionando) e eu quero que ele tenha acesso a todas as reservas dele em uma seção do painel do paciente. As reservas são feitas em nome do ID do paciente que está logado, e elas são armazenadas na tabela Reserva.      
 
-No EJS já tem um exemplo de como eu quero que fique mais ou menos a tabela de reservas. (No botão 'detalhes' ao ser clicado, deve exibir um modal com todas as informações do quarto escolhido, incluindo as fotos)
 
 
 

@@ -1,30 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel do Acompanhante - Instituto Vita</title>
     <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/css/acompanhante/style_apoio_ao_paciente.css">
-</head>
+</head> 
+
 <body>
 
     <nav>
-        <a href="/" class="img"><img src="/image/logo.png" alt="Logo" class="img-logo"></a>
+        <a href="/" class="img">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
         <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
         <a href="/nav/acomodacoes">Acomodações</a>
-        <a href="/nav/apoio-paciente">Apoio ao Paciente</a>
-        <a href="/nav/localizacao">Localização</a>
-        <a href="/perguntas/perguntas-frequentes">FAQ</a>
-        <a href="/usuarios/logout" class="btn-logout">Sair</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
     </nav>
 
     <div class="painel-container">
         <aside class="sidebar">
-            <div class="sidebar-item active" data-target="paciente"><span class="icon">👩‍⚕️</span> Paciente Vinculado</div>
+            <div class="sidebar-item active" data-target="paciente"><span class="icon">👩‍⚕️</span> Paciente Vinculado
+            </div>
             <div class="sidebar-item" data-target="agenda"><span class="icon">📅</span> Agenda do Paciente</div>
             <div class="sidebar-item" data-target="chat"><span class="icon">💬</span> Comunicação</div>
-            <div class="sidebar-item" data-target="orientacoes"><span class="icon">📘</span> Orientações e Recursos</div>
+            <div class="sidebar-item" data-target="orientacoes"><span class="icon">📘</span> Orientações e Recursos
+            </div>
             <div class="sidebar-item" data-target="feedback"><span class="icon">📝</span> Feedback e Avaliações</div>
         </aside>
 
@@ -76,13 +111,29 @@
                     <h3 class="card-title">Próximos Eventos</h3>
                     <table>
                         <thead>
-                            <tr><th>Data</th><th>Horário</th><th>Atividade</th><th>Local</th><th>Ações</th></tr>
+                            <tr>
+                                <th>Data</th>
+                                <th>Horário</th>
+                                <th>Atividade</th>
+                                <th>Local</th>
+                                <th>Ações</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr><td>24/10/2025</td><td>09:00</td><td>Quimioterapia</td><td>Sala 02</td>
-                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td></tr>
-                            <tr><td>26/10/2025</td><td>14:30</td><td>Consulta médica</td><td>Consultório 3</td>
-                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td></tr>
+                            <tr>
+                                <td>24/10/2025</td>
+                                <td>09:00</td>
+                                <td>Quimioterapia</td>
+                                <td>Sala 02</td>
+                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td>
+                            </tr>
+                            <tr>
+                                <td>26/10/2025</td>
+                                <td>14:30</td>
+                                <td>Consulta médica</td>
+                                <td>Consultório 3</td>
+                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td>
+                            </tr>
                         </tbody>
                     </table>
                     <button class="btn-download mt-3">Exportar Agenda (PDF)</button>
@@ -193,4 +244,5 @@
     </script>
 
 </body>
+
 </html>

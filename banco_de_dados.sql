@@ -274,12 +274,13 @@ CREATE TABLE IF NOT EXISTS `paciente` (
   UNIQUE KEY `paciente_cpf` (`paciente_cpf`),
   CONSTRAINT `fk_paciente_email` FOREIGN KEY (`paciente_email`) REFERENCES `usuario` (`usuario_email`),
   CONSTRAINT `fk_paciente_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.paciente: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.paciente: ~2 rows (aproximadamente)
 DELETE FROM `paciente`;
 INSERT INTO `paciente` (`paciente_id`, `usuario_id`, `paciente_email`, `paciente_nome`, `paciente_cpf`, `paciente_rg`, `paciente_data_nascimento`, `paciente_sexo`, `paciente_estado_civil`, `paciente_profissao`, `paciente_nacionalidade`, `paciente_tipo_sanguineo`, `paciente_altura`, `paciente_peso`, `paciente_telefone`, `paciente_logradouro`, `paciente_numero`, `paciente_bairro`, `paciente_cidade`, `paciente_estado`, `paciente_cep`, `paciente_contato_emergencia_1_nome`, `paciente_contato_emergencia_1_parentesco`, `paciente_contato_emergencia_1_telefone`, `paciente_contato_emergencia_2_nome`, `paciente_contato_emergencia_2_parentesco`, `paciente_contato_emergencia_2_telefone`, `paciente_responsavel_legal_nome`, `paciente_responsavel_legal_parentesco`, `paciente_responsavel_legal_telefone`, `paciente_centro_tratamento_nome`, `paciente_medico_assistente_nome`, `paciente_diagnostico`, `paciente_fase_tratamento`, `paciente_tipo_tratamento`, `paciente_tempo_tratamento`, `paciente_data_ultima_sessao`, `paciente_historico_medico_resumido`, `paciente_alergias_risco`, `paciente_medicamentos_uso_essenciais`, `paciente_vulnerabilidade_imunossupressao`, `paciente_restricoes_alimentares`, `paciente_restricoes_mobilidade`, `paciente_preferencia_horario_refeicao`, `paciente_observacoes_enfermagem`, `paciente_observacoes_gerais`) VALUES
-	(6, 43, 'paciente@gmail.com', 'paciente', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', 'Portal', 'Santana de Parnaíba', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'nenhum', '4', 'quimioterapia', '4 anos', '2025-11-04', 'nenhum', 'nenhum', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum');
+	(6, 43, 'paciente@gmail.com', 'paciente', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'nenhum', '4', 'quimioterapia', '4 anos', '2025-11-04', 'nenhum', 'nenhum', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum'),
+	(7, 44, 'teste@gmail.com', 'teste', '75395165425', '9638745632', '2001-02-21', 'Feminino', 'Casado', 'professor', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', '', '4', 'quimioterapia', '4 anos', '2025-11-07', '', '', '', 0, '', '', 'Indiferente', '', '');
 
 -- Copiando estrutura para tabela hotel.pergunta
 CREATE TABLE IF NOT EXISTS `pergunta` (
@@ -332,17 +333,17 @@ CREATE TABLE IF NOT EXISTS `quarto` (
 DELETE FROM `quarto`;
 INSERT INTO `quarto` (`quarto_id`, `tipo_quarto_id`, `quarto_numero`, `quarto_andar`, `quarto_status`, `quarto_observacoes`, `quarto_data_criacao`, `quarto_data_atualizacao`) VALUES
 	(6, 6, '101', '1º Andar', 'reservado', 'Vista para o jardim, próximo à rampa de acesso', '2025-11-13 19:22:43', '2025-11-13 23:55:45'),
-	(7, 6, '102', '1º Andar', 'reservado', 'Próximo à enfermagem', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
+	(7, 6, '102', '1º Andar', 'reservado', 'Próximo à enfermagem', '2025-11-13 19:22:43', '2025-11-17 23:18:38'),
 	(8, 6, '201', '2º Andar', 'ocupado', 'Quarto silencioso', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
 	(9, 7, '205', '2º Andar', 'ocupado', 'Vista para a cidade', '2025-11-13 19:22:43', '2025-11-14 18:02:55'),
 	(10, 7, '206', '2º Andar', 'em_limpeza', 'Quarto recém-liberado', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(11, 7, '301', '3º Andar', 'disponivel', NULL, '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(12, 8, '305', '3º Andar', 'disponivel', 'Suíte de canto, mais espaçosa', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
+	(11, 7, '301', '3º Andar', 'reservado', NULL, '2025-11-13 19:22:43', '2025-11-15 01:31:59'),
+	(12, 8, '305', '3º Andar', 'reservado', 'Suíte de canto, mais espaçosa', '2025-11-13 19:22:43', '2025-11-17 21:15:55'),
 	(13, 8, '306', '3º Andar', 'manutencao', 'Manutenção no ar-condicionado', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
 	(14, 8, '401', '4º Andar', 'reservado', 'Com cozinha compacta completa', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(15, 9, '103', '1º Andar', 'disponivel', 'Acessibilidade total, mais perto do elevador', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
+	(15, 9, '103', '1º Andar', 'reservado', 'Acessibilidade total, mais perto do elevador', '2025-11-13 19:22:43', '2025-11-17 22:24:36'),
 	(16, 9, '104', '1º Andar', 'ocupado', 'Próximo à saída de emergência', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(17, 10, '405', '4º Andar', 'ocupado', 'Equipamentos de monitoramento instalados', '2025-11-13 19:22:43', '2025-11-14 18:02:41'),
+	(17, 10, '405', '4º Andar', 'disponivel', 'Equipamentos de monitoramento instalados', '2025-11-13 19:22:43', '2025-11-14 23:09:03'),
 	(18, 10, '406', '4º Andar', 'ocupado', 'Com isolamento acústico', '2025-11-13 19:22:43', '2025-11-14 18:02:38'),
 	(19, 10, '407', '4º Andar', 'ocupado', 'Próximo à sala da equipe médica', '2025-11-13 19:22:43', '2025-11-13 19:22:43');
 
@@ -355,12 +356,26 @@ CREATE TABLE IF NOT EXISTS `quarto_fotos` (
   PRIMARY KEY (`foto_id`),
   KEY `quarto_id` (`tipo_quarto_id`) USING BTREE,
   CONSTRAINT `FK_quarto_fotos_tipo_quarto` FOREIGN KEY (`tipo_quarto_id`) REFERENCES `tipo_quarto` (`tipo_quarto_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.quarto_fotos: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.quarto_fotos: ~15 rows (aproximadamente)
 DELETE FROM `quarto_fotos`;
 INSERT INTO `quarto_fotos` (`foto_id`, `tipo_quarto_id`, `foto_caminho`, `foto_ordem`) VALUES
-	(11, 6, '/img/quartos/quarto101_1.jpg', 1);
+	(11, 6, '/img/quartos/individual_adaptado_1.jpg', 1),
+	(12, 6, '/img/quartos/individual_adaptado_2.jpg', 2),
+	(13, 6, '/img/quartos/individual_adaptado_3.jpg', 3),
+	(14, 7, '/img/quartos/duplo_simples_1.jpg', 1),
+	(15, 7, '/img/quartos/duplo_simples_2.jpg', 2),
+	(16, 7, '/img/quartos/duplo_simples_3.jpg', 3),
+	(17, 8, '/img/quartos/suite_familiar_1.jpg', 1),
+	(18, 8, '/img/quartos/suite_familiar_2.jpg', 2),
+	(19, 8, '/img/quartos/suite_familiar_3.jpg', 3),
+	(20, 9, '/img/quartos/quarto_para_cadeirantes_1.jpg', 1),
+	(21, 9, '/img/quartos/quarto_para_cadeirantes_2.jpg', 2),
+	(22, 9, '/img/quartos/quarto_para_cadeirantes_3.jpg', 3),
+	(23, 10, '/img/quartos/quarto_com_cuidados_intensivos_1.jpg', 1),
+	(24, 10, '/img/quartos/quarto_com_cuidados_intensivos_2.jpg', 2),
+	(25, 10, '/img/quartos/quarto_com_cuidados_intensivos_3.jpg', 3);
 
 -- Copiando estrutura para tabela hotel.reserva
 CREATE TABLE IF NOT EXISTS `reserva` (
@@ -393,12 +408,16 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   CONSTRAINT `fk_reserva_acompanhante` FOREIGN KEY (`acompanhante_id`) REFERENCES `acompanhante` (`acompanhante_id`) ON DELETE SET NULL,
   CONSTRAINT `fk_reserva_paciente` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`paciente_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_reserva_quarto` FOREIGN KEY (`quarto_id`) REFERENCES `quarto` (`quarto_id`) ON DELETE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Registro central das reservas';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Registro central das reservas';
 
--- Copiando dados para a tabela hotel.reserva: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.reserva: ~5 rows (aproximadamente)
 DELETE FROM `reserva`;
 INSERT INTO `reserva` (`reserva_id`, `paciente_id`, `acompanhante_id`, `quarto_id`, `reserva_data_checkin_previsto`, `reserva_data_checkout_previsto`, `reserva_data_checkin_real`, `reserva_data_checkout_real`, `reserva_num_hospedes`, `reserva_duracao_dias`, `reserva_status`, `reserva_motivo`, `reserva_necessidades_especiais`, `reserva_valor_diaria`, `reserva_valor_servicos`, `reserva_valor_total`, `reserva_desconto`, `reserva_admin_aprovou`, `reserva_data_criacao`, `reserva_data_atualizacao`, `reserva_observacoes`, `reserva_observacoes_internas`) VALUES
-	(17, 6, NULL, 6, '2025-11-13 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-13 23:55:44', '2025-11-13 23:55:44', NULL, NULL);
+	(17, 6, NULL, 6, '2025-11-13 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-13 23:55:44', '2025-11-13 23:55:44', NULL, NULL),
+	(18, 6, NULL, 11, '2025-11-19 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-15 01:31:58', '2025-11-15 01:31:58', NULL, NULL),
+	(19, 6, NULL, 12, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-17 21:15:54', '2025-11-17 21:15:54', NULL, NULL),
+	(20, 6, NULL, 15, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-17 22:24:36', '2025-11-17 22:24:36', NULL, NULL),
+	(21, 7, NULL, 7, '2025-11-26 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'asa', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-17 23:18:38', '2025-11-17 23:18:38', NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.resposta
 CREATE TABLE IF NOT EXISTS `resposta` (
@@ -460,7 +479,7 @@ CREATE TABLE IF NOT EXISTS `tipo_quarto` (
   `tipo_quarto_data_criacao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `tipo_quarto_data_atualizacao` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `tipo_quarto_observacoes` text,
-  PRIMARY KEY (`tipo_quarto_id`), 
+  PRIMARY KEY (`tipo_quarto_id`),
   UNIQUE KEY `tipo_quarto_nome` (`tipo_quarto_nome`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tipos de acomodação disponíveis no hotel';
 
@@ -486,7 +505,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`usuario_id`),
   UNIQUE KEY `usuario_email` (`usuario_email`),
   UNIQUE KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela hotel.usuario: ~4 rows (aproximadamente)
 DELETE FROM `usuario`;
@@ -494,7 +513,8 @@ INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_
 	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-11-12 20:45:28', '/uploads/usuarios/padrao.png'),
 	(40, 'doador@gmail.com', '$2b$10$TUh6hQKV5tzkK5co0A9hTedCnbJcb1v7aUd.E7OgVxFh.uYSzBucq', 'doador', '2025-11-13 16:30:30', 'ativo', NULL, '/uploads/usuarios/padrao.png'),
 	(41, 'voluntario@gmail.com', '$2b$10$pRMCCoTzoeOyPzY97BFrVe7DIskU8lvgKTHTKIjbKz4guHV8l0AL2', 'voluntario', '2025-11-13 16:32:00', 'ativo', NULL, '/uploads/usuarios/padrao.png'),
-	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-14 13:51:25', '/uploads/usuarios/padrao.png');
+	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-17 21:26:57', '/uploads/usuarios/padrao.png'),
+	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'paciente', '2025-11-17 16:16:09', 'ativo', '2025-11-17 20:18:25', '/uploads/usuarios/padrao.png');
 
 -- Copiando estrutura para tabela hotel.voluntario
 CREATE TABLE IF NOT EXISTS `voluntario` (
