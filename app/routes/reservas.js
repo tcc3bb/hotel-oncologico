@@ -6,7 +6,7 @@ const verificaLogin = require('../middlewares/verificaLogin');
 const ReservasDAO = require('../infra/ReservasDAO');
 
 // =======================
-// LISTAR RESERVAS
+// LISTAR RESERVAS (TODAS)
 // =======================
 router.get('/reservas', (req, res) => {
     const connection = connectionFactory();
@@ -22,7 +22,7 @@ router.get('/reservas', (req, res) => {
 });
 
 // =======================
-// FORMULÁRIO NOVA RESERVA (com escolha de quarto) - CORRIGIDO
+// FORMULÁRIO NOVA RESERVA (com escolha de quarto)
 // =======================
 router.get('/reservas/nova', verificaLogin, (req, res) => {
     const connection = connectionFactory();
@@ -51,7 +51,7 @@ router.get('/reservas/nova', verificaLogin, (req, res) => {
 
             res.render('reservas/nova-reserva', {
                 user: req.session.user,
-                tipos: tipos, // <<< AGORA VOCÊ PASSA TIPOS, NÃO QUARTOS
+                tipos: tipos,
                 flashMessage: flashMessage
             });
         });
@@ -60,7 +60,7 @@ router.get('/reservas/nova', verificaLogin, (req, res) => {
 
 
 // =======================
-// SALVAR NOVA RESERVA - CORRIGIDO (AGORA ESCOLHE O QUARTO AUTOMATICAMENTE)
+// SALVAR NOVA RESERVA
 // =======================
 router.post('/reservas/nova', verificaLogin, (req, res) => {
     const connection = connectionFactory();
@@ -73,7 +73,6 @@ router.post('/reservas/nova', verificaLogin, (req, res) => {
         return res.redirect('/reservas/nova');
     }
 
-    // Agora o form envia tipo_quarto_id (e NÃO quarto_id)
     if (!reserva.tipo_quarto_id ||
         !reserva.reserva_data_checkin_previsto ||
         !reserva.reserva_data_checkout_previsto) {
@@ -142,25 +141,25 @@ router.post('/reservas/nova', verificaLogin, (req, res) => {
         // ============================================
         // SALVA A RESERVA
         // ============================================
-function salvarReserva() {
+        function salvarReserva() {
 
-    delete reserva.reserva_periodo;
-    delete reserva.acompanhante_email;
-    delete reserva.tipo_quarto_id;  
-    reserva.reserva_status = 'pendente';
-    reserva.reserva_num_hospedes = 1;
-    reserva.reserva_valor_diaria = 0.00;
-    reserva.reserva_valor_servicos = 0.00;
-    reserva.reserva_valor_total = 0.00;
-    reserva.reserva_desconto = 0.00;
-    reserva.reserva_admin_aprovou = 0;
+            delete reserva.reserva_periodo;
+            delete reserva.acompanhante_email;
+            delete reserva.tipo_quarto_id;  
+            reserva.reserva_status = 'pendente';
+            reserva.reserva_num_hospedes = 1;
+            reserva.reserva_valor_diaria = 0.00;
+            reserva.reserva_valor_servicos = 0.00;
+            reserva.reserva_valor_total = 0.00;
+            reserva.reserva_desconto = 0.00;
+            reserva.reserva_admin_aprovou = 0;
 
-    dao.salvar(reserva, (erroSalvar) => {
+            dao.salvar(reserva, (erroSalvar) => {
                 connection.end();
                 if (erroSalvar) {
                     req.flash('erro', `Erro ao salvar a reserva: ${erroSalvar.message}`);
                     return res.redirect('/reservas/nova');
-                }
+                } 
 
                 req.flash('sucesso', 'Reserva criada com sucesso e aguardando confirmação!');
                 res.redirect('/paciente/minhas-reservas');
@@ -168,6 +167,27 @@ function salvarReserva() {
         }
     });
 });
+
+
+
+// =======================
+// CANCELAR RESERVA
+// =======================
+router.post('/reservas/cancelar/:id', verificaLogin, (req, res) => {
+    const connection = connectionFactory();
+    const dao = new ReservasDAO(connection);
+
+    dao.atualizarStatus(req.params.id, "cancelada", (erro) => {
+        connection.end();
+        if (erro) {
+            console.error("Erro ao cancelar reserva:", erro);
+            return res.status(500).send("Erro ao cancelar reserva");
+        }
+
+        res.status(200).send("OK");
+    });
+});
+
 
 // =======================
 // EDITAR RESERVA
@@ -180,25 +200,8 @@ router.post('/reservas/editar/:id', (req, res) => {
     dao.atualizar(id, reserva, (erro) => {
         connection.end();
         if (erro) {
-            console.error('Erro ao atualizar reserva:', erro);
+            console.error('Erro ao atualizar reserva:', erro);a
             return res.status(500).send('Erro ao atualizar reserva');
-        }
-        res.redirect('/admin/painel');
-    });
-});
-
-// =======================
-// DELETAR RESERVA
-// =======================
-router.get('/reservas/deletar/:id', (req, res) => {
-    const connection = connectionFactory();
-    const dao = new ReservasDAO(connection);
-    const id = req.params.id;
-    dao.deletar(id, (erro) => {
-        connection.end();
-        if (erro) {
-            console.error('Erro ao deletar reserva:', erro);
-            return res.status(500).send('Erro ao deletar reserva');
         }
         res.redirect('/admin/painel');
     });
