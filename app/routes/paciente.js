@@ -15,34 +15,22 @@ module.exports = (connectionFactory) => {
         const pacienteDAO = new PacienteDAO(connection);
         const reservasDAO = new ReservasDAO(connection);
 
-        // ------------------------------------
         // 1) BUSCA OS DADOS COMPLETOS DO PACIENTE
-        // ------------------------------------
         pacienteDAO.buscarDadosCompletos(usuarioId, (err, resultados) => {
             if (err) {
                 console.error('Erro MySQL em buscarDadosCompletos:', err);
-                connection.end();
                 return res.status(500).send('Erro ao buscar informações.');
             }
 
             let paciente = resultados[0] || null;
 
-            // ------------------------------------
-            // 2) GARANTE QUE É PACIENTE
-            // (mantendo a mesma regra do segundo GET)
-            // ------------------------------------
             if (req.session.user.tipo !== 'paciente') {
-                connection.end();
                 return res.status(403).send("Acesso negado. Apenas pacientes.");
             }
 
-            // ------------------------------------
-            // 3) BUSCA paciente_id PELO usuario_id
-            // (função original do segundo GET)
-            // ------------------------------------
+            // 2) BUSCA paciente_id PELO usuario_id
             reservasDAO.buscarPacienteIdPorUsuarioId(usuarioId, (erro, pacienteId) => {
                 if (erro || !pacienteId) {
-                    connection.end();
                     return res.render('paciente/minhas-reservas', {
                         user: req.session.user,
                         paciente: paciente || {},
@@ -57,19 +45,11 @@ module.exports = (connectionFactory) => {
                     });
                 }
 
-                // ------------------------------------
-                // 4) LISTA AS RESERVAS DO PACIENTE
-                // ------------------------------------
+                // 3) LISTA AS RESERVAS DO PACIENTE
                 reservasDAO.listarPorPaciente(pacienteId, (erro2, reservas) => {
-                    connection.end();
-
                     if (erro2) {
                         return res.status(500).send("Erro ao carregar suas reservas.");
                     }
-
-                    // ------------------------------------
-                    // 5) RENDER FINAL COM TUDO JUNTO
-                    // ------------------------------------
                     return res.render('paciente/minhas-reservas', {
                         user: req.session.user,
                         paciente: paciente || {},
@@ -82,7 +62,7 @@ module.exports = (connectionFactory) => {
                             }
                             : req.session.user
                     });
-                }); 
+                });
             });
         });
     });
@@ -136,21 +116,26 @@ module.exports = (connectionFactory) => {
         });
     });
 
-
-
     // =======================
     // DETALHES (RETORNA JSON PARA O MODAL)
     // =======================
     router.get('/reservas/detalhes/:id', verificaLogin, (req, res) => {
-        const connection = connectionFactory();
-        const dao = new ReservasDAO(connection);
-        dao.buscarDetalhes(req.params.id, (erro, resultado) => {
-            connection.end();
-            res.json(resultado[0]);
-        });
+    const connection = connectionFactory();
+    const dao = new ReservasDAO(connection);
+
+    dao.buscarDetalhes(req.params.id, (erro, resultado) => {
+        if (erro) {
+            console.error("Erro MySQL em buscarDetalhes:", erro);
+            return res.status(500).json({ erro: "Erro ao buscar detalhes da reserva." });
+        }
+
+        if (!resultado || resultado.length === 0) {
+            return res.status(404).json({ erro: "Reserva não encontrada." });
+        }
+
+        res.json(resultado[0]);
     });
-
-
+});
 
 
     return router;

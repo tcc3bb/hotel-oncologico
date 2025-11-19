@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `acompanhante` (
   CONSTRAINT `fk_acompanhante_usuario_email` FOREIGN KEY (`acompanhante_email`) REFERENCES `usuario` (`usuario_email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.acompanhante: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.acompanhante: ~0 rows (aproximadamente)
 DELETE FROM `acompanhante`;
 
 -- Copiando estrutura para tabela hotel.admin
@@ -238,6 +238,7 @@ CREATE TABLE IF NOT EXISTS `paciente` (
   `paciente_telefone` varchar(20) DEFAULT NULL,
   `paciente_logradouro` varchar(255) DEFAULT NULL,
   `paciente_numero` varchar(10) DEFAULT NULL,
+  `paciente_complemento` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `paciente_bairro` varchar(100) DEFAULT NULL,
   `paciente_cidade` varchar(100) DEFAULT NULL,
   `paciente_estado` varchar(50) DEFAULT NULL,
@@ -274,13 +275,14 @@ CREATE TABLE IF NOT EXISTS `paciente` (
   UNIQUE KEY `paciente_cpf` (`paciente_cpf`),
   CONSTRAINT `fk_paciente_email` FOREIGN KEY (`paciente_email`) REFERENCES `usuario` (`usuario_email`),
   CONSTRAINT `fk_paciente_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela hotel.paciente: ~2 rows (aproximadamente)
 DELETE FROM `paciente`;
-INSERT INTO `paciente` (`paciente_id`, `usuario_id`, `paciente_email`, `paciente_nome`, `paciente_cpf`, `paciente_rg`, `paciente_data_nascimento`, `paciente_sexo`, `paciente_estado_civil`, `paciente_profissao`, `paciente_nacionalidade`, `paciente_tipo_sanguineo`, `paciente_altura`, `paciente_peso`, `paciente_telefone`, `paciente_logradouro`, `paciente_numero`, `paciente_bairro`, `paciente_cidade`, `paciente_estado`, `paciente_cep`, `paciente_contato_emergencia_1_nome`, `paciente_contato_emergencia_1_parentesco`, `paciente_contato_emergencia_1_telefone`, `paciente_contato_emergencia_2_nome`, `paciente_contato_emergencia_2_parentesco`, `paciente_contato_emergencia_2_telefone`, `paciente_responsavel_legal_nome`, `paciente_responsavel_legal_parentesco`, `paciente_responsavel_legal_telefone`, `paciente_centro_tratamento_nome`, `paciente_medico_assistente_nome`, `paciente_diagnostico`, `paciente_fase_tratamento`, `paciente_tipo_tratamento`, `paciente_tempo_tratamento`, `paciente_data_ultima_sessao`, `paciente_historico_medico_resumido`, `paciente_alergias_risco`, `paciente_medicamentos_uso_essenciais`, `paciente_vulnerabilidade_imunossupressao`, `paciente_restricoes_alimentares`, `paciente_restricoes_mobilidade`, `paciente_preferencia_horario_refeicao`, `paciente_observacoes_enfermagem`, `paciente_observacoes_gerais`) VALUES
-	(6, 43, 'paciente@gmail.com', 'paciente', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'nenhum', '4', 'quimioterapia', '4 anos', '2025-11-04', 'nenhum', 'nenhum', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum'),
-	(7, 44, 'teste@gmail.com', 'teste', '75395165425', '9638745632', '2001-02-21', 'Feminino', 'Casado', 'professor', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', '', '4', 'quimioterapia', '4 anos', '2025-11-07', '', '', '', 0, '', '', 'Indiferente', '', '');
+INSERT INTO `paciente` (`paciente_id`, `usuario_id`, `paciente_email`, `paciente_nome`, `paciente_cpf`, `paciente_rg`, `paciente_data_nascimento`, `paciente_sexo`, `paciente_estado_civil`, `paciente_profissao`, `paciente_nacionalidade`, `paciente_tipo_sanguineo`, `paciente_altura`, `paciente_peso`, `paciente_telefone`, `paciente_logradouro`, `paciente_numero`, `paciente_complemento`, `paciente_bairro`, `paciente_cidade`, `paciente_estado`, `paciente_cep`, `paciente_contato_emergencia_1_nome`, `paciente_contato_emergencia_1_parentesco`, `paciente_contato_emergencia_1_telefone`, `paciente_contato_emergencia_2_nome`, `paciente_contato_emergencia_2_parentesco`, `paciente_contato_emergencia_2_telefone`, `paciente_responsavel_legal_nome`, `paciente_responsavel_legal_parentesco`, `paciente_responsavel_legal_telefone`, `paciente_centro_tratamento_nome`, `paciente_medico_assistente_nome`, `paciente_diagnostico`, `paciente_fase_tratamento`, `paciente_tipo_tratamento`, `paciente_tempo_tratamento`, `paciente_data_ultima_sessao`, `paciente_historico_medico_resumido`, `paciente_alergias_risco`, `paciente_medicamentos_uso_essenciais`, `paciente_vulnerabilidade_imunossupressao`, `paciente_restricoes_alimentares`, `paciente_restricoes_mobilidade`, `paciente_preferencia_horario_refeicao`, `paciente_observacoes_enfermagem`, `paciente_observacoes_gerais`) VALUES
+	(6, 43, 'paciente@gmail.com', 'paciente', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', NULL, 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'nenhum', '4', 'quimioterapia', '4 anos', '2025-11-04', 'nenhum', 'nenhum', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum'),
+	(7, 44, 'teste@gmail.com', 'teste', '75395165425', '9638745632', '2001-02-21', 'Feminino', 'Casado', 'professor', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', NULL, 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', '', '4', 'quimioterapia', '4 anos', '2025-11-07', '', '', '', 0, '', '', 'Indiferente', '', ''),
+	(8, 45, 'joao.silva@email.com', 'João Silva', '98653212495', '356752362', '1980-01-15', 'Masculino', 'Casado', 'arquiteto', 'brasileira', 'B+', 1.75, 70.00, '11975632654', 'Rua das Flores', '123', 'bloco 1', 'Centro', 'São Paulo', 'SP', '035698623', 'Maria Silva', 'Esposa', '11963852653', 'Pedro Silva', 'Filho', '11945685230', 'Maria Silva', 'Esposa', '11963852653', 'Hospital Oncológico ABC', 'Dr. Carlos Mendes', 'Câncer de garganta não pequenas células, estágio II, adenocarcinoma.', 'Tratamento ativo', 'Quimioterapia combinada com radioterapia', '6 meses (iniciado em abril de 2023)', '2023-10-01', 'Paciente com histórico de tabagismo por 20 anos (parou em 2020). Diagnosticado em março de 2023 após sintomas de tosse persistente e perda de peso. Sem outras comorbidades significativas.', 'Alérgico a penicilina (reação cutânea). Risco de infecções devido ao tratamento oncológico.', 'Analgésicos (paracetamol), antieméticos (ondansetrona), suplementos vitamínicos.', 1, 'Dieta leve, evitar alimentos ácidos e picantes para reduzir náuseas. Preferência por alimentos moles e fáceis de digerir.\n', 'Mobilidade reduzida devido à fadiga e fraqueza causadas pelo tratamento. Recomendado uso de cadeira de rodas para longas distâncias.', 'Indiferente', 'Monitorar sinais vitais diariamente. Observar sinais de infecção (febre, calafrios). Administrar medicações conforme prescrito. Avaliar nível de dor e fadiga.', 'Paciente motivado e cooperativo. Família apoiadora e presente. Recomendado acompanhamento psicológico para suporte emocional. Próxima consulta em 15 dias.');
 
 -- Copiando estrutura para tabela hotel.pergunta
 CREATE TABLE IF NOT EXISTS `pergunta` (
@@ -339,11 +341,11 @@ INSERT INTO `quarto` (`quarto_id`, `tipo_quarto_id`, `quarto_numero`, `quarto_an
 	(10, 7, '206', '2º Andar', 'em_limpeza', 'Quarto recém-liberado', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
 	(11, 7, '301', '3º Andar', 'reservado', NULL, '2025-11-13 19:22:43', '2025-11-15 01:31:59'),
 	(12, 8, '305', '3º Andar', 'reservado', 'Suíte de canto, mais espaçosa', '2025-11-13 19:22:43', '2025-11-17 21:15:55'),
-	(13, 8, '306', '3º Andar', 'manutencao', 'Manutenção no ar-condicionado', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
+	(13, 8, '306', '3º Andar', 'reservado', 'Manutenção no ar-condicionado', '2025-11-13 19:22:43', '2025-11-18 23:07:09'),
 	(14, 8, '401', '4º Andar', 'reservado', 'Com cozinha compacta completa', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
 	(15, 9, '103', '1º Andar', 'reservado', 'Acessibilidade total, mais perto do elevador', '2025-11-13 19:22:43', '2025-11-17 22:24:36'),
 	(16, 9, '104', '1º Andar', 'ocupado', 'Próximo à saída de emergência', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(17, 10, '405', '4º Andar', 'disponivel', 'Equipamentos de monitoramento instalados', '2025-11-13 19:22:43', '2025-11-14 23:09:03'),
+	(17, 10, '405', '4º Andar', 'reservado', 'Equipamentos de monitoramento instalados', '2025-11-13 19:22:43', '2025-11-18 20:39:45'),
 	(18, 10, '406', '4º Andar', 'ocupado', 'Com isolamento acústico', '2025-11-13 19:22:43', '2025-11-14 18:02:38'),
 	(19, 10, '407', '4º Andar', 'ocupado', 'Próximo à sala da equipe médica', '2025-11-13 19:22:43', '2025-11-13 19:22:43');
 
@@ -392,10 +394,6 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `reserva_status` enum('pendente','confirmada','em_andamento','concluida','cancelada','no-show') DEFAULT 'pendente',
   `reserva_motivo` text COMMENT 'Ex.: Tratamento quimioterapia, Pós-operatório',
   `reserva_necessidades_especiais` text COMMENT 'Necessidades específicas para a estadia',
-  `reserva_valor_diaria` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'Valor da diária do quarto no momento da reserva',
-  `reserva_valor_servicos` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'Soma dos serviços adicionais',
-  `reserva_valor_total` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'Soma total',
-  `reserva_desconto` decimal(10,2) DEFAULT '0.00',
   `reserva_admin_aprovou` tinyint(1) DEFAULT '0' COMMENT 'Se a reserva foi revisada e aprovada por um admin',
   `reserva_data_criacao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `reserva_data_atualizacao` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -408,16 +406,18 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   CONSTRAINT `fk_reserva_acompanhante` FOREIGN KEY (`acompanhante_id`) REFERENCES `acompanhante` (`acompanhante_id`) ON DELETE SET NULL,
   CONSTRAINT `fk_reserva_paciente` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`paciente_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_reserva_quarto` FOREIGN KEY (`quarto_id`) REFERENCES `quarto` (`quarto_id`) ON DELETE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Registro central das reservas';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Registro central das reservas';
 
--- Copiando dados para a tabela hotel.reserva: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.reserva: ~4 rows (aproximadamente)
 DELETE FROM `reserva`;
-INSERT INTO `reserva` (`reserva_id`, `paciente_id`, `acompanhante_id`, `quarto_id`, `reserva_data_checkin_previsto`, `reserva_data_checkout_previsto`, `reserva_data_checkin_real`, `reserva_data_checkout_real`, `reserva_num_hospedes`, `reserva_duracao_dias`, `reserva_status`, `reserva_motivo`, `reserva_necessidades_especiais`, `reserva_valor_diaria`, `reserva_valor_servicos`, `reserva_valor_total`, `reserva_desconto`, `reserva_admin_aprovou`, `reserva_data_criacao`, `reserva_data_atualizacao`, `reserva_observacoes`, `reserva_observacoes_internas`) VALUES
-	(17, 6, NULL, 6, '2025-11-13 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-13 23:55:44', '2025-11-13 23:55:44', NULL, NULL),
-	(18, 6, NULL, 11, '2025-11-19 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-15 01:31:58', '2025-11-15 01:31:58', NULL, NULL),
-	(19, 6, NULL, 12, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-17 21:15:54', '2025-11-17 21:15:54', NULL, NULL),
-	(20, 6, NULL, 15, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-17 22:24:36', '2025-11-17 22:24:36', NULL, NULL),
-	(21, 7, NULL, 7, '2025-11-26 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'asa', NULL, 0.00, 0.00, 0.00, 0.00, 0, '2025-11-17 23:18:38', '2025-11-17 23:18:38', NULL, NULL);
+INSERT INTO `reserva` (`reserva_id`, `paciente_id`, `acompanhante_id`, `quarto_id`, `reserva_data_checkin_previsto`, `reserva_data_checkout_previsto`, `reserva_data_checkin_real`, `reserva_data_checkout_real`, `reserva_num_hospedes`, `reserva_duracao_dias`, `reserva_status`, `reserva_motivo`, `reserva_necessidades_especiais`, `reserva_admin_aprovou`, `reserva_data_criacao`, `reserva_data_atualizacao`, `reserva_observacoes`, `reserva_observacoes_internas`) VALUES
+	(17, 6, NULL, 6, '2025-11-13 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-13 23:55:44', '2025-11-13 23:55:44', NULL, NULL),
+	(18, 6, NULL, 11, '2025-11-19 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-15 01:31:58', '2025-11-15 01:31:58', NULL, NULL),
+	(19, 6, NULL, 12, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-17 21:15:54', '2025-11-17 21:15:54', NULL, NULL),
+	(20, 6, NULL, 15, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-17 22:24:36', '2025-11-17 22:24:36', NULL, NULL),
+	(21, 7, NULL, 7, '2025-11-26 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'asa', NULL, 0, '2025-11-17 23:18:38', '2025-11-17 23:18:38', NULL, NULL),
+	(22, 8, NULL, 17, '2025-11-20 03:00:00', '2025-11-30 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'continuação do tratamento', NULL, 0, '2025-11-18 20:39:45', '2025-11-18 20:39:45', NULL, NULL),
+	(23, 8, NULL, 13, '2025-11-19 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', NULL, NULL, 0, '2025-11-18 23:07:09', '2025-11-18 23:07:09', NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.resposta
 CREATE TABLE IF NOT EXISTS `resposta` (
@@ -505,16 +505,17 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`usuario_id`),
   UNIQUE KEY `usuario_email` (`usuario_email`),
   UNIQUE KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.usuario: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.usuario: ~6 rows (aproximadamente)
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_tipo`, `usuario_data_criacao`, `usuario_estado`, `usuario_ultimo_login`, `usuario_foto_perfil`) VALUES
 	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-11-12 20:45:28', '/uploads/usuarios/padrao.png'),
-	(40, 'doador@gmail.com', '$2b$10$TUh6hQKV5tzkK5co0A9hTedCnbJcb1v7aUd.E7OgVxFh.uYSzBucq', 'doador', '2025-11-13 16:30:30', 'ativo', NULL, '/uploads/usuarios/padrao.png'),
-	(41, 'voluntario@gmail.com', '$2b$10$pRMCCoTzoeOyPzY97BFrVe7DIskU8lvgKTHTKIjbKz4guHV8l0AL2', 'voluntario', '2025-11-13 16:32:00', 'ativo', NULL, '/uploads/usuarios/padrao.png'),
-	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-17 21:26:57', '/uploads/usuarios/padrao.png'),
-	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'paciente', '2025-11-17 16:16:09', 'ativo', '2025-11-17 20:18:25', '/uploads/usuarios/padrao.png');
+	(40, 'doador@gmail.com', '$2b$10$TUh6hQKV5tzkK5co0A9hTedCnbJcb1v7aUd.E7OgVxFh.uYSzBucq', 'doador', '2025-11-13 16:30:30', 'ativo', '2025-11-18 17:00:14', '/uploads/usuarios/padrao.png'),
+	(41, 'voluntario@gmail.com', '$2b$10$pRMCCoTzoeOyPzY97BFrVe7DIskU8lvgKTHTKIjbKz4guHV8l0AL2', 'voluntario', '2025-11-13 16:32:00', 'ativo', '2025-11-18 16:47:47', '/uploads/usuarios/padrao.png'),
+	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-18 20:41:38', '/uploads/usuarios/padrao.png'),
+	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'acompanhante', '2025-11-17 16:16:09', 'ativo', '2025-11-18 16:42:11', '/uploads/usuarios/padrao.png'),
+	(45, 'joao.silva@email.com', '$2b$10$2TCAFBsUaQNhf6VEpBVm4O56UN4ohu0M5sBQxQklOYvz29w6o0Z/2', 'paciente', '2025-11-18 17:32:52', 'ativo', '2025-11-18 20:41:56', '/uploads/usuarios/padrao.png');
 
 -- Copiando estrutura para tabela hotel.voluntario
 CREATE TABLE IF NOT EXISTS `voluntario` (

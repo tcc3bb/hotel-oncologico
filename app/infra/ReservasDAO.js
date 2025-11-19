@@ -1,14 +1,10 @@
-/**
- * DAO para operações no banco de dados relacionadas a Reservas.
- * @param {object} connection - Objeto de conexão com o banco de dados.
- */
 function ReservasDAO(connection) {
     this._connection = connection;
 }
 
 /* =========================
    BUSCAR ID DO PACIENTE PELO ID DO USUÁRIO
-   ========================= */
+    ========================= */
 ReservasDAO.prototype.buscarPacienteIdPorUsuarioId = function (usuarioId, callback) {
     const sql = `SELECT paciente_id FROM paciente WHERE usuario_id = ?`;
     this._connection.query(sql, [usuarioId], (erro, resultados) => {
@@ -82,7 +78,7 @@ ReservasDAO.prototype.listar = function (callback) {
 };
 
 // Buscar tipos de quarto com pelo menos 1 quarto disponível
-ReservasDAO.prototype.buscarTiposDisponiveis= function (callback) {
+ReservasDAO.prototype.buscarTiposDisponiveis = function (callback) {
     const sql = `
         SELECT 
             tq.tipo_quarto_id,
@@ -109,7 +105,7 @@ ReservasDAO.prototype.buscarFotosPorTipo = function (callback) {
         FROM quarto_fotos
         ORDER BY foto_ordem ASC
     `;
-    this._connection.query(sql, callback); 
+    this._connection.query(sql, callback);
 }
 
 ReservasDAO.prototype.buscarQuartoDisponivelPorTipo = function (tipoId, callback) {
@@ -244,7 +240,7 @@ ReservasDAO.prototype.atualizar = function (id, reserva, callback) {
 
 
 // Atualizar status da reserva
-ReservasDAO.prototype.atualizarStatus = function(id, status, callback) {
+ReservasDAO.prototype.atualizarStatus = function (id, status, callback) {
     const sql = `UPDATE reserva SET reserva_status = ? WHERE raeserva_id = ?`;
     this._connection.query(sql, [status, id], callback);
 };
@@ -277,5 +273,43 @@ ReservasDAO.prototype.listarPorPaciente = function (pacienteId, callback) {
     this._connection.query(sql, [pacienteId], callback);
 };
 
+ReservasDAO.prototype.buscarDetalhes = function (id, callback) {
+    const sql = `
+        SELECT 
+            r.*,
+            p.paciente_nome,
+            a.acompanhante_nome,
+            q.quarto_numero,
+            tq.tipo_quarto_id,
+            tq.tipo_quarto_nome,
+            tq.tipo_quarto_descricao,
+            tq.tipo_quarto_capacidade,
+            tq.tipo_quarto_valor,
+            f.foto_caminho
+        FROM reserva r
+        LEFT JOIN paciente p ON p.paciente_id = r.paciente_id
+        LEFT JOIN acompanhante a ON a.acompanhante_id = r.acompanhante_id
+        LEFT JOIN quarto q ON q.quarto_id = r.quarto_id
+        LEFT JOIN tipo_quarto tq ON tq.tipo_quarto_id = q.tipo_quarto_id
+        LEFT JOIN quarto_fotos f ON f.tipo_quarto_id = tq.tipo_quarto_id
+        WHERE r.reserva_id = ?
+    `;
+
+    this._connection.query(sql, [id], (err, results) => {
+        if (err) return callback(err);
+
+        if (!results.length) return callback(null, []);
+
+        // ⚠️ Como vem várias linhas (1 por foto), precisamos consolidar:
+        const base = { ...results[0], fotos: [] };
+
+        results.forEach(r => {
+            if (r.foto_caminho) base.fotos.push(r.foto_caminho);
+        });
+
+        // Retorna a reserva consolidada dentro de um array
+        callback(null, [base]);
+    });
+};
 
 module.exports = ReservasDAO;

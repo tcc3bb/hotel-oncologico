@@ -230,46 +230,6 @@ class PacienteDAO {
         });
     }
 
-    // Buscar detalhes completos da reserva
-    buscarDetalhes(id, callback) {
-        const sql = `
-        SELECT 
-            r.*,
-            p.paciente_nome,
-            a.acompanhante_nome,
-
-            q.quarto_numero,
-            tq.tipo_quarto_id,
-            tq.tipo_quarto_nome,
-            tq.tipo_quarto_descricao,
-            tq.tipo_quarto_capacidade,
-            tq.tipo_quarto_valor,
-
-            f.foto_caminho
-        FROM reserva r
-        LEFT JOIN paciente p ON p.paciente_id = r.paciente_id
-        LEFT JOIN acompanhante a ON a.acompanhante_id = r.acompanhante_id
-        LEFT JOIN quarto q ON q.quarto_id = r.quarto_id
-        LEFT JOIN tipo_quarto tq ON tq.tipo_quarto_id = q.tipo_quarto_id
-        LEFT JOIN quarto_fotos f ON f.tipo_quarto_id = tq.tipo_quarto_id
-        WHERE r.reserva_id = ?
-    `;
-
-        this._connection.query(sql, [id], (err, results) => {
-            if (err) return callback(err);
-
-            if (!results.length) return callback(null, []);
-
-            // ⚠️ Como vem várias linhas (1 por foto), precisamos consolidar:
-            const base = { ...results[0], fotos: [] };
-
-            results.forEach(r => {
-                if (r.foto_caminho) base.fotos.push(r.foto_caminho);
-            });
-
-            callback(null, [base]);
-        });
-    }
 
 }
 
