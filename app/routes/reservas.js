@@ -164,27 +164,6 @@ router.post('/reservas/nova', verificaLogin, (req, res) => {
     });
 });
 
-
-
-// =======================
-// CANCELAR RESERVA
-// =======================
-router.post('/reservas/cancelar/:id', verificaLogin, (req, res) => {
-    const connection = connectionFactory();
-    const dao = new ReservasDAO(connection);
-
-    dao.atualizarStatus(req.params.id, "cancelada", (erro) => {
-        connection.end();
-        if (erro) {
-            console.error("Erro ao cancelar reserva:", erro);
-            return res.status(500).send("Erro ao cancelar reserva");
-        }
-
-        res.status(200).send("OK");
-    });
-});
-
-
 // =======================
 // EDITAR RESERVA
 // =======================

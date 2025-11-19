@@ -3,8 +3,8 @@ function ReservasDAO(connection) {
 }
 
 /* =========================
-   BUSCAR ID DO PACIENTE PELO ID DO USUÁRIO
-    ========================= */
+BUSCAR ID DO PACIENTE PELO ID DO USUÁRIO
+========================= */
 ReservasDAO.prototype.buscarPacienteIdPorUsuarioId = function (usuarioId, callback) {
     const sql = `SELECT paciente_id FROM paciente WHERE usuario_id = ?`;
     this._connection.query(sql, [usuarioId], (erro, resultados) => {
@@ -241,7 +241,7 @@ ReservasDAO.prototype.atualizar = function (id, reserva, callback) {
 
 // Atualizar status da reserva
 ReservasDAO.prototype.atualizarStatus = function (id, status, callback) {
-    const sql = `UPDATE reserva SET reserva_status = ? WHERE raeserva_id = ?`;
+    const sql = `UPDATE reserva SET reserva_status = ? WHERE reserva_id = ?`;
     this._connection.query(sql, [status, id], callback);
 };
 
@@ -283,8 +283,6 @@ ReservasDAO.prototype.buscarDetalhes = function (id, callback) {
             tq.tipo_quarto_id,
             tq.tipo_quarto_nome,
             tq.tipo_quarto_descricao,
-            tq.tipo_quarto_capacidade,
-            tq.tipo_quarto_valor,
             f.foto_caminho
         FROM reserva r
         LEFT JOIN paciente p ON p.paciente_id = r.paciente_id

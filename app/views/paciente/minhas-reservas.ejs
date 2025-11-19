@@ -61,15 +61,11 @@
          </div>
          <div class="sidebar-item" data-target="reservas" tabindex="0">
             <span class="icon" aria-hidden="true">📅</span>
-            <span>Reservas Atuais</span>
+            <span>Minhas Reservas</span>
          </div>
          <div class="sidebar-item" data-target="saude" tabindex="0">
             <span class="icon" aria-hidden="true">❤️</span>
             <span>Perfil de Saúde</span>
-         </div>
-         <div class="sidebar-item" data-target="chat" tabindex="0">
-            <span class="icon" aria-hidden="true">💬</span>
-            <span>Chat e Suporte</span>
          </div>
          <div class="sidebar-item" data-target="historico" tabindex="0">
             <span class="icon" aria-hidden="true">📜</span>
@@ -262,7 +258,7 @@
          <!--============================================= SECTION MINHAS RESERVAS =================================================-->
          <!--====================================================================================================================== -->
          <section id="reservas" class="conteudo">
-            <h2 class="section-title">Reservas Atuais</h2>
+            <h2 class="section-title">Minhas Reservas</h2>
             <a href="/reservas/nova" class="btn">Nova reserva</a>
 
             <div class="card card-reservas">
@@ -341,9 +337,9 @@
 
                            <div class="galeria-quarto">
                               ${reserva.fotos && reserva.fotos.length > 0
-                                                      ? reserva.fotos.map(f => `<img src="${f}" class="foto-quarto">`).join('')
-                                                      : '<p>Sem fotos disponíveis.</p>'
-                                                   }
+                              ? reserva.fotos.map(f => `<img src="${f}" class="foto-quarto">`).join('')
+                              : '<p>Sem fotos disponíveis.</p>'
+                           }
                            </div>
 
                            <hr>
@@ -367,8 +363,16 @@
 
                function cancelarReserva(id) {
                   if (!confirm("Deseja realmente cancelar esta reserva?")) return;
-                  fetch(`/reservas/cancelar/${id}`, { method: "POST" })
-                     .then(() => location.reload());
+                  fetch(`/paciente/reservas/cancelar/${id}`, { method: "POST" })
+                     .then(response => {
+                        if (!response.ok) {
+                           throw new Error('Erro ao cancelar reserva');
+                        }
+                        location.reload();
+                     })
+                     .catch(error => {
+                        alert('Erro: ' + error.message);
+                     });
                }
             </script>
          </section>
@@ -604,35 +608,6 @@
                   }
                });
             </script>
-         </section>
-
-         <!-- ======================================================================================================================-->
-         <!--================================================= SECTION CHAT ========================================================-->
-         <!--====================================================================================================================== -->
-         <section id="chat" class="conteudo">
-            <h2 class="section-title">Chat e Suporte</h2>
-            <p class="subtitle">Converse diretamente com as equipes do Instituto Vita.</p>
-
-            <div class="painel-dashboard chat-cards">
-               <div class="card card-chat">
-                  <span class="chat-icon">🧑‍🤝‍🧑</span>
-                  <h4 class="card-title">Acompanhantes e Familiares</h4>
-                  <p>Comunique-se com seu acompanhante ou outros familiares cadastrados.</p>
-                  <button class="btn-primary-block">Iniciar Chat</button>
-               </div>
-               <div class="card card-chat">
-                  <span class="chat-icon">🩺</span>
-                  <h4 class="card-title">Equipe de Saúde</h4>
-                  <p>Dúvidas rápidas com enfermeiros, médicos ou equipe de apoio clínico.</p>
-                  <button class="btn-primary-block">Acessar Suporte Clínico</button>
-               </div>
-               <div class="card card-chat">
-                  <span class="chat-icon">🤝</span>
-                  <h4 class="card-title">Voluntários</h4>
-                  <p>Peça ajuda ou converse com voluntários disponíveis para apoio emocional.</p>
-                  <button class="btn-primary-block">Chamar Voluntário</button>
-               </div>
-            </div>
          </section>
 
          <!-- ======================================================================================================================-->
