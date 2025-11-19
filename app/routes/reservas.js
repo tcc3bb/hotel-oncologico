@@ -148,10 +148,6 @@ router.post('/reservas/nova', verificaLogin, (req, res) => {
             delete reserva.tipo_quarto_id;  
             reserva.reserva_status = 'pendente';
             reserva.reserva_num_hospedes = 1;
-            reserva.reserva_valor_diaria = 0.00;
-            reserva.reserva_valor_servicos = 0.00;
-            reserva.reserva_valor_total = 0.00;
-            reserva.reserva_desconto = 0.00;
             reserva.reserva_admin_aprovou = 0;
 
             dao.salvar(reserva, (erroSalvar) => {

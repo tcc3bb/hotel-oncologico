@@ -82,14 +82,10 @@ module.exports = (connectionFactory) => {
                             }
                             : req.session.user
                     });
-                });
+                }); 
             });
         });
     });
-
-
-
-
 
     // 🔹 POST /paciente/verificar-senha
     router.post('/verificar-senha', (req, res) => {

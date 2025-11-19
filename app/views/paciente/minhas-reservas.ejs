@@ -4,7 +4,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Instituto Vita</title> 
+   <title>Instituto Vita</title>
    <link rel="icon" href="/image/logo.png">
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,6 +63,10 @@
             <span class="icon" aria-hidden="true">📅</span>
             <span>Reservas Atuais</span>
          </div>
+         <div class="sidebar-item" data-target="saude" tabindex="0">
+            <span class="icon" aria-hidden="true">❤️</span>
+            <span>Perfil de Saúde</span>
+         </div>
          <div class="sidebar-item" data-target="chat" tabindex="0">
             <span class="icon" aria-hidden="true">💬</span>
             <span>Chat e Suporte</span>
@@ -74,10 +78,6 @@
          <div class="sidebar-item" data-target="documentos" tabindex="0">
             <span class="icon" aria-hidden="true">📂</span>
             <span>Documentos</span>
-         </div>
-         <div class="sidebar-item" data-target="saude" tabindex="0">
-            <span class="icon" aria-hidden="true">❤️</span>
-            <span>Perfil de Saúde</span>
          </div>
          <div class="sidebar-item" data-target="alimentacao" tabindex="0">
             <span class="icon" aria-hidden="true">🍽️</span>
@@ -186,6 +186,11 @@
                            readonly>
                      </div>
                      <div>
+                        <label>Complemento:</label>
+                        <input type="text" name="paciente_complemento"
+                           value="<%= paciente.paciente_complemento || '' %>" readonly>
+                     </div>
+                     <div>
                         <label>Bairro:</label>
                         <input type="text" name="paciente_bairro" value="<%= paciente.paciente_bairro || '' %>"
                            readonly>
@@ -253,8 +258,6 @@
             </script>
          </section>
 
-
-
          <!-- ======================================================================================================================-->
          <!--============================================= SECTION MINHAS RESERVAS =================================================-->
          <!--====================================================================================================================== -->
@@ -317,48 +320,291 @@
                   </table>
                </div>
             </div>
+
+            <!-- ============= MODAL COM DETALHES ============= -->
+            <div id="modalReserva" class="modal">
+               <div class="modal-content">
+                  <span class="close" onclick="fecharModal()">&times;</span>
+                  <h3>Detalhes da Reserva</h3>
+                  <div id="conteudoModal"></div>
+               </div>
+            </div>
+
+            <script>
+               function abrirModal(id) {
+                  fetch(`/paciente/reservas/detalhes/${id}`)
+                     .then(res => res.json())
+                     .then(reserva => {
+                        document.getElementById('conteudoModal').innerHTML = `
+                           <h3>${reserva.tipo_quarto_nome}</h3>
+                           <p>${reserva.tipo_quarto_descricao}</p>
+
+                           <div class="galeria-quarto">
+                              ${reserva.fotos && reserva.fotos.length > 0
+                                                      ? reserva.fotos.map(f => `<img src="${f}" class="foto-quarto">`).join('')
+                                                      : '<p>Sem fotos disponíveis.</p>'
+                                                   }
+                           </div>
+
+                           <hr>
+
+                           <p><b>Paciente:</b> ${reserva.paciente_nome}</p>
+                           <p><b>Acompanhante:</b> ${reserva.acompanhante_nome || 'Nenhum'}</p>
+                           <p><b>Quarto:</b> ${reserva.quarto_numero}</p>
+                           <p><b>Status:</b> ${reserva.reserva_status}</p>
+                           <p><b>Check-in previsto:</b> ${new Date(reserva.reserva_data_checkin_previsto).toLocaleString('pt-BR')}</p>
+                           <p><b>Check-out previsto:</b> ${new Date(reserva.reserva_data_checkout_previsto).toLocaleString('pt-BR')}</p>
+                           <p><b>Necessidades especiais:</b> ${reserva.reserva_necessidades_especiais || 'Nenhuma'}</p>
+                        `;
+
+                        document.getElementById('modalReserva').style.display = 'block';
+                     });
+               }
+
+               function fecharModal() {
+                  document.getElementById('modalReserva').style.display = 'none';
+               }
+
+               function cancelarReserva(id) {
+                  if (!confirm("Deseja realmente cancelar esta reserva?")) return;
+                  fetch(`/reservas/cancelar/${id}`, { method: "POST" })
+                     .then(() => location.reload());
+               }
+            </script>
          </section>
 
-         <!-- ============= MODAL COM DETALHES ============= -->
-         <div id="modalReserva" class="modal">
-            <div class="modal-content">
-               <span class="close" onclick="fecharModal()">&times;</span>
-               <h3>Detalhes da Reserva</h3>
-               <div id="conteudoModal"></div>
+         <!-- ======================================================================================================================-->
+         <!--================================================= PERFIL DE SAÚDE =======================================================-->
+         <!--====================================================================================================================== -->
+         <section id="saude" class="conteudo">
+            <h2 class="section-title">Perfil de Saúde</h2>
+            <p class="subtitle">Suas informações clínicas vitais e plano de tratamento atual.</p>
+
+            <div class="painel-dashboard saude-cards">
+
+               <!-- DIAGNÓSTICO PRINCIPAL -->
+               <div class="card card-metricas">
+                  <h4 class="card-title">Diagnóstico Principal</h4>
+                  <p class="value-destaque">
+                     <%= paciente.paciente_diagnostico || "Não informado" %>
+                  </p>
+
+                  <% if (paciente.paciente_fase_tratamento) { %>
+                     <span class="badge badge-info">
+                        <%= paciente.paciente_fase_tratamento %>
+                     </span>
+                     <% } %>
+               </div>
+
+               <!-- ALERGIAS -->
+               <div class="card card-metricas">
+                  <h4 class="card-title">Alergias Conhecidas</h4>
+                  <p class="value-destaque">
+                     <%= paciente.paciente_alergias_risco || "Nenhuma informada" %>
+                  </p>
+
+                  <% if (paciente.paciente_alergias_risco) { %>
+                     <span class="badge badge-danger">Atenção</span>
+                     <% } else { %>
+                        <span class="badge badge-info">OK</span>
+                        <% } %>
+               </div>
+
+               <!-- PLANO DE TRATAMENTO -->
+               <div class="card card-plano">
+                  <h4 class="card-title">Plano de Tratamento</h4>
+
+                  <ul class="plano-list">
+
+                     <% if (paciente.paciente_tipo_tratamento) { %>
+                        <li>
+                           <span class="list-icon">⚕️</span>
+                           <%= paciente.paciente_tipo_tratamento %>
+                              <% if (paciente.paciente_tempo_tratamento) { %>
+                                 ( <%= paciente.paciente_tempo_tratamento %> )
+                                    <% } %>
+                        </li>
+                        <% } %>
+
+                           <% if (paciente.paciente_medicamentos_uso_essenciais) { %>
+                              <li><span class="list-icon">💊</span>
+                                 <%= paciente.paciente_medicamentos_uso_essenciais %>
+                              </li>
+                              <% } %>
+
+                                 <% if (paciente.paciente_data_ultima_sessao) { %>
+                                    <li><span class="list-icon">🗓️</span>
+                                       Última Sessão:
+                                       <%= paciente.paciente_data_ultima_sessao %>
+                                    </li>
+                                    <% } %>
+
+                  </ul>
+
+                  <button class="btn-secondary mt-3" onclick="abrirModalSaude()">Editar Saúde</button>
+               </div>
             </div>
-         </div>
 
-         <script>
-            function abrirModal(id) {
-               fetch(`/reservas/detalhes/${id}`)
-                  .then(res => res.json())
-                  .then(reserva => {
-                     document.getElementById('conteudoModal').innerHTML = `
-                  <p><b>Paciente:</b> ${reserva.paciente_nome}</p>
-                  <p><b>Acompanhante:</b> ${reserva.acompanhante_nome || 'Nenhum'}</p>
-                  <p><b>Quarto:</b> ${reserva.quarto_numero}</p>
-                  <p><b>Status:</b> ${reserva.reserva_status}</p>
-                  <p><b>Check-in previsto:</b> ${new Date(reserva.reserva_data_checkin_previsto).toLocaleString('pt-BR')}</p>
-                  <p><b>Check-out previsto:</b> ${new Date(reserva.reserva_data_checkout_previsto).toLocaleString('pt-BR')}</p>
-                  <p><b>Motivo:</b> ${reserva.reserva_motivo || 'Não informado'}</p>
-                  <p><b>Necessidades especiais:</b> ${reserva.reserva_necessidades_especiais || 'Nenhuma'}</p>
-               `;
-                     document.getElementById('modalReserva').style.display = 'block';
+            <!-- =========================== MODAL EDITAR SAÚDE =========================== -->
+            <div id="modalSaude" class="modal-overlay" style="display: none;">
+               <div class="modal-content">
+
+                  <div class="modal-header">
+                     <h2>Editar Perfil de Saúde</h2>
+                     <button class="close-btn" onclick="fecharModalSaude()">×</button>
+                  </div>
+
+                  <form id="formSaude">
+
+                     <div class="modal-body">
+
+                        <!-- Diagnóstico -->
+                        <div class="campo-modal">
+                           <label>Diagnóstico Principal</label>
+                           <textarea name="paciente_diagnostico"
+                              rows="2"><%= paciente.paciente_diagnostico || '' %></textarea>
+                        </div>
+
+                        <!-- Fase -->
+                        <div class="campo-modal">
+                           <label>Fase do Tratamento</label>
+                           <input type="text" name="paciente_fase_tratamento"
+                              value="<%= paciente.paciente_fase_tratamento || '' %>">
+                        </div>
+
+                        <!-- Tipo tratamento -->
+                        <div class="campo-modal">
+                           <label>Tipo de Tratamento</label>
+                           <input type="text" name="paciente_tipo_tratamento"
+                              value="<%= paciente.paciente_tipo_tratamento || '' %>">
+                        </div>
+
+                        <!-- Tempo tratamento -->
+                        <div class="campo-modal">
+                           <label>Duração / Tempo de Tratamento</label>
+                           <input type="text" name="paciente_tempo_tratamento"
+                              value="<%= paciente.paciente_tempo_tratamento || '' %>">
+                        </div>
+
+                        <!-- Última sessão -->
+                        <div class="campo-modal">
+                           <label>Data da Última Sessão</label>
+                           <input type="date" name="paciente_data_ultima_sessao"
+                              value="<%= paciente.paciente_data_ultima_sessao ? paciente.paciente_data_ultima_sessao.split('T')[0] : '' %>">
+                        </div>
+
+                        <!-- Alergias -->
+                        <div class="campo-modal">
+                           <label>Alergias</label>
+                           <textarea name="paciente_alergias_risco"
+                              rows="2"><%= paciente.paciente_alergias_risco || '' %></textarea>
+                        </div>
+
+                        <!-- Medicamentos essenciais -->
+                        <div class="campo-modal">
+                           <label>Medicamentos Essenciais</label>
+                           <textarea name="paciente_medicamentos_uso_essenciais"
+                              rows="2"><%= paciente.paciente_medicamentos_uso_essenciais || '' %></textarea>
+                        </div>
+
+                        <!-- Vulnerabilidade -->
+                        <div class="campo-modal">
+                           <label>Imunossupressão</label>
+                           <select name="paciente_vulnerabilidade_imunossupressao">
+                              <option value="0" <%=paciente.paciente_vulnerabilidade_imunossupressao==0 ? "selected"
+                                 : "" %>>Não</option>
+                              <option value="1" <%=paciente.paciente_vulnerabilidade_imunossupressao==1 ? "selected"
+                                 : "" %>>Sim</option>
+                           </select>
+                        </div>
+
+                        <!-- Restrições alimentares -->
+                        <div class="campo-modal">
+                           <label>Restrições Alimentares</label>
+                           <textarea name="paciente_restricoes_alimentares"
+                              rows="2"><%= paciente.paciente_restricoes_alimentares || '' %></textarea>
+                        </div>
+
+                        <!-- Restrições de mobilidade -->
+                        <div class="campo-modal">
+                           <label>Restrições de Mobilidade</label>
+                           <textarea name="paciente_restricoes_mobilidade"
+                              rows="2"><%= paciente.paciente_restricoes_mobilidade || '' %></textarea>
+                        </div>
+
+                        <!-- Preferência horário de refeição -->
+                        <div class="campo-modal">
+                           <label>Preferência de Horário de Refeição</label>
+                           <select name="paciente_preferencia_horario_refeicao">
+                              <option <%=paciente.paciente_preferencia_horario_refeicao==="Manhã" ? "selected" : "" %>>
+                                 Manhã
+                              </option>
+                              <option <%=paciente.paciente_preferencia_horario_refeicao==="Tarde" ? "selected" : "" %>
+                                 >Tarde</option>
+                              <option <%=paciente.paciente_preferencia_horario_refeicao==="Noite" ? "selected" : "" %>
+                                 >Noite</option>
+                              <option <%=paciente.paciente_preferencia_horario_refeicao==="Indiferente" ? "selected"
+                                 : "" %>>Indiferente</option>
+                           </select>
+                        </div>
+
+                        <!-- Observações enfermagem -->
+                        <div class="campo-modal">
+                           <label>Observações da Enfermagem</label>
+                           <textarea name="paciente_observacoes_enfermagem"
+                              rows="3"><%= paciente.paciente_observacoes_enfermagem || '' %></textarea>
+                        </div>
+
+                        <!-- Observações gerais -->
+                        <div class="campo-modal">
+                           <label>Observações Gerais</label>
+                           <textarea name="paciente_observacoes_gerais"
+                              rows="3"><%= paciente.paciente_observacoes_gerais || '' %></textarea>
+                        </div>
+
+                     </div>
+
+                     <div class="modal-footer">
+                        <button type="button" class="btn-cancelar" onclick="fecharModalSaude()">Cancelar</button>
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                     </div>
+
+                  </form>
+               </div>
+            </div>
+
+            <script>
+               function abrirModalSaude() {
+                  document.getElementById("modalSaude").style.display = "flex";
+               }
+
+               function fecharModalSaude() {
+                  document.getElementById("modalSaude").style.display = "none";
+               }
+
+               document.getElementById("formSaude").addEventListener("submit", async function (e) {
+                  e.preventDefault();
+
+                  const formData = new FormData(this);
+                  const dados = Object.fromEntries(formData.entries());
+
+                  const resposta = await fetch("/paciente/atualizar", {
+                     method: "POST",
+                     headers: { "Content-Type": "application/json" },
+                     body: JSON.stringify(dados)
                   });
-            }
 
-            function fecharModal() {
-               document.getElementById('modalReserva').style.display = 'none';
-            }
+                  const json = await resposta.json();
 
-            function cancelarReserva(id) {
-               if (!confirm("Deseja realmente cancelar esta reserva?")) return;
-               fetch(`/reservas/cancelar/${id}`, { method: "POST" })
-                  .then(() => location.reload());
-            }
-         </script>
-
-
+                  if (json.ok) {
+                     alert("Informações atualizadas!");
+                     location.reload();
+                  } else {
+                     alert("Erro ao atualizar!");
+                  }
+               });
+            </script>
+         </section>
 
          <!-- ======================================================================================================================-->
          <!--================================================= SECTION CHAT ========================================================-->
@@ -464,36 +710,6 @@
          </section>
 
          <!-- ======================================================================================================================-->
-         <!--================================================= SECTION SAÚDE =======================================================-->
-         <!--====================================================================================================================== -->
-         <section id="saude" class="conteudo">
-            <h2 class="section-title">Perfil de Saúde</h2>
-            <p class="subtitle">Suas informações clínicas vitais e plano de tratamento atual.</p>
-
-            <div class="painel-dashboard saude-cards">
-               <div class="card card-metricas">
-                  <h4 class="card-title">Diagnóstico Principal</h4>
-                  <p class="value-destaque">Câncer de Mama - Estágio II</p>
-                  <span class="badge badge-info">Ativo</span>
-               </div>
-               <div class="card card-metricas">
-                  <h4 class="card-title">Alergias Conhecidas</h4>
-                  <p class="value-destaque">Penicilina, Amendoim</p>
-                  <span class="badge badge-danger">Atenção</span>
-               </div>
-               <div class="card card-plano">
-                  <h4 class="card-title">Plano de Tratamento</h4>
-                  <ul class="plano-list">
-                     <li><span class="list-icon">✅</span> Quimioterapia (Ciclo 4 de 6)</li>
-                     <li><span class="list-icon">💊</span> Medicação X (Diária, 8h e 20h)</li>
-                     <li><span class="list-icon">🗓️</span> Próxima Cirurgia: 01/03/2025</li>
-                  </ul>
-                  <button class="btn-secondary mt-3">Ver Detalhes do Plano</button>
-               </div>
-            </div>
-         </section>
-
-         <!-- ======================================================================================================================-->
          <!--============================================== SECTION ALIMENTAÇÃO ====================================================-->
          <!--====================================================================================================================== -->
          <section id="alimentacao" class="conteudo">
@@ -545,6 +761,7 @@
                <button class="btn-primary mt-3" type="button">Enviar Avaliação</button>
             </div>
          </section>
+
       </main>
    </div>
 

@@ -62,7 +62,6 @@ ReservasDAO.prototype.listar = function (callback) {
             r.reserva_status,
             r.reserva_data_checkin_previsto,
             r.reserva_data_checkout_previsto,
-            r.reserva_motivo,
             r.reserva_data_criacao
         FROM reserva r
         LEFT JOIN paciente p ON r.paciente_id = p.paciente_id
@@ -241,23 +240,7 @@ ReservasDAO.prototype.atualizar = function (id, reserva, callback) {
     this._connection.query(sql, [reserva, id], callback);
 };
 
-// Buscar detalhes completos da reserva
-ReservasDAO.prototype.buscarDetalhes = function(id, callback) {
-    const sql = `
-        SELECT 
-            r.*, 
-            p.paciente_nome,
-            a.acompanhante_nome,
-            q.quarto_numero
-        FROM reserva r
-        LEFT JOIN paciente p ON r.paciente_id = p.paciente_id
-        LEFT JOIN acompanhante a ON r.acompanhante_id = a.acompanhante_id
-        LEFT JOIN quarto q ON r.quarto_id = q.quarto_id
-        WHERE r.reserva_id = ?
-        LIMIT 1;
-    `;
-    this._connection.query(sql, [id], callback);
-};
+
 
 
 // Atualizar status da reserva
@@ -282,7 +265,6 @@ ReservasDAO.prototype.listarPorPaciente = function (pacienteId, callback) {
             r.reserva_status,
             r.reserva_data_checkin_previsto,
             r.reserva_data_checkout_previsto,
-            r.reserva_motivo,
             r.reserva_data_criacao
         FROM reserva r
         LEFT JOIN paciente p ON r.paciente_id = p.paciente_id

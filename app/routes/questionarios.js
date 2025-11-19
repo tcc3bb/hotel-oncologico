@@ -48,6 +48,7 @@ module.exports = (connectionFactory) => {
                 paciente_telefone,
                 paciente_logradouro,
                 paciente_numero,
+                paciente_complemento,
                 paciente_bairro,
                 paciente_estado,
                 paciente_cidade,
@@ -81,7 +82,7 @@ module.exports = (connectionFactory) => {
                 paciente_observacoes_enfermagem,
                 paciente_observacoes_gerais
             ) VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
             )
         `;
 
@@ -102,11 +103,11 @@ module.exports = (connectionFactory) => {
                 body.paciente_telefone,
                 body.paciente_logradouro,
                 body.paciente_numero,
+                body.paciente_complemento,
                 body.paciente_bairro,
                 body.paciente_estado,
                 body.paciente_cidade,
                 body.paciente_cep,
-
 
                 body.paciente_contato_emergencia_1_nome,
                 body.paciente_contato_emergencia_1_parentesco,
@@ -136,7 +137,6 @@ module.exports = (connectionFactory) => {
                 body.paciente_observacoes_enfermagem,
                 body.paciente_observacoes_gerais
             ];
-
 
             // Passo 3: Executando o INSERT
             connection.query(sql, values, (err) => {

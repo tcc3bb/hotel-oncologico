@@ -14,8 +14,10 @@ class PacienteDAO {
                 u.usuario_estado,
                 u.usuario_ultimo_login,
                 u.usuario_foto_perfil,
+
                 pac.paciente_id,
                 pac.usuario_id AS paciente_usuario_id,
+                pac.paciente_email,
                 pac.paciente_nome,
                 pac.paciente_cpf,
                 pac.paciente_rg,
@@ -31,20 +33,25 @@ class PacienteDAO {
                 pac.paciente_logradouro,
                 pac.paciente_numero,
                 pac.paciente_bairro,
+                pac.paciente_complemento,
                 pac.paciente_cidade,
                 pac.paciente_estado,
                 pac.paciente_cep,
+
                 pac.paciente_contato_emergencia_1_nome,
                 pac.paciente_contato_emergencia_1_parentesco,
                 pac.paciente_contato_emergencia_1_telefone,
                 pac.paciente_contato_emergencia_2_nome,
                 pac.paciente_contato_emergencia_2_parentesco,
                 pac.paciente_contato_emergencia_2_telefone,
+
                 pac.paciente_responsavel_legal_nome,
                 pac.paciente_responsavel_legal_parentesco,
                 pac.paciente_responsavel_legal_telefone,
+
                 pac.paciente_centro_tratamento_nome,
                 pac.paciente_medico_assistente_nome,
+
                 pac.paciente_diagnostico,
                 pac.paciente_fase_tratamento,
                 pac.paciente_tipo_tratamento,
@@ -59,6 +66,7 @@ class PacienteDAO {
                 pac.paciente_preferencia_horario_refeicao,
                 pac.paciente_observacoes_enfermagem,
                 pac.paciente_observacoes_gerais
+
             FROM usuario u
             LEFT JOIN paciente pac ON pac.usuario_id = u.usuario_id
             WHERE u.usuario_id = ?
@@ -73,6 +81,13 @@ class PacienteDAO {
             // 🔹 Formatar data de nascimento corretamente (para input date)
             if (paciente.paciente_data_nascimento instanceof Date) {
                 paciente.paciente_data_nascimento = paciente.paciente_data_nascimento.toISOString().split('T')[0];
+            }
+
+            // 🔹 Formatar data da última sessão corretamente
+            if (paciente.paciente_data_ultima_sessao instanceof Date) {
+                paciente.paciente_data_ultima_sessao = paciente.paciente_data_ultima_sessao.toISOString().split('T')[0];
+            } else if (typeof paciente.paciente_data_ultima_sessao === "string") {
+                paciente.paciente_data_ultima_sessao = paciente.paciente_data_ultima_sessao.split('T')[0];
             }
 
             callback(null, [paciente]);
@@ -97,6 +112,7 @@ class PacienteDAO {
             "paciente_telefone",
             "paciente_logradouro",
             "paciente_numero",
+            "paciente_complemento",
             "paciente_bairro",
             "paciente_cidade",
             "paciente_estado",
@@ -136,6 +152,7 @@ class PacienteDAO {
                 updatesPaciente.push(`${campo} = ?`);
                 valoresPaciente.push(dados[campo]);
             }
+
         });
 
         // CAMPOS DA TABELA USUARIO
@@ -212,6 +229,48 @@ class PacienteDAO {
             });
         });
     }
+
+    // Buscar detalhes completos da reserva
+    buscarDetalhes(id, callback) {
+        const sql = `
+        SELECT 
+            r.*,
+            p.paciente_nome,
+            a.acompanhante_nome,
+
+            q.quarto_numero,
+            tq.tipo_quarto_id,
+            tq.tipo_quarto_nome,
+            tq.tipo_quarto_descricao,
+            tq.tipo_quarto_capacidade,
+            tq.tipo_quarto_valor,
+
+            f.foto_caminho
+        FROM reserva r
+        LEFT JOIN paciente p ON p.paciente_id = r.paciente_id
+        LEFT JOIN acompanhante a ON a.acompanhante_id = r.acompanhante_id
+        LEFT JOIN quarto q ON q.quarto_id = r.quarto_id
+        LEFT JOIN tipo_quarto tq ON tq.tipo_quarto_id = q.tipo_quarto_id
+        LEFT JOIN quarto_fotos f ON f.tipo_quarto_id = tq.tipo_quarto_id
+        WHERE r.reserva_id = ?
+    `;
+
+        this._connection.query(sql, [id], (err, results) => {
+            if (err) return callback(err);
+
+            if (!results.length) return callback(null, []);
+
+            // ⚠️ Como vem várias linhas (1 por foto), precisamos consolidar:
+            const base = { ...results[0], fotos: [] };
+
+            results.forEach(r => {
+                if (r.foto_caminho) base.fotos.push(r.foto_caminho);
+            });
+
+            callback(null, [base]);
+        });
+    }
+
 }
 
 module.exports = PacienteDAO;
