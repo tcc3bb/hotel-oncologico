@@ -1,23 +1,23 @@
-var express = require('express'); 
-var app = require('./config/express.js')(); 
+var express = require('express');
+var app = require('./config/express.js')();
 
 // Rotas home
-require('./app/routes/home.js')(app); 
+require('./app/routes/home.js')(app);
 const flash = require('connect-flash');
 
 // Conexão com banco
-const connectionFactory = require('./app/infra/connectionFactory'); 
-const connection = connectionFactory(); 
+const connectionFactory = require('./app/infra/connectionFactory');
+const connection = connectionFactory();
 
 // DAO
-const UsuariosDAO = require('./app/infra/UsuariosDAO'); 
+const UsuariosDAO = require('./app/infra/UsuariosDAO');
 const usuariosDAO = new UsuariosDAO(connection);
 
-const PainelAdminDAO = require('./app/infra/PainelAdminDAO')(); 
+const PainelAdminDAO = require('./app/infra/PainelAdminDAO')();
 const painelAdminDAO = new PainelAdminDAO(connection);
 
 const PerguntasDAO = require('./app/infra/PerguntasDAO');
-const perguntasDAO = new PerguntasDAO(connection); 
+const perguntasDAO = new PerguntasDAO(connection);
 
 const ArtigosDAO = require('./app/infra/ArtigosDAO');
 const artigosDAO = ArtigosDAO(connection);
@@ -27,10 +27,10 @@ const reservasDAO = new ReservasDAO(connection);
 
 // Rotas 
 const usuariosRouter = require('./app/routes/usuarios')(usuariosDAO);
-app.use('/usuarios', usuariosRouter); 
+app.use('/usuarios', usuariosRouter);
 
 const passwordsRouter = require('./app/routes/passwords')();
-app.use('/', passwordsRouter); 
+app.use('/', passwordsRouter);
 
 const questionarioRouter = require('./app/routes/questionarios')(connectionFactory);
 app.use('/questionarios', questionarioRouter);
@@ -59,7 +59,12 @@ app.use('/voluntario', voluntarioRouter);
 const doadorRouter = require('./app/routes/doador')(connectionFactory);
 app.use('/doador', doadorRouter);
 
+const doacoesRouter = require('./app/routes/doacoes');
+app.use('/doacoes', doacoesRouter);
+
+
 require('./app/routes/reservas')(app);
+
 
 // Arquivos estáticos
 app.use(express.static('static'));
@@ -67,9 +72,10 @@ app.use(express.static('app/public'));
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 
+
 // Servidor Laragon
 /*app.listen(3000, function(){
-    console.log('Servidor Rodando!');
+    console.log('Servidor Rodando!');
 });*/
 
 // Servidor Render

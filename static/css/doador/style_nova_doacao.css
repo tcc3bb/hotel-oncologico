@@ -1,0 +1,326 @@
+:root {
+    --verde-escuro: #23543b;
+    --verde-claro: #cfe9d1;
+    --verde-medio: #3a7d55;
+    --vermelho: #d9534f;
+    --branco: #fff;
+    --cinza-claro: #f9f9f9;
+    --cinza-medio: #ccc;
+    --cinza-escuro: #666;
+    --sombra-leve: rgba(0, 0, 0, 0.1);
+    --borda-arredondada: 8px;
+    --cor-principal: #23543b; /* Verde Escuro Original */
+    --cor-secundaria: #3a7d55; /* Verde Médio Original - Usado para hover e acentos */
+    --cor-acento-claro: #cfe9d1; /* Verde Claro Original - Usado para fundos */
+    --cor-acento-vibrante: #00bcd4; /* Azul Turquesa para destaque moderno, fugindo do verde no sidebar */
+    --cor-fundo-dashboard: #f4f7f6; /* Fundo mais suave para o painel */
+    --cor-texto-escuro: #333;
+    --cor-texto-claro: #fff;
+    
+    /* Cores de Status/Ações */
+    --cor-sucesso: #4CAF50; /* Verde vibrante */
+    --cor-aviso: #FFC107; /* Amarelo */
+    --cor-perigo: #E91E63; /* Rosa/Vermelho vibrante para atenção/cancelar */
+    --cor-info: #2196F3; /* Azul */
+    --cor-service: #9C27B0; /* Roxo para tags de serviço */
+    --sombra-elevada: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --borda-arredondada-lg: 12px;
+    --borda-arredondada-md: 8px;
+    --transicao-rapida: all 0.3s ease;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #444;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    max-width: 58rem;
+    margin: 2.5rem auto 5rem;
+    padding: 0 1.25rem;
+    text-align: center;
+}
+
+p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+/* =============================================================================================================================== */
+/* =========================================================== MENU ============================================================== */
+/* =============================================================================================================================== */
+nav {
+    background-color: #699b80;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 100%;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 6px 10px;
+    font-size: 1em;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background-color: #83aa89;
+}
+
+.img {
+    padding: 0;
+}
+
+.img-logo {
+    height: 8vh;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+
+.btn-entrar,
+.btn-cadastrar,
+.btn-nav {
+    padding: 8px 18px;
+    background-color: #3b4a3b;
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-entrar:hover,
+.btn-cadastrar:hover {
+    background-color: #83aa89;
+}
+
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+
+/* ================================
+   SEÇÃO PRINCIPAL
+================================ */
+.conteudo {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* -------------------- Nova Doação Section -------------------- */
+.doacao-opcoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.opcao-item {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--cor-acento-claro);
+    border-radius: var(--borda-arredondada-md);
+    border: 1px solid var(--cor-secundaria);
+    transition: var(--transicao-rapida);
+}
+
+.opcao-item:hover {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+}
+
+.opcao-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.opcao-item h4 {
+    color: var(--cor-principal);
+    margin-bottom: 5px;
+}
+
+.opcao-item p {
+    font-size: 0.95rem;
+    color: var(--cor-cinza-escuro);
+}
+
+/* Estilos para o formulário e campos, baseados em .doacao-detalhes do exemplo */
+#form-doacao {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--cor-fundo-dashboard);
+    border-radius: var(--borda-arredondada-md);
+    border: 1px solid var(--cor-acento-claro);
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--cor-principal);
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    padding: 8px;
+    border-radius: var(--borda-arredondada-md);
+    border: 1px solid var(--cor-secundaria);
+}
+
+.form-bloco {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--cor-acento-claro);
+    border-radius: var(--borda-arredondada-md);
+    border: 1px solid var(--cor-secundaria);
+}
+
+.form-bloco h3 {
+    color: var(--cor-principal);
+    margin-bottom: 10px;
+}
+
+#impacto-texto {
+    font-size: 1.05rem;
+    color: var(--cor-texto-escuro);
+    margin-bottom: 15px;
+}
+
+/* Estilos para alertas */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: var(--borda-arredondada-md);
+    border: 1px solid transparent;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+/* Estilos para botões, assumindo que .btn-primary é usado */
+.btn-primary {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--borda-arredondada-md);
+    cursor: pointer;
+    transition: var(--transicao-rapida);
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-secundaria);
+}
+
+
+
+
+
+/* =============================================================================================================================== */
+/* ========================================================== FOOTER ============================================================= */
+/* =============================================================================================================================== */
+
+footer {
+    background-color: #699b80;
+    color: #fff;
+    padding: 30px 20px 15px 20px;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-container>div {
+    flex: 1 1 250px;
+    min-width: 220px;
+}
+
+.footer-container h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #c9d6c5;
+}
+
+.footer-container p,
+.footer-container a {
+    color: #d4d9d4;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #5a6a5a;
+    padding-top: 12px;
+    font-size: 0.85rem;
+    color: #aeb5ab;
+}

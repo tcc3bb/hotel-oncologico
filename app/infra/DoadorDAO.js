@@ -11,7 +11,7 @@ class DoadorDAO {
             FROM doador d
             JOIN usuario u ON d.usuario_id = u.usuario_id
             WHERE u.usuario_id = ?
-        `;
+        `; 
         this._connection.query(sql, [usuarioId], callback);
     }
 

@@ -55,21 +55,13 @@
     <!--====================================================================================================================== -->
     <div class="painel-container">
         <aside class="sidebar">
-            <div class="sidebar-item active" data-target="historico-doacoes" tabindex="0">
+            <div class="sidebar-item active" data-target="minhas-doacoes" tabindex="0">
                 <span class="icon" aria-hidden="true">💰</span>
-                <span>Histórico de Doações</span>
+                <span>Minhas Doações</span>
             </div>
-            <div class="sidebar-item" data-target="nova-doacao" tabindex="0">
-                <span class="icon" aria-hidden="true">➕</span>
-                <span>Nova Doação</span>
-            </div>
-            <div class="sidebar-item" data-target="impacto" tabindex="0">
-                <span class="icon" aria-hidden="true">🌱</span>
-                <span>Impacto das Doações</span>
-            </div>
-            <div class="sidebar-item" data-target="certificados" tabindex="0">
-                <span class="icon" aria-hidden="true">🧾</span>
-                <span>Certificados e Recibos</span>
+            <div class="sidebar-item" data-target="conta" tabindex="0">
+                <span class="icon" aria-hidden="true">👤</span>
+                <span>Minha Conta</span>
             </div>
             <div class="sidebar-item" data-target="campanhas" tabindex="0">
                 <span class="icon" aria-hidden="true">📢</span>
@@ -79,9 +71,9 @@
 
         <main>
             <!-- ======================================================================================================================-->
-            <!--============================================== SECTION HISTÓRICO DE DOAÇÕES =============================================-->
+            <!--==================================================== MINHAS DOAÇÕES ===================================================-->
             <!--====================================================================================================================== -->
-            <section id="historico-doacoes" class="conteudo ativo">
+            <section id="minhas-doacoes" class="conteudo ativo">
                 <h2 class="section-title">💰 Histórico de Doações</h2>
                 <p class="subtitle">Acompanhe tudo o que já foi doado — valores, datas, tipo e destino.</p>
                 <div class="card">
@@ -102,7 +94,6 @@
                             <option>Serviço</option>
                         </select>
                         <button class="btn-secondary" type="button">Buscar</button>
-                        <button class="btn-download" type="button">Exportar PDF</button>
                     </div>
                     <div class="table-responsive">
                         <table>
@@ -148,106 +139,11 @@
             </section>
 
             <!-- ======================================================================================================================-->
-            <!--============================================== SECTION NOVA DOAÇÃO =====================================================-->
+            <!--============================================== SECTION HISTÓRICO DE DOAÇÕES =============================================-->
             <!--====================================================================================================================== -->
-            <section id="nova-doacao" class="conteudo">
-                <h2 class="section-title">➕ Nova Doação</h2>
-                <p class="subtitle">Espaço para realizar novas contribuições com facilidade e segurança.</p>
-                <div class="card">
-                    <h3 class="card-title">Escolha o Tipo de Doação</h3>
-                    <div class="doacao-opcoes">
-                        <div class="opcao-item">
-                            <span class="opcao-icon">💵</span>
-                            <h4>Financeira</h4>
-                            <p>Via PIX, cartão ou boleto.</p>
-                            <button class="btn-primary" type="button">Doar Financeiro</button>
-                        </div>
-                        <div class="opcao-item">
-                            <span class="opcao-icon">🎁</span>
-                            <h4>Em Produtos</h4>
-                            <p>Roupas, alimentos, livros, itens de higiene.</p>
-                            <button class="btn-primary" type="button">Doar Produtos</button>
-                        </div>
-                        <div class="opcao-item">
-                            <span class="opcao-icon">💼</span>
-                            <h4>Em Serviços</h4>
-                            <p>Palestras, transporte, suporte profissional.</p>
-                            <button class="btn-primary" type="button">Oferecer Serviço</button>
-                        </div>
-                    </div>
-                    <div class="doacao-detalhes">
-                        <label for="destino">Destino:</label>
-                        <select id="destino">
-                            <option>Apoiar Pacientes</option>
-                            <option>Atividades de Bem-Estar</option>
-                            <option>Manutenção do Hotel</option>
-                            <option>Campanhas Específicas</option>
-                        </select>
-                        <label for="recorrente">Doação Recorrente:</label>
-                        <select id="recorrente">
-                            <option>Única</option>
-                            <option>Mensal</option>
-                            <option>Trimestral</option>
-                            <option>Anual</option>
-                        </select>
-                        <p><strong>Impacto Estimado:</strong> Com R$50, você ajuda 5 pacientes por dia.</p>
-                        <button class="btn-primary" type="button">Agendar Retirada (se físico)</button>
-                        <button class="btn-primary" type="button">Confirmar Doação</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ======================================================================================================================-->
-            <!--============================================== SECTION IMPACTO DAS DOAÇÕES =============================================-->
-            <!--====================================================================================================================== -->
-            <section id="impacto" class="conteudo">
-                <h2 class="section-title">🌱 Impacto das Doações</h2>
-                <p class="subtitle">Mostra de forma clara e inspiradora como as contribuições estão sendo usadas.</p>
-                <div class="card">
-                    <h3 class="card-title">Painel de Impacto Visual</h3>
-                    <div class="impacto-graficos">
-                        <div class="grafico-item">
-                            <h4>Refeições Servidas</h4>
-                            <p>1.200 refeições este mês</p>
-                            <div class="barra-progresso" style="width: 80%;"></div>
-                        </div>
-                        <div class="grafico-item">
-                            <h4>Atendimentos Realizados</h4>
-                            <p>500 atendimentos este ano</p>
-                            <div class="barra-progresso" style="width: 60%;"></div>
-                        </div>
-                    </div>
-                    <h3 class="card-title mt-4">Relatos Reais</h3>
-                    <div class="relatos">
-                        <div class="relato-item">
-                            <p>"Graças às doações, pude receber tratamento sem custos extras." - Paciente João</p>
-                        </div>
-                    </div>
-                    <h3 class="card-title mt-4">Transparência Financeira</h3>
-                    <p>Relatórios disponíveis: <a href="#">Ver Relatório Anual</a></p>
-                    <h3 class="card-title mt-4">Vídeos e Depoimentos</h3>
-                    <div class="videos">
-                        <iframe width="300" height="200" src="https://www.youtube.com/embed/exemplo" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ======================================================================================================================-->
-            <!--============================================== SECTION CERTIFICADOS E RECIBOS =========================================-->
-            <!--====================================================================================================================== -->
-            <section id="certificados" class="conteudo">
-                <h2 class="section-title">🧾 Certificados e Recibos</h2>
-                <p class="subtitle">Geração e armazenamento de comprovantes de doações.</p>
-                <div class="card">
-                    <h3 class="card-title">Emissão de Recibos</h3>
-                    <button class="btn-primary" type="button">Emitir Recibo Individual</button>
-                    <button class="btn-primary" type="button">Emitir Recibo Anual</button>
-                    <h3 class="card-title mt-4">Certificados de Reconhecimento</h3>
-                    <p>Você é um <strong>Doador Ouro</strong>! <button class="btn-secondary" type="button">Baixar Certificado</button></p>
-                    <button class="btn-secondary" type="button">Compartilhar nas Redes Sociais</button>
-                    <h3 class="card-title mt-4">Envio Automático</h3>
-                    <p>Recibos são enviados automaticamente por e-mail após cada doação.</p>
-                </div>
+            <section id="conta" class="conteudo">
+                <h2 class="section-title">Minha Conta</h2>
+                
             </section>
 
             <!-- ======================================================================================================================-->
@@ -288,8 +184,8 @@
         </main>
     </div>
 
-    <footer> 
-        <div class="footer-container"> 
+    <footer>
+        <div class="footer-container">
             <div class="footer-about">
                 <h3>Sobre a Empresa</h3>
                 <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
@@ -344,4 +240,5 @@
         }
     </script>
 </body>
+
 </html>

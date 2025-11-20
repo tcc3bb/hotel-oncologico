@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Vita</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/doador/style_nova_doacao.css">
+</head>
+
+<body>
+    <!-- ======================================================================================================================-->
+    <!--===================================================== MENU ============================================================-->
+    <!--====================================================================================================================== -->
+    <nav>
+        <a href="/" class="img">
+            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+        </a>
+        <a href="/nav/sobre-nos">Sobre nós</a>
+        <a href="/nav/sobre-cancer">Sobre o câncer</a>
+        <a href="/nav/acomodacoes">Acomodações</a>
+        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+        <a href="/nav/localizacao">Localizações</a>
+        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+        <% if (!user) { %>
+            <!-- Usuário não logado -->
+            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+            <% } else { %>
+                <!-- Usuário logado -->
+                <% if (user.tipo==='paciente' ) { %>
+                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                    <% } else if (user.tipo==='acompanhante' ) { %>
+                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                        <% } else if (user.tipo==='voluntario' ) { %>
+                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                            <% } else if (user.tipo==='doador' ) { %>
+                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                <% } else if (user.tipo==='admin' ) { %>
+                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                    <% } else { %>
+                                        <!-- Caso algum outro tipo apareça -->
+                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                        <% } %>
+                                            <!-- Botão de logout -->
+                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                            <% } %>
+    </nav>
+
+    <section id="nova-doacao" class="conteudo">
+
+        <% if (errors && errors.length> 0) { %>
+            <div class="alert alert-danger">
+                <% errors.forEach(e=> { %><p>
+                        <%= e %>
+                    </p>
+                    <% }) %>
+            </div>
+            <% } %>
+
+                <% if (success) { %>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                    <% } %>
+
+                        <div class="card">
+                            <h3 class="card-title">Escolha o Tipo de Doação</h3>
+
+                            <div class="doacao-opcoes">
+
+                                <div class="opcao-item">
+                                    <span class="opcao-icon">💵</span>
+                                    <h4>Financeira</h4>
+                                    <p>Ajude via PIX, cartão ou depósito.</p>
+                                    <button class="btn-primary btn-escolher" data-tipo="financeira">Doar
+                                        Financeiro</button>
+                                </div>
+
+                                <div class="opcao-item">
+                                    <span class="opcao-icon">🎁</span>
+                                    <h4>Produto</h4>
+                                    <p>Roupas, livros, itens de higiene etc.</p>
+                                    <button class="btn-primary btn-escolher" data-tipo="produto">Doar Produto</button>
+                                </div>
+
+                                <div class="opcao-item">
+                                    <span class="opcao-icon">🍎</span>
+                                    <h4>Alimento</h4>
+                                    <p>Cestas básicas, perecíveis e não perecíveis.</p>
+                                    <button class="btn-primary btn-escolher" data-tipo="alimento">Doar Alimento</button>
+                                </div>
+
+                            </div>
+
+
+                            <!-- FORMULÁRIO GERAL -->
+                            <form id="form-doacao" action="/doacoes/nova" method="POST" style="display:none">
+
+                                <input type="hidden" name="doacao_tipo" id="doacao_tipo">
+
+                                <!-- DESTINO DA DOAÇÃO -->
+                                <div class="campo">
+                                    <label>Destino da Doação:</label>
+                                    <select name="doacao_destino" required>
+                                        <option value="Apoiar Pacientes">Apoiar Pacientes</option>
+                                        <option value="Atividades de Bem-Estar">Atividades de Bem-Estar</option>
+                                        <option value="Manutenção do Hotel">Manutenção do Hotel</option>
+                                        <option value="Campanhas Específicas">Campanhas Específicas</option>
+                                        <option value="Medicamentos e Insumos">Medicamentos e Insumos</option>
+                                        <option value="Eventos Solidários">Eventos Solidários</option>
+                                        <option value="Infraestrutura e Obras">Infraestrutura e Obras</option>
+                                    </select>
+                                </div>
+
+                                <!-- RECORRÊNCIA -->
+                                <div class="campo">
+                                    <label>Doação Recorrente:</label>
+                                    <select name="doacao_recorrencia">
+                                        <option value="Única">Única</option>
+                                        <option value="Mensal">Mensal</option>
+                                        <option value="Trimestral">Trimestral</option>
+                                        <option value="Anual">Anual</option>
+                                    </select>
+                                </div>
+
+                                <!-- FORM FINANCEIRO -->
+                                <div id="form-financeiro" class="form-bloco" style="display:none">
+                                    <h3>Doação Financeira</h3>
+
+                                    <label>Valor (R$):</label>
+                                    <input type="number" step="0.01" name="doacao_valor" id="valor-input">
+
+                                    <label>Método de Pagamento:</label>
+                                    <select name="doacao_metodo_pagamento">
+                                        <option value="Pix">Pix</option>
+                                        <option value="Boleto">Boleto</option>
+                                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                        <option value="Depósito Bancário">Depósito Bancário</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                </div>
+
+                                <!-- FORM PRODUTOS -->
+                                <div id="form-produto" class="form-bloco" style="display:none">
+                                    <h3>Doação de Produto</h3>
+
+                                    <label>Categoria:</label>
+                                    <input type="text" name="produto_categoria_item">
+
+                                    <label>Quantidade:</label>
+                                    <input type="number" name="produto_quantidade">
+
+                                    <label>Condição do Item:</label>
+                                    <select name="doacao_condicao">
+                                        <option value="Novo">Novo</option>
+                                        <option value="Seminovo">Seminovo</option>
+                                        <option value="Usado em bom estado">Usado em bom estado</option>
+                                    </select>
+                                </div>
+
+
+                                <!-- FORM ALIMENTOS -->
+                                <div id="form-alimento" class="form-bloco" style="display:none">
+                                    <h3>Doação de Alimentos</h3>
+
+                                    <label>Tipo de Alimento:</label>
+                                    <input type="text" name="alimento_categoria_item">
+
+                                    <label>Quantidade:</label>
+                                    <input type="number" name="alimento_quantidade">
+
+                                    <label>Unidade (kg, pacotes, litros):</label>
+                                    <input type="text" name="alimento_unidade">
+                                </div>
+
+
+                                <p id="impacto-texto"><strong>Impacto Estimado:</strong> Escolha ou preencha os dados
+                                    acima.</p>
+
+                                <button class="btn-primary" type="submit">Confirmar Doação</button>
+                            </form>
+                        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll(".btn-escolher").forEach(btn => {
+            btn.addEventListener("click", () => {
+
+                const tipo = btn.dataset.tipo;
+                const form = document.getElementById("form-doacao");
+                const tipoInput = document.getElementById("doacao_tipo");
+
+                form.style.display = "block";
+
+                // Corrige para ficar capitalizado como o banco espera
+                let formatoFinal =
+                    tipo === "financeira" ? "Financeira" :
+                        tipo === "produto" ? "Produto" :
+                            tipo === "alimento" ? "Alimento" :
+                                "";
+
+                tipoInput.value = formatoFinal;
+
+                // Esconde tudo primeiro
+                document.querySelectorAll(".form-bloco").forEach(b => b.style.display = "none");
+
+                if (tipo === "financeira") {
+                    document.getElementById("form-financeiro").style.display = "block";
+                }
+                if (tipo === "produto") {
+                    document.getElementById("form-produto").style.display = "block";
+                }
+                if (tipo === "alimento") {
+                    document.getElementById("form-alimento").style.display = "block";
+                }
+            });
+        });
+
+        // Impacto da doação financeira
+        document.getElementById("valor-input")?.addEventListener("input", e => {
+            const v = parseFloat(e.target.value);
+            const impacto = document.getElementById("impacto-texto");
+
+            if (!v || v <= 0) {
+                impacto.innerHTML = "<strong>Impacto Estimado:</strong> Informe um valor para calcular.";
+                return;
+            }
+
+            const pacientes = Math.round(v / 10);
+            const dias = Math.max(1, Math.round(v / 30));
+
+            impacto.innerHTML = `
+        <strong>Impacto Estimado:</strong> Com R$${v.toFixed(2)}, você apoia cerca de 
+        <b>${pacientes} pacientes</b> por <b>${dias} dias</b>.
+    `;
+        });
+    </script>
+
+
+
+    <!-- ======================================================================================================================-->
+    <!--==================================================== FOOTER ===========================================================-->
+    <!--====================================================================================================================== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

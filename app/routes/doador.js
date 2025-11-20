@@ -4,9 +4,9 @@ module.exports = (connectionFactory) => {
 
     // 🔹 Página principal da área do acompanhante
     router.get('/minhas-doacoes', (req, res) => {
-        if (!req.session?.user) return res.redirect('/usuarios/login');
-        res.render('doador/minhas-doacoes');
+        return res.redirect('/doacoes/minhas');
     });
+
 
     return router;
 };

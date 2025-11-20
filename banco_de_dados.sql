@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `acompanhante` (
   CONSTRAINT `fk_acompanhante_usuario_email` FOREIGN KEY (`acompanhante_email`) REFERENCES `usuario` (`usuario_email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.acompanhante: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.acompanhante: ~1 rows (aproximadamente)
 DELETE FROM `acompanhante`;
 
 -- Copiando estrutura para tabela hotel.admin
@@ -133,6 +133,37 @@ CREATE TABLE IF NOT EXISTS `artigo` (
 DELETE FROM `artigo`;
 INSERT INTO `artigo` (`artigo_id`, `admin_id`, `artigo_titulo`, `artigo_subtitulo`, `artigo_resumo`, `artigo_conteudo`, `artigo_imagem_capa`, `artigo_imagens_extras`, `artigo_slug`, `artigo_palavras_chave`, `artigo_descricao_meta`, `artigo_categoria`, `artigo_tags`, `artigo_status`, `artigo_data_publicacao`, `artigo_data_criacao`, `artigo_data_atualizacao`, `artigo_visualizacoes`, `artigo_curtidas`, `artigo_comentarios`, `artigo_destacado`, `artigo_aprovado_admin`, `artigo_observacoes_internas`) VALUES
 	(5, 3, 'Entendendo o Câncer: Causas, Sintomas, Tratamentos e Prevenção', 'Uma visão abrangente sobre uma das doenças mais desafiadoras da medicina moderna, com foco em conscientização e cuidados.', 'O câncer é uma doença caracterizada pelo crescimento descontrolado de células anômalas no corpo, afetando milhões de pessoas globalmente. Este artigo explora suas causas principais, sintomas comuns, opções de tratamento e estratégias de prevenção, enfatizando a importância da detecção precoce e do apoio médico. Baseado em dados científicos atualizados, o texto visa informar e conscientizar sobre essa condição, destacando avanços na pesquisa e na medicina.', 'Introdução ao Câncer\r\nO câncer é um grupo de doenças que surge quando células normais do corpo sofrem mutações genéticas, levando a um crescimento descontrolado e invasivo. Segundo a Organização Mundial da Saúde (OMS), cerca de 10 milhões de mortes por ano são atribuídas ao câncer, tornando-o a segunda principal causa de óbito no mundo. Existem mais de 100 tipos de câncer, classificados por órgãos afetados, como pulmão, mama, próstata e pele. A compreensão dessa doença é essencial para a prevenção e o tratamento eficaz.\r\n\r\nCausas e Fatores de Risco\r\nAs causas do câncer são multifatoriais, envolvendo fatores genéticos, ambientais e de estilo de vida. Mutagens como radiação ionizante, substâncias químicas (ex.: tabaco, amianto) e vírus (ex.: HPV, hepatite B) podem danificar o DNA celular. Fatores de risco incluem:\r\n\r\nTabagismo: Responsável por cerca de 22% dos casos globais.\r\nObesidade e sedentarismo: Aumentam o risco de câncer de mama, cólon e endométrio.\r\nExposição solar excessiva: Principal causa do câncer de pele.\r\nHereditariedade: Genes como BRCA1 e BRCA2 elevam o risco de câncer de mama e ovário. Estudos epidemiológicos, como os da American Cancer Society, mostram que cerca de 40% dos casos poderiam ser evitados com mudanças no estilo de vida.\r\nSintomas Comuns\r\nOs sintomas variam conforme o tipo e estágio do câncer, mas sinais de alerta incluem:\r\n\r\nPerda de peso inexplicável.\r\nFadiga persistente.\r\nDor localizada ou generalizada.\r\nMudanças na pele, como feridas que não cicatrizam.\r\nSangramentos anômalos (ex.: tosse com sangue). A detecção precoce por meio de exames de rotina, como mamografia ou colonoscopia, é crucial, pois aumenta as chances de cura em até 90% em estágios iniciais.\r\nTratamentos Disponíveis\r\nO tratamento do câncer é personalizado e pode incluir:\r\n\r\nCirurgia: Remoção do tumor primário.\r\nQuimioterapia: Uso de medicamentos para destruir células cancerosas.\r\nRadioterapia: Radiação direcionada para matar células malignas.\r\nImunoterapia: Estimula o sistema imune a combater o câncer.\r\nTerapia alvo: Ataca especificamente mutações genéticas. Avanços como a terapia CAR-T têm revolucionado tratamentos para leucemias, com taxas de sucesso superiores a 80% em alguns casos. A integração de IA em diagnósticos também melhora a precisão.\r\nPrevenção e Conscientização\r\nA prevenção foca em hábitos saudáveis: não fumar, dieta equilibrada rica em frutas e vegetais, atividade física regular e vacinas (ex.: contra HPV). Programas de rastreamento, como o do SUS no Brasil, ajudam na detecção precoce. Apoio psicológico e grupos de suporte são vitais para pacientes e famílias. Pesquisas recentes indicam que a redução da poluição ambiental poderia prevenir milhões de casos anuais.\r\n\r\nConclusão\r\nO câncer, embora grave, é cada vez mais tratável com avanços científicos. A conscientização, detecção precoce e adoção de estilos de vida saudáveis são armas poderosas contra essa doença. Consulte sempre um profissional de saúde para orientações personalizadas.', 'bff5b46c03dc2abd6cf387091dd6a6c5', NULL, 'entendendo-o-cancer-causas-sintomas-tratamentos-prevencao  Imagem de Cada', 'câncer, oncologia, prevenção de câncer, sintomas de câncer, tratamento de câncer, fatores de risco, detecção precoce, saúde pública', NULL, 'Saúde e Bem-Estar, Oncologia', NULL, 'rascunho', '2025-10-27 18:40:06', '2025-10-27 21:40:06', '2025-10-27 21:50:42', 3, 0, 0, 0, 0, NULL);
+
+-- Copiando estrutura para tabela hotel.doacao
+CREATE TABLE IF NOT EXISTS `doacao` (
+  `doacao_id` int NOT NULL AUTO_INCREMENT,
+  `doador_id` int NOT NULL,
+  `doacao_tipo` enum('Financeira','Produto','Alimento') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `doacao_descricao` text,
+  `doacao_valor` decimal(12,2) DEFAULT NULL,
+  `doacao_metodo_pagamento` enum('Pix','Boleto','Cartão de Crédito','Depósito Bancário','Outro') DEFAULT NULL,
+  `doacao_comprovante` varchar(255) DEFAULT NULL,
+  `doacao_categoria_item` varchar(100) DEFAULT NULL,
+  `doacao_quantidade` int DEFAULT NULL,
+  `doacao_unidade` varchar(50) DEFAULT NULL,
+  `doacao_status` enum('Pendente','Aprovada','Recusada') DEFAULT 'Pendente',
+  `doacao_data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `doacao_destino` varchar(100) DEFAULT NULL,
+  `doacao_recorrencia` enum('Única','Mensal','Trimestral','Anual') DEFAULT 'Única',
+  `doacao_condicao` varchar(50) DEFAULT NULL,
+  `servico_tipo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`doacao_id`),
+  KEY `idx_doador_doacao` (`doador_id`),
+  CONSTRAINT `fk_doacao_doador` FOREIGN KEY (`doador_id`) REFERENCES `doador` (`doador_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela hotel.doacao: ~0 rows (aproximadamente)
+DELETE FROM `doacao`;
+INSERT INTO `doacao` (`doacao_id`, `doador_id`, `doacao_tipo`, `doacao_descricao`, `doacao_valor`, `doacao_metodo_pagamento`, `doacao_comprovante`, `doacao_categoria_item`, `doacao_quantidade`, `doacao_unidade`, `doacao_status`, `doacao_data`, `doacao_destino`, `doacao_recorrencia`, `doacao_condicao`, `servico_tipo`) VALUES
+	(1, 3, 'Financeira', 'nenhuma', 500.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 12:30:44', NULL, 'Única', NULL, NULL),
+	(2, 3, 'Financeira', NULL, 500.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 16:13:37', NULL, 'Única', NULL, NULL),
+	(3, 3, 'Financeira', NULL, 500.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 17:03:14', 'Infraestrutura e Obras', 'Única', 'Novo', 'Transporte'),
+	(4, 3, 'Financeira', NULL, 700.00, 'Cartão de Crédito', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 17:06:37', 'Apoiar Pacientes', 'Única', 'Novo', 'Transporte');
 
 -- Copiando estrutura para tabela hotel.doador
 CREATE TABLE IF NOT EXISTS `doador` (
@@ -277,10 +308,10 @@ CREATE TABLE IF NOT EXISTS `paciente` (
   CONSTRAINT `fk_paciente_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.paciente: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.paciente: ~3 rows (aproximadamente)
 DELETE FROM `paciente`;
 INSERT INTO `paciente` (`paciente_id`, `usuario_id`, `paciente_email`, `paciente_nome`, `paciente_cpf`, `paciente_rg`, `paciente_data_nascimento`, `paciente_sexo`, `paciente_estado_civil`, `paciente_profissao`, `paciente_nacionalidade`, `paciente_tipo_sanguineo`, `paciente_altura`, `paciente_peso`, `paciente_telefone`, `paciente_logradouro`, `paciente_numero`, `paciente_complemento`, `paciente_bairro`, `paciente_cidade`, `paciente_estado`, `paciente_cep`, `paciente_contato_emergencia_1_nome`, `paciente_contato_emergencia_1_parentesco`, `paciente_contato_emergencia_1_telefone`, `paciente_contato_emergencia_2_nome`, `paciente_contato_emergencia_2_parentesco`, `paciente_contato_emergencia_2_telefone`, `paciente_responsavel_legal_nome`, `paciente_responsavel_legal_parentesco`, `paciente_responsavel_legal_telefone`, `paciente_centro_tratamento_nome`, `paciente_medico_assistente_nome`, `paciente_diagnostico`, `paciente_fase_tratamento`, `paciente_tipo_tratamento`, `paciente_tempo_tratamento`, `paciente_data_ultima_sessao`, `paciente_historico_medico_resumido`, `paciente_alergias_risco`, `paciente_medicamentos_uso_essenciais`, `paciente_vulnerabilidade_imunossupressao`, `paciente_restricoes_alimentares`, `paciente_restricoes_mobilidade`, `paciente_preferencia_horario_refeicao`, `paciente_observacoes_enfermagem`, `paciente_observacoes_gerais`) VALUES
-	(6, 43, 'paciente@gmail.com', 'paciente', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', NULL, 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'nenhum', '4', 'quimioterapia', '4 anos', '2025-11-04', 'nenhum', 'nenhum', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum'),
+	(6, 43, 'paciente@gmail.com', 'paciente', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', NULL, 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'nenhum', '5', 'quimioterapia', '4 anos', '2025-11-04', 'nenhum', 'nenhum', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum'),
 	(7, 44, 'teste@gmail.com', 'teste', '75395165425', '9638745632', '2001-02-21', 'Feminino', 'Casado', 'professor', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', NULL, 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', '', '4', 'quimioterapia', '4 anos', '2025-11-07', '', '', '', 0, '', '', 'Indiferente', '', ''),
 	(8, 45, 'joao.silva@email.com', 'João Silva', '98653212495', '356752362', '1980-01-15', 'Masculino', 'Casado', 'arquiteto', 'brasileira', 'B+', 1.75, 70.00, '11975632654', 'Rua das Flores', '123', 'bloco 1', 'Centro', 'São Paulo', 'SP', '035698623', 'Maria Silva', 'Esposa', '11963852653', 'Pedro Silva', 'Filho', '11945685230', 'Maria Silva', 'Esposa', '11963852653', 'Hospital Oncológico ABC', 'Dr. Carlos Mendes', 'Câncer de garganta não pequenas células, estágio II, adenocarcinoma.', 'Tratamento ativo', 'Quimioterapia combinada com radioterapia', '6 meses (iniciado em abril de 2023)', '2023-10-01', 'Paciente com histórico de tabagismo por 20 anos (parou em 2020). Diagnosticado em março de 2023 após sintomas de tosse persistente e perda de peso. Sem outras comorbidades significativas.', 'Alérgico a penicilina (reação cutânea). Risco de infecções devido ao tratamento oncológico.', 'Analgésicos (paracetamol), antieméticos (ondansetrona), suplementos vitamínicos.', 1, 'Dieta leve, evitar alimentos ácidos e picantes para reduzir náuseas. Preferência por alimentos moles e fáceis de digerir.\n', 'Mobilidade reduzida devido à fadiga e fraqueza causadas pelo tratamento. Recomendado uso de cadeira de rodas para longas distâncias.', 'Indiferente', 'Monitorar sinais vitais diariamente. Observar sinais de infecção (febre, calafrios). Administrar medicações conforme prescrito. Avaliar nível de dor e fadiga.', 'Paciente motivado e cooperativo. Família apoiadora e presente. Recomendado acompanhamento psicológico para suporte emocional. Próxima consulta em 15 dias.');
 
@@ -408,16 +439,16 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   CONSTRAINT `fk_reserva_quarto` FOREIGN KEY (`quarto_id`) REFERENCES `quarto` (`quarto_id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Registro central das reservas';
 
--- Copiando dados para a tabela hotel.reserva: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.reserva: ~7 rows (aproximadamente)
 DELETE FROM `reserva`;
 INSERT INTO `reserva` (`reserva_id`, `paciente_id`, `acompanhante_id`, `quarto_id`, `reserva_data_checkin_previsto`, `reserva_data_checkout_previsto`, `reserva_data_checkin_real`, `reserva_data_checkout_real`, `reserva_num_hospedes`, `reserva_duracao_dias`, `reserva_status`, `reserva_motivo`, `reserva_necessidades_especiais`, `reserva_admin_aprovou`, `reserva_data_criacao`, `reserva_data_atualizacao`, `reserva_observacoes`, `reserva_observacoes_internas`) VALUES
 	(17, 6, NULL, 6, '2025-11-13 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-13 23:55:44', '2025-11-13 23:55:44', NULL, NULL),
 	(18, 6, NULL, 11, '2025-11-19 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-15 01:31:58', '2025-11-15 01:31:58', NULL, NULL),
-	(19, 6, NULL, 12, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-17 21:15:54', '2025-11-17 21:15:54', NULL, NULL),
-	(20, 6, NULL, 15, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-17 22:24:36', '2025-11-17 22:24:36', NULL, NULL),
+	(19, 6, NULL, 12, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'concluida', 'tratamento', NULL, 0, '2025-11-17 21:15:54', '2025-11-19 22:59:39', NULL, NULL),
+	(20, 6, NULL, 15, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'cancelada', 'tratamento', NULL, 0, '2025-11-17 22:24:36', '2025-11-19 22:59:20', NULL, NULL),
 	(21, 7, NULL, 7, '2025-11-26 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'asa', NULL, 0, '2025-11-17 23:18:38', '2025-11-17 23:18:38', NULL, NULL),
-	(22, 8, NULL, 17, '2025-11-20 03:00:00', '2025-11-30 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'continuação do tratamento', NULL, 0, '2025-11-18 20:39:45', '2025-11-18 20:39:45', NULL, NULL),
-	(23, 8, NULL, 13, '2025-11-19 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', NULL, NULL, 0, '2025-11-18 23:07:09', '2025-11-18 23:07:09', NULL, NULL);
+	(22, 8, NULL, 17, '2025-11-20 03:00:00', '2025-11-30 03:00:00', NULL, NULL, 1, NULL, 'confirmada', 'continuação do tratamento', NULL, 0, '2025-11-18 20:39:45', '2025-11-19 22:47:27', NULL, NULL),
+	(23, 8, NULL, 13, '2025-11-19 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'confirmada', NULL, NULL, 0, '2025-11-18 23:07:09', '2025-11-19 22:47:30', NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.resposta
 CREATE TABLE IF NOT EXISTS `resposta` (
@@ -511,11 +542,11 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_tipo`, `usuario_data_criacao`, `usuario_estado`, `usuario_ultimo_login`, `usuario_foto_perfil`) VALUES
 	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-11-12 20:45:28', '/uploads/usuarios/padrao.png'),
-	(40, 'doador@gmail.com', '$2b$10$TUh6hQKV5tzkK5co0A9hTedCnbJcb1v7aUd.E7OgVxFh.uYSzBucq', 'doador', '2025-11-13 16:30:30', 'ativo', '2025-11-18 17:00:14', '/uploads/usuarios/padrao.png'),
+	(40, 'doador@gmail.com', '$2b$10$TUh6hQKV5tzkK5co0A9hTedCnbJcb1v7aUd.E7OgVxFh.uYSzBucq', 'doador', '2025-11-13 16:30:30', 'ativo', '2025-11-20 14:22:19', '/uploads/usuarios/padrao.png'),
 	(41, 'voluntario@gmail.com', '$2b$10$pRMCCoTzoeOyPzY97BFrVe7DIskU8lvgKTHTKIjbKz4guHV8l0AL2', 'voluntario', '2025-11-13 16:32:00', 'ativo', '2025-11-18 16:47:47', '/uploads/usuarios/padrao.png'),
-	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-18 20:41:38', '/uploads/usuarios/padrao.png'),
+	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-19 19:59:15', '/uploads/usuarios/padrao.png'),
 	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'acompanhante', '2025-11-17 16:16:09', 'ativo', '2025-11-18 16:42:11', '/uploads/usuarios/padrao.png'),
-	(45, 'joao.silva@email.com', '$2b$10$2TCAFBsUaQNhf6VEpBVm4O56UN4ohu0M5sBQxQklOYvz29w6o0Z/2', 'paciente', '2025-11-18 17:32:52', 'ativo', '2025-11-18 20:41:56', '/uploads/usuarios/padrao.png');
+	(45, 'joao.silva@email.com', '$2b$10$2TCAFBsUaQNhf6VEpBVm4O56UN4ohu0M5sBQxQklOYvz29w6o0Z/2', 'paciente', '2025-11-18 17:32:52', 'ativo', '2025-11-19 19:46:29', '/uploads/usuarios/padrao.png');
 
 -- Copiando estrutura para tabela hotel.voluntario
 CREATE TABLE IF NOT EXISTS `voluntario` (
