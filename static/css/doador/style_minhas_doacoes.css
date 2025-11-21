@@ -625,30 +625,26 @@ tbody td {
 .badge-service { background-color: var(--cor-service); }
 
 
-/* -------------------- Chat Section -------------------- */
-.chat-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.card-chat {
-    text-align: center;
-    border-top: 5px solid var(--cor-acento-vibrante);
-}
-
-.chat-icon {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.card-chat p {
-    font-size: 0.95rem;
-    color: var(--cor-cinza-escuro);
-}
-
 /* -------------------- Histórico Section -------------------- */
+#minhas-doacoes .btn {
+    background-color: #699b80;
+    border: none;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+#minhas-doacoes .card {
+    margin-top: 15px;
+}
+
 .historico-filtros {
     display: flex;
     gap: 15px;
@@ -671,165 +667,81 @@ tbody td {
     border: 1px solid var(--cor-secundaria);
 }
 
-.resumo-total {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: var(--cor-acento-claro);
-    border-radius: var(--borda-arredondada-md);
-    border-left: 5px solid var(--cor-secundaria);
-}
-
-.resumo-total p {
-    margin-bottom: 8px;
-    font-size: 1.05rem;
-    color: var(--cor-texto-escuro);
-}
-
-.resumo-total strong {
-    color: var(--cor-principal);
-    font-weight: 700;
-}
-
-/* -------------------- Nova Doação Section -------------------- */
-.doacao-opcoes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+/* Estilos para os cards de resumo */
+.resumo-cards {
+    display: flex;
     gap: 20px;
-    margin-bottom: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px 0;
 }
 
-.opcao-item {
-    text-align: center;
+.card-resumo {
+    background-color: var(--branco);
+    border-radius: var(--borda-arredondada-lg);
+    box-shadow: var(--sombra-elevada);
     padding: 20px;
-    background-color: var(--cor-acento-claro);
-    border-radius: var(--borda-arredondada-md);
-    border: 1px solid var(--cor-secundaria);
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
     transition: var(--transicao-rapida);
+    border: 1px solid var(--cinza-medio);
 }
 
-.opcao-item:hover {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-texto-claro);
+.card-resumo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.opcao-icon {
-    font-size: 3rem;
+.card-resumo h3 {
+    color: var(--verde-escuro);
+    font-size: 1.2em;
     margin-bottom: 10px;
-    display: block;
-}
-
-.opcao-item h4 {
-    color: var(--cor-principal);
-    margin-bottom: 5px;
-}
-
-.opcao-item p {
-    font-size: 0.95rem;
-    color: var(--cor-cinza-escuro);
-}
-
-.doacao-detalhes {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: var(--cor-fundo-dashboard);
-    border-radius: var(--borda-arredondada-md);
-    border: 1px solid var(--cor-acento-claro);
-}
-
-.doacao-detalhes label {
-    display: block;
-    margin-bottom: 5px;
     font-weight: 600;
-    color: var(--cor-principal);
 }
 
-.doacao-detalhes select {
-    width: 100%;
-    padding: 8px;
-    border-radius: var(--borda-arredondada-md);
-    border: 1px solid var(--cor-secundaria);
-    margin-bottom: 15px;
-}
-
-.doacao-detalhes p {
-    font-size: 1.05rem;
+.card-resumo p {
     color: var(--cor-texto-escuro);
-    margin-bottom: 15px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
 }
 
-/* -------------------- Impacto Section -------------------- */
-.impacto-graficos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 20px;
+.card-resumo .valor {
+    color: var(--verde-medio);
 }
 
-.grafico-item {
-    padding: 15px;
-    background-color: var(--cor-acento-claro);
-    border-radius: var(--borda-arredondada-md);
-    border-left: 3px solid var(--cor-info);
-}
-
-.grafico-item h4 {
-    color: var(--cor-principal);
-    margin-bottom: 5px;
-}
-
-.grafico-item p {
-    font-size: 0.95rem;
-    color: var(--cor-texto-escuro);
-    margin-bottom: 10px;
-}
-
-.barra-progresso {
-    height: 10px;
-    background-color: var(--cinza-medio);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.barra-progresso::before {
+/* Ícones simples usando CSS (ou substitua por ícones reais se preferir) */
+.card-resumo::before {
     content: '';
     display: block;
-    height: 100%;
-    background-color: var(--cor-sucesso);
-    width: 0%;
-    transition: width 0.3s ease;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 10px;
+    background-color: var(--verde-claro);
+    border-radius: 50%;
+    border: 3px solid var(--verde-medio);
 }
 
-.relatos {
-    margin-top: 20px;
+.card-resumo:nth-child(1)::before {
+    /* Ícone para Mês - talvez um calendário simples */
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5IDNIMTVWMUgMTMuNVYySDEwLjVWMEg5VjJINUM0IDJDMi45IDEuOSAyIDIuOSAyIDRDMS45IDUuMSAyIDYuMSAyIDdWMjFDMiAyMi4xIDIuOSA0IDIuOSA0SDIxQzIyLjEgMjIgMjMgMjEuMSAyMyAyMFY3QzIzIDYuMSAyMi4xIDUgMjEgNUMyMi4xIDQuOSAyMiAzLjkgMjEgM0gxOVoiIGZpbGw9IiMyMzU0M2IiLz4KPHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjM1NDNiIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+');
+    background-size: cover;
 }
 
-.relato-item {
-    padding: 15px;
-    background-color: var(--cor-fundo-dashboard);
-    border-radius: var(--borda-arredondada-md);
-    border-left: 5px solid var(--cor-aviso);
-    margin-bottom: 10px;
+.card-resumo:nth-child(2)::before {
+    /* Ícone para Ano - talvez um gráfico */
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5IDNIMTVWMUgMTMuNVYySDEwLjVWMEg5VjJINUM0IDJDMi45IDEuOSAyIDIuOSAyIDRDMS45IDUuMSAyIDYuMSAyIDdWMjFDMiAyMi4xIDIuOSA0IDIuOSA0SDIxQzIyLjEgMjIgMjMgMjEuMSAyMyAyMFY3QzIzIDYuMSAyMi4xIDUgMjEgNUMyMi4xIDQuOSAyMiAzLjkgMjEgM0gxOVoiIGZpbGw9IiMyMzU0M2IiLz4KPHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjM1NDNiIiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iMTIiIHk9IjEwIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMjM1NDNiIi8+Cjwvc3ZnPg==');
+    background-size: cover;
 }
 
-.relato-item p {
-    font-style: italic;
-    color: var(--cor-texto-escuro);
+.card-resumo:nth-child(3)::before {
+    /* Ícone para Geral - talvez uma soma */
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDMTMuMSAyIDIuOSA0IDIuOSA0SDIxQzIyLjEgMjIgMjMgMjEuMSAyMyAyMFY3QzIzIDYuMSAyMi4xIDUgMjEgNUMyMi4xIDQuOSAyMiAzLjkgMjEgM0gxOVoiIGZpbGw9IiMyMzU0M2IiLz4KPHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjM1NDNiIiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iMTIiIHk9IjEwIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMjM1NDNiIi8+Cjwvc3ZnPg==');
+    background-size: cover;
 }
 
-.videos {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.videos iframe {
-    border-radius: var(--borda-arredondada-md);
-    border: none;
-}
-
-/* -------------------- Certificados Section -------------------- */
-.card-title.mt-4 {
-    margin-top: 30px;
-}
 
 /* -------------------- Campanhas Section -------------------- */
 .campanhas-lista {

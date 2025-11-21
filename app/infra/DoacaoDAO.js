@@ -26,6 +26,41 @@ class DoacaoDAO {
         const sql = "UPDATE doacao SET doacao_status = ? WHERE doacao_id = ?";
         this._connection.query(sql, [novoStatus, doacaoId], callback);
     }
+
+    listarFiltrado(doadorId, filtros, callback) {
+
+        let sql = `
+        SELECT *
+        FROM doacao
+        WHERE doador_id = ?
+    `;
+        const params = [doadorId];
+
+        // filtro de tipo
+        if (filtros.tipo) {
+            sql += " AND doacao_tipo = ?";
+            params.push(filtros.tipo);
+        }
+
+        // filtro de mês (1-12)
+        if (filtros.mes) {
+            sql += " AND MONTH(doacao_data) = ?";
+            params.push(filtros.mes);
+        }
+
+        // filtro de ano (YYYY)
+        if (filtros.ano) {
+            sql += " AND YEAR(doacao_data) = ?";
+            params.push(filtros.ano);
+        }
+
+        sql += " ORDER BY doacao_data DESC";
+
+        this._connection.query(sql, params, callback);
+    }
+
 }
+
+
 
 module.exports = DoacaoDAO;

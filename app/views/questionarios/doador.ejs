@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/questionarios/style_doador.css">
 </head>
 
-<body>
+<body> 
     <div class="form-wrapper">
         <h2>Cadastro de Doador</h2>
 
@@ -17,170 +17,185 @@
             <p class="error-message">
                 <%= erro %>
             </p>
-        <% } %>
+            <% } %>
 
-        <form method="POST">
-            <input type="hidden" name="usuario_id" value="<%= usuarioId %>">
+                <form method="POST">
+                    <input type="hidden" name="usuario_id" value="<%= usuarioId %>">
 
-            <!-- INFORMAÇÕES PESSOAIS -->
-            <fieldset>
-                <legend>Informações Pessoais</legend>
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="doador_nome">Nome completo:</label>
-                        <input type="text" id="doador_nome" name="doador_nome" required>
-                    </div>
+                    <!-- TIPO DE PESSOA -->
+                    <fieldset>
+                        <legend>Tipo de Pessoa</legend>
+                        <div class="form-control">
+                            <label for="tipo_pessoa">Selecione o tipo de pessoa:</label>
+                            <select id="tipo_pessoa" name="tipo_pessoa" required>
+                                <option value="">Selecione</option>
+                                <option value="fisica">Pessoa Física</option>
+                                <option value="juridica">Pessoa Jurídica</option>
+                            </select>
+                        </div>
+                    </fieldset>
 
-                    <div class="form-control">
-                        <label for="doador_cpf">CPF:</label>
-                        <input type="text" id="doador_cpf" name="doador_cpf" maxlength="14" placeholder="000.000.000-00">
-                    </div>
+                    <!-- INFORMAÇÕES PESSOAIS - PESSOA FÍSICA -->
+                    <fieldset id="fieldset_pf" style="display: none;">
+                        <legend>Informações Pessoais (Pessoa Física)</legend>
+                        <div class="field-group">
+                            <div class="form-control">
+                                <label for="doador_nome">Nome completo:</label>
+                                <input type="text" id="doador_nome" name="doador_nome">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_rg">RG:</label>
-                        <input type="text" id="doador_rg" name="doador_rg">
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_cpf">CPF:</label>
+                                <input type="text" id="doador_cpf" name="doador_cpf" maxlength="14"
+                                    placeholder="000.000.000-00">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_data_nascimento">Data de nascimento:</label>
-                        <input type="date" id="doador_data_nascimento" name="doador_data_nascimento">
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_rg">RG:</label>
+                                <input type="text" id="doador_rg" name="doador_rg">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_sexo">Sexo:</label>
-                        <select id="doador_sexo" name="doador_sexo">
-                            <option value="">Selecione</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Feminino">Feminino</option>
-                            <option value="Outro">Outro</option>
-                        </select>
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_data_nascimento">Data de nascimento:</label>
+                                <input type="date" id="doador_data_nascimento" name="doador_data_nascimento">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_estado_civil">Estado civil:</label>
-                        <select id="doador_estado_civil" name="doador_estado_civil">
-                            <option value="">Selecione</option>
-                            <option value="Solteiro(a)">Solteiro(a)</option>
-                            <option value="Casado(a)">Casado(a)</option>
-                            <option value="Divorciado(a)">Divorciado(a)</option>
-                            <option value="Viúvo(a)">Viúvo(a)</option>
-                            <option value="Outro">Outro</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-control">
-                        <label for="doador_profissao">Profissão:</label>
-                        <input type="text" id="doador_profissao" name="doador_profissao">
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_sexo">Sexo:</label>
+                                <select id="doador_sexo" name="doador_sexo">
+                                    <option value="">Selecione</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Outro">Outro</option>
+                                    <option value="Prefiro_nao_informar">Prefiro não informar</option>
+                                </select>
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_nacionalidade">Nacionalidade:</label>
-                        <input type="text" id="doador_nacionalidade" name="doador_nacionalidade" value="Brasileira">
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_telefone">Telefone:</label>
+                                <input type="tel" id="doador_telefone" name="doador_telefone"
+                                    placeholder="(00) 00000-0000">
+                            </div>
+                        </div>
+                    </fieldset>
 
-                    <div class="form-control">
-                        <label for="doador_telefone">Telefone:</label>
-                        <input type="tel" id="doador_telefone" name="doador_telefone" placeholder="(00) 00000-0000">
-                    </div>
-                </div>
-            </fieldset>
+                    <!-- INFORMAÇÕES PESSOAIS - PESSOA JURÍDICA -->
+                    <fieldset id="fieldset_pj" style="display: none;">
+                        <legend>Informações Pessoais (Pessoa Jurídica)</legend>
+                        <div class="field-group">
+                            <div class="form-control">
+                                <label for="doador_nome_empresa">Nome da Empresa:</label>
+                                <input type="text" id="doador_nome_empresa" name="doador_nome_empresa">
+                            </div>
 
-            <!-- ENDEREÇO -->
-            <fieldset>
-                <legend>Endereço</legend>
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="doador_endereco">Logradouro:</label>
-                        <input type="text" id="doador_endereco" name="doador_endereco">
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_area_atuacao_empresa">Área de Atuação da Empresa:</label>
+                                <input type="text" id="doador_area_atuacao_empresa" name="doador_area_atuacao_empresa">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_cidade">Cidade:</label>
-                        <input type="text" id="doador_cidade" name="doador_cidade">
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_cnpj">CNPJ:</label>
+                                <input type="text" id="doador_cnpj" name="doador_cnpj" maxlength="18"
+                                    placeholder="00.000.000/0000-00">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_estado">Estado:</label>
-                        <input type="text" id="doador_estado" name="doador_estado">
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_telefone_empresa">Telefone da Empresa:</label>
+                                <input type="tel" id="doador_telefone_empresa" name="doador_telefone_empresa"
+                                    placeholder="(00) 00000-0000">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_cep">CEP:</label>
-                        <input type="text" id="doador_cep" name="doador_cep">
-                    </div>
-                </div>
-            </fieldset>
+                            <div class="form-control">
+                                <label for="doador_representante">Nome do Representante Legal:</label>
+                                <input type="text" id="doador_representante" name="doador_representante">
+                            </div>
 
-            <!-- DADOS DA DOAÇÃO -->
-            <fieldset>
-                <legend>Dados da Doação</legend>
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="doador_tipo_doacao">Tipo de doação:</label>
-                        <select id="doador_tipo_doacao" name="doador_tipo_doacao" required>
-                            <option value="">Selecione</option>
-                            <option value="Financeira">Financeira</option>
-                            <option value="Material">Material</option>
-                            <option value="Serviço">Serviço</option>
-                            <option value="Alimentos">Alimentos</option>
-                            <option value="Outros">Outros</option>
-                        </select>
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_cpf_representante">CPF do Representante:</label>
+                                <input type="text" id="doador_cpf_representante" name="doador_cpf_representante"
+                                    maxlength="14" placeholder="000.000.000-00">
+                            </div>
+                        </div>
+                    </fieldset>
 
-                    <div class="form-control">
-                        <label for="doador_valor_medio">Valor (se financeira):</label>
-                        <input type="number" step="0.01" id="doador_valor_medio" name="doador_valor_medio" placeholder="Ex: 100.00">
-                    </div>
+                    <!-- ENDEREÇO -->
+                    <fieldset>
+                        <legend>Endereço</legend>
+                        <div class="field-group">
+                            <div class="form-control">
+                                <label for="doador_endereco">Logradouro:</label>
+                                <input type="text" id="doador_endereco" name="doador_endereco">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_periodicidade_doacao">Periodicidade:</label>
-                        <select id="doador_periodicidade_doacao" name="doador_periodicidade_doacao">
-                            <option value="Única">Única</option>
-                            <option value="Mensal">Mensal</option>
-                            <option value="Trimestral">Trimestral</option>
-                            <option value="Anual">Anual</option>
-                            <option value="Variável">Variável</option>
-                        </select>
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_numero">Número:</label>
+                                <input type="text" id="doador_numero" name="doador_numero">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_metodo_pagamento">Método de pagamento:</label>
-                        <select id="doador_metodo_pagamento" name="doador_metodo_pagamento">
-                            <option value="Pix">Pix</option>
-                            <option value="Boleto">Boleto</option>
-                            <option value="Cartão de Crédito">Cartão de Crédito</option>
-                            <option value="Depósito Bancário">Depósito Bancário</option>
-                            <option value="Outro">Outro</option>
-                        </select>
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_complemento">Complemento:</label>
+                                <input type="text" id="doador_complemento" name="doador_complemento">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_relacao_instituicao">Relação com a Instituição:</label>
-                        <select id="doador_relacao_instituicao" name="doador_relacao_instituicao">
-                            <option value="Nenhuma">Nenhuma</option>
-                            <option value="Parceria">Parceria</option>
-                            <option value="Voluntário">Voluntário</option>
-                            <option value="Familiar de Paciente">Familiar de Paciente</option>
-                            <option value="Outro">Outro</option>
-                        </select>
-                    </div>
+                            <div class="form-control">
+                                <label for="doador_bairro">Bairro:</label>
+                                <input type="text" id="doador_bairro" name="doador_bairro">
+                            </div>
 
-                    <div class="form-control">
-                        <label for="doador_pix_chave">Chave Pix (se aplicável):</label>
-                        <input type="text" id="doador_pix_chave" name="doador_pix_chave">
-                    </div>
-                </div>
+                            <div class="form-control">
+                                <label for="doador_cidade">Cidade:</label>
+                                <input type="text" id="doador_cidade" name="doador_cidade">
+                            </div>
 
-                <!-- Textarea fica em uma linha separada para ocupar a largura total -->
-                <div class="form-control" style="margin-top: 20px;">
-                    <label for="doador_motivo_apoio">Motivo do apoio:</label>
-                    <textarea id="doador_motivo_apoio" name="doador_motivo_apoio" rows="4"></textarea>
-                </div>
-            </fieldset>
+                            <div class="form-control">
+                                <label for="doador_estado">Estado:</label>
+                                <input type="text" id="doador_estado" name="doador_estado">
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label for="doador_cep">CEP:</label>
+                            <input type="text" id="doador_cep" name="doador_cep">
+                        </div>
+                    </fieldset>
 
-            <button type="submit">Enviar Cadastro</button>
-        </form>
+                    <button type="submit">Enviar Cadastro</button>
+                </form>
     </div>
+
+    <script>
+        document.getElementById('tipo_pessoa').addEventListener('change', function () {
+            const tipo = this.value;
+            const fieldsetPf = document.getElementById('fieldset_pf');
+            const fieldsetPj = document.getElementById('fieldset_pj');
+
+            if (tipo === 'fisica') {
+                fieldsetPf.style.display = 'block';
+                fieldsetPj.style.display = 'none';
+                // Tornar campos PF obrigatórios
+                document.querySelectorAll('#fieldset_pf input, #fieldset_pf select').forEach(el => {
+                    if (el.id !== 'doador_telefone') el.required = true; // Exemplo: telefone opcional
+                });
+                // Remover required de PJ
+                document.querySelectorAll('#fieldset_pj input, #fieldset_pj select').forEach(el => {
+                    el.required = false;
+                });
+            } else if (tipo === 'juridica') {
+                fieldsetPf.style.display = 'none';
+                fieldsetPj.style.display = 'block';
+                // Tornar campos PJ obrigatórios
+                document.querySelectorAll('#fieldset_pj input, #fieldset_pj select').forEach(el => {
+                    if (el.id !== 'doador_telefone_pj') el.required = true; // Exemplo: telefone opcional
+                });
+                // Remover required de PF
+                document.querySelectorAll('#fieldset_pf input, #fieldset_pf select').forEach(el => {
+                    el.required = false;
+                });
+            } else {
+                fieldsetPf.style.display = 'none';
+                fieldsetPj.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>

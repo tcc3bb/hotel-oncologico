@@ -316,100 +316,81 @@ module.exports = (connectionFactory) => {
     });
 
     router.post('/doador/:id', (req, res) => {
-        const { id } = req.params;
+    const { id } = req.params;
 
-        const {
-            doador_nome,
-            doador_cpf,
-            doador_rg,
-            doador_data_nascimento,
-            doador_sexo,
-            doador_estado_civil,
-            doador_profissao,
-            doador_nacionalidade,
-            doador_telefone,
-            doador_logradouro,
-            doador_numero,
-            doador_bairro,
-            doador_cidade,
-            doador_estado,
-            doador_cep,
-            doador_tipo_doacao,
-            doador_valor_medio,
-            doador_periodicidade_doacao,
-            doador_metodo_pagamento,
-            doador_relacao_instituicao,
-            doador_motivo_apoio,
-            doador_pix_chave
-        } = req.body;
+    const tipoPessoa = req.body.tipo_pessoa; // fisica ou juridica
 
-        console.log('POST /doador ->', req.body);
+    console.log("Recebido:", req.body);
 
-        const sql = `
-        INSERT INTO doador (
-            usuario_id,
-            doador_nome,
-            doador_cpf,
-            doador_rg,
-            doador_data_nascimento,
-            doador_sexo,
-            doador_estado_civil,
-            doador_profissao,
-            doador_nacionalidade,
-            doador_telefone,
-            doador_logradouro,
-            doador_numero,
-            doador_bairro,
-            doador_cidade,
-            doador_estado,
-            doador_cep,
-            doador_tipo_doacao,
-            doador_valor_medio,
-            doador_periodicidade_doacao,
-            doador_metodo_pagamento,
-            doador_relacao_instituicao,
-            doador_motivo_apoio,
-            doador_pix_chave
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    // Objeto base
+    let dados = {
+        usuario_id: id,
+        doador_tipo: tipoPessoa === "fisica" ? "Pessoa Física" : "Pessoa Jurídica",
+        doador_logradouro: req.body.doador_endereco || null,
+        doador_numero: req.body.doador_numero || null,
+        doador_complemento: req.body.doador_complemento || null,
+        doador_bairro: req.body.doador_bairro || null,
+        doador_cidade: req.body.doador_cidade || null,
+        doador_estado: req.body.doador_estado || null,
+        doador_cep: req.body.doador_cep || null
+    };
 
-        const values = [
-            id,
-            doador_nome,
-            doador_cpf,
-            doador_rg,
-            doador_data_nascimento,
-            doador_sexo,
-            doador_estado_civil,
-            doador_profissao,
-            doador_nacionalidade,
-            doador_telefone,
-            doador_logradouro,
-            doador_numero,
-            doador_bairro,
-            doador_cidade,
-            doador_estado,
-            doador_cep,
-            doador_tipo_doacao,
-            doador_valor_medio || null,
-            doador_periodicidade_doacao,
-            doador_metodo_pagamento,
-            doador_relacao_instituicao,
-            doador_motivo_apoio,
-            doador_pix_chave
-        ];
+    if (tipoPessoa === "fisica") {
 
-        connection.query(sql, values, (err) => {
-            if (err) {
-                console.error('Erro ao inserir doador:', err);
-                return res.status(500).render('questionarios/doador', {
-                    erro: 'Erro ao salvar dados. Verifique as informações e tente novamente.',
-                    usuarioId: id
-                });
-            }
-            res.redirect('/usuarios/login');
-        });
+        dados = {
+            ...dados,
+            doador_nome: req.body.doador_nome,
+            doador_cpf: req.body.doador_cpf,
+            doador_rg: req.body.doador_rg || null,
+            doador_data_nascimento: req.body.doador_data_nascimento || null,
+            doador_sexo: req.body.doador_sexo || null,
+            doador_telefone: req.body.doador_telefone || null,
+
+            // Campos PJ precisam estar NULL para não quebrar UNIQUE
+            doador_nome_empresa: null,
+            doador_area_atuacao_empresa: null,
+            doador_cnpj: null,
+            doador_telefone_empresa: null,
+            doador_representante: null,
+            doador_cpf_representante: null
+        };
+
+    } else if (tipoPessoa === "juridica") {
+
+        dados = {
+            ...dados,
+            doador_nome_empresa: req.body.doador_nome_empresa,
+            doador_area_atuacao_empresa: req.body.doador_area_atuacao_empresa || null,
+            doador_cnpj: req.body.doador_cnpj,
+            doador_telefone_empresa: req.body.doador_telefone_empresa || null,
+            doador_representante: req.body.doador_representante || null,
+            doador_cpf_representante: req.body.doador_cpf_representante || null,
+
+            // Campos PF precisam estar NULL
+            doador_nome: null,
+            doador_cpf: null,
+            doador_rg: null,
+            doador_data_nascimento: null,
+            doador_sexo: null,
+            doador_telefone: null
+        };
+    }
+
+    const sql = `INSERT INTO doador SET ?`;
+
+    connection.query(sql, dados, (err) => {
+        if (err) {
+            console.error("Erro ao salvar doador:", err);
+            return res.status(500).render("questionarios/doador", {
+                usuarioId: id,
+                erro: "Erro ao salvar dados. Verifique as informações."
+            });
+        }
+
+        res.redirect('/usuarios/login');
     });
+});
+
 
 
 

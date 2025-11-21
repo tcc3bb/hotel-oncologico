@@ -75,65 +75,220 @@
             <!--====================================================================================================================== -->
             <section id="minhas-doacoes" class="conteudo ativo">
                 <h2 class="section-title">💰 Histórico de Doações</h2>
-                <p class="subtitle">Acompanhe tudo o que já foi doado — valores, datas, tipo e destino.</p>
+                <a href="/doacoes/nova" class="btn">Nova Doação</a>
                 <div class="card">
                     <h3 class="card-title">Lista Completa de Doações</h3>
                     <div class="historico-filtros">
-                        <label for="filtro-periodo">Filtrar por Período:</label>
-                        <select id="filtro-periodo">
-                            <option>Todos</option>
-                            <option>Mensal</option>
-                            <option>Anual</option>
-                            <option>Recorrentes</option>
-                        </select>
-                        <label for="filtro-tipo">Tipo:</label>
+                        <label>Tipo:</label>
                         <select id="filtro-tipo">
-                            <option>Todos</option>
-                            <option>Financeira</option>
-                            <option>Produto</option>
-                            <option>Serviço</option>
+                            <option value="">Todos</option>
+                            <option value="Financeira">Financeira</option>
+                            <option value="Produto">Produto</option>
+                            <option value="Alimento">Alimento</option>
                         </select>
-                        <button class="btn-secondary" type="button">Buscar</button>
+
+                        <label>Mês:</label>
+                        <select id="filtro-mes">
+                            <option value="">Todos</option>
+                            <% for (let i=1; i<=12; i++) { %>
+                                <option value="<%= i %>">
+                                    <%= i %>
+                                </option>
+                                <% } %>
+                        </select>
+
+                        <label>Ano:</label>
+                        <select id="filtro-ano">
+                            <option value="">Todos</option>
+                            <% const anoAtual=new Date().getFullYear(); %>
+                                <% for (let a=anoAtual; a>= anoAtual - 10; a--) { %>
+                                    <option value="<%= a %>">
+                                        <%= a %>
+                                    </option>
+                                    <% } %>
+                        </select>
+
+                        <button id="btn-filtrar" class="btn-secondary" type="button">Buscar</button>
+                        <button id="btn-limpar" class="btn-secondary" type="button">Limpar Filtros</button>
+                        <!-- Novo botão -->
                     </div>
+
+                    <script>
+                        // Função para aplicar filtro (reutilizada para ambos os botões)
+                        async function aplicarFiltro(tipo = '', mes = '', ano = '') {
+                            const params = new URLSearchParams();
+                            if (tipo) params.append("tipo", tipo);
+                            if (mes) params.append("mes", mes);
+                            if (ano) params.append("ano", ano);
+
+                            try {
+                                const response = await fetch(`/doacoes/minhas?${params.toString()}`, {
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest'
+                                    }
+                                });
+
+                                if (!response.ok) {
+                                    throw new Error('Erro na requisição');
+                                }
+
+                                const data = await response.json();
+
+                                // Atualizar a tabela
+                                const tbody = document.querySelector('table tbody');
+                                tbody.innerHTML = ''; // Limpar conteúdo atual
+
+                                if (data.doacoes && data.doacoes.length > 0) {
+                                    data.doacoes.forEach(d => {
+                                        const row = document.createElement('tr');
+
+                                        // Data
+                                        const tdData = document.createElement('td');
+                                        tdData.textContent = new Date(d.doacao_data).toLocaleDateString("pt-BR");
+                                        row.appendChild(tdData);
+
+                                        // Valor/Tipo
+                                        const tdValor = document.createElement('td');
+                                        if (d.doacao_tipo === "Financeira") {
+                                            tdValor.textContent = `R$ ${d.doacao_valor} (Financeira)`;
+                                        } else if (d.doacao_tipo === "Produto") {
+                                            tdValor.textContent = `${d.doacao_categoria_item} (Produto)`;
+                                        } else if (d.doacao_tipo === "Alimento") {
+                                            tdValor.textContent = `${d.doacao_categoria_item} (Alimento)`;
+                                        }
+                                        row.appendChild(tdValor);
+
+                                        // Status
+                                        const tdStatus = document.createElement('td');
+                                        const span = document.createElement('span');
+                                        span.className = d.doacao_status === "Aprovada" ? "badge badge-success" :
+                                            d.doacao_status === "Pendente" ? "badge badge-warning" : "badge badge-danger";
+                                        span.textContent = d.doacao_status === "Aprovada" ? "Concluída" :
+                                            d.doacao_status === "Pendente" ? "Pendente" : "Recusada";
+                                        tdStatus.appendChild(span);
+                                        row.appendChild(tdStatus);
+
+                                        // Ações
+                                        const tdAcoes = document.createElement('td');
+                                        tdAcoes.className = 'acoes';
+                                        if (d.doacao_comprovante) {
+                                            const link = document.createElement('a');
+                                            link.href = d.doacao_comprovante;
+                                            link.className = 'btn-sm btn-secondary';
+                                            link.target = '_blank';
+                                            link.textContent = 'Comprovante';
+                                            tdAcoes.appendChild(link);
+                                        } else {
+                                            const button = document.createElement('button');
+                                            button.className = 'btn-sm btn-secondary';
+                                            button.disabled = true;
+                                            button.textContent = 'Sem comprovante';
+                                            tdAcoes.appendChild(button);
+                                        }
+                                        row.appendChild(tdAcoes);
+
+                                        tbody.appendChild(row);
+                                    });
+                                } else {
+                                    const row = document.createElement('tr');
+                                    const td = document.createElement('td');
+                                    td.colSpan = 4;
+                                    td.textContent = 'Nenhuma doação registrada.';
+                                    row.appendChild(td);
+                                    tbody.appendChild(row);
+                                }
+
+                                // Atualizar resumo
+                                document.querySelector('.resumo-total p:nth-child(1) strong').nextSibling.textContent = ` R$ ${data.totais.totalMes}`;
+                                document.querySelector('.resumo-total p:nth-child(2) strong').nextSibling.textContent = ` R$ ${data.totais.totalAno}`;
+                                document.querySelector('.resumo-total p:nth-child(3) strong').nextSibling.textContent = ` R$ ${data.totais.totalGeral}`;
+                                document.querySelector('.resumo-total p:nth-child(4) strong').nextSibling.textContent = ` ${data.totais.ranking}`;
+
+                            } catch (error) {
+                                console.error('Erro ao aplicar filtro:', error);
+                                alert('Erro ao aplicar filtro. Tente novamente.');
+                            }
+                        }
+
+                        // Evento para o botão "Buscar"
+                        document.getElementById("btn-filtrar").addEventListener("click", () => {
+                            const tipo = document.getElementById("filtro-tipo").value;
+                            const mes = document.getElementById("filtro-mes").value;
+                            const ano = document.getElementById("filtro-ano").value;
+                            aplicarFiltro(tipo, mes, ano);
+                        });
+
+                        // Evento para o botão "Limpar Filtros"
+                        document.getElementById("btn-limpar").addEventListener("click", () => {
+                            // Resetar os selects para valores vazios
+                            document.getElementById("filtro-tipo").value = "";
+                            document.getElementById("filtro-mes").value = "";
+                            document.getElementById("filtro-ano").value = "";
+                            // Aplicar filtro sem parâmetros (mostra tudo)
+                            aplicarFiltro();
+                        });
+                    </script>
+
                     <div class="table-responsive">
                         <table>
                             <thead>
                                 <tr>
                                     <th>Data</th>
                                     <th>Valor/Tipo</th>
-                                    <th>Campanha</th>
                                     <th>Status</th>
-                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>15/01/2025</td>
-                                    <td>R$ 100,00 (Financeira)</td>
-                                    <td>Apoio Pacientes</td>
-                                    <td><span class="badge badge-success">Concluída</span></td>
-                                    <td class="acoes">
-                                        <button class="btn-sm btn-secondary" type="button">Comprovante</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>10/12/2024</td>
-                                    <td>Roupa (Produto)</td>
-                                    <td>Doação Itens</td>
-                                    <td><span class="badge badge-warning">Em Processamento</span></td>
-                                    <td class="acoes">
-                                        <button class="btn-sm btn-secondary" type="button">Comprovante</button>
-                                    </td>
-                                </tr>
-                                <!-- Adicionar mais linhas conforme dados dinâmicos -->
+                                <% if (doacoes && doacoes.length> 0) { %>
+                                    <% doacoes.forEach(d=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= new Date(d.doacao_data).toLocaleDateString("pt-BR") %>
+                                            </td>
+                                            <td>
+                                                <% if (d.doacao_tipo==="Financeira" ) { %>
+                                                    R$ <%= d.doacao_valor %> (Financeira)
+                                                        <% } else if (d.doacao_tipo==="Produto" ) { %>
+                                                            <%= d.doacao_categoria_item %> (Produto)
+                                                                <% } else if (d.doacao_tipo==="Alimento" ) { %>
+                                                                    <%= d.doacao_categoria_item %> (Alimento)
+                                                                        <% } %>
+                                            </td>
+                                            <td>
+                                                <% if (d.doacao_status==="Aprovada" ) { %>
+                                                    <span class="badge badge-success">Concluída</span>
+                                                    <% } else if (d.doacao_status==="Pendente" ) { %>
+                                                        <span class="badge badge-warning">Pendente</span>
+                                                        <% } else { %>
+                                                            <span class="badge badge-danger">Recusada</span>
+                                                            <% } %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="4">Nenhuma doação registrada.</td>
+                                                </tr>
+                                                <% } %>
                             </tbody>
                         </table>
                     </div>
-                    <div class="resumo-total">
-                        <p><strong>Total Doado no Mês:</strong> R$ 500,00</p>
-                        <p><strong>Total Doado no Ano:</strong> R$ 2.000,00</p>
-                        <p><strong>Total Geral:</strong> R$ 5.000,00</p>
-                        <p><strong>Ranking Pessoal:</strong> Top 10% dos Doadores</p>
+                    <div class="resumo-cards">
+                        <div class="card-resumo">
+                            <h3>Total Doado no Mês</h3>
+                            <p class="valor">R$ <%= totais ? totais.totalMes : '0.00' %>
+                            </p>
+                        </div>
+                        <div class="card-resumo">
+                            <h3>Total Doado no Ano</h3>
+                            <p class="valor">R$ <%= totais ? totais.totalAno : '0.00' %>
+                            </p>
+                        </div>
+                        <div class="card-resumo">
+                            <h3>Total Geral</h3>
+                            <p class="valor">R$ <%= totais ? totais.totalGeral : '0.00' %>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -143,7 +298,7 @@
             <!--====================================================================================================================== -->
             <section id="conta" class="conteudo">
                 <h2 class="section-title">Minha Conta</h2>
-                
+
             </section>
 
             <!-- ======================================================================================================================-->

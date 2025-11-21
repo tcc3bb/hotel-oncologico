@@ -139,7 +139,6 @@ CREATE TABLE IF NOT EXISTS `doacao` (
   `doacao_id` int NOT NULL AUTO_INCREMENT,
   `doador_id` int NOT NULL,
   `doacao_tipo` enum('Financeira','Produto','Alimento') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `doacao_descricao` text,
   `doacao_valor` decimal(12,2) DEFAULT NULL,
   `doacao_metodo_pagamento` enum('Pix','Boleto','Cartão de Crédito','Depósito Bancário','Outro') DEFAULT NULL,
   `doacao_comprovante` varchar(255) DEFAULT NULL,
@@ -155,58 +154,44 @@ CREATE TABLE IF NOT EXISTS `doacao` (
   PRIMARY KEY (`doacao_id`),
   KEY `idx_doador_doacao` (`doador_id`),
   CONSTRAINT `fk_doacao_doador` FOREIGN KEY (`doador_id`) REFERENCES `doador` (`doador_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.doacao: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.doacao: ~3 rows (aproximadamente)
 DELETE FROM `doacao`;
-INSERT INTO `doacao` (`doacao_id`, `doador_id`, `doacao_tipo`, `doacao_descricao`, `doacao_valor`, `doacao_metodo_pagamento`, `doacao_comprovante`, `doacao_categoria_item`, `doacao_quantidade`, `doacao_unidade`, `doacao_status`, `doacao_data`, `doacao_destino`, `doacao_recorrencia`, `doacao_condicao`, `servico_tipo`) VALUES
-	(1, 3, 'Financeira', 'nenhuma', 500.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 12:30:44', NULL, 'Única', NULL, NULL),
-	(2, 3, 'Financeira', NULL, 500.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 16:13:37', NULL, 'Única', NULL, NULL),
-	(3, 3, 'Financeira', NULL, 500.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 17:03:14', 'Infraestrutura e Obras', 'Única', 'Novo', 'Transporte'),
-	(4, 3, 'Financeira', NULL, 700.00, 'Cartão de Crédito', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 17:06:37', 'Apoiar Pacientes', 'Única', 'Novo', 'Transporte');
+INSERT INTO `doacao` (`doacao_id`, `doador_id`, `doacao_tipo`, `doacao_valor`, `doacao_metodo_pagamento`, `doacao_comprovante`, `doacao_categoria_item`, `doacao_quantidade`, `doacao_unidade`, `doacao_status`, `doacao_data`, `doacao_destino`, `doacao_recorrencia`, `doacao_condicao`, `servico_tipo`) VALUES
+	(7, 3, 'Produto', NULL, NULL, NULL, 'móvel', 2, NULL, 'Pendente', '2025-11-20 18:29:52', 'Apoiar Pacientes', 'Única', 'Novo', NULL),
+	(8, 3, 'Financeira', 1100.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-10-20 18:33:30', 'Apoiar Pacientes', 'Única', NULL, NULL),
+	(9, 3, 'Alimento', NULL, NULL, NULL, 'arroz', 2, '3', 'Pendente', '2025-11-20 19:19:15', 'Apoiar Pacientes', 'Única', NULL, NULL),
+	(10, 3, 'Financeira', 200.00, 'Cartão de Crédito', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 20:15:45', 'Apoiar Pacientes', 'Única', NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.doador
 CREATE TABLE IF NOT EXISTS `doador` (
   `doador_id` int NOT NULL AUTO_INCREMENT,
   `usuario_id` int NOT NULL,
+  `doador_tipo` enum('Pessoa Física','Pessoa Jurídica') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Pessoa Física',
   `doador_nome` varchar(255) NOT NULL,
   `doador_cpf` varchar(14) DEFAULT NULL,
   `doador_rg` varchar(20) DEFAULT NULL,
   `doador_data_nascimento` date DEFAULT NULL,
-  `doador_sexo` enum('Masculino','Feminino','Outro') DEFAULT NULL,
-  `doador_estado_civil` enum('Solteiro(a)','Casado(a)','Divorciado(a)','Viúvo(a)','Outro') DEFAULT NULL,
-  `doador_profissao` varchar(100) DEFAULT NULL,
-  `doador_nacionalidade` varchar(100) DEFAULT 'Brasileira',
+  `doador_sexo` enum('Masculino','Feminino','Prefiro não informar','Outro') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `doador_telefone` varchar(20) DEFAULT NULL,
   `doador_logradouro` varchar(255) DEFAULT NULL,
   `doador_numero` varchar(10) DEFAULT NULL,
+  `doador_complemento` varchar(50) DEFAULT NULL,
   `doador_bairro` varchar(100) DEFAULT NULL,
   `doador_cidade` varchar(100) DEFAULT NULL,
   `doador_estado` varchar(50) DEFAULT NULL,
   `doador_cep` varchar(15) DEFAULT NULL,
-  `doador_tipo` enum('Pessoa Física','Pessoa Jurídica') DEFAULT 'Pessoa Física',
   `doador_nome_empresa` varchar(255) DEFAULT NULL,
+  `doador_area_atuacao_empresa` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `doador_cnpj` varchar(18) DEFAULT NULL,
-  `doador_cargo_empresa` varchar(100) DEFAULT NULL,
-  `doador_site_empresa` varchar(255) DEFAULT NULL,
-  `doador_area_atuacao_empresa` varchar(100) DEFAULT NULL,
-  `doador_relacao_instituicao` enum('Nenhuma','Parceria','Voluntário','Familiar de Paciente','Outro') DEFAULT 'Nenhuma',
-  `doador_motivo_apoio` text,
-  `doador_tipo_doacao` enum('Financeira','Material','Serviço','Alimentos','Outros') DEFAULT 'Financeira',
-  `doador_valor_medio` decimal(10,2) DEFAULT NULL,
-  `doador_periodicidade_doacao` enum('Única','Mensal','Trimestral','Anual','Variável') DEFAULT 'Única',
-  `doador_metodo_pagamento` enum('Pix','Boleto','Cartão de Crédito','Depósito Bancário','Outro') DEFAULT 'Pix',
-  `doador_data_ultima_doacao` date DEFAULT NULL,
+  `doador_telefone_empresa` varchar(15) DEFAULT NULL,
+  `doador_representante` varchar(150) DEFAULT NULL,
+  `doador_cpf_representante` varchar(15) DEFAULT NULL,
   `doador_qtd_total_doacoes` int DEFAULT '0',
   `doador_valor_total_doado` decimal(12,2) DEFAULT '0.00',
-  `doador_intencao_continuar` tinyint(1) DEFAULT '1',
-  `doador_receber_atualizacoes` tinyint(1) DEFAULT '1',
-  `doador_receber_certificado` tinyint(1) DEFAULT '0',
-  `doador_banco_nome` varchar(100) DEFAULT NULL,
-  `doador_banco_agencia` varchar(20) DEFAULT NULL,
-  `doador_banco_conta` varchar(20) DEFAULT NULL,
-  `doador_banco_tipo_conta` enum('Corrente','Poupança','Pagamento','Outro') DEFAULT NULL,
-  `doador_pix_chave` varchar(255) DEFAULT NULL,
+  `doador_valor_medio` decimal(10,2) DEFAULT NULL,
+  `doador_data_ultima_doacao` date DEFAULT NULL,
   `doador_documento_comprovante` varchar(255) DEFAULT NULL,
   `doador_documento_identidade` varchar(255) DEFAULT NULL,
   `doador_documento_cnpj` varchar(255) DEFAULT NULL,
@@ -223,10 +208,10 @@ CREATE TABLE IF NOT EXISTS `doador` (
   CONSTRAINT `fk_doador_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.doador: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.doador: ~1 rows (aproximadamente)
 DELETE FROM `doador`;
-INSERT INTO `doador` (`doador_id`, `usuario_id`, `doador_nome`, `doador_cpf`, `doador_rg`, `doador_data_nascimento`, `doador_sexo`, `doador_estado_civil`, `doador_profissao`, `doador_nacionalidade`, `doador_telefone`, `doador_logradouro`, `doador_numero`, `doador_bairro`, `doador_cidade`, `doador_estado`, `doador_cep`, `doador_tipo`, `doador_nome_empresa`, `doador_cnpj`, `doador_cargo_empresa`, `doador_site_empresa`, `doador_area_atuacao_empresa`, `doador_relacao_instituicao`, `doador_motivo_apoio`, `doador_tipo_doacao`, `doador_valor_medio`, `doador_periodicidade_doacao`, `doador_metodo_pagamento`, `doador_data_ultima_doacao`, `doador_qtd_total_doacoes`, `doador_valor_total_doado`, `doador_intencao_continuar`, `doador_receber_atualizacoes`, `doador_receber_certificado`, `doador_banco_nome`, `doador_banco_agencia`, `doador_banco_conta`, `doador_banco_tipo_conta`, `doador_pix_chave`, `doador_documento_comprovante`, `doador_documento_identidade`, `doador_documento_cnpj`, `doador_data_cadastro`, `doador_verificado`, `doador_aprovado_admin`, `doador_observacoes`, `doador_observacoes_internas`) VALUES
-	(3, 40, 'doador', '12365478963', '32654125', '2025-11-20', 'Feminino', 'Solteiro(a)', 'empresário', 'Brasileira', '11963852741', NULL, NULL, NULL, 'São Paulo', 'SP', '07790852', 'Pessoa Física', NULL, NULL, NULL, NULL, NULL, 'Parceria', '', 'Serviço', NULL, 'Trimestral', 'Pix', NULL, 0, 0.00, 1, 1, 0, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '2025-11-13 19:31:16', 0, 0, NULL, NULL);
+INSERT INTO `doador` (`doador_id`, `usuario_id`, `doador_tipo`, `doador_nome`, `doador_cpf`, `doador_rg`, `doador_data_nascimento`, `doador_sexo`, `doador_telefone`, `doador_logradouro`, `doador_numero`, `doador_complemento`, `doador_bairro`, `doador_cidade`, `doador_estado`, `doador_cep`, `doador_nome_empresa`, `doador_area_atuacao_empresa`, `doador_cnpj`, `doador_telefone_empresa`, `doador_representante`, `doador_cpf_representante`, `doador_qtd_total_doacoes`, `doador_valor_total_doado`, `doador_valor_medio`, `doador_data_ultima_doacao`, `doador_documento_comprovante`, `doador_documento_identidade`, `doador_documento_cnpj`, `doador_data_cadastro`, `doador_verificado`, `doador_aprovado_admin`, `doador_observacoes`, `doador_observacoes_internas`) VALUES
+	(3, 40, 'Pessoa Física', 'doador', '12365478963', '32654125', '2025-11-20', 'Feminino', '11963852741', NULL, NULL, NULL, NULL, 'São Paulo', 'SP', '07790852', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0.00, NULL, NULL, NULL, NULL, NULL, '2025-11-13 19:31:16', 0, 0, NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.historico_quarto
 CREATE TABLE IF NOT EXISTS `historico_quarto` (
@@ -542,7 +527,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_tipo`, `usuario_data_criacao`, `usuario_estado`, `usuario_ultimo_login`, `usuario_foto_perfil`) VALUES
 	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-11-12 20:45:28', '/uploads/usuarios/padrao.png'),
-	(40, 'doador@gmail.com', '$2b$10$TUh6hQKV5tzkK5co0A9hTedCnbJcb1v7aUd.E7OgVxFh.uYSzBucq', 'doador', '2025-11-13 16:30:30', 'ativo', '2025-11-20 14:22:19', '/uploads/usuarios/padrao.png'),
+	(40, 'doador@gmail.com', '$2b$10$TUh6hQKV5tzkK5co0A9hTedCnbJcb1v7aUd.E7OgVxFh.uYSzBucq', 'doador', '2025-11-13 16:30:30', 'ativo', '2025-11-21 17:31:47', '/uploads/usuarios/padrao.png'),
 	(41, 'voluntario@gmail.com', '$2b$10$pRMCCoTzoeOyPzY97BFrVe7DIskU8lvgKTHTKIjbKz4guHV8l0AL2', 'voluntario', '2025-11-13 16:32:00', 'ativo', '2025-11-18 16:47:47', '/uploads/usuarios/padrao.png'),
 	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-19 19:59:15', '/uploads/usuarios/padrao.png'),
 	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'acompanhante', '2025-11-17 16:16:09', 'ativo', '2025-11-18 16:42:11', '/uploads/usuarios/padrao.png'),
