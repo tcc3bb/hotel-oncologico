@@ -71,6 +71,11 @@ class DoadorDAO {
 
         this._connection.query(sql, [usuarioId], callback);
     }
+
+    buscarPorUsuarioId(usuarioId, callback) {
+        const sql = "SELECT doador_id FROM doador WHERE usuario_id = ?";
+        this._connection.query(sql, [usuarioId], callback);
+    }
 }
 
 module.exports = DoadorDAO;

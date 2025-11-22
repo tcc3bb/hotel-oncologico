@@ -169,25 +169,6 @@
                                         tdStatus.appendChild(span);
                                         row.appendChild(tdStatus);
 
-                                        // Ações
-                                        const tdAcoes = document.createElement('td');
-                                        tdAcoes.className = 'acoes';
-                                        if (d.doacao_comprovante) {
-                                            const link = document.createElement('a');
-                                            link.href = d.doacao_comprovante;
-                                            link.className = 'btn-sm btn-secondary';
-                                            link.target = '_blank';
-                                            link.textContent = 'Comprovante';
-                                            tdAcoes.appendChild(link);
-                                        } else {
-                                            const button = document.createElement('button');
-                                            button.className = 'btn-sm btn-secondary';
-                                            button.disabled = true;
-                                            button.textContent = 'Sem comprovante';
-                                            tdAcoes.appendChild(button);
-                                        }
-                                        row.appendChild(tdAcoes);
-
                                         tbody.appendChild(row);
                                     });
                                 } else {
@@ -207,7 +188,6 @@
 
                             } catch (error) {
                                 console.error('Erro ao aplicar filtro:', error);
-                                alert('Erro ao aplicar filtro. Tente novamente.');
                             }
                         }
 
@@ -292,40 +272,41 @@
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <script>
-                document.querySelectorAll('#formDoador input, #formDoador select').forEach(el => {
-                    el.addEventListener('focus', () => el.removeAttribute('readonly'));
-                });
-
-                document.getElementById('formDoador').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-
-                    const dados = Object.fromEntries(new FormData(e.target).entries());
-
-                    const resp = await fetch('/doador/atualizar', {
-                        method: 'POST',
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(dados)
+                <script>
+                    document.querySelectorAll('#formDoador input, #formDoador select').forEach(el => {
+                        el.addEventListener('focus', () => el.removeAttribute('readonly'));
                     });
 
-                    const result = await resp.json();
-                    alert(result.mensagem);
+                    document.getElementById('formDoador').addEventListener('submit', async (e) => {
+                        e.preventDefault();
 
-                    if (result.ok) location.reload();
-                });
+                        const dados = Object.fromEntries(new FormData(e.target).entries());
 
-                document.getElementById('btnExcluir').addEventListener('click', async () => {
-                    if (!confirm("Deseja realmente excluir sua conta?")) return;
+                        const resp = await fetch('/doador/atualizar', {
+                            method: 'POST',
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(dados)
+                        });
 
-                    const resp = await fetch('/doador/excluir', { method: 'DELETE' });
-                    const result = await resp.json();
-                    alert(result.mensagem);
+                        const result = await resp.json();
+                        alert(result.mensagem);
 
-                    if (result.ok) window.location.href = "/";
-                });
-            </script>
+                        if (result.ok) location.reload();
+                    });
+
+                    document.getElementById('btnExcluir').addEventListener('click', async () => {
+                        if (!confirm("Deseja realmente excluir sua conta?")) return;
+
+                        const resp = await fetch('/doador/excluir', { method: 'DELETE' });
+                        const result = await resp.json();
+                        alert(result.mensagem);
+
+                        if (result.ok) window.location.href = "/";
+                    });
+                </script>
+
+            </section>
 
             <!-- ======================================================================================================================-->
             <!--===================================================== MINHA CONTA =====================================================-->

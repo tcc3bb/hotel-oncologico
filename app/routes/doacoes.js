@@ -114,86 +114,108 @@ router.post("/nova", verificaLogin, (req, res) => {
 router.get("/minhas", verificaLogin, (req, res) => {
     const conn = connectionFactory();
     const doadorDAO = new DoadorDAO(conn);
-    const doacaoDAO = new DoacaoDAO(conn); 
+    const doacaoDAO = new DoacaoDAO(conn);
 
     const usuarioId = req.session.user.id;
 
-    // capturar filtros
     const filtros = {
         tipo: req.query.tipo || null,
         mes: req.query.mes || null,
         ano: req.query.ano || null
     };
 
-    // 1. Buscar o doador_id vinculado ao usuário
-    doadorDAO.buscarPorUsuarioId(usuarioId, (err, resultadoDoador) => {
-        if (err || resultadoDoador.length === 0) {
+    const isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
+
+    doadorDAO.buscarPorUsuarioId(usuarioId, (err, resultadoDoadorId) => {
+
+        if (err || resultadoDoadorId.length === 0) {
             conn.end();
+
+            if (isAjax) {
+                return res.json({
+                    erro: true,
+                    mensagem: "Não foi possível localizar o perfil do doador."
+                });
+            }
+
             return res.send("Erro: não foi possível localizar o perfil do doador.");
         }
 
-        const doadorId = resultadoDoador[0].doador_id;
+        const doadorId = resultadoDoadorId[0].doador_id;
 
-        // Usar somente listarFiltrado (assumindo que seja o desejado)
-        doacaoDAO.listarFiltrado(doadorId, filtros, (err2, doacoes) => {
-            conn.end();
+        doadorDAO.buscarDadosCompletos(usuarioId, (erro, dadosCompletos) => {
 
-            if (err2) {
-                console.log(err2);
-                return res.send("Erro ao buscar doações.");
+            if (erro || !dadosCompletos) {
+                conn.end();
+
+                if (isAjax) {
+                    return res.json({
+                        erro: true,
+                        mensagem: "Não foi possível carregar os dados do perfil."
+                    });
+                }
+
+                return res.send("Erro: não foi possível localizar o perfil do doador.");
             }
 
-            // Calcular totais dinamicamente baseados nas doações filtradas
-            let totalMes = 0;
-            let totalAno = 0;
-            let totalGeral = 0;
-            const anoAtual = new Date().getFullYear();
-            const mesAtual = new Date().getMonth() + 1; // Janeiro = 1
+            doacaoDAO.listarFiltrado(doadorId, filtros, (err2, doacoes) => {
 
-            doacoes.forEach(d => {
-                const data = new Date(d.doacao_data);
-                const valor = parseFloat(d.doacao_valor) || 0; // Apenas para doações financeiras
+                if (err2) {
+                    conn.end();
 
-                if (d.doacao_tipo === "Financeira") {
-                    totalGeral += valor;
-                    if (data.getFullYear() === anoAtual) {
-                        totalAno += valor;
-                        if (data.getMonth() + 1 === mesAtual) {
-                            totalMes += valor;
+                    if (isAjax) {
+                        return res.json({
+                            erro: true,
+                            mensagem: "Erro ao buscar doações."
+                        });
+                    }
+
+                    return res.send("Erro ao buscar doações.");
+                }
+
+                // Calcular totais
+                let totalMes = 0;
+                let totalAno = 0;
+                let totalGeral = 0;
+                const anoAtual = new Date().getFullYear();
+                const mesAtual = new Date().getMonth() + 1;
+
+                doacoes.forEach(d => {
+                    const data = new Date(d.doacao_data);
+                    const valor = parseFloat(d.doacao_valor) || 0;
+
+                    if (d.doacao_tipo === "Financeira") {
+                        totalGeral += valor;
+                        if (data.getFullYear() === anoAtual) {
+                            totalAno += valor;
+                            if (data.getMonth() + 1 === mesAtual) {
+                                totalMes += valor;
+                            }
                         }
                     }
+                });
+
+                const totais = {
+                    totalMes: totalMes.toFixed(2),
+                    totalAno: totalAno.toFixed(2),
+                    totalGeral: totalGeral.toFixed(2),
+                    ranking: "Top 10% dos Doadores"
+                };
+
+                conn.end();
+
+                // SE FOR AJAX → responde JSON
+                if (isAjax) {
+                    return res.json({ doacoes, totais });
                 }
+
+                // acesso normal (renderizar página)
+                res.render("doador/minhas-doacoes", { doacoes, totais });
             });
-
-            // Ranking fixo (ajuste se houver lógica real)
-            const ranking = "Top 10% dos Doadores";
-
-            // Verificar se é uma requisição AJAX
-            if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
-                // Retornar JSON para AJAX
-                return res.json({
-                    doacoes,
-                    totais: {
-                        totalMes: totalMes.toFixed(2),
-                        totalAno: totalAno.toFixed(2),
-                        totalGeral: totalGeral.toFixed(2),
-                        ranking
-                    }
-                });
-            } else {
-                // Renderizar página normalmente
-                res.render("doador/minhas-doacoes", {
-                    doacoes,
-                    totais: {
-                        totalMes: totalMes.toFixed(2),
-                        totalAno: totalAno.toFixed(2),
-                        totalGeral: totalGeral.toFixed(2),
-                        ranking
-                    }
-                });
-            }
         });
     });
 });
+
+
 
 module.exports = router;
