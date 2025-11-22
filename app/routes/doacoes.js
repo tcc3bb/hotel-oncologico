@@ -114,7 +114,7 @@ router.post("/nova", verificaLogin, (req, res) => {
 router.get("/minhas", verificaLogin, (req, res) => {
     const conn = connectionFactory();
     const doadorDAO = new DoadorDAO(conn);
-    const doacaoDAO = new DoacaoDAO(conn);
+    const doacaoDAO = new DoacaoDAO(conn); 
 
     const usuarioId = req.session.user.id;
 
@@ -195,6 +195,5 @@ router.get("/minhas", verificaLogin, (req, res) => {
         });
     });
 });
-
 
 module.exports = router;

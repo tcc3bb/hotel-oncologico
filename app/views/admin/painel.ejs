@@ -75,6 +75,10 @@
                 <span class="icon">❓</span>
                 <span>Gestão do Chat</span>
             </div>
+            <div class="sidebar-item" tabindex="0" data-target="doacoes">
+                <span class="icon">💰</span>
+                <span>Gestão de Doações</span>
+            </div>
         </aside>
 
         <main>
@@ -134,301 +138,276 @@
                             <% }) %>
                     </tbody>
                 </table>
-            </section>
-            <!-- ======================================================================================================================-->
-            <!--================================================= MODAL: EDITAR USUÁRIO ========================================================-->
-            <!--====================================================================================================================== -->
-            <div id="modalEdicao" class="modal" style="display:none;">
-                <div class="modal-content">
-                    <span class="close" onclick="fecharModalEdicao()">&times;</span>
-                    <h3>Editar Usuário</h3>
-                    <form id="formEdicao" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" id="usuarioIdEdicao" name="id">
 
-                        <label for="tipoEdicao">Tipo de Usuário:</label>
-                        <select id="tipoEdicao" name="tipo" required>
-                            <option value="admin">Admin</option>
-                            <option value="paciente">Paciente</option>
-                            <option value="acompanhante">Acompanhante</option>
-                            <option value="voluntario">Voluntário</option>
-                            <option value="doador">Doador</option>
-                        </select>
+                <!-- ==============================================-->
+                <!--========== MODAL: EDITAR USUÁRIO ==============-->
+                <!-- ==============================================-->
+                <div id="modalEdicao" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <span class="close" onclick="fecharModalEdicao()">&times;</span>
+                        <h3>Editar Usuário</h3>
+                        <form id="formEdicao" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" id="usuarioIdEdicao" name="id">
 
-                        <label for="estadoEdicao">Estado:</label>
-                        <select id="estadoEdicao" name="estado" required>
-                            <option value="ativo">Ativo</option>
-                            <option value="inativo">Inativo</option>
-                        </select>
+                            <label for="tipoEdicao">Tipo de Usuário:</label>
+                            <select id="tipoEdicao" name="tipo" required>
+                                <option value="admin">Admin</option>
+                                <option value="paciente">Paciente</option>
+                                <option value="acompanhante">Acompanhante</option>
+                                <option value="voluntario">Voluntário</option>
+                                <option value="doador">Doador</option>
+                            </select>
 
-                        <label for="fotoPerfilEdicao">Foto de Perfil:</label>
-                        <input type="file" id="fotoPerfilEdicao" name="foto_perfil" accept="image/*">
+                            <label for="estadoEdicao">Estado:</label>
+                            <select id="estadoEdicao" name="estado" required>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
 
-                        <div id="previewFoto" style="margin-top:10px;">
-                            <img id="fotoPreviewImg" src="" alt="Prévia da foto"
-                                style="max-width:100px; display:none; border-radius:8px;">
-                        </div>
+                            <label for="fotoPerfilEdicao">Foto de Perfil:</label>
+                            <input type="file" id="fotoPerfilEdicao" name="foto_perfil" accept="image/*">
 
-                        <button type="submit" class="btn-primary" style="margin-top:15px;">Salvar Alterações</button>
-                    </form>
+                            <div id="previewFoto" style="margin-top:10px;">
+                                <img id="fotoPreviewImg" src="" alt="Prévia da foto"
+                                    style="max-width:100px; display:none; border-radius:8px;">
+                            </div>
+
+                            <button type="submit" class="btn-primary" style="margin-top:15px;">Salvar
+                                Alterações</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <script>
-                function abrirModalEdicao(id, tipo, estado) {
-                    document.getElementById('usuarioIdEdicao').value = id;
-                    document.getElementById('tipoEdicao').value = tipo;
-                    document.getElementById('estadoEdicao').value = estado;
-                    document.getElementById('fotoPerfilEdicao').value = '';
-                    document.getElementById('fotoPreviewImg').style.display = 'none';
-                    const form = document.getElementById('formEdicao');
-                    form.action = `/admin/usuarios/${id}/editar`;
-                    document.getElementById('modalEdicao').style.display = 'block';
-                }
-                function fecharModalEdicao() {
-                    document.getElementById('modalEdicao').style.display = 'none';
-                }
-                // Pré-visualização da foto
-                document.getElementById('fotoPerfilEdicao').addEventListener('change', function (event) {
-                    const file = event.target.files[0];
-                    const imgPreview = document.getElementById('fotoPreviewImg');
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = e => {
-                            imgPreview.src = e.target.result;
-                            imgPreview.style.display = 'block';
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        imgPreview.style.display = 'none';
+                <script>
+                    function abrirModalEdicao(id, tipo, estado) {
+                        document.getElementById('usuarioIdEdicao').value = id;
+                        document.getElementById('tipoEdicao').value = tipo;
+                        document.getElementById('estadoEdicao').value = estado;
+                        document.getElementById('fotoPerfilEdicao').value = '';
+                        document.getElementById('fotoPreviewImg').style.display = 'none';
+                        const form = document.getElementById('formEdicao');
+                        form.action = `/admin/usuarios/${id}/editar`;
+                        document.getElementById('modalEdicao').style.display = 'block';
                     }
-                });
-            </script>
+                    function fecharModalEdicao() {
+                        document.getElementById('modalEdicao').style.display = 'none';
+                    }
+                    // Pré-visualização da foto
+                    document.getElementById('fotoPerfilEdicao').addEventListener('change', function (event) {
+                        const file = event.target.files[0];
+                        const imgPreview = document.getElementById('fotoPreviewImg');
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = e => {
+                                imgPreview.src = e.target.result;
+                                imgPreview.style.display = 'block';
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            imgPreview.style.display = 'none';
+                        }
+                    });
+                </script>
 
-            <!-- ======================================================================================================================-->
-            <!--========================================== MODAL: SENHA PARA EXCLUIR ==================================================-->
-            <!--====================================================================================================================== -->
-            <div id="modalSenha" class="modal" style="display:none;">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <h3>Confirme sua senha</h3>
-                    <p>Para excluir o usuário, digite sua senha:</p>
-                    <form id="formDelete" method="POST">
-                        <input type="password" name="senha" id="senhaAdmin" placeholder="Senha do admin" required>
-                        <button type="submit">Confirmar</button>
-                    </form>
-                    <p id="erroSenha" style="color:red; display:none;">Senha incorreta</p>
+                <!-- ==============================================-->
+                <!--========== MODAL: SENHA PARA EXCLUIR ==========-->
+                <!-- ==============================================-->
+                <div id="modalSenha" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <h3>Confirme sua senha</h3>
+                        <p>Para excluir o usuário, digite sua senha:</p>
+                        <form id="formDelete" method="POST">
+                            <input type="password" name="senha" id="senhaAdmin" placeholder="Senha do admin" required>
+                            <button type="submit">Confirmar</button>
+                        </form>
+                        <p id="erroSenha" style="color:red; display:none;">Senha incorreta</p>
+                    </div>
                 </div>
-            </div>
-            <script>
-                let usuarioExcluirId = null;
-                function confirmDelete(usuarioId, usuarioEmail) {
-                    usuarioExcluirId = usuarioId;
-                    document.getElementById('senhaAdmin').value = '';
-                    document.getElementById('erroSenha').style.display = 'none';
-                    document.getElementById('formDelete').action = `/admin/usuarios/${usuarioId}/delete`;
-                    document.getElementById('modalSenha').style.display = 'block';
-                }
-                function closeModal() {
-                    document.getElementById('modalSenha').style.display = 'none';
-                }
-            </script>
+                <script>
+                    let usuarioExcluirId = null;
+                    function confirmDelete(usuarioId, usuarioEmail) {
+                        usuarioExcluirId = usuarioId;
+                        document.getElementById('senhaAdmin').value = '';
+                        document.getElementById('erroSenha').style.display = 'none';
+                        document.getElementById('formDelete').action = `/admin/usuarios/${usuarioId}/delete`;
+                        document.getElementById('modalSenha').style.display = 'block';
+                    }
+                    function closeModal() {
+                        document.getElementById('modalSenha').style.display = 'none';
+                    }
+                </script>
+
+            </section>
 
             <!-- ======================================================================================================================-->
             <!--============================================== GESTÃO DE RESERVAS =====================================================-->
             <!--====================================================================================================================== -->
-<section id="reservas" class="conteudo">
-    <h2 class="section-title">Gestão de Reservas</h2>
+            <section id="reservas" class="conteudo">
+                <h2 class="section-title">Gestão de Reservas</h2>
 
-    <!-- Botão para abrir modal de nova reserva -->
-    <button class="btn-primary" type="button" id="btnNovaReserva">+ Nova reserva</button>
+                <!-- Botão para abrir modal de nova reserva -->
+                <button class="btn-primary" type="button" id="btnNovaReserva">+ Nova reserva</button>
 
-    <!-- Filtros -->
-    <div class="filtros" aria-label="Filtros de reservas">
-        <label for="data-reserva">Data:</label>
-        <input type="date" id="data-reserva" name="data-reserva" />
+                <!-- Filtros -->
+                <div class="filtros" aria-label="Filtros de reservas">
+                    <label for="data-reserva">Data:</label>
+                    <input type="date" id="data-reserva" name="data-reserva" />
 
-        <label for="status-reserva">Status:</label>
-        <select id="status-reserva" name="status-reserva">
-            <option value="">Todos</option>
-            <option value="confirmada">Confirmada</option>
-            <option value="pendente">Pendente</option>
-            <option value="cancelada">Cancelada</option>
-            <option value="em_andamento">Em andamento</option>
-            <option value="concluida">Concluída</option>
-        </select>
+                    <label for="status-reserva">Status:</label>
+                    <select id="status-reserva" name="status-reserva">
+                        <option value="">Todos</option>
+                        <option value="confirmada">Confirmada</option>
+                        <option value="pendente">Pendente</option>
+                        <option value="cancelada">Cancelada</option>
+                        <option value="em_andamento">Em andamento</option>
+                        <option value="concluida">Concluída</option>
+                    </select>
 
-        <label for="usuario-reserva">Usuário:</label>
-        <input type="text" id="usuario-reserva" name="usuario-reserva" placeholder="Nome do paciente" />
-    </div>
+                    <label for="usuario-reserva">Usuário:</label>
+                    <input type="text" id="usuario-reserva" name="usuario-reserva" placeholder="Nome do paciente" />
+                </div>
 
-    <!-- Lista de Reservas -->
-    <table id="tabelaReservas">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Paciente</th>
-                <th>Quarto</th>
-                <th>Status</th>
-                <th>Check-in</th>
-                <th>Check-out</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% reservas.forEach(r => { %>
-            <tr>
-                <td><%= r.reserva_id %></td>
-                <td><%= r.paciente_nome %></td>
-                <td><%= r.quarto_numero %></td>
-                <td><%= r.reserva_status %></td>
-                <td><%= r.reserva_data_checkin_previsto.toLocaleDateString() %></td>
-                <td><%= r.reserva_data_checkout_previsto.toLocaleDateString() %></td>
-                <td class="acoes">
-                    <button class="btnEditar" 
-                        data-id="<%= r.reserva_id %>"
-                        data-status="<%= r.reserva_status %>"
-                        data-paciente="<%= r.paciente_id %>"
-                        data-quarto="<%= r.quarto_id %>"
-                        data-checkin="<%= r.reserva_data_checkin_previsto.toISOString().slice(0,16) %>"
-                        data-checkout="<%= r.reserva_data_checkout_previsto.toISOString().slice(0,16) %>"
-                        data-motivo="<%= r.reserva_motivo || '' %>">
-                        ✏️
-                    </button>
-                    <a href="/reservas/deletar/<%= r.reserva_id %>" class="btn-delete" onclick="return confirm('Excluir reserva?')">🗑️</a>
-                </td>
-            </tr>
-            <% }) %>
-        </tbody>
-    </table>
+                <!-- Lista de Reservas -->
+                <table id="tabelaReservas">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Paciente</th>
+                            <th>Quarto</th>
+                            <th>Status</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% reservas.forEach(r=> { %>
+                            <tr>
+                                <td>
+                                    <%= r.reserva_id %>
+                                </td>
+                                <td>
+                                    <%= r.paciente_nome %>
+                                </td>
+                                <td>
+                                    <%= r.quarto_numero %>
+                                </td>
+                                <td>
+                                    <%= r.reserva_status %>
+                                </td>
+                                <td>
+                                    <%= r.reserva_data_checkin_previsto.toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= r.reserva_data_checkout_previsto.toLocaleDateString() %>
+                                </td>
+                                <td class="acoes">
+                                    <button class="btnEditar" data-id="<%= r.reserva_id %>"
+                                        data-status="<%= r.reserva_status %>" data-paciente="<%= r.paciente_id %>"
+                                        data-quarto="<%= r.quarto_id %>"
+                                        data-checkin="<%= r.reserva_data_checkin_previsto.toISOString().slice(0,16) %>"
+                                        data-checkout="<%= r.reserva_data_checkout_previsto.toISOString().slice(0,16) %>"
+                                        data-motivo="<%= r.reserva_motivo || '' %>">
+                                        ✏️
+                                    </button>
+                                    <a href="/reservas/deletar/<%= r.reserva_id %>" class="btn-delete"
+                                        onclick="return confirm('Excluir reserva?')">🗑️</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
 
-    <!-- ============== MODAL: NOVA RESERVA ================= -->
-    <div id="modalNovaReserva" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Nova Reserva</h3>
-            <form action="/reservas/nova" method="POST">
-                <label>Paciente ID:</label>
-                <input type="number" name="paciente_id" required>
+                <!-- ============== MODAL: NOVA RESERVA ================= -->
+                <div id="modalNovaReserva" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Nova Reserva</h3>
+                        <form action="/reservas/nova" method="POST">
+                            <label>Paciente ID:</label>
+                            <input type="number" name="paciente_id" required>
 
-                <label>Quarto ID:</label>
-                <input type="number" name="quarto_id" required>
+                            <label>Quarto ID:</label>
+                            <input type="number" name="quarto_id" required>
 
-                <label>Check-in previsto:</label>
-                <input type="datetime-local" name="reserva_data_checkin_previsto" required>
+                            <label>Check-in previsto:</label>
+                            <input type="datetime-local" name="reserva_data_checkin_previsto" required>
 
-                <label>Check-out previsto:</label>
-                <input type="datetime-local" name="reserva_data_checkout_previsto" required>
+                            <label>Check-out previsto:</label>
+                            <input type="datetime-local" name="reserva_data_checkout_previsto" required>
 
-                <label>Motivo da estadia:</label>
-                <textarea name="reserva_motivo"></textarea>
+                            <label>Motivo da estadia:</label>
+                            <textarea name="reserva_motivo"></textarea>
 
-                <button type="submit" class="btn-primary">Salvar</button>
-            </form>
-        </div>
-    </div>
+                            <button type="submit" class="btn-primary">Salvar</button>
+                        </form>
+                    </div>
+                </div>
 
-    <!-- ============== MODAL: EDITAR RESERVA ================= -->
-    <div id="modalEditarReserva" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Editar Reserva</h3>
-            <form id="formEditarReserva" method="POST">
-                <label>Status:</label>
-                <select name="reserva_status">
-                    <option value="pendente">Pendente</option>
-                    <option value="confirmada">Confirmada</option>
-                    <option value="em_andamento">Em andamento</option>
-                    <option value="concluida">Concluída</option>
-                    <option value="cancelada">Cancelada</option>
-                </select>
+                <!-- ============== MODAL: EDITAR RESERVA ================= -->
+                <div id="modalEditarReserva" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Editar Reserva</h3>
+                        <form id="formEditarReserva" method="POST">
+                            <label>Status:</label>
+                            <select name="reserva_status">
+                                <option value="pendente">Pendente</option>
+                                <option value="confirmada">Confirmada</option>
+                                <option value="em_andamento">Em andamento</option>
+                                <option value="concluida">Concluída</option>
+                                <option value="cancelada">Cancelada</option>
+                            </select>
 
-                <label>Check-in previsto:</label>
-                <input type="datetime-local" name="reserva_data_checkin_previsto" required>
+                            <label>Check-in previsto:</label>
+                            <input type="datetime-local" name="reserva_data_checkin_previsto" required>
 
-                <label>Check-out previsto:</label>
-                <input type="datetime-local" name="reserva_data_checkout_previsto" required>
+                            <label>Check-out previsto:</label>
+                            <input type="datetime-local" name="reserva_data_checkout_previsto" required>
 
-                <label>Motivo:</label>
-                <textarea name="reserva_motivo"></textarea>
+                            <label>Motivo:</label>
+                            <textarea name="reserva_motivo"></textarea>
 
-                <button type="submit" class="btn-primary">Salvar alterações</button>
-            </form>
-        </div>
-    </div>
-</section>
+                            <button type="submit" class="btn-primary">Salvar alterações</button>
+                        </form>
+                    </div>
+                </div>
 
-<!-- ============== ESTILO BÁSICO DOS MODAIS ================= -->
-<style>
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 100;
-        padding-top: 80px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-    }
+                <!-- ============== SCRIPT DOS MODAIS ================= -->
+                <script>
+                    // Abrir e fechar modais
+                    const modalNova = document.getElementById("modalNovaReserva");
+                    const modalEditar = document.getElementById("modalEditarReserva");
+                    const btnNova = document.getElementById("btnNovaReserva");
+                    const closeButtons = document.querySelectorAll(".close");
 
-    .modal-content {
-        background: #fff;
-        margin: auto;
-        padding: 25px;
-        border-radius: 10px;
-        width: 400px;
-        max-width: 90%;
-    }
+                    btnNova.onclick = () => modalNova.style.display = "block";
+                    closeButtons.forEach(btn => btn.onclick = () => {
+                        modalNova.style.display = "none";
+                        modalEditar.style.display = "none";
+                    });
 
-    .close {
-        float: right;
-        font-size: 20px;
-        cursor: pointer;
-    }
+                    window.onclick = (event) => {
+                        if (event.target === modalNova) modalNova.style.display = "none";
+                        if (event.target === modalEditar) modalEditar.style.display = "none";
+                    };
 
-    .btn-delete {
-        background: #d9534f;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-    }
-</style>
+                    // Preencher modal de edição dinamicamente
+                    document.querySelectorAll(".btnEditar").forEach(btn => {
+                        btn.addEventListener("click", () => {
+                            const id = btn.dataset.id;
+                            const form = document.getElementById("formEditarReserva");
+                            form.action = `/reservas/editar/${id}`;
+                            form.reserva_status.value = btn.dataset.status;
+                            form.reserva_data_checkin_previsto.value = btn.dataset.checkin;
+                            form.reserva_data_checkout_previsto.value = btn.dataset.checkout;
+                            form.reserva_motivo.value = btn.dataset.motivo;
+                            modalEditar.style.display = "block";
+                        });
+                    });
+                </script>
 
-<!-- ============== SCRIPT DOS MODAIS ================= -->
-<script>
-    // Abrir e fechar modais
-    const modalNova = document.getElementById("modalNovaReserva");
-    const modalEditar = document.getElementById("modalEditarReserva");
-    const btnNova = document.getElementById("btnNovaReserva");
-    const closeButtons = document.querySelectorAll(".close");
-
-    btnNova.onclick = () => modalNova.style.display = "block";
-    closeButtons.forEach(btn => btn.onclick = () => {
-        modalNova.style.display = "none";
-        modalEditar.style.display = "none";
-    });
-
-    window.onclick = (event) => {
-        if (event.target === modalNova) modalNova.style.display = "none";
-        if (event.target === modalEditar) modalEditar.style.display = "none";
-    };
-
-    // Preencher modal de edição dinamicamente
-    document.querySelectorAll(".btnEditar").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const id = btn.dataset.id;
-            const form = document.getElementById("formEditarReserva");
-            form.action = `/reservas/editar/${id}`;
-            form.reserva_status.value = btn.dataset.status;
-            form.reserva_data_checkin_previsto.value = btn.dataset.checkin;
-            form.reserva_data_checkout_previsto.value = btn.dataset.checkout;
-            form.reserva_motivo.value = btn.dataset.motivo;
-            modalEditar.style.display = "block";
-        });
-    });
-</script>
-
+            </section>
 
             <!-- ======================================================================================================================-->
             <!--============================================== GESTÃO DE CONTEÚDOS ====================================================-->
@@ -481,154 +460,160 @@
                                     <% }) %>
                             </tbody>
                         </table>
-            </section>
-            <!-- ======================================================================================================================-->
-            <!--=============================================== MODAL: NOVO ARTIGO ====================================================-->
-            <!--====================================================================================================================== -->
-            <div id="modalNovoArtigo" class="modal" style="display:none;">
-                <div class="modal-content">
-                    <span class="close" onclick="fecharModalNovo()">&times;</span>
-                    <h3>Novo Artigo</h3>
 
-                    <form id="formNovoArtigo" action="/admin/artigos/novo" method="POST" enctype="multipart/form-data">
-                        <label for="artigo_titulo">Título:</label>
-                        <input type="text" id="artigo_titulo" name="artigo_titulo" required>
+                        <!-- ============================================================================-->
+                        <!--========================== MODAL: NOVO ARTIGO ===============================-->
+                        <!--============================================================================ -->
+                        <div id="modalNovoArtigo" class="modal" style="display:none;">
+                            <div class="modal-content">
+                                <span class="close" onclick="fecharModalNovo()">&times;</span>
+                                <h3>Novo Artigo</h3>
 
-                        <label for="artigo_subtitulo">Subtítulo:</label>
-                        <input type="text" id="artigo_subtitulo" name="artigo_subtitulo">
+                                <form id="formNovoArtigo" action="/admin/artigos/novo" method="POST"
+                                    enctype="multipart/form-data">
+                                    <label for="artigo_titulo">Título:</label>
+                                    <input type="text" id="artigo_titulo" name="artigo_titulo" required>
 
-                        <label for="artigo_categoria">Categoria:</label>
-                        <input type="text" id="artigo_categoria" name="artigo_categoria"
-                            placeholder="Ex: Saúde, Psicologia...">
+                                    <label for="artigo_subtitulo">Subtítulo:</label>
+                                    <input type="text" id="artigo_subtitulo" name="artigo_subtitulo">
 
-                        <label for="artigo_resumo">Resumo:</label>
-                        <textarea id="artigo_resumo" name="artigo_resumo" rows="3" required></textarea>
+                                    <label for="artigo_categoria">Categoria:</label>
+                                    <input type="text" id="artigo_categoria" name="artigo_categoria"
+                                        placeholder="Ex: Saúde, Psicologia...">
 
-                        <label for="artigo_conteudo">Conteúdo completo:</label>
-                        <textarea id="artigo_conteudo" name="artigo_conteudo" rows="8" required></textarea>
+                                    <label for="artigo_resumo">Resumo:</label>
+                                    <textarea id="artigo_resumo" name="artigo_resumo" rows="3" required></textarea>
 
-                        <label for="artigo_palavras_chave">Palavras-chave:</label>
-                        <input type="text" id="artigo_palavras_chave" name="artigo_palavras_chave"
-                            placeholder="separadas por vírgula">
+                                    <label for="artigo_conteudo">Conteúdo completo:</label>
+                                    <textarea id="artigo_conteudo" name="artigo_conteudo" rows="8" required></textarea>
 
-                        <label for="artigo_slug">Slug (URL amigável):</label>
-                        <input type="text" id="artigo_slug" name="artigo_slug" placeholder="ex: cuidados-pos-cirurgia">
+                                    <label for="artigo_palavras_chave">Palavras-chave:</label>
+                                    <input type="text" id="artigo_palavras_chave" name="artigo_palavras_chave"
+                                        placeholder="separadas por vírgula">
 
-                        <label for="artigo_imagem_capa">Imagem de capa:</label>
-                        <input type="file" id="artigo_imagem_capa" name="artigo_imagem_capa" accept="image/*">
+                                    <label for="artigo_slug">Slug (URL amigável):</label>
+                                    <input type="text" id="artigo_slug" name="artigo_slug"
+                                        placeholder="ex: cuidados-pos-cirurgia">
 
-                        <div id="previewCapa" style="margin-top:10px;">
-                            <img id="capaPreviewImg" src="" alt="Prévia da capa"
-                                style="max-width:150px; display:none; border-radius:8px;">
+                                    <label for="artigo_imagem_capa">Imagem de capa:</label>
+                                    <input type="file" id="artigo_imagem_capa" name="artigo_imagem_capa"
+                                        accept="image/*">
+
+                                    <div id="previewCapa" style="margin-top:10px;">
+                                        <img id="capaPreviewImg" src="" alt="Prévia da capa"
+                                            style="max-width:150px; display:none; border-radius:8px;">
+                                    </div>
+
+                                    <button type="submit" class="btn-primary" style="margin-top:15px;">Salvar
+                                        Artigo</button>
+                                </form>
+                            </div>
                         </div>
-
-                        <button type="submit" class="btn-primary" style="margin-top:15px;">Salvar Artigo</button>
-                    </form>
-                </div>
-            </div>
-            <script>
-                /* =========================================================================================================== */
-                /* ======================================== SCRIPT: NOVO ARTIGO ============================================== */
-                /* =========================================================================================================== */
-                // Abrir modal de novo artigo
-                function abrirModalNovo() {
-                    document.getElementById('modalNovoArtigo').style.display = 'block';
-                    document.getElementById('formNovoArtigo').reset();
-                    document.getElementById('capaPreviewImg').style.display = 'none';
-                }
-                // Fechar modal
-                function fecharModalNovo() {
-                    document.getElementById('modalNovoArtigo').style.display = 'none';
-                }
-                // Pré-visualização da imagem de capa
-                document.getElementById('artigo_imagem_capa').addEventListener('change', function (event) {
-                    const file = event.target.files[0];
-                    const imgPreview = document.getElementById('capaPreviewImg');
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = e => {
-                            imgPreview.src = e.target.result;
-                            imgPreview.style.display = 'block';
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        imgPreview.style.display = 'none';
-                    }
-                });
-                // Fechar o modal clicando fora dele
-                window.addEventListener('click', function (event) {
-                    const modal = document.getElementById('modalNovoArtigo');
-                    if (event.target === modal) {
-                        fecharModalNovo();
-                    }
-                });
-            </script>
-            <script>
-                /* =========================================================================================================== */
-                /* ======================================= SCRIPT: EDITAR ARTIGO ============================================= */
-                /* =========================================================================================================== */
-                async function abrirModalEditarArtigo(id) {
-                    try {
-                        const response = await fetch(`/admin/artigos/${id}`);
-                        if (!response.ok) throw new Error('Erro ao buscar o artigo.');
-                        const artigo = await response.json();
-
-                        // Abre o modal
-                        const modal = document.getElementById('modalNovoArtigo');
-                        modal.style.display = 'block';
-                        modal.querySelector('h3').innerText = 'Editar Artigo';
-
-                        // Preenche os campos
-                        document.getElementById('artigo_titulo').value = artigo.artigo_titulo || '';
-                        document.getElementById('artigo_subtitulo').value = artigo.artigo_subtitulo || '';
-                        document.getElementById('artigo_categoria').value = artigo.artigo_categoria || '';
-                        document.getElementById('artigo_resumo').value = artigo.artigo_resumo || '';
-                        document.getElementById('artigo_palavras_chave').value = artigo.artigo_palavras_chave || '';
-                        document.getElementById('artigo_slug').value = artigo.artigo_slug || '';
-
-                        // 🔹 Espera o TinyMCE estar pronto antes de setar o conteúdo
-                        const editor = tinymce.get('artigo_conteudo');
-                        if (editor) {
-                            editor.setContent(artigo.artigo_conteudo || '');
-                        } else {
-                            tinymce.once('AddEditor', () => {
-                                tinymce.get('artigo_conteudo').setContent(artigo.artigo_conteudo || '');
+                        <script>
+                            /* =========================================================================================================== */
+                            /* ======================================== SCRIPT: NOVO ARTIGO ============================================== */
+                            /* =========================================================================================================== */
+                            // Abrir modal de novo artigo
+                            function abrirModalNovo() {
+                                document.getElementById('modalNovoArtigo').style.display = 'block';
+                                document.getElementById('formNovoArtigo').reset();
+                                document.getElementById('capaPreviewImg').style.display = 'none';
+                            }
+                            // Fechar modal
+                            function fecharModalNovo() {
+                                document.getElementById('modalNovoArtigo').style.display = 'none';
+                            }
+                            // Pré-visualização da imagem de capa
+                            document.getElementById('artigo_imagem_capa').addEventListener('change', function (event) {
+                                const file = event.target.files[0];
+                                const imgPreview = document.getElementById('capaPreviewImg');
+                                if (file) {
+                                    const reader = new FileReader();
+                                    reader.onload = e => {
+                                        imgPreview.src = e.target.result;
+                                        imgPreview.style.display = 'block';
+                                    };
+                                    reader.readAsDataURL(file);
+                                } else {
+                                    imgPreview.style.display = 'none';
+                                }
                             });
-                        }
+                            // Fechar o modal clicando fora dele
+                            window.addEventListener('click', function (event) {
+                                const modal = document.getElementById('modalNovoArtigo');
+                                if (event.target === modal) {
+                                    fecharModalNovo();
+                                }
+                            });
+                        </script>
+                        <script>
+                            /* ======================================================================== */
+                            /* ======================= SCRIPT: EDITAR ARTIGO ========================== */
+                            /* ======================================================================== */
+                            async function abrirModalEditarArtigo(id) {
+                                try {
+                                    const response = await fetch(`/admin/artigos/${id}`);
+                                    if (!response.ok) throw new Error('Erro ao buscar o artigo.');
+                                    const artigo = await response.json();
 
-                        // Mostra a imagem de capa, se existir
-                        const preview = document.getElementById('capaPreviewImg');
-                        if (artigo.artigo_imagem_capa) {
-                            preview.src = artigo.artigo_imagem_capa;
-                            preview.style.display = 'block';
-                        } else {
-                            preview.style.display = 'none';
-                        }
+                                    // Abre o modal
+                                    const modal = document.getElementById('modalNovoArtigo');
+                                    modal.style.display = 'block';
+                                    modal.querySelector('h3').innerText = 'Editar Artigo';
 
-                        // Define o action do formulário como PUT
-                        const form = document.getElementById('formNovoArtigo');
-                        form.action = `/admin/artigos/${id}?_method=PUT`;
+                                    // Preenche os campos
+                                    document.getElementById('artigo_titulo').value = artigo.artigo_titulo || '';
+                                    document.getElementById('artigo_subtitulo').value = artigo.artigo_subtitulo || '';
+                                    document.getElementById('artigo_categoria').value = artigo.artigo_categoria || '';
+                                    document.getElementById('artigo_resumo').value = artigo.artigo_resumo || '';
+                                    document.getElementById('artigo_palavras_chave').value = artigo.artigo_palavras_chave || '';
+                                    document.getElementById('artigo_slug').value = artigo.artigo_slug || '';
 
-                    } catch (err) {
-                        console.error('Erro ao abrir modal de edição:', err);
-                        alert('Não foi possível carregar o artigo para edição.');
-                    }
-                }
-            </script>
+                                    // 🔹 Espera o TinyMCE estar pronto antes de setar o conteúdo
+                                    const editor = tinymce.get('artigo_conteudo');
+                                    if (editor) {
+                                        editor.setContent(artigo.artigo_conteudo || '');
+                                    } else {
+                                        tinymce.once('AddEditor', () => {
+                                            tinymce.get('artigo_conteudo').setContent(artigo.artigo_conteudo || '');
+                                        });
+                                    }
 
-            <script
-                src="https://cdn.tiny.cloud/1/dap6c3mpzxaz4rfmtgm5rr0za2vkn7k17uwv3zsqfpn908g1/tinymce/6/tinymce.min.js"
-                referrerpolicy="origin"></script>
-            <script>
-                tinymce.init({
-                    selector: '#artigo_conteudo',
-                    height: 400,
-                    menubar: false,
-                    plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount',
-                    toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                });
-            </script>
+                                    // Mostra a imagem de capa, se existir
+                                    const preview = document.getElementById('capaPreviewImg');
+                                    if (artigo.artigo_imagem_capa) {
+                                        preview.src = artigo.artigo_imagem_capa;
+                                        preview.style.display = 'block';
+                                    } else {
+                                        preview.style.display = 'none';
+                                    }
+
+                                    // Define o action do formulário como PUT
+                                    const form = document.getElementById('formNovoArtigo');
+                                    form.action = `/admin/artigos/${id}?_method=PUT`;
+
+                                } catch (err) {
+                                    console.error('Erro ao abrir modal de edição:', err);
+                                    alert('Não foi possível carregar o artigo para edição.');
+                                }
+                            }
+                        </script>
+
+                        <script
+                            src="https://cdn.tiny.cloud/1/dap6c3mpzxaz4rfmtgm5rr0za2vkn7k17uwv3zsqfpn908g1/tinymce/6/tinymce.min.js"
+                            referrerpolicy="origin"></script>
+                        <script>
+                            tinymce.init({
+                                selector: '#artigo_conteudo',
+                                height: 400,
+                                menubar: false,
+                                plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount',
+                                toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                            });
+                        </script>
+
+            </section>
 
             <!-- ======================================================================================================================-->
             <!--================================================ GESTÃO DO CHAT =======================================================-->
@@ -663,6 +648,283 @@
                             <% } else { %>
                                 <p>Nenhuma pergunta cadastrada.</p>
                                 <% } %>
+            </section>
+
+
+            <!-- ======================================================================================================================-->
+            <!--============================================== GESTÃO DE DOAÇÕES ======================================================-->
+            <!--====================================================================================================================== -->
+            <section id="doacoes" class="conteudo">
+                <h2 class="section-title">Gestão de Doações</h2>
+
+                <!-- Botão de nova doação -->
+                <button class="btn-primary" type="button" id="btnNovaDoacao">+ Registrar Doação</button>
+
+                <!-- Filtros -->
+                <div class="filtros">
+                    <label for="filtroTipo">Tipo:</label>
+                    <select id="filtroTipo">
+                        <option value="">Todos</option>
+                        <option value="financeira">Financeira</option>
+                        <option value="alimento">Alimento</option>
+                        <option value="roupa">Roupas</option>
+                        <option value="higiene">Higiene</option>
+                    </select>
+
+                    <label for="filtroMes">Mês:</label>
+                    <select id="filtroMes">
+                        <option value="">Todos</option>
+                        <option value="1">Janeiro</option>
+                        <option value="2">Fevereiro</option>
+                        <option value="3">Março</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Maio</option>
+                        <option value="6">Junho</option>
+                        <option value="7">Julho</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+
+                    <label for="filtroAno">Ano:</label>
+                    <input type="number" id="filtroAno" placeholder="2025">
+
+                    <button id="btnAplicarFiltros" class="btn-primary" type="button">Aplicar filtros</button>
+                    <button id="btnLimparFiltros" class="btn-secondary" type="button">Limpar</button>
+                </div>
+
+                <!-- Lista de doações -->
+                <table id="tabelaDoacoes">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Doador</th>
+                            <th>Tipo</th>
+                            <th>Valor/Descrição</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% if (doacoes && doacoes.length> 0) { %>
+                            <% doacoes.forEach(d=> { %>
+                                <tr>
+                                    <td>
+                                        <%= d.doacao_id %>
+                                    </td>
+                                    <td>
+                                        <%= d.doador_nome %>
+                                    </td>
+                                    <td>
+                                        <%= d.doacao_tipo %>
+                                    </td>
+                                    <td>
+                                        <% if (d.doacao_valor) { %>
+                                            R$ <%= d.doacao_valor %>
+                                                <% } else { %>
+                                                    <%= d.doacao_categoria_item || d.doacao_info || "—" %>
+                                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <%= new Date(d.doacao_data).toLocaleDateString("pt-BR") %>
+                                    </td>
+                                    <td>
+                                        <%= d.doacao_status %>
+                                    </td>
+
+                                    <td class="acoes">
+                                        <button class="btnEditarDoacao" data-id="<%= d.doacao_id %>"
+                                            data-tipo="<%= d.doacao_tipo %>"
+                                            data-info="<%= d.doacao_info || d.doacao_valor %>"
+                                            data-status="<%= d.doacao_status %>"
+                                            data-data="<%= d.doacao_data.toISOString() %>">
+                                            ✏️
+                                        </button>
+
+                                        <a href="/admin/doacoes/deletar/<%= d.doacao_id %>" class="btn-delete"
+                                            onclick="return confirm('Excluir doação?')">🗑️</a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="7">Nenhuma doação encontrada.</td>
+                                        </tr>
+                                        <% } %>
+                    </tbody>
+
+                </table>
+
+                <!-- ============== MODAL NOVA DOAÇÃO ================= -->
+                <div id="modalNovaDoacao" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Registrar Doação</h3>
+                        <form action="/admin/doacoes/nova" method="POST">
+
+                            <label>Doador ID:</label>
+                            <input type="number" name="doador_id" required>
+
+                            <label>Tipo:</label>
+                            <select name="doacao_tipo" required>
+                                <option value="financeira">Financeira</option>
+                                <option value="alimento">Alimento</option>
+                                <option value="roupa">Roupas</option>
+                                <option value="higiene">Higiene</option>
+                            </select>
+
+                            <label>Valor / Descrição:</label>
+                            <input type="text" name="doacao_info" required>
+
+                            <label>Data:</label>
+                            <input type="datetime-local" name="doacao_data" required>
+
+                            <label>Status:</label>
+                            <select name="doacao_status">
+                                <option value="confirmada">Confirmada</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="cancelada">Cancelada</option>
+                            </select>
+
+                            <button class="btn-primary" type="submit">Salvar</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ============== MODAL EDITAR DOAÇÃO ================= -->
+                <div id="modalEditarDoacao" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Editar Doação</h3>
+                        <form id="formEditarDoacao" method="POST">
+
+                            <label>Tipo:</label>
+                            <select name="doacao_tipo">
+                                <option value="financeira">Financeira</option>
+                                <option value="alimento">Alimento</option>
+                                <option value="roupa">Roupas</option>
+                                <option value="higiene">Higiene</option>
+                            </select>
+
+                            <label>Valor / Descrição:</label>
+                            <input type="text" name="doacao_info" required>
+
+                            <label>Data:</label>
+                            <input type="datetime-local" name="doacao_data" required>
+
+                            <label>Status:</label>
+                            <select name="doacao_status">
+                                <option value="confirmada">Confirmada</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="cancelada">Cancelada</option>
+                            </select>
+
+                            <button class="btn-primary" type="submit">Salvar Alterações</button>
+                        </form>
+                    </div>
+                </div>
+
+                <script>
+                    const modalNovaDoacao = document.getElementById("modalNovaDoacao");
+                    const modalEditarDoacao = document.getElementById("modalEditarDoacao");
+
+                    const btnNovaDoacao = document.getElementById("btnNovaDoacao");
+                    const closeBtnsDoacao = modalNovaDoacao.querySelector(".close").onclick =
+                        modalEditarDoacao.querySelector(".close").onclick =
+                        function () {
+                            modalNovaDoacao.style.display = "none";
+                            modalEditarDoacao.style.display = "none";
+                        };
+
+                    btnNovaDoacao.onclick = () => modalNovaDoacao.style.display = "block";
+
+                    // Preencher modal de edição
+                    document.querySelectorAll(".btnEditarDoacao").forEach(btn => {
+                        btn.onclick = () => {
+                            const form = document.getElementById("formEditarDoacao");
+
+                            form.action = `/admin/doacoes/editar/${btn.dataset.id}`;
+                            form.doacao_tipo.value = btn.dataset.tipo;
+                            form.doacao_info.value = btn.dataset.info;
+                            form.doacao_status.value = btn.dataset.status;
+                            form.doacao_data.value = btn.dataset.data;
+
+                            modalEditarDoacao.style.display = "block";
+                        };
+                    });
+
+                    window.onclick = (event) => {
+                        if (event.target === modalNovaDoacao) modalNovaDoacao.style.display = "none";
+                        if (event.target === modalEditarDoacao) modalEditarDoacao.style.display = "none";
+                    };
+                </script>
+
+                <script>
+                    // ============================
+                    // FILTROS DE DOAÇÕES (FRONT-END)
+                    // ============================
+
+                    const filtroTipo = document.getElementById("filtroTipo");
+                    const filtroMes = document.getElementById("filtroMes");
+                    const filtroAno = document.getElementById("filtroAno");
+
+                    const btnAplicar = document.getElementById("btnAplicarFiltros");
+                    const btnLimpar = document.getElementById("btnLimparFiltros");
+
+                    const linhas = document.querySelectorAll("#tabelaDoacoes tbody tr");
+
+                    function aplicarFiltros() {
+                        const tipo = filtroTipo.value;
+                        const mes = filtroMes.value;
+                        const ano = filtroAno.value.trim();
+
+                        linhas.forEach(tr => {
+                            const tds = tr.querySelectorAll("td");
+
+                            if (tds.length === 1) return; // ignora “Nenhuma doação encontrada”
+
+                            const tipoTD = tds[2].textContent.trim().toLowerCase();
+                            const dataTD = tds[4].textContent.trim(); // formato BR: dd/mm/yyyy
+
+                            const [dia, mesBR, anoBR] = dataTD.split("/");
+
+                            let mostrar = true;
+
+                            // Filtro por tipo
+                            if (tipo && tipoTD !== tipo.toLowerCase()) {
+                                mostrar = false;
+                            }
+
+                            // Filtro por mês
+                            if (mes && Number(mesBR) !== Number(mes)) {
+                                mostrar = false;
+                            }
+
+                            // Filtro por ano
+                            if (ano && Number(anoBR) !== Number(ano)) {
+                                mostrar = false;
+                            }
+
+                            tr.style.display = mostrar ? "" : "none";
+                        });
+                    }
+
+                    // Botão aplicar
+                    btnAplicar.onclick = aplicarFiltros;
+
+                    // Botão limpar
+                    btnLimpar.onclick = () => {
+                        filtroTipo.value = "";
+                        filtroMes.value = "";
+                        filtroAno.value = "";
+                        linhas.forEach(tr => tr.style.display = "");
+                    };
+                </script>
+
             </section>
 
             <script>

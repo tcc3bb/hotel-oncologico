@@ -7,15 +7,12 @@ module.exports = function (painelAdminDAO) {
     const ArtigosDAO = require('../infra/ArtigosDAO');
     const connectionFactory = require('../infra/connectionFactory');
     const connection = connectionFactory();
-
-    // CORREÇÃO: Adicionando 'new' se ArtigosDAO for uma classe
     const artigosDAO = ArtigosDAO(connection);
     const PerguntasDAO = require('../infra/PerguntasDAO');
     const perguntasDAO = new PerguntasDAO(connection);
     const reservasController = require('../controllers/reservasController');
-
-    // CORREÇÃO PRINCIPAL: Removendo o '()' para importar a classe
     const ReservasDAO = require('../infra/ReservasDAO');
+    const DoacaoDAO = require('../infra/DoacaoDAO');
 
 
     // 🔹 Middleware: apenas admin pode acessar
@@ -40,35 +37,42 @@ module.exports = function (painelAdminDAO) {
                 perguntasDAO.listarComRespostas((err, perguntas) => {
                     if (err) return res.status(500).send('Erro ao listar perguntas');
 
-                    // ✅ Buscar reservas antes de renderizar
                     const connection2 = require('../infra/connectionFactory')();
-
-                    // CORREÇÃO: Usando o import da classe, não do require completo
-                    // const ReservasDAO = require('../infra/ReservasDAO'); 
-                    // ReservasDAO já foi importado no topo, podemos usar a variável
                     const reservasDAO = new ReservasDAO(connection2);
 
-
-                    // CORREÇÃO: O método correto no DAO é 'listar', não 'listarTodas'
                     reservasDAO.listar((err, reservas) => {
-                        connection2.end(); // Boa prática: fechar a conexão aqui
                         if (err) {
                             console.error('Erro ao listar reservas:', err);
                             return res.status(500).send('Erro ao listar reservas');
                         }
 
-                        res.render('admin/painel', {
-                            user: req.session.user,
-                            usuarios,
-                            artigos,
-                            perguntas,
-                            reservas
+                        // 💥 ADICIONAR A BUSCA DAS DOAÇÕES AQUI
+                        const connection3 = require('../infra/connectionFactory')();
+                        const doacaoDAO = new DoacaoDAO(connection3);
+
+                        doacaoDAO.listarTodas((err, doacoes) => {
+                            connection3.end();
+
+                            if (err) {
+                                console.error('Erro ao listar doações:', err);
+                                return res.status(500).send('Erro ao listar doações');
+                            }
+
+                            res.render('admin/painel', {
+                                user: req.session.user,
+                                usuarios,
+                                artigos,
+                                perguntas,
+                                reservas,
+                                doacoes   // <<< 🔥 agora EXISTE
+                            });
                         });
                     });
                 });
             });
         });
     });
+
 
 
 
@@ -283,7 +287,7 @@ module.exports = function (painelAdminDAO) {
                 return res.status(500).send('Erro ao excluir artigo');
             }
             res.redirect('/admin/painel');
-        }); 
+        });
     });
 
 
@@ -293,6 +297,33 @@ module.exports = function (painelAdminDAO) {
     router.get('/reservas/editar/:id', reservasController.editarForm);
     router.post('/reservas/editar/:id', reservasController.atualizar);
     router.get('/reservas/deletar/:id', reservasController.deletar);
+
+    // =========================
+    // GESTÃO DE DOAÇÕES — ADMIN
+    // =========================
+    router.get("/doacoes", (req, res) => {
+        const connection = connectionFactory();
+        const DoacaoDAO = require("../infra/DoacaoDAO");
+        const dao = new DoacaoDAO(connection);
+
+        dao.listarTodas((err, doacoes) => {
+            connection.end();
+
+            if (err) {
+                console.log(err);
+                return res.status(500).send("Erro ao buscar doações.");
+            }
+
+            res.render("admin/painel", {
+                usuarios: [],
+                artigos: [],
+                perguntas: [],
+                reservas: [],
+                doacoes: doacoes   // <<<<<< AQUI!
+            });
+        });
+    });
+
 
     return router;
 };

@@ -77,6 +77,24 @@ class DoacaoDAO {
         });
     }
 
+    listarTodas(callback) {
+    const sql = `
+        SELECT 
+            d.*, 
+            CASE 
+                WHEN doa.doador_tipo = 'Pessoa Jurídica' 
+                    THEN doa.doador_nome_empresa
+                ELSE doa.doador_nome
+            END AS doador_nome
+        FROM doacao d
+        JOIN doador doa ON doa.doador_id = d.doador_id
+        ORDER BY d.doacao_data DESC
+    `;
+    
+    this._connection.query(sql, callback);
+}
+
+
 
 }
 
