@@ -59,6 +59,25 @@ class DoacaoDAO {
         this._connection.query(sql, params, callback);
     }
 
+    calcularTotais(doadorId, callback) {
+        const sql = `
+        SELECT 
+            COALESCE(SUM(CASE WHEN MONTH(doacao_data) = MONTH(CURRENT_DATE()) 
+                            AND YEAR(doacao_data) = YEAR(CURRENT_DATE()) 
+                            THEN doacao_valor END), 0) AS totalMes,
+            COALESCE(SUM(CASE WHEN YEAR(doacao_data) = YEAR(CURRENT_DATE()) 
+                            THEN doacao_valor END), 0) AS totalAno
+        FROM doacao
+        WHERE doador_id = ?
+    `;
+
+        this._connection.query(sql, [doadorId], (erro, resultados) => {
+            if (erro) return callback(erro);
+            callback(null, resultados[0]);
+        });
+    }
+
+
 }
 
 

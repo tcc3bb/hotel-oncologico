@@ -10,20 +10,31 @@
     --cinza-escuro: #666;
     --sombra-leve: rgba(0, 0, 0, 0.1);
     --borda-arredondada: 8px;
-    --cor-principal: #23543b; /* Verde Escuro Original */
-    --cor-secundaria: #3a7d55; /* Verde Médio Original - Usado para hover e acentos */
-    --cor-acento-claro: #cfe9d1; /* Verde Claro Original - Usado para fundos */
-    --cor-acento-vibrante: #00bcd4; /* Azul Turquesa para destaque moderno, fugindo do verde no sidebar */
-    --cor-fundo-dashboard: #f4f7f6; /* Fundo mais suave para o painel */
+    --cor-principal: #23543b;
+    /* Verde Principal (Claro) */
+    /* Verde Escuro Original */
+    --cor-secundaria: #3a7d55;
+    /* Verde Médio Original - Usado para hover e acentos */
+    --cor-acento-claro: #cfe9d1;
+    /* Verde Claro Original - Usado para fundos */
+    --cor-acento-vibrante: #00bcd4;
+    /* Azul Turquesa para destaque moderno, fugindo do verde no sidebar */
+    --cor-fundo-dashboard: #f4f7f6;
+    /* Fundo mais suave para o painel */
     --cor-texto-escuro: #333;
     --cor-texto-claro: #fff;
-    
+
     /* Cores de Status/Ações */
-    --cor-sucesso: #4CAF50; /* Verde vibrante */
-    --cor-aviso: #FFC107; /* Amarelo */
-    --cor-perigo: #E91E63; /* Rosa/Vermelho vibrante para atenção/cancelar */
-    --cor-info: #2196F3; /* Azul */
-    --cor-service: #9C27B0; /* Roxo para tags de serviço */
+    --cor-sucesso: #4CAF50;
+    /* Verde vibrante */
+    --cor-aviso: #FFC107;
+    /* Amarelo */
+    --cor-perigo: #E91E63;
+    /* Rosa/Vermelho vibrante para atenção/cancelar */
+    --cor-info: #2196F3;
+    /* Azul */
+    --cor-service: #9C27B0;
+    /* Roxo para tags de serviço */
 
     --sombra-elevada: 0 4px 12px rgba(0, 0, 0, 0.08);
     --borda-arredondada-lg: 12px;
@@ -413,8 +424,15 @@ main {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .section-title {
@@ -448,13 +466,15 @@ main {
     transform: translateY(-2px);
 }
 
-.card-title, .card-subtitle {
+.card-title,
+.card-subtitle {
     font-family: 'Cinzel Decorative', serif;
     color: var(--cor-principal);
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 1.3rem;
 }
+
 .card-subtitle {
     font-size: 1.1rem;
     color: var(--cor-secundaria);
@@ -489,7 +509,10 @@ main {
 }
 
 /* -------------------- Botões -------------------- */
-.btn-primary, .btn-secondary, .btn-delete, .btn-download {
+.btn-primary,
+.btn-secondary,
+.btn-delete,
+.btn-download {
     padding: 10px 20px;
     border-radius: var(--borda-arredondada-md);
     border: none;
@@ -618,11 +641,26 @@ tbody td {
     color: var(--cor-texto-claro);
 }
 
-.badge-success { background-color: var(--cor-sucesso); }
-.badge-warning { background-color: var(--cor-aviso); color: var(--cor-texto-escuro);}
-.badge-danger { background-color: var(--cor-perigo); }
-.badge-info { background-color: var(--cor-info); }
-.badge-service { background-color: var(--cor-service); }
+.badge-success {
+    background-color: var(--cor-sucesso);
+}
+
+.badge-warning {
+    background-color: var(--cor-aviso);
+    color: var(--cor-texto-escuro);
+}
+
+.badge-danger {
+    background-color: var(--cor-perigo);
+}
+
+.badge-info {
+    background-color: var(--cor-info);
+}
+
+.badge-service {
+    background-color: var(--cor-service);
+}
 
 
 /* -------------------- Histórico Section -------------------- */
@@ -850,7 +888,165 @@ tbody td {
     margin-top: 20px;
 }
 
-/* -------------------- Rodapé -------------------- */
+
+/* =============================================================================================================================== */
+/* ======================================================= MINHA CONTA =========================================================== */
+/* =============================================================================================================================== */
+#conta {
+    background: var(--cinza-claro);
+    border-radius: var(--borda-arredondada);
+    box-shadow: var(--sombra-leve);
+}
+
+fieldset {
+    border: 2px solid var(--cor-secundaria);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    padding: 0 10px;
+    margin-left: -5px;
+}
+
+.section-title {
+    color: var(--verde-escuro);
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--verde-medio);
+}
+
+.section-subtitle {
+    color: var(--verde-medio);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.info-card {
+    background: var(--branco);
+    border-radius: var(--borda-arredondada);
+    box-shadow: 0 2px 6px var(--sombra-leve);
+    transition: var(--transicao-rapida);
+}
+
+.info-card:hover {
+    transform: translateY(-2px);
+}
+
+.campo,
+.campo-duplo,
+.campo-trio {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    gap: .5rem;
+}
+
+.campo-duplo {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.campo-duplo>div,
+.campo-trio>div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-trio>div:not(:last-child) {
+    margin-right: .5rem;
+}
+
+label {
+    font-weight: 600;
+    color: var(--verde-escuro);
+}
+
+input,
+textarea,
+select {
+    padding: .6rem .8rem;
+    border: 1px solid var(--cinza-medio);
+    border-radius: var(--borda-arredondada);
+    background: var(--cinza-claro);
+    transition: var(--transicao-rapida);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--verde-medio);
+    background: var(--branco);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.btn-primary,
+.btn-success,
+.delete {
+    border: none;
+    padding: .7rem 1.4rem;
+    border-radius: var(--borda-arredondada);
+    cursor: pointer;
+    transition: var(--transicao-rapida);
+    font-weight: 600;
+    color: var(--branco);
+}
+
+.btn-primary {
+    background: var(--verde-medio);
+}
+
+.btn-primary:hover {
+    background: var(--verde-escuro);
+}
+
+.btn-success {
+    background: var(--verde-escuro);
+}
+
+.btn-success:hover {
+    background: #1a3f2c;
+}
+
+.delete {
+    background: var(--vermelho);
+}
+
+.delete:hover {
+    background: #b52b27;
+}
+
+input[readonly],
+select[readonly] {
+    background: #f8f8f8;
+    cursor: pointer;
+}
+
+input:not([readonly]),
+select:not([readonly]) {
+    border: 2px solid #2ecc71;
+    background: #fff;
+}
+
+/* =============================================================================================================================== */
+/* ========================================================== FOOTER ============================================================= */
+/* =============================================================================================================================== */
 footer {
     background-color: #699b80;
     color: #fff;
@@ -868,7 +1064,7 @@ footer {
     gap: 30px;
 }
 
-.footer-container > div {
+.footer-container>div {
     flex: 1 1 250px;
     min-width: 220px;
 }
