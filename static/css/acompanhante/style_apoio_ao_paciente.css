@@ -74,7 +74,7 @@ nav a:hover {
     background-color: #3b4a3b;
     color: white;
     border-radius: 8px;
-    font-weight: 700;
+    font-weight: 700; 
     font-family: 'Cinzel Decorative', serif;
     box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
     transition: background-color 0.3s ease;
@@ -304,6 +304,114 @@ textarea {
     border: 1px solid var(--cinza-medio);
     resize: vertical;
 }
+
+/* ======= MINHA CONTA ========== */
+
+#conta {
+    background: var(--cinza-claro);
+    border-radius: var(--borda-arredondada);
+    box-shadow: var(--sombra-leve);
+}
+
+.section-title {
+    color: var(--verde-escuro);
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--verde-medio);
+}
+
+.section-subtitle {
+    color: var(--verde-medio);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.info-card {
+    background: var(--branco);
+    border-radius: var(--borda-arredondada);
+    box-shadow: 0 2px 6px var(--sombra-leve);
+    transition: var(--transicao-rapida);
+}
+
+.info-card:hover {
+    transform: translateY(-2px);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    gap: .5rem;
+}
+
+label {
+    font-weight: 600;
+    color: var(--verde-escuro);
+}
+
+input,
+select,
+textarea {
+    padding: .6rem .8rem;
+    border: 1px solid var(--cinza-medio);
+    border-radius: var(--borda-arredondada);
+    background: var(--cinza-claro);
+    transition: var(--transicao-rapida);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--verde-medio);
+    background: var(--branco);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.btn {
+    border: none;
+    padding: .7rem 1.4rem;
+    border-radius: var(--borda-arredondada);
+    cursor: pointer;
+    transition: var(--transicao-rapida);
+    font-weight: 600;
+    color: var(--branco);
+    background: var(--verde-medio);
+}
+
+.btn:hover {
+    background: var(--verde-escuro);
+}
+
+.excluir {
+    background: var(--vermelho);
+}
+
+.excluir:hover {
+    background: #b52b27;
+}
+
+.hidden {
+    display: none;
+}
+
+input[disabled],
+select[disabled],
+textarea[disabled] {
+    background: #f8f8f8;
+    cursor: pointer;
+}
+
+input:not([disabled]),
+select:not([disabled]),
+textarea:not([disabled]) {
+    border: 2px solid #2ecc71;
+    background: #fff;
+}
+
 
 /* ================================================
 FOOTER

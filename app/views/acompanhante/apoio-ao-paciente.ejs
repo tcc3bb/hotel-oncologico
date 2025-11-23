@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/acompanhante/style_apoio_ao_paciente.css">
-</head> 
+</head>
 
 <body>
 
@@ -54,19 +54,195 @@
 
     <div class="painel-container">
         <aside class="sidebar">
-            <div class="sidebar-item active" data-target="paciente"><span class="icon">👩‍⚕️</span> Paciente Vinculado
+            <div class="sidebar-item active" data-target="conta" tabindex="0">
+                <span class="icon" aria-hidden="true">👤</span>
+                <span>Minha Conta</span>
             </div>
-            <div class="sidebar-item" data-target="agenda"><span class="icon">📅</span> Agenda do Paciente</div>
-            <div class="sidebar-item" data-target="chat"><span class="icon">💬</span> Comunicação</div>
-            <div class="sidebar-item" data-target="orientacoes"><span class="icon">📘</span> Orientações e Recursos
+            <div class="sidebar-item" data-target="paciente">
+                <span class="icon">👩‍⚕️</span>
+                <span> Paciente </span>
             </div>
-            <div class="sidebar-item" data-target="feedback"><span class="icon">📝</span> Feedback e Avaliações</div>
+            <div class="sidebar-item" data-target="agenda">
+                <span class="icon">📅</span>
+                Agenda do Paciente
+            </div>
+            <div class="sidebar-item" data-target="orientacoes">
+                <span class="icon">📘</span>
+                Orientações e Recursos
+            </div>
+            <div class="sidebar-item" data-target="feedback">
+                <span class="icon">📝</span>
+                Feedback e Avaliações
+            </div>
         </aside>
 
         <main>
 
-            <!-- PACIENTE VINCULADO -->
-            <section id="paciente" class="conteudo ativo">
+            <!-- ======================================================================================================================-->
+            <!--===================================================== MINHA CONTA =====================================================-->
+            <!--====================================================================================================================== -->
+            <section id="conta" class="conteudo ativo">
+                <h2 class="section-title">👤 Minha Conta — Acompanhante</h2>
+
+                <form id="formConta" class="info-form">
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Conta</h3>
+                        <div class="form-group">
+                            <label>Email (login):</label>
+                            <input type="email" name="usuario_email" value="<%= dados.usuario_email %>" readonly>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Informações Pessoais</h3>
+
+                        <div class="form-group">
+                            <label>Nome Completo:</label>
+                            <input type="text" id="acompanhante_nome" name="acompanhante_nome"
+                                value="<%= dados.acompanhante_nome %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>CPF:</label>
+                            <input type="text" id="acompanhante_cpf" name="acompanhante_cpf"
+                                value="<%= dados.acompanhante_cpf %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>RG:</label>
+                            <input type="text" id="acompanhante_rg" name="acompanhante_rg"
+                                value="<%= dados.acompanhante_rg %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Data de Nascimento:</label>
+                            <input type="date" id="acompanhante_data_nascimento" name="acompanhante_data_nascimento"
+                                value="<%= dados.acompanhante_data_nascimento ? dados.acompanhante_data_nascimento.toISOString().substring(0,10) : '' %>">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sexo:</label>
+                            <select id="acompanhante_sexo" name="acompanhante_sexo">
+                                <option <%=dados.acompanhante_sexo==='Masculino' ?'selected':'' %> >Masculino</option>
+                                <option <%=dados.acompanhante_sexo==='Feminino' ?'selected':'' %> >Feminino</option>
+                                <option <%=dados.acompanhante_sexo==='Outro' ?'selected':'' %> >Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Parentesco com o Paciente:</label>
+                            <input type="text" id="acompanhante_parentesco" name="acompanhante_parentesco"
+                                value="<%= dados.acompanhante_parentesco %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Telefone:</label>
+                            <input type="text" id="acompanhante_telefone" name="acompanhante_telefone"
+                                value="<%= dados.acompanhante_telefone %>">
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Endereço</h3>
+
+                        <div class="form-group">
+                            <label>Endereço:</label>
+                            <input type="text" id="acompanhante_endereco" name="acompanhante_endereco"
+                                value="<%= dados.acompanhante_endereco %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Número:</label>
+                            <input type="number" id="acompanhante_numero" name="acompanhante_numero"
+                                value="<%= dados.acompanhante_numero %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Complemento:</label>
+                            <input type="text" id="acompanhante_complemento" name="acompanhante_complemento"
+                                value="<%= dados.acompanhante_complemento %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cidade:</label>
+                            <input type="text" id="acompanhante_cidade" name="acompanhante_cidade"
+                                value="<%= dados.acompanhante_cidade %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Estado:</label>
+                            <input type="text" id="acompanhante_estado" name="acompanhante_estado"
+                                value="<%= dados.acompanhante_estado %>">
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Observações</h3>
+                        <textarea id="acompanhante_observacoes"
+                            name="acompanhante_observacoes"><%= dados.acompanhante_observacoes %></textarea>
+                    </div>
+
+                    <button id="btnSalvar" type="button" class="btn">Salvar Alterações</button>
+
+                    <hr>
+
+                    <button id="btnExcluir" type="button" class="btn excluir">Excluir Minha Conta</button>
+                </form>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+
+                        const inputs = document.querySelectorAll("#formConta input, #formConta select, #formConta textarea");
+                        const btnSalvar = document.getElementById("btnSalvar");
+                        const btnExcluir = document.getElementById("btnExcluir");
+
+                        btnSalvar.onclick = async () => {
+
+                            const dados = {};
+
+                            inputs.forEach(i => {
+                                dados[i.name] = i.value;
+                            });
+
+                            const reqApi = await fetch("/acompanhante/atualizar", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(dados)
+                            });
+
+                            const res = await reqApi.json();
+
+
+                            if (!res.ok) return alert("Erro ao salvar: " + res.message);
+
+                            alert("Dados atualizados com sucesso!");
+                            window.location.reload();
+                        };
+
+                        btnExcluir.onclick = async () => {
+                            if (!confirm("Tem certeza que deseja excluir sua conta?")) return;
+
+                            const req = await fetch("/acompanhante/excluir/<%= dados.usuario_id %>", {
+                                method: "DELETE"
+                            });
+
+                            const res = await req.json();
+
+                            if (res.ok) window.location.href = "/";
+                            else alert("Erro ao excluir: " + res.message);
+                        };
+                    });
+                </script>
+
+            </section>
+
+
+            <!-- ======================================================================================================================-->
+            <!--================================================= PACIENTE VINCULADO ==================================================-->
+            <!--====================================================================================================================== -->
+            <section id="paciente" class="conteudo">
                 <h2 class="section-title">👩‍⚕️ Paciente Vinculado</h2>
                 <div class="card">
                     <h3 class="card-title">Ficha do Paciente</h3>
@@ -93,17 +269,11 @@
                     </ul>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">Upload de Documentos</h3>
-                    <div class="upload-area">
-                        <label class="upload-label">Arraste ou selecione arquivos (PDF, JPG, PNG)</label>
-                        <input type="file" multiple style="display:none;">
-                        <button class="btn-primary">Enviar</button>
-                    </div>
-                </div>
             </section>
 
-            <!-- AGENDA -->
+            <!-- ======================================================================================================================-->
+            <!--======================================================= AGENDA ========================================================-->
+            <!--====================================================================================================================== -->
             <section id="agenda" class="conteudo">
                 <h2 class="section-title">📅 Agenda do Paciente</h2>
                 <p class="subtitle">Visualize as próximas atividades e compromissos.</p>
@@ -140,32 +310,9 @@
                 </div>
             </section>
 
-            <!-- COMUNICAÇÃO -->
-            <section id="chat" class="conteudo">
-                <h2 class="section-title">💬 Comunicação e Chat</h2>
-                <div class="chat-cards">
-                    <div class="card card-chat">
-                        <span class="chat-icon">🩺</span>
-                        <h4 class="card-title">Equipe Médica</h4>
-                        <p>Envie dúvidas sobre o tratamento ou sintomas.</p>
-                        <button class="btn-primary-block">Abrir Chat</button>
-                    </div>
-                    <div class="card card-chat">
-                        <span class="chat-icon">🤝</span>
-                        <h4 class="card-title">Voluntários</h4>
-                        <p>Solicite apoio emocional e companhia no período de internação.</p>
-                        <button class="btn-primary-block">Conversar Agora</button>
-                    </div>
-                    <div class="card card-chat">
-                        <span class="chat-icon">🏨</span>
-                        <h4 class="card-title">Recepção e Hotel</h4>
-                        <p>Para dúvidas sobre hospedagem, transporte e horários.</p>
-                        <button class="btn-primary-block">Falar com Recepção</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ORIENTAÇÕES -->
+            <!-- ======================================================================================================================-->
+            <!--===================================================== ORIENTAÇÕES =====================================================-->
+            <!--====================================================================================================================== -->
             <section id="orientacoes" class="conteudo">
                 <h2 class="section-title">📘 Orientações e Recursos</h2>
                 <div class="card">
@@ -194,7 +341,9 @@
                 </div>
             </section>
 
-            <!-- FEEDBACK -->
+            <!-- ======================================================================================================================-->
+            <!--====================================================== FEEDBACK =======================================================-->
+            <!--====================================================================================================================== -->
             <section id="feedback" class="conteudo">
                 <h2 class="section-title">📝 Feedback e Avaliações</h2>
                 <div class="card card-avaliacao">

@@ -160,7 +160,7 @@ module.exports = (connectionFactory) => {
 
     router.post('/acompanhante/:id', (req, res) => {
         const { id } = req.params;
-        const { acompanhante_nome, acompanhante_email, acompanhante_cpf, acompanhante_rg, acompanhante_data_nascimento, acompanhante_sexo, acompanhante_parentesco, acompanhante_telefone, acompanhante_endereco, acompanhante_cidade, acompanhante_estado, acompanhante_observacoes, paciente_email } = req.body;
+        const { acompanhante_nome, acompanhante_email, acompanhante_cpf, acompanhante_rg, acompanhante_data_nascimento, acompanhante_sexo, acompanhante_parentesco, acompanhante_telefone, acompanhante_endereco, acompanhante_numero, acompanhante_complemento, acompanhante_cidade, acompanhante_estado, acompanhante_observacoes, paciente_email } = req.body;
 
         console.log('POST /acompanhante ->', req.body);
 
@@ -168,7 +168,7 @@ module.exports = (connectionFactory) => {
         connection.query('SELECT usuario_email FROM usuario WHERE usuario_id = ?', [id], (err, rows) => {
             if (err) {
                 console.error('Erro ao buscar e-mail do usuário:', err);
-                return res.status(500).render('questionarios/paciente', {
+                return res.status(500).render('questionarios/acompanhante', {
                     erro: 'Erro ao buscar e-mail do usuário. Verifique os logs.',
                     usuarioId: id
                 });
@@ -188,17 +188,19 @@ module.exports = (connectionFactory) => {
             acompanhante_parentesco, 
             acompanhante_telefone, 
             acompanhante_endereco, 
+            acompanhante_numero, 
+            acompanhante_complemento, 
             acompanhante_cidade, 
             acompanhante_estado, 
             acompanhante_observacoes, 
             paciente_email
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
             connection.query(sqlInsert, [
                 id,
                 acompanhante_nome,
-                acompanhante_email,
+                email,
                 acompanhante_cpf,
                 acompanhante_rg,
                 acompanhante_data_nascimento,
@@ -206,6 +208,8 @@ module.exports = (connectionFactory) => {
                 acompanhante_parentesco,
                 acompanhante_telefone,
                 acompanhante_endereco,
+                acompanhante_numero,
+                acompanhante_complemento,
                 acompanhante_cidade,
                 acompanhante_estado,
                 acompanhante_observacoes,

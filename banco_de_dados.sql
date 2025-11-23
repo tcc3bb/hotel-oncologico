@@ -23,8 +23,8 @@ USE `hotel`;
 CREATE TABLE IF NOT EXISTS `acompanhante` (
   `acompanhante_id` int NOT NULL AUTO_INCREMENT,
   `usuario_id` int NOT NULL,
-  `acompanhante_nome` varchar(255) NOT NULL,
   `acompanhante_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `acompanhante_nome` varchar(255) NOT NULL,
   `acompanhante_cpf` varchar(14) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `acompanhante_rg` varchar(20) DEFAULT NULL,
   `acompanhante_data_nascimento` date NOT NULL,
@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS `acompanhante` (
   `acompanhante_parentesco` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `acompanhante_telefone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `acompanhante_endereco` varchar(255) DEFAULT NULL,
+  `acompanhante_numero` int DEFAULT NULL,
+  `acompanhante_complemento` int DEFAULT NULL,
   `acompanhante_cidade` varchar(100) DEFAULT NULL,
   `acompanhante_estado` varchar(50) DEFAULT NULL,
   `paciente_email` varchar(255) NOT NULL,
@@ -154,22 +156,21 @@ CREATE TABLE IF NOT EXISTS `doacao` (
   PRIMARY KEY (`doacao_id`),
   KEY `idx_doador_doacao` (`doador_id`),
   CONSTRAINT `fk_doacao_doador` FOREIGN KEY (`doador_id`) REFERENCES `doador` (`doador_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela hotel.doacao: ~3 rows (aproximadamente)
 DELETE FROM `doacao`;
 INSERT INTO `doacao` (`doacao_id`, `doador_id`, `doacao_tipo`, `doacao_valor`, `doacao_metodo_pagamento`, `doacao_comprovante`, `doacao_categoria_item`, `doacao_quantidade`, `doacao_unidade`, `doacao_status`, `doacao_data`, `doacao_destino`, `doacao_recorrencia`, `doacao_condicao`, `servico_tipo`) VALUES
-	(7, 3, 'Produto', NULL, NULL, NULL, 'móvel', 2, NULL, 'Pendente', '2025-11-20 18:29:52', 'Apoiar Pacientes', 'Única', 'Novo', NULL),
-	(8, 3, 'Financeira', 1100.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-10-20 18:33:30', 'Apoiar Pacientes', 'Única', NULL, NULL),
-	(9, 3, 'Alimento', NULL, NULL, NULL, 'arroz', 2, '3', 'Pendente', '2025-11-20 19:19:15', 'Apoiar Pacientes', 'Única', NULL, NULL),
-	(10, 3, 'Financeira', 200.00, 'Cartão de Crédito', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-20 20:15:45', 'Apoiar Pacientes', 'Única', NULL, NULL);
+	(11, 5, 'Financeira', 500.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-22 16:38:52', 'Apoiar Pacientes', 'Única', NULL, NULL),
+	(12, 5, 'Financeira', 1002.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2024-01-22 17:05:15', 'Apoiar Pacientes', 'Única', NULL, NULL),
+	(13, 5, 'Produto', NULL, NULL, NULL, 'móvel', 2, NULL, 'Pendente', '2025-11-22 17:05:21', 'Apoiar Pacientes', 'Única', 'Novo', NULL);
 
 -- Copiando estrutura para tabela hotel.doador
 CREATE TABLE IF NOT EXISTS `doador` (
   `doador_id` int NOT NULL AUTO_INCREMENT,
   `usuario_id` int NOT NULL,
   `doador_tipo` enum('Pessoa Física','Pessoa Jurídica') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Pessoa Física',
-  `doador_nome` varchar(255) NOT NULL,
+  `doador_nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `doador_cpf` varchar(14) DEFAULT NULL,
   `doador_rg` varchar(20) DEFAULT NULL,
   `doador_data_nascimento` date DEFAULT NULL,
@@ -206,12 +207,12 @@ CREATE TABLE IF NOT EXISTS `doador` (
   UNIQUE KEY `doador_cpf` (`doador_cpf`),
   UNIQUE KEY `doador_cnpj` (`doador_cnpj`),
   CONSTRAINT `fk_doador_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela hotel.doador: ~1 rows (aproximadamente)
 DELETE FROM `doador`;
 INSERT INTO `doador` (`doador_id`, `usuario_id`, `doador_tipo`, `doador_nome`, `doador_cpf`, `doador_rg`, `doador_data_nascimento`, `doador_sexo`, `doador_telefone`, `doador_logradouro`, `doador_numero`, `doador_complemento`, `doador_bairro`, `doador_cidade`, `doador_estado`, `doador_cep`, `doador_nome_empresa`, `doador_area_atuacao_empresa`, `doador_cnpj`, `doador_telefone_empresa`, `doador_representante`, `doador_cpf_representante`, `doador_qtd_total_doacoes`, `doador_valor_total_doado`, `doador_valor_medio`, `doador_data_ultima_doacao`, `doador_documento_comprovante`, `doador_documento_identidade`, `doador_documento_cnpj`, `doador_data_cadastro`, `doador_verificado`, `doador_aprovado_admin`, `doador_observacoes`, `doador_observacoes_internas`) VALUES
-	(3, 40, 'Pessoa Física', 'doador', '12365478963', '32654125', '2025-11-20', 'Feminino', '11963852741', NULL, NULL, NULL, NULL, 'São Paulo', 'SP', '07790852', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0.00, NULL, NULL, NULL, NULL, NULL, '2025-11-13 19:31:16', 0, 0, NULL, NULL);
+	(5, 48, 'Pessoa Jurídica', NULL, NULL, NULL, NULL, NULL, NULL, 'avenida um ', '2', '2', 'portal', 'São Paulo', 'SP', '07790852', 'Doacoes', 'ccvvj', '866026000', '45630306809', 'cvcvhvhe', '9652521307', 0, 0.00, NULL, NULL, NULL, NULL, NULL, '2025-11-21 20:59:37', 0, 0, NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.historico_quarto
 CREATE TABLE IF NOT EXISTS `historico_quarto` (
@@ -427,8 +428,8 @@ CREATE TABLE IF NOT EXISTS `reserva` (
 -- Copiando dados para a tabela hotel.reserva: ~7 rows (aproximadamente)
 DELETE FROM `reserva`;
 INSERT INTO `reserva` (`reserva_id`, `paciente_id`, `acompanhante_id`, `quarto_id`, `reserva_data_checkin_previsto`, `reserva_data_checkout_previsto`, `reserva_data_checkin_real`, `reserva_data_checkout_real`, `reserva_num_hospedes`, `reserva_duracao_dias`, `reserva_status`, `reserva_motivo`, `reserva_necessidades_especiais`, `reserva_admin_aprovou`, `reserva_data_criacao`, `reserva_data_atualizacao`, `reserva_observacoes`, `reserva_observacoes_internas`) VALUES
-	(17, 6, NULL, 6, '2025-11-13 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-13 23:55:44', '2025-11-13 23:55:44', NULL, NULL),
-	(18, 6, NULL, 11, '2025-11-19 03:00:00', '2025-11-28 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'tratamento', NULL, 0, '2025-11-15 01:31:58', '2025-11-15 01:31:58', NULL, NULL),
+	(17, 6, NULL, 6, '2025-11-13 06:00:00', '2025-11-28 06:00:00', NULL, NULL, 1, NULL, 'concluida', '', NULL, 0, '2025-11-13 23:55:44', '2025-11-22 02:21:07', NULL, NULL),
+	(18, 6, NULL, 11, '2025-11-19 06:00:00', '2025-11-28 06:00:00', NULL, NULL, 1, NULL, 'concluida', '', NULL, 0, '2025-11-15 01:31:58', '2025-11-22 02:20:53', NULL, NULL),
 	(19, 6, NULL, 12, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'concluida', 'tratamento', NULL, 0, '2025-11-17 21:15:54', '2025-11-19 22:59:39', NULL, NULL),
 	(20, 6, NULL, 15, '2025-11-18 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'cancelada', 'tratamento', NULL, 0, '2025-11-17 22:24:36', '2025-11-19 22:59:20', NULL, NULL),
 	(21, 7, NULL, 7, '2025-11-26 03:00:00', '2025-11-29 03:00:00', NULL, NULL, 1, NULL, 'pendente', 'asa', NULL, 0, '2025-11-17 23:18:38', '2025-11-17 23:18:38', NULL, NULL),
@@ -521,17 +522,17 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`usuario_id`),
   UNIQUE KEY `usuario_email` (`usuario_email`),
   UNIQUE KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela hotel.usuario: ~6 rows (aproximadamente)
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_tipo`, `usuario_data_criacao`, `usuario_estado`, `usuario_ultimo_login`, `usuario_foto_perfil`) VALUES
-	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-11-12 20:45:28', '/uploads/usuarios/padrao.png'),
-	(40, 'doador@gmail.com', '$2b$10$TUh6hQKV5tzkK5co0A9hTedCnbJcb1v7aUd.E7OgVxFh.uYSzBucq', 'doador', '2025-11-13 16:30:30', 'ativo', '2025-11-21 17:31:47', '/uploads/usuarios/padrao.png'),
+	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-11-22 13:39:02', '/uploads/usuarios/padrao.png'),
 	(41, 'voluntario@gmail.com', '$2b$10$pRMCCoTzoeOyPzY97BFrVe7DIskU8lvgKTHTKIjbKz4guHV8l0AL2', 'voluntario', '2025-11-13 16:32:00', 'ativo', '2025-11-18 16:47:47', '/uploads/usuarios/padrao.png'),
-	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-19 19:59:15', '/uploads/usuarios/padrao.png'),
-	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'acompanhante', '2025-11-17 16:16:09', 'ativo', '2025-11-18 16:42:11', '/uploads/usuarios/padrao.png'),
-	(45, 'joao.silva@email.com', '$2b$10$2TCAFBsUaQNhf6VEpBVm4O56UN4ohu0M5sBQxQklOYvz29w6o0Z/2', 'paciente', '2025-11-18 17:32:52', 'ativo', '2025-11-19 19:46:29', '/uploads/usuarios/padrao.png');
+	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-21 21:08:08', '/uploads/usuarios/padrao.png'),
+	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'acompanhante', '2025-11-17 16:16:09', 'ativo', '2025-11-22 16:55:12', '/uploads/usuarios/padrao.png'),
+	(45, 'joao.silva@email.com', '$2b$10$2TCAFBsUaQNhf6VEpBVm4O56UN4ohu0M5sBQxQklOYvz29w6o0Z/2', 'paciente', '2025-11-18 17:32:52', 'ativo', '2025-11-19 19:46:29', '/uploads/usuarios/padrao.png'),
+	(48, 'doador3@gmail.com', '$2b$10$8aTdnjmoTHa4i/SnGAHtBurdR3YjqJ/kD9IAkT/IWnq3HjZlCJWCO', 'doador', '2025-11-21 17:52:50', 'ativo', '2025-11-22 16:33:31', '/uploads/usuarios/padrao.png');
 
 -- Copiando estrutura para tabela hotel.voluntario
 CREATE TABLE IF NOT EXISTS `voluntario` (
