@@ -41,8 +41,10 @@ module.exports = (connectionFactory) => {
                                 usuario_email: paciente.usuario_email,
                                 usuario_senha: paciente.usuario_senha
                             }
-                            : req.session.user
+                            : req.session.user,
+                        msgSucesso: null   //  👈 ADICIONE ISTO
                     });
+
                 }
 
                 // 3) LISTA AS RESERVAS DO PACIENTE
@@ -60,7 +62,8 @@ module.exports = (connectionFactory) => {
                                 usuario_email: paciente.usuario_email,
                                 usuario_senha: paciente.usuario_senha
                             }
-                            : req.session.user
+                            : req.session.user,
+                        msgSucesso: null   //  👈 ADICIONE ISTO
                     });
                 });
             });
@@ -120,40 +123,46 @@ module.exports = (connectionFactory) => {
     // DETALHES (RETORNA JSON PARA O MODAL)
     // =======================
     router.get('/reservas/detalhes/:id', verificaLogin, (req, res) => {
-    const connection = connectionFactory();
-    const dao = new ReservasDAO(connection);
+        const connection = connectionFactory();
+        const dao = new ReservasDAO(connection);
 
-    dao.buscarDetalhes(req.params.id, (erro, resultado) => {
-        if (erro) {
-            console.error("Erro MySQL em buscarDetalhes:", erro);
-            return res.status(500).json({ erro: "Erro ao buscar detalhes da reserva." });
-        }
+        dao.buscarDetalhes(req.params.id, (erro, resultado) => {
+            if (erro) {
+                console.error("Erro MySQL em buscarDetalhes:", erro);
+                return res.status(500).json({ erro: "Erro ao buscar detalhes da reserva." });
+            }
 
-        if (!resultado || resultado.length === 0) {
-            return res.status(404).json({ erro: "Reserva não encontrada." });
-        }
+            if (!resultado || resultado.length === 0) {
+                return res.status(404).json({ erro: "Reserva não encontrada." });
+            }
 
-        res.json(resultado[0]);
+            res.json(resultado[0]);
+        });
     });
-});
 
-// =======================
-// CANCELAR RESERVA
-// =======================
-router.post('/reservas/cancelar/:id', verificaLogin, (req, res) => {
-    const connection = connectionFactory();
-    const dao = new ReservasDAO(connection);
+    // =======================
+    // CANCELAR RESERVA
+    // =======================
+    router.post('/reservas/cancelar/:id', verificaLogin, (req, res) => {
+        const connection = connectionFactory();
+        const dao = new ReservasDAO(connection);
 
-    dao.atualizarStatus(req.params.id, "cancelada", (erro) => {
-        connection.end();
-        if (erro) {
-            console.error("Erro ao cancelar reserva:", erro);
-            return res.status(500).send("Erro ao cancelar reserva");
-        }
+        dao.atualizarStatus(req.params.id, "cancelada", (erro) => {
+            connection.end();
+            if (erro) {
+                console.error("Erro ao cancelar reserva:", erro);
+                return res.status(500).send("Erro ao cancelar reserva");
+            }
 
-        res.status(200).send("OK");
+            res.status(200).send("OK");
+        });
     });
-});
+
+    const avaliacaoController = require('../controllers/avaliacaoPaciente');
+
+    router.get("/avaliacoes", avaliacaoController.index);
+    router.post("/avaliacoes", avaliacaoController.salvar);
+
 
     return router;
 };

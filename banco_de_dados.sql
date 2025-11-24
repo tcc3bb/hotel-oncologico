@@ -47,10 +47,13 @@ CREATE TABLE IF NOT EXISTS `acompanhante` (
   CONSTRAINT `fk_acompanhante_paciente` FOREIGN KEY (`paciente_email`) REFERENCES `paciente` (`paciente_email`),
   CONSTRAINT `fk_acompanhante_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_acompanhante_usuario_email` FOREIGN KEY (`acompanhante_email`) REFERENCES `usuario` (`usuario_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela hotel.acompanhante: ~1 rows (aproximadamente)
 DELETE FROM `acompanhante`;
+INSERT INTO `acompanhante` (`acompanhante_id`, `usuario_id`, `acompanhante_email`, `acompanhante_nome`, `acompanhante_cpf`, `acompanhante_rg`, `acompanhante_data_nascimento`, `acompanhante_sexo`, `acompanhante_parentesco`, `acompanhante_telefone`, `acompanhante_endereco`, `acompanhante_numero`, `acompanhante_complemento`, `acompanhante_cidade`, `acompanhante_estado`, `paciente_email`, `acompanhante_observacoes`) VALUES
+	(5, 53, 'acompanhante@gmail.com', 'acompanhante', '536424536777', '56.563.563.4', '2025-11-13', 'Masculino', 'pai', '11975685362', 'avenida um', 2, 85, 'são paulo', 'SP', 'paciente@gmail.com', 'nenhuma'),
+	(6, 54, 'teste2@gmail.com', 'acompanhante', '536424536778', '56.563.563.4', '2020-03-02', NULL, 'pai', '11963852741', 'avenida um', 2, 85, 'são paulo', 'SP', 'joao.silva@email.com', '');
 
 -- Copiando estrutura para tabela hotel.admin
 CREATE TABLE IF NOT EXISTS `admin` (
@@ -135,6 +138,22 @@ CREATE TABLE IF NOT EXISTS `artigo` (
 DELETE FROM `artigo`;
 INSERT INTO `artigo` (`artigo_id`, `admin_id`, `artigo_titulo`, `artigo_subtitulo`, `artigo_resumo`, `artigo_conteudo`, `artigo_imagem_capa`, `artigo_imagens_extras`, `artigo_slug`, `artigo_palavras_chave`, `artigo_descricao_meta`, `artigo_categoria`, `artigo_tags`, `artigo_status`, `artigo_data_publicacao`, `artigo_data_criacao`, `artigo_data_atualizacao`, `artigo_visualizacoes`, `artigo_curtidas`, `artigo_comentarios`, `artigo_destacado`, `artigo_aprovado_admin`, `artigo_observacoes_internas`) VALUES
 	(5, 3, 'Entendendo o Câncer: Causas, Sintomas, Tratamentos e Prevenção', 'Uma visão abrangente sobre uma das doenças mais desafiadoras da medicina moderna, com foco em conscientização e cuidados.', 'O câncer é uma doença caracterizada pelo crescimento descontrolado de células anômalas no corpo, afetando milhões de pessoas globalmente. Este artigo explora suas causas principais, sintomas comuns, opções de tratamento e estratégias de prevenção, enfatizando a importância da detecção precoce e do apoio médico. Baseado em dados científicos atualizados, o texto visa informar e conscientizar sobre essa condição, destacando avanços na pesquisa e na medicina.', 'Introdução ao Câncer\r\nO câncer é um grupo de doenças que surge quando células normais do corpo sofrem mutações genéticas, levando a um crescimento descontrolado e invasivo. Segundo a Organização Mundial da Saúde (OMS), cerca de 10 milhões de mortes por ano são atribuídas ao câncer, tornando-o a segunda principal causa de óbito no mundo. Existem mais de 100 tipos de câncer, classificados por órgãos afetados, como pulmão, mama, próstata e pele. A compreensão dessa doença é essencial para a prevenção e o tratamento eficaz.\r\n\r\nCausas e Fatores de Risco\r\nAs causas do câncer são multifatoriais, envolvendo fatores genéticos, ambientais e de estilo de vida. Mutagens como radiação ionizante, substâncias químicas (ex.: tabaco, amianto) e vírus (ex.: HPV, hepatite B) podem danificar o DNA celular. Fatores de risco incluem:\r\n\r\nTabagismo: Responsável por cerca de 22% dos casos globais.\r\nObesidade e sedentarismo: Aumentam o risco de câncer de mama, cólon e endométrio.\r\nExposição solar excessiva: Principal causa do câncer de pele.\r\nHereditariedade: Genes como BRCA1 e BRCA2 elevam o risco de câncer de mama e ovário. Estudos epidemiológicos, como os da American Cancer Society, mostram que cerca de 40% dos casos poderiam ser evitados com mudanças no estilo de vida.\r\nSintomas Comuns\r\nOs sintomas variam conforme o tipo e estágio do câncer, mas sinais de alerta incluem:\r\n\r\nPerda de peso inexplicável.\r\nFadiga persistente.\r\nDor localizada ou generalizada.\r\nMudanças na pele, como feridas que não cicatrizam.\r\nSangramentos anômalos (ex.: tosse com sangue). A detecção precoce por meio de exames de rotina, como mamografia ou colonoscopia, é crucial, pois aumenta as chances de cura em até 90% em estágios iniciais.\r\nTratamentos Disponíveis\r\nO tratamento do câncer é personalizado e pode incluir:\r\n\r\nCirurgia: Remoção do tumor primário.\r\nQuimioterapia: Uso de medicamentos para destruir células cancerosas.\r\nRadioterapia: Radiação direcionada para matar células malignas.\r\nImunoterapia: Estimula o sistema imune a combater o câncer.\r\nTerapia alvo: Ataca especificamente mutações genéticas. Avanços como a terapia CAR-T têm revolucionado tratamentos para leucemias, com taxas de sucesso superiores a 80% em alguns casos. A integração de IA em diagnósticos também melhora a precisão.\r\nPrevenção e Conscientização\r\nA prevenção foca em hábitos saudáveis: não fumar, dieta equilibrada rica em frutas e vegetais, atividade física regular e vacinas (ex.: contra HPV). Programas de rastreamento, como o do SUS no Brasil, ajudam na detecção precoce. Apoio psicológico e grupos de suporte são vitais para pacientes e famílias. Pesquisas recentes indicam que a redução da poluição ambiental poderia prevenir milhões de casos anuais.\r\n\r\nConclusão\r\nO câncer, embora grave, é cada vez mais tratável com avanços científicos. A conscientização, detecção precoce e adoção de estilos de vida saudáveis são armas poderosas contra essa doença. Consulte sempre um profissional de saúde para orientações personalizadas.', 'bff5b46c03dc2abd6cf387091dd6a6c5', NULL, 'entendendo-o-cancer-causas-sintomas-tratamentos-prevencao  Imagem de Cada', 'câncer, oncologia, prevenção de câncer, sintomas de câncer, tratamento de câncer, fatores de risco, detecção precoce, saúde pública', NULL, 'Saúde e Bem-Estar, Oncologia', NULL, 'rascunho', '2025-10-27 18:40:06', '2025-10-27 21:40:06', '2025-10-27 21:50:42', 3, 0, 0, 0, 0, NULL);
+
+-- Copiando estrutura para tabela hotel.avaliacao_paciente
+CREATE TABLE IF NOT EXISTS `avaliacao_paciente` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `paciente_id` int NOT NULL,
+  `nota` int NOT NULL,
+  `comentario` text,
+  `data_avaliacao` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_paciente_id` (`paciente_id`),
+  CONSTRAINT `fk_paciente_id` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`paciente_id`) ON DELETE CASCADE,
+  CONSTRAINT `avaliacao_paciente_chk_1` CHECK ((`nota` between 1 and 5))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela hotel.avaliacao_paciente: ~0 rows (aproximadamente)
+DELETE FROM `avaliacao_paciente`;
 
 -- Copiando estrutura para tabela hotel.doacao
 CREATE TABLE IF NOT EXISTS `doacao` (
@@ -522,17 +541,19 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`usuario_id`),
   UNIQUE KEY `usuario_email` (`usuario_email`),
   UNIQUE KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.usuario: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.usuario: ~7 rows (aproximadamente)
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_tipo`, `usuario_data_criacao`, `usuario_estado`, `usuario_ultimo_login`, `usuario_foto_perfil`) VALUES
 	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-11-22 13:39:02', '/uploads/usuarios/padrao.png'),
 	(41, 'voluntario@gmail.com', '$2b$10$pRMCCoTzoeOyPzY97BFrVe7DIskU8lvgKTHTKIjbKz4guHV8l0AL2', 'voluntario', '2025-11-13 16:32:00', 'ativo', '2025-11-18 16:47:47', '/uploads/usuarios/padrao.png'),
-	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-21 21:08:08', '/uploads/usuarios/padrao.png'),
-	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'acompanhante', '2025-11-17 16:16:09', 'ativo', '2025-11-22 16:55:12', '/uploads/usuarios/padrao.png'),
-	(45, 'joao.silva@email.com', '$2b$10$2TCAFBsUaQNhf6VEpBVm4O56UN4ohu0M5sBQxQklOYvz29w6o0Z/2', 'paciente', '2025-11-18 17:32:52', 'ativo', '2025-11-19 19:46:29', '/uploads/usuarios/padrao.png'),
-	(48, 'doador3@gmail.com', '$2b$10$8aTdnjmoTHa4i/SnGAHtBurdR3YjqJ/kD9IAkT/IWnq3HjZlCJWCO', 'doador', '2025-11-21 17:52:50', 'ativo', '2025-11-22 16:33:31', '/uploads/usuarios/padrao.png');
+	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-22 20:25:53', '/uploads/usuarios/padrao.png'),
+	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'acompanhante', '2025-11-17 16:16:09', 'ativo', '2025-11-22 17:58:29', '/uploads/usuarios/padrao.png'),
+	(45, 'joao.silva@email.com', '$2b$10$2TCAFBsUaQNhf6VEpBVm4O56UN4ohu0M5sBQxQklOYvz29w6o0Z/2', 'paciente', '2025-11-18 17:32:52', 'ativo', '2025-11-24 19:36:20', '/uploads/usuarios/padrao.png'),
+	(48, 'doador3@gmail.com', '$2b$10$8aTdnjmoTHa4i/SnGAHtBurdR3YjqJ/kD9IAkT/IWnq3HjZlCJWCO', 'doador', '2025-11-21 17:52:50', 'ativo', '2025-11-22 16:33:31', '/uploads/usuarios/padrao.png'),
+	(53, 'acompanhante@gmail.com', '$2b$10$KNjWTFJIDMPXAkJIPdI0o.f.gd9PQndpkk98AcolMc2jqhM.ZMkc2', 'acompanhante', '2025-11-22 21:06:11', 'ativo', '2025-11-24 16:01:42', '/uploads/usuarios/padrao.png'),
+	(54, 'teste2@gmail.com', '$2b$10$nbuXtY0IZe4v9IXycL6ii.kyDO9kWzVOTW64cT.qHyfE51pImlPcq', 'acompanhante', '2025-11-24 16:03:20', 'ativo', '2025-11-24 16:05:26', '/uploads/usuarios/padrao.png');
 
 -- Copiando estrutura para tabela hotel.voluntario
 CREATE TABLE IF NOT EXISTS `voluntario` (

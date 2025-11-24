@@ -718,23 +718,52 @@
          </section>
 
          <!-- ======================================================================================================================-->
-         <!--=============================================== SECTION AVALIAÇÃO =====================================================-->
+         <!--===================================================== SECTION AVALIAÇÃO ================================================-->
          <!--====================================================================================================================== -->
          <section id="avaliacao" class="conteudo">
-            <h2 class="section-title">Avaliação e Feedback</h2>
-            <p class="subtitle">Sua opinião é fundamental para aprimorarmos o cuidado.</p>
+            <h2 class="section-title">Avaliação do Alojamento</h2>
 
-            <div class="card card-avaliacao">
-               <h3 class="card-title">Avaliação Geral do Instituto Vita</h3>
-               <div class="estrelas">
-                  <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span
-                     class="star">⭐</span><span class="star-vazia">⭐</span>
+            <p class="subtitle">
+               Sua opinião é essencial para melhorarmos continuamente o acolhimento do Instituto Vita.
+            </p>
+
+            <% if (typeof msgSucesso !=="undefined" && msgSucesso) { %>
+               <div class="alert alert-success" style="
+                  background: #cfe9d1;
+                  color: #23543b;
+                  padding: 15px;
+                  border-radius: 8px;
+                  margin-bottom: 20px;
+                  border-left: 6px solid #3a7d55;
+                  font-weight: 600;
+               ">
+                  <%= msgSucesso %>
                </div>
-               <label for="feedback-text" class="label mt-3">Comentário Detalhado:</label>
-               <textarea id="feedback-text" placeholder="Deixe aqui seu comentário sobre sua experiência recente..."
-                  rows="5"></textarea>
-               <button class="btn-primary mt-3" type="button">Enviar Avaliação</button>
-            </div>
+               <% } %>
+
+                  <div class="card card-avaliacao">
+                     <form id="formAvaliacao" action="/paciente/avaliacoes" method="POST">
+                        <div class="campo">
+                           <label>Como você avalia sua estadia?</label>
+                           <select name="avaliacao_nota" required>
+                              <option value="">Selecione...</option>
+                              <option value="5">⭐⭐⭐⭐⭐ — Excelente</option>
+                              <option value="4">⭐⭐⭐⭐ — Muito Boa</option>
+                              <option value="3">⭐⭐⭐ — Boa</option>
+                              <option value="2">⭐⭐ — Regular</option>
+                              <option value="1">⭐ — Ruim</option>
+                           </select>
+                        </div>
+
+                        <div class="campo">
+                           <label>Comentários (opcional):</label>
+                           <textarea name="avaliacao_comentario" rows="4"
+                              placeholder="Conte-nos sobre sua experiência..."></textarea>
+                        </div>
+
+                        <button class="btn-success" type="submit">Enviar Avaliação</button>
+                     </form>
+                  </div>
          </section>
 
       </main>
@@ -765,38 +794,65 @@
       </div>
    </footer>
 
-
    <script>
       const sidebarItems = document.querySelectorAll('.sidebar-item');
       const contents = document.querySelectorAll('.conteudo');
 
-      sidebarItems.forEach(item => {
-         item.addEventListener('click', () => {
-            sidebarItems.forEach(i => i.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('ativo'));
+      // Função genérica para ativar seção
+      function ativarSection(id) {
+         // Esconde tudo
+         contents.forEach(sec => sec.classList.remove('ativo'));
+         sidebarItems.forEach(i => i.classList.remove('active'));
+
+         // Ativa os corretos
+         const sec = document.getElementById(id);
+         const item = document.querySelector(`.sidebar-item[data-target="${id}"]`);
+
+         if (sec && item) {
+            sec.classList.add('ativo');
             item.classList.add('active');
-            const targetId = item.dataset.target;
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-               targetContent.classList.add('ativo');
-            }
+         }
+      }
+
+      // Função para trocar a aba (wrapper da função ativarSection)
+      function abrirAba(idAlvo) {
+         ativarSection(idAlvo);
+      }
+
+      // ⬅ Salvar última aba no localStorage
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+         item.addEventListener('click', () => {
+            const alvo = item.getAttribute('data-target');
+            localStorage.setItem('ultimaSectionPaciente', alvo);
+            abrirAba(alvo);
          });
       });
 
-      // Inicializar a primeira aba ao carregar a página
-      if (document.querySelector('.sidebar-item.active')) {
-         const initialTarget = document.querySelector('.sidebar-item.active').dataset.target;
-         const initialContent = document.getElementById(initialTarget);
-         if (initialContent) {
-            initialContent.classList.add('ativo');
-         }
-      } else if (sidebarItems.length > 0) {
-         // Se nenhuma estiver ativa, ative a primeira (ou 'conta')
-         sidebarItems[0].classList.add('active');
-         document.getElementById(sidebarItems[0].dataset.target).classList.add('ativo');
-      }
-   </script>
+      // Checar parâmetro da URL (aba=)
+      const params = new URLSearchParams(window.location.search);
+      const abaURL = params.get('aba');
 
+      window.addEventListener('DOMContentLoaded', () => {
+         const ultima = localStorage.getItem('ultimaSectionPaciente');
+
+         if (abaURL) {
+            // Prioridade 1: URL
+            abrirAba(abaURL);
+         } else if (ultima) {
+            // Prioridade 2: última aba salva
+            ativarSection(ultima);
+         } else {
+            // Prioridade 3: primeira aba ou a que já estiver active no HTML
+            const ativa = document.querySelector('.sidebar-item.active');
+
+            if (ativa) {
+               ativarSection(ativa.dataset.target);
+            } else if (sidebarItems.length > 0) {
+               ativarSection(sidebarItems[0].dataset.target);
+            }
+         }
+      });
+   </script>
 
 </body>
 

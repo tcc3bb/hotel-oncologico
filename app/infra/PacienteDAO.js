@@ -239,6 +239,19 @@ class PacienteDAO {
         this._connection.query(sql, [email], callback);
     }
 
+    buscarPacienteIdPorUsuarioId(usuarioId, callback) {
+        const sql = `
+        SELECT paciente_id 
+        FROM paciente 
+        WHERE usuario_id = ?
+    `;
+        this._connection.query(sql, [usuarioId], (err, result) => {
+            if (err) return callback(err, null);
+            if (!result || result.length === 0) return callback(null, null);
+            callback(null, result[0].paciente_id);
+        });
+    }
+
 
 
 }
