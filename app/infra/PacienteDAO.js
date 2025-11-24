@@ -230,6 +230,16 @@ class PacienteDAO {
         });
     }
 
+    buscarPorEmail(email, callback) {
+        const sql = `
+        SELECT *
+        FROM paciente
+        WHERE paciente_email = ?
+    `;
+        this._connection.query(sql, [email], callback);
+    }
+
+
 
 }
 

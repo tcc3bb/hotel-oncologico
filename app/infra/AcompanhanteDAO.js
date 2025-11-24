@@ -16,7 +16,6 @@ class AcompanhanteDAO {
     }
 
     atualizarDados(usuarioId, dados, callback) {
-
         // Somente campos que realmente existem na tabela acompanhante
         const camposValidos = [
             "acompanhante_nome",
@@ -58,6 +57,15 @@ class AcompanhanteDAO {
             [usuarioId],
             callback
         );
+    }
+
+    buscarPorUsuarioId(usuarioId, callback) {
+        const sql = `
+        SELECT *
+        FROM acompanhante
+        WHERE usuario_id = ?
+    `;
+        this._connection.query(sql, [usuarioId], callback);
     }
 }
 

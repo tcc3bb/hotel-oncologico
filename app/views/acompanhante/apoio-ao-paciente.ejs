@@ -238,37 +238,121 @@
 
             </section>
 
-
             <!-- ======================================================================================================================-->
             <!--================================================= PACIENTE VINCULADO ==================================================-->
             <!--====================================================================================================================== -->
             <section id="paciente" class="conteudo">
                 <h2 class="section-title">👩‍⚕️ Paciente Vinculado</h2>
-                <div class="card">
-                    <h3 class="card-title">Ficha do Paciente</h3>
-                    <p><strong>Nome:</strong> João da Silva</p>
-                    <p><strong>Idade:</strong> 58 anos</p>
-                    <p><strong>Diagnóstico:</strong> Câncer de Próstata (Estágio II)</p>
-                    <p><strong>Médico responsável:</strong> Dr. Ricardo Costa</p>
-                    <p><strong>Quarto:</strong> Ala Girassol - 304</p>
-                </div>
+                <p class="subtitle">Informações completas do paciente sob seus cuidados</p>
+                <!-- GRID PRINCIPAL -->
+                <div class="paciente-grid">
 
-                <div class="card">
-                    <h3 class="card-title">Situação Atual</h3>
-                    <p><strong>Status:</strong> Internado</p>
-                    <p><strong>Tratamento:</strong> Quimioterapia - Ciclo 2 de 6</p>
-                    <p><strong>Observações:</strong> Evoluindo bem ao tratamento, com boa resposta clínica.</p>
-                </div>
+                    <!-- CARD — Ficha -->
+                    <div class="paciente-card destaque">
+                        <h3>🗂️ Ficha do Paciente</h3>
 
-                <div class="card">
-                    <h3 class="card-title">Plano de Tratamento</h3>
-                    <ul class="plano-list">
-                        <li><span class="list-icon">💉</span> Sessão de Quimioterapia — 24/10/2025</li>
-                        <li><span class="list-icon">📊</span> Exame de Controle — 01/11/2025</li>
-                        <li><span class="list-icon">🧘‍♂️</span> Fisioterapia Oncológica — 03/11/2025</li>
-                    </ul>
-                </div>
+                        <div class="info-linha">
+                            <span>Nome:</span>
+                            <p>
+                                <%= paciente.paciente_nome %>
+                            </p>
+                        </div>
 
+                        <div class="info-linha">
+                            <span>Data de Nascimento:</span>
+                            <p>
+                                <%= paciente.paciente_data_nascimento %>
+                            </p>
+                        </div>
+
+                        <div class="info-linha">
+                            <span>Sexo:</span>
+                            <p>
+                                <%= paciente.paciente_sexo %>
+                            </p>
+                        </div>
+
+                        <div class="info-linha">
+                            <span>Diagnóstico:</span>
+                            <p>
+                                <%= paciente.paciente_diagnostico %>
+                            </p>
+                        </div>
+
+                        <div class="info-linha">
+                            <span>Médico Responsável:</span>
+                            <p>
+                                <%= paciente.paciente_medico_assistente_nome %>
+                            </p>
+                        </div>
+
+                        <div class="info-linha">
+                            <span>Centro de Tratamento:</span>
+                            <p>
+                                <%= paciente.paciente_centro_tratamento_nome %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CARD — Situação Atual -->
+                    <div class="paciente-card">
+                        <h3>📊 Situação Atual</h3>
+
+                        <div class="info-linha">
+                            <span>Fase do Tratamento:</span>
+                            <p>
+                                <%= paciente.paciente_fase_tratamento %>
+                            </p>
+                        </div>
+
+                        <div class="info-linha">
+                            <span>Tipo de Tratamento:</span>
+                            <p>
+                                <%= paciente.paciente_tipo_tratamento %>
+                            </p>
+                        </div>
+
+                        <div class="info-linha">
+                            <span>Última Sessão:</span>
+                            <p>
+                                <%= paciente.paciente_data_ultima_sessao %>
+                            </p>
+                        </div>
+
+                        <div class="info-linha observacoes">
+                            <span>Observações:</span>
+                            <p>
+                                <%= paciente.paciente_observacoes_enfermagem %>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- CARD — Informações Gerais -->
+                <div class="card-geral">
+                    <h3>🧬 Informações Gerais</h3>
+
+                    <div class="info-linha">
+                        <span>Alergias:</span>
+                        <p>
+                            <%= paciente.paciente_alergias_risco %>
+                        </p>
+                    </div>
+
+                    <div class="info-linha">
+                        <span>Restrição Alimentar:</span>
+                        <p>
+                            <%= paciente.paciente_restricoes_alimentares %>
+                        </p>
+                    </div>
+
+                    <div class="info-linha">
+                        <span>Medicamentos Essenciais:</span>
+                        <p>
+                            <%= paciente.paciente_medicamentos_uso_essenciais %>
+                        </p>
+                    </div>
+                </div>
             </section>
 
             <!-- ======================================================================================================================-->
@@ -314,32 +398,79 @@
             <!--===================================================== ORIENTAÇÕES =====================================================-->
             <!--====================================================================================================================== -->
             <section id="orientacoes" class="conteudo">
-                <h2 class="section-title">📘 Orientações e Recursos</h2>
-                <div class="card">
-                    <h3 class="card-title">Guias Educativos</h3>
-                    <ul>
-                        <li><a href="#">🧾 Cuidados Diários do Paciente (PDF)</a></li>
-                        <li><a href="#">🥗 Alimentação Saudável Durante o Tratamento</a></li>
-                        <li><a href="#">🚗 Transporte Seguro e Logística de Deslocamento</a></li>
-                    </ul>
+
+                <!-- HEADER DA SECTION -->
+                <div class="orientacoes-header">
+                    <div>
+                        <h2>📘 Orientações e Recursos</h2>
+                        <p class="subtitulo">Materiais essenciais para apoiar pacientes e acompanhantes</p>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">Apoio Psicológico</h3>
-                    <p>Materiais para lidar com o estresse e ansiedade durante o tratamento:</p>
-                    <ul>
-                        <li><a href="#">🧘 Técnicas de Relaxamento</a></li>
-                        <li><a href="#">💬 Grupo de Apoio Familiar</a></li>
-                    </ul>
-                </div>
+                <!-- GRID PRINCIPAL -->
+                <div class="orientacoes-grid">
 
-                <div class="card">
-                    <h3 class="card-title">Contatos Úteis</h3>
-                    <p><strong>Psicóloga:</strong> Ana Lúcia — (11) 99999-9999</p>
-                    <p><strong>Assistente Social:</strong> Marcos — (11) 98888-8888</p>
-                    <p><strong>Emergência:</strong> 192 (SAMU) / 193 (Bombeiros)</p>
+                    <!-- GUIAS EDUCATIVOS -->
+                    <div class="orientacao-card destaque">
+                        <div class="card-top">
+                            <h3>📚 Guias Educativos</h3>
+                            <span class="tag">Conteúdo Oficial</span>
+                        </div>
+
+                        <p class="card-desc">Materiais preparados pela equipe de enfermagem e nutrição.</p>
+
+                        <ul class="lista-links">
+                            <li><a href="#">🧾 Cuidados Diários do Paciente (PDF)</a></li>
+                            <li><a href="#">🥗 Alimentação Saudável Durante o Tratamento</a></li>
+                            <li><a href="#">🚗 Transporte Seguro e Logística de Deslocamento</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- APOIO PSICOLÓGICO -->
+                    <div class="orientacao-card">
+                        <div class="card-top">
+                            <h3>💚 Apoio Psicológico</h3>
+                            <span class="tag tag-suave">Bem-estar</span>
+                        </div>
+
+                        <p class="card-desc">Materiais fundamentais para lidar com ansiedade e estresse.</p>
+
+                        <ul class="lista-links">
+                            <li><a href="#">🧘 Técnicas de Relaxamento</a></li>
+                            <li><a href="#">💬 Grupo de Apoio Familiar</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- CONTATOS ÚTEIS -->
+                    <div class="orientacao-card">
+                        <div class="card-top">
+                            <h3>📞 Contatos Úteis</h3>
+                            <span class="tag tag-info">Importante</span>
+                        </div>
+
+                        <p class="card-desc">Profissionais e serviços disponíveis em caso de necessidade.</p>
+
+                        <div class="contatos-box">
+                            <p><strong>Psicóloga:</strong> Ana Lúcia — (11) 99999-9999</p>
+                            <p><strong>Assistente Social:</strong> Marcos — (11) 98888-8888</p>
+                            <p><strong>Emergência:</strong> 192 (SAMU) / 193 (Bombeiros)</p>
+                        </div>
+                    </div>
+
+                    <!-- BANNER LATERAL / NOVO BLOCO -->
+                    <div class="orientacao-banner">
+                        <h3>🌿 Espaço de Acolhimento</h3>
+                        <p>
+                            Nosso hotel oncológico oferece áreas de descanso, aromaterapia,
+                            oficinas de arte e apoio emocional.
+                        </p>
+
+                        <a href="#" class="btn-banner">Conhecer Programas</a>
+                    </div>
+
                 </div>
             </section>
+
 
             <!-- ======================================================================================================================-->
             <!--====================================================== FEEDBACK =======================================================-->
