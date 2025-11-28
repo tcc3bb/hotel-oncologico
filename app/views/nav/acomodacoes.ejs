@@ -16,39 +16,41 @@
 
 <body>
     <nav>
-        <a href="/" class="img">
-            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
-        </a>
-        <a href="/nav/sobre-nos">Sobre nós</a>
-        <a href="/nav/sobre-cancer">Sobre o câncer</a>
-        <a href="/nav/acomodacoes">Acomodações</a>
-        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
-        <a href="/nav/localizacao">Localizações</a>
-        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
-        <% if (!user) { %>
-            <!-- Usuário não logado -->
-            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-            <% } else { %>
-                <!-- Usuário logado -->
-                <% if (user.tipo==='paciente' ) { %>
-                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
-                    <% } else if (user.tipo==='acompanhante' ) { %>
-                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
-                        <% } else if (user.tipo==='voluntario' ) { %>
-                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
-                            <% } else if (user.tipo==='doador' ) { %>
-                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
-                                <% } else if (user.tipo==='admin' ) { %>
-                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
-                                    <% } else { %>
-                                        <!-- Caso algum outro tipo apareça -->
-                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-                                        <% } %>
-                                            <!-- Botão de logout -->
-                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+        <div class="nav-links">
+            <a href="/" class="img">
+                <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+            </a>
+            <a href="/nav/sobre-nos">Sobre nós</a>
+            <a href="/nav/sobre-cancer">Sobre o câncer</a>
+            <a href="/nav/acomodacoes">Acomodações</a>
+            <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+            <a href="/nav/localizacao">Localizações</a>
+            <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+            <% if (!user) { %>
+                <!-- Usuário não logado -->
+                <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                <% } else { %>
+                    <!-- Usuário logado -->
+                    <% if (user.tipo==='paciente' ) { %>
+                        <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                        <% } else if (user.tipo==='acompanhante' ) { %>
+                            <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                            <% } else if (user.tipo==='voluntario' ) { %>
+                                <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                                <% } else if (user.tipo==='doador' ) { %>
+                                    <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                    <% } else if (user.tipo==='admin' ) { %>
+                                        <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                        <% } else { %>
+                                            <!-- Caso algum outro tipo apareça -->
+                                            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
                                             <% } %>
+                                                <!-- Botão de logout -->
+                                                <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                                <% } %>
+        </div>
     </nav>
 
     <!-- =================== HEADER =================== -->
@@ -340,8 +342,20 @@
             }
         });
     });
-
 </script>
 
+
+    <script>
+        /*====== MENU MOBILE ======*/
+        const hamburger = document.createElement("div");
+        hamburger.classList.add("hamburger");
+        hamburger.innerHTML = "<span></span><span></span><span></span>";
+
+        document.querySelector("nav").prepend(hamburger);
+
+        hamburger.addEventListener("click", () => {
+            document.querySelector(".nav-links").classList.toggle("active");
+        });
+    </script>
 
 </html>

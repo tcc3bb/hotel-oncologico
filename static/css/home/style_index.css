@@ -8,18 +8,11 @@ html {
     font-size: 100%;
 }
 
-main {
-    max-width: 58rem;
-    margin: 2.5rem auto 5rem;
-    padding: 0 1.25rem;
-    text-align: center;
-}
-
 body {
     font-family: Arial, sans-serif;
     background: #fff;
     color: #444;
-    line-height: 1.6; 
+    line-height: 1.6;
 }
 
 p {
@@ -30,16 +23,14 @@ p {
     text-align: justify;
 }
 
-/* =============================================================================================================================== */
 /* =========================================================== MENU ============================================================== */
-/* =============================================================================================================================== */
 nav {
     background-color: #699b80;
-    padding: 12px 20px;
+    padding: 1rem 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 1rem;
     font-weight: 600;
     font-size: 0.9rem;
     max-width: 100%;
@@ -51,13 +42,20 @@ nav a {
     transition: color 0.3s ease;
     cursor: pointer;
     white-space: nowrap;
-    padding: 6px 10px;
-    font-size: 1em;
-    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 0.4rem;
 }
 
 nav a:hover {
     background-color: #83aa89;
+}
+
+/* LINKS DESKTOP */
+nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
 }
 
 .img {
@@ -65,20 +63,20 @@ nav a:hover {
 }
 
 .img-logo {
-    height: 8vh; 
+    height: 7vh;
+    max-height: 3.5rem;
     width: auto;
     object-fit: contain;
     display: block;
 }
 
-
 .btn-entrar,
 .btn-cadastrar,
 .btn-nav {
-    padding: 8px 18px;
+    padding: 0.5rem 1.2rem;
     background-color: #3b4a3b;
     color: white;
-    border-radius: 8px;
+    border-radius: 0.6rem;
     font-weight: 700;
     font-family: 'Cinzel Decorative', serif;
     box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
@@ -95,21 +93,63 @@ nav a:hover {
 .btn-logout {
     background-color: #e74c3c;
     color: white;
-    padding: 8px 15px;
-    border-radius: 4px;
     text-decoration: none;
     margin-left: 10px;
-    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
 }
 
 .btn-logout:hover {
     background-color: #c0392b;
 }
 
+/* HAMBURGUER MENU */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    cursor: pointer;
+}
 
-/* =============================================================================================================================== */
+.hamburger span {
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* =========================================================== MENU MOBILE =========================================================== */
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 /* =========================================================== HERO ============================================================== */
-/* =============================================================================================================================== */
 .hero {
     position: relative;
     background: url("https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/810a265a-e405-4c7a-99cc-01be939f42d9.png") center center/cover no-repeat;
@@ -117,8 +157,8 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 500px;
-    padding: 20px;
+    height: 75vh;
+    padding: 2rem;
     text-align: center;
     color: white;
 }
@@ -134,19 +174,19 @@ nav a:hover {
 .hero-content {
     position: relative;
     z-index: 1;
-    max-width: 700px;
+    max-width: 45rem;
 }
 
 .hero h1 {
     font-size: 2.25rem;
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
     line-height: 1.2;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 24px;
+    gap: 1.2rem;
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -155,8 +195,8 @@ nav a:hover {
     background-color: #699b80;
     border: none;
     color: white;
-    padding: 12px 28px;
-    border-radius: 30px;
+    padding: 0.8rem 2rem;
+    border-radius: 2rem;
     font-weight: 600;
     cursor: pointer;
     font-size: 1rem;
@@ -169,20 +209,18 @@ nav a:hover {
     background-color: #5a876b;
 }
 
-/* =============================================================================================================================== */
 /* =========================================================== MAIN ============================================================== */
-/* =============================================================================================================================== */
 main {
-    max-width: 900px;
-    margin: 40px auto 60px auto;
-    padding: 0 16px;
+    max-width: 60rem;
+    margin: 3rem auto;
+    padding: 0 1.2rem;
 }
 
 section[aria-labelledby] h2 {
     font-family: 'Cinzel Decorative', serif;
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     color: #3b4a3b;
 }
 
@@ -191,9 +229,10 @@ section p {
     line-height: 1.6;
     color: #3b4a3b;
     font-family: 'EB Garamond', serif;
+    margin-bottom: 1rem;
 }
 
-/* Seção localização */
+/* =============================================== SECTION LOCALIZAÇÃO ========================================================= */
 .location-section {
     display: flex;
     max-width: 1100px;
@@ -205,37 +244,34 @@ section p {
 
 .location-text {
     flex: 1;
-    min-width: 300px;
+    min-width: 18.75rem;
 }
 
 .location-image img {
-    max-width: 420px;
-    max-height: 380px;
     width: 100%;
-    height: 50%;
+    max-width: 26.25rem;
+    max-height: 23.75rem;
+    height: auto;
     border-radius: 15px;
     box-shadow: 0 6px 15px rgb(50 50 50 / 0.15);
 }
 
-/* =============================================================================================================================== */
 /* ========================================================== FOOTER ============================================================= */
-/* =============================================================================================================================== */
-
 footer {
     background-color: #699b80;
     color: #fff;
-    padding: 30px 20px 15px 20px;
+    padding: 2.5rem 1.5rem 1rem;
     font-family: 'EB Garamond', serif;
     font-size: 0.9rem;
 }
 
 .footer-container {
-    max-width: 1100px;
+    max-width: 70rem;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 2rem;
 }
 
 .footer-container>div {
@@ -246,7 +282,7 @@ footer {
 .footer-container h3 {
     font-family: 'Cinzel Decorative', serif;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 0.8rem;
     color: #c9d6c5;
 }
 
@@ -262,39 +298,42 @@ footer {
 }
 
 .footer-bottom {
+    margin-top: 2rem;
     text-align: center;
-    margin-top: 20px;
     border-top: 1px solid #5a6a5a;
-    padding-top: 12px; 
+    padding-top: 1rem;
     font-size: 0.85rem;
     color: #aeb5ab;
 }
 
-/* =============================================================================================================================== */
 /* ====================================================== RESPONSIVIDADE ========================================================= */
-/* =============================================================================================================================== */
 @media (max-width: 720px) {
     nav {
         flex-wrap: wrap;
         gap: 16px;
         font-size: 0.85rem;
     }
+
     .hero {
         height: 400px;
         padding: 16px;
     }
+
     .hero h1 {
         font-size: 1.6rem;
         margin-bottom: 16px;
     }
+
     .btn {
         font-size: 0.9rem;
         padding: 10px 22px;
     }
+
     .location-section {
         flex-direction: column;
         padding: 0 12px;
     }
+
     .location-image,
     .location-text {
         max-width: 100%;

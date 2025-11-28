@@ -20,40 +20,42 @@
 </head>
 
 <body>
-       <nav>
-        <a href="/" class="img">
-            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
-        </a>
-        <a href="/nav/sobre-nos">Sobre nós</a>
-        <a href="/nav/sobre-cancer">Sobre o câncer</a>
-        <a href="/nav/acomodacoes">Acomodações</a>
-        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
-        <a href="/nav/localizacao">Localizações</a>
-        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
-        <% if (!user) { %>
-            <!-- Usuário não logado -->
-            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-            <% } else { %>
-                <!-- Usuário logado -->
-                <% if (user.tipo==='paciente' ) { %>
-                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
-                    <% } else if (user.tipo==='acompanhante' ) { %>
-                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
-                        <% } else if (user.tipo==='voluntario' ) { %>
-                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
-                            <% } else if (user.tipo==='doador' ) { %>
-                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
-                                <% } else if (user.tipo==='admin' ) { %>
-                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
-                                    <% } else { %>
-                                        <!-- Caso algum outro tipo apareça -->
-                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-                                        <% } %>
-                                            <!-- Botão de logout -->
-                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+    <nav>
+        <div class="nav-links">
+            <a href="/" class="img">
+                <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+            </a>
+            <a href="/nav/sobre-nos">Sobre nós</a>
+            <a href="/nav/sobre-cancer">Sobre o câncer</a>
+            <a href="/nav/acomodacoes">Acomodações</a>
+            <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+            <a href="/nav/localizacao">Localizações</a>
+            <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+            <% if (!user) { %>
+                <!-- Usuário não logado -->
+                <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                <% } else { %>
+                    <!-- Usuário logado -->
+                    <% if (user.tipo==='paciente' ) { %>
+                        <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                        <% } else if (user.tipo==='acompanhante' ) { %>
+                            <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                            <% } else if (user.tipo==='voluntario' ) { %>
+                                <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                                <% } else if (user.tipo==='doador' ) { %>
+                                    <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                    <% } else if (user.tipo==='admin' ) { %>
+                                        <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                        <% } else { %>
+                                            <!-- Caso algum outro tipo apareça -->
+                                            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
                                             <% } %>
+                                                <!-- Botão de logout -->
+                                                <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                                <% } %>
+        </div>
     </nav>
 
 
@@ -67,7 +69,6 @@
             </p>
 
             <div class="cards-container hospitais-cards">
-                <!-- 3 iniciais -->
                 <div class="card"
                     data-info="Hospital do Câncer de São Paulo é referência nacional no tratamento oncológico."
                     data-lat="-23.5565" data-lng="-46.6601">
@@ -97,8 +98,18 @@
                         <p>Rua das Três Irmãs, 100, Paraíso, São Paulo, SP</p>
                     </div>
                 </div>
+
+                <div class="card"
+                    data-info="Hospital do Câncer de São Paulo é referência nacional no tratamento oncológico."
+                    data-lat="-23.5565" data-lng="-46.6601">
+                    <img src="/image/apoio-paciente/hospital1.jpg" alt="Hospital do Câncer de São Paulo">
+                    <button class="mapa-sobre-img">Mapa</button>
+                    <div class="card-content">
+                        <h3>Hospital do Câncer de São Paulo</h3>
+                        <p> R. Dr. Arnaldo, 251, Cerqueira Cezar, São Paulo, SP</p>
+                    </div>
+                </div>
             </div>
-            <button class="btn-carregar" data-target="hospitais-cards">Carregar mais</button>
         </section>
 
         <!-- FARMÁCIAS -->
@@ -194,7 +205,6 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-carregar" data-target="clinicas-cards">Carregar mais</button>
         </section>
     </main>
 
@@ -243,6 +253,18 @@
         </div>
     </footer>
 
+    <script>
+        /*====== MENU MOBILE ======*/
+        const hamburger = document.createElement("div");
+        hamburger.classList.add("hamburger");
+        hamburger.innerHTML = "<span></span><span></span><span></span>";
+
+        document.querySelector("nav").prepend(hamburger);
+
+        hamburger.addEventListener("click", () => {
+            document.querySelector(".nav-links").classList.toggle("active");
+        });
+    </script>
 </body>
 
 <script>
@@ -268,18 +290,6 @@
 
     fechar.onclick = () => modal.style.display = 'none';
     window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; }
-
-    // CARREGAR MAIS
-    document.querySelectorAll('.btn-carregar').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = document.querySelector(`.${btn.dataset.target}`);
-            for (let i = 0; i < 3; i++) {
-                const novo = target.children[i].cloneNode(true);
-                target.appendChild(novo);
-            }
-            btn.style.display = 'none';
-        });
-    });
 
     // CARROSSEL PARADO COM SETAS
     const track = document.querySelector('.farmacias-track');
@@ -387,9 +397,6 @@
             return null;
         }
     }
-
-
-
 </script>
 
 </html>

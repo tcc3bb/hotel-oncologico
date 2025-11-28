@@ -8,13 +8,6 @@ html {
     font-size: 100%;
 }
 
-main {
-    max-width: 58rem;
-    margin: 2.5rem auto 5rem;
-    padding: 0 1.25rem;
-    text-align: center;
-}
-
 body {
     font-family: Arial, sans-serif;
     background: #fff;
@@ -28,6 +21,13 @@ p {
     line-height: 1.6;
     margin-bottom: 1rem;
     text-align: justify;
+}
+
+main {
+    max-width: 58rem;
+    margin: 2.5rem auto 5rem;
+    padding: 0 1.25rem;
+    text-align: center;
 }
 
 .title {
@@ -44,14 +44,13 @@ p {
 .dots {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    gap: 0.75rem;
+    margin: 2rem 0;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: 0.75rem;
+    height: 0.75rem;
     border-radius: 50%;
     background-color: #61967e;
 }
@@ -60,16 +59,14 @@ p {
     background-color: #2a684e;
 }
 
-
-
-/*-----     NAVBAR     -----*/
+/* =========================================================== MENU ============================================================== */
 nav {
     background-color: #699b80;
-    padding: 12px 20px;
+    padding: 1rem 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 1rem;
     font-weight: 600;
     font-size: 0.9rem;
     max-width: 100%;
@@ -81,21 +78,29 @@ nav a {
     transition: color 0.3s ease;
     cursor: pointer;
     white-space: nowrap;
-    padding: 6px 10px;
-    font-size: 1em;
-    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 0.4rem;
 }
 
 nav a:hover {
     background-color: #83aa89;
 }
 
-.img{
+/* LINKS DESKTOP */
+nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.img {
     padding: 0;
 }
 
 .img-logo {
-    height: 8vh; 
+    height: 7vh;
+    max-height: 3.5rem;
     width: auto;
     object-fit: contain;
     display: block;
@@ -105,406 +110,345 @@ nav a:hover {
 .btn-cadastrar,
 .btn-nav {
     padding: 0.5rem 1.2rem;
-    background: #3b4a3b;
-    color: #fff;
-    border-radius: 0.5rem;
+    background-color: #3b4a3b;
+    color: white;
+    border-radius: 0.6rem;
     font-weight: 700;
     font-family: 'Cinzel Decorative', serif;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    transition: background-color 0.3s ease;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .btn-entrar:hover,
 .btn-cadastrar:hover {
-    background: #83aa89;
+    background-color: #83aa89;
 }
 
 .btn-logout {
-    background: #e74c3c;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    margin-left: 0.6rem;
-    font-weight: 700;
-    color: #fff;
+    background-color: #e74c3c;
+    color: white;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
 }
 
 .btn-logout:hover {
-    background: #c0392b;
+    background-color: #c0392b;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*----------     HOSPITAIS PRÓXIMOS     ----------*/
-.hospitais-section {
-    max-width: 100%;
-}
-
-.hospitais-section h2 {
-    text-align: center;
-    font-size: 32px;
-    color: #1e5a3c;
-    margin-bottom: 10px;
-}
-
-.descricao {
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 40px;
-}
-
-.cards-container {
-    display: flex;
+/* HAMBURGUER MENU */
+.hamburger {
+    display: none;
     flex-direction: column;
-    gap: 30px;
+    gap: 0.35rem;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* =========================================================== MENU MOBILE =========================================================== */
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* =========================================================== MAIN  ============================================================== */
+
+.main-container {
+    flex: 1;
+    max-width: 75rem;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+/* Seções Gerais */
+section {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+section h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.5rem;
+    color: #2a684e;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+section .descricao,
+.farmacias-container p,
+.clinicas-container p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* Hospitais */
+.hospitais-section .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: 2rem;
 }
 
 .card {
-    display: flex;
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.8rem;
     overflow: hidden;
+    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .card img {
-    width: 40%;
+    width: 100%;
+    height: 14rem;
     object-fit: cover;
 }
 
 .card-content {
-    padding: 20px;
-    flex: 1;
+    padding: 1.5rem;
 }
 
 .card-content h3 {
-    font-size: 20px;
+    font-size: 1.5rem;
     color: #1e5a3c;
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
 }
 
 .card-content p {
-    font-size: 14px;
-    color: #444;
-    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #555;
 }
 
-.card-footer {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.mapa-btn {
-    background-color: #1e5a3c;
+.mapa-sobre-img {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(30, 90, 60, 0.9);
     color: #fff;
     border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
     cursor: pointer;
-    font-size: 13px;
-}
-
-.mapa-btn:hover {
-    background-color: #17472e;
-}
-
-.tag {
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: bold;
-    color: #fff;
-}
-
-.publico {
-    background-color: #1e5a3c;
-}
-
-.privado {
-    background-color: #c94a4a;
-}
-
-
-
-
-/*----------     FARMÁCIAS PRÓXIMAS     ----------*/
-.farmacias-section {
-    width: 100%;
-    padding: 2rem 1rem;
-    font-family: Arial, sans-serif;
-}
-
-.farmacias-container {
-    background-color: #6aa986;
-    padding: 2rem 1rem;
-    color: #fff;
-    border-radius: 1rem;
-    text-align: center;
-    margin: 0 auto 2rem auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.farmacias-container h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.farmacias-container p {
-    font-size: 1rem;
-    opacity: 0.9;
-}
-
-.farmacias-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-}
-
-.farmacia-card {
-    background-color: #2a684e;
-    border-radius: 1rem;
-    overflow: hidden;
-    flex: 1 1 20rem;
-    max-width: 22rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    max-height: 30rem;
-
-}
-
-.farmacia-card:hover {
-    transform: translateY(-5px);
-}
-
-.farmacia-card img {
-    width: 100%;
-    height: 65%;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.farmacia-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-
-.farmacia-card p {
     font-size: 0.9rem;
-    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.mapa-sobre-img:hover {
+    background: #1e5a3c;
+    transform: scale(1.1);
+}
+
+/* Farmácias */
+.farmacias-section .farmacias-container {
+    background: linear-gradient(90deg, #6aa986 0%, #2a684e 100%);
     color: #fff;
-}
-
-.tag {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.tag span {
-    padding: 0.4rem 0.8rem;
     border-radius: 1rem;
-    font-size: 0.8rem;
-    font-weight: bold;
+    padding: 2rem;
+    margin-top: 9rem;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
-.comum {
-    background-color: #e0e0e0;
-    color: #444;
-}
-
-.alto-custo {
-    background-color: #f5a623;
-    color: #fff;
-}
-
-.mapa {
-    font-size: 0.8rem;
-    text-decoration: none;
-    background-color: #6aa986;
-    color: #fff;
-    padding: 0.4rem 0.8rem;
-    border-radius: 1rem;
-}
-
-/* ---- CARROSSEL FARMÁCIAS ---- */
 .farmacias-carousel {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    margin: 0 auto;
+    border-radius: 1rem;
 }
 
 .farmacias-track {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
+    padding: 1rem 0;
 }
 
 .farmacias-track::-webkit-scrollbar {
     display: none;
 }
 
+.farmacia-card {
+    flex: 0 0 clamp(16rem, 35vw, 20rem);
+    background: #2a684e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.farmacia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.farmacia-card img {
+    width: 100%;
+    height: 11rem;
+    object-fit: cover;
+}
+
+.farmacia-card h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin: 1rem;
+}
+
+.farmacia-card p {
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin: 0 1rem 1rem;
+}
+
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(30, 90, 60, 0.8);
-    color: white;
+    background: rgba(255, 255, 255, 0.8);
+    color: #2a684e;
     border: none;
     border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     font-size: 1.2rem;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    z-index: 10;
 }
 
 .carousel-btn:hover {
-    background: #1e5a3c;
+    background: #fff;
+    transform: translateY(-50%) scale(1.1);
 }
 
 .carousel-btn.prev {
-    left: 0.5rem;
+    left: 10px;
 }
 
 .carousel-btn.next {
-    right: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .carousel-btn {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .farmacias-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .farmacia-card {
-        max-width: 90%;
-    }
-}
-
-
-
-
-/*----------     CLÍNICAS PRÓXIMAS     ----------*/
-.clinicas-section {
-    width: 100%;
-    padding: 2rem 1rem;
-    font-family: Arial, sans-serif;
-}
-
-.clinicas-container {
-    background-color: #6aa986;
-    padding: 2rem 1rem;
-    color: #fff;
-    border-radius: 1rem;
-    text-align: center;
-    margin: 0 auto 2rem auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.clinicas-container h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.clinicas-container p {
-    font-size: 1rem;
-    opacity: 0.9;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ---- BOTÃO MAPA SOBRE IMAGEM ---- */
-.mapa-sobre-img {
-    position: absolute;
-    bottom: 10px;
     right: 10px;
-    background: rgba(30, 90, 60, 0.85);
+}
+
+/* ========================================================== SECTION CLÍNICAS ============================================================= */
+.clinicas-section .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* Botão Carregar Mais */
+.btn-carregar {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(90deg, #1e5a3c 0%, #2a684e 100%);
     color: #fff;
     border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 13px;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.mapa-sobre-img:hover {
-    background: #1e5a3c;
+.btn-carregar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ---- MODAL ---- */
+/* ========================================================== MODAIS ============================================================= */
 .modal {
     display: none;
     position: fixed;
-    z-index: 999;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .modal-content {
     background: #fff;
     width: 90%;
     max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
-    padding: 2rem;
     border-radius: 15px;
+    padding: 2rem;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     animation: slideIn 0.3s ease;
 }
 
 @keyframes slideIn {
     from {
-        transform: translateY(-20px);
+        transform: translateY(-50px);
         opacity: 0;
     }
 
@@ -516,119 +460,66 @@ nav a:hover {
 
 .fechar {
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5rem;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
     cursor: pointer;
     color: #1e5a3c;
+    transition: color 0.3s ease;
 }
 
 .fechar:hover {
     color: #c94a4a;
 }
 
-/* ---- CARROSSEL FARMÁCIAS ---- */
-.farmacias-carousel {
-    overflow: hidden;
-    position: relative;
+#map {
+    height: 400px;
     width: 100%;
+    border-radius: 10px;
+    margin-top: 1rem;
 }
 
-.farmacias-track {
-    display: flex;
-    gap: 1rem;
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
+/* Responsividade */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 0 1rem;
+        gap: 2rem;
     }
 
-    100% {
-        transform: translateX(-50%);
+    section {
+        padding: 1.5rem;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .farmacias-track {
+        gap: 1rem;
+    }
+
+    .farmacia-card {
+        flex: 0 0 280px;
+    }
+
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
     }
 }
 
-.farmacia-card {
-    position: relative;
-    flex: 0 0 20rem;
-}
-
-/* ---- BOTÃO CARREGAR MAIS ---- */
-.btn-carregar {
-    display: block;
-    margin: 2rem auto;
-    padding: 0.75rem 1.5rem;
-    background: #1e5a3c;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn-carregar:hover {
-    background: #2a684e;
-}
-
-/* Corrige cards clicáveis */
-.card,
-.farmacia-card {
-    position: relative;
-    cursor: pointer;
-}
-
-
-/* ---- BOTÃO SCROLL PARA TOPO ---- */
-#scrollTop {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: #2a684e;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    padding: 0.8rem;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s;
-}
-
-#scrollTop:hover {
-    background: #1e5a3c;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*-----     FOOTER     -----*/
+/* ========================================================== FOOTER ============================================================= */
 footer {
-    background: #699b80;
+    background-color: #699b80;
     color: #fff;
-    padding: 2rem 1.25rem 1rem;
+    padding: 2.5rem 1.5rem 1rem;
     font-family: 'EB Garamond', serif;
     font-size: 0.9rem;
 }
 
 .footer-container {
-    max-width: 68.75rem;
+    max-width: 70rem;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -637,14 +528,14 @@ footer {
 }
 
 .footer-container>div {
-    flex: 1 1 15rem;
-    min-width: 13.75rem;
+    flex: 1 1 250px;
+    min-width: 220px;
 }
 
 .footer-container h3 {
     font-family: 'Cinzel Decorative', serif;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.8rem;
     color: #c9d6c5;
 }
 
@@ -660,10 +551,10 @@ footer {
 }
 
 .footer-bottom {
+    margin-top: 2rem;
     text-align: center;
-    margin-top: 1.25rem;
     border-top: 1px solid #5a6a5a;
-    padding-top: 0.75rem;
+    padding-top: 1rem;
     font-size: 0.85rem;
     color: #aeb5ab;
 }

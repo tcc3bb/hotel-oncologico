@@ -8,19 +8,12 @@ html {
     font-size: 100%;
 }
 
-main {
-    max-width: 58rem;
-    margin: 2.5rem auto 5rem;
-    padding: 0 1.25rem;
-    text-align: center;
-}
-
 body {
     font-family: Arial, sans-serif;
     background: #fff;
     color: #444;
     line-height: 1.6;
-} 
+}
 
 p {
     font-family: 'EB Garamond', serif;
@@ -30,9 +23,22 @@ p {
     text-align: justify;
 }
 
+main {
+    max-width: 60rem;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+p {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1rem, 1vw + .9rem, 1.25rem);
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+
 .title {
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
     color: #61967e;
     margin-bottom: 1.8rem;
 }
@@ -45,31 +51,29 @@ p {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    gap: .8rem;
+    margin: 2rem 0;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: .75rem;
+    height: .75rem;
     border-radius: 50%;
-    background-color: #61967e;
+    background: #61967e;
 }
 
 .dot.dark {
     background-color: #2a684e;
 }
 
-
-
-/*-----     NAVBAR     -----*/
+/* =========================================================== MENU ============================================================== */
 nav {
     background-color: #699b80;
-    padding: 12px 20px;
+    padding: 1rem 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 1rem;
     font-weight: 600;
     font-size: 0.9rem;
     max-width: 100%;
@@ -81,21 +85,29 @@ nav a {
     transition: color 0.3s ease;
     cursor: pointer;
     white-space: nowrap;
-    padding: 6px 10px;
-    font-size: 1em;
-    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 0.4rem;
 }
 
 nav a:hover {
     background-color: #83aa89;
 }
 
-.img{
+/* LINKS DESKTOP */
+nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.img {
     padding: 0;
 }
 
 .img-logo {
-    height: 8vh; 
+    height: 7vh;
+    max-height: 3.5rem;
     width: auto;
     object-fit: contain;
     display: block;
@@ -105,42 +117,93 @@ nav a:hover {
 .btn-cadastrar,
 .btn-nav {
     padding: 0.5rem 1.2rem;
-    background: #3b4a3b;
-    color: #fff;
-    border-radius: 0.5rem;
+    background-color: #3b4a3b;
+    color: white;
+    border-radius: 0.6rem;
     font-weight: 700;
     font-family: 'Cinzel Decorative', serif;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    transition: background-color 0.3s ease;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .btn-entrar:hover,
 .btn-cadastrar:hover {
-    background: #83aa89;
+    background-color: #83aa89;
 }
 
 .btn-logout {
-    background: #e74c3c;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    margin-left: 0.6rem;
-    font-weight: 700;
-    color: #fff;
+    background-color: #e74c3c;
+    color: white;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
 }
 
 .btn-logout:hover {
-    background: #c0392b;
+    background-color: #c0392b;
 }
 
+/* HAMBURGUER MENU 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    cursor: pointer;
+}*/
 
+.hamburger {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    flex-direction: column;
+    gap: .4rem;
+    cursor: pointer;
+}
 
+.hamburger span {
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
 
+/* =========================================================== MENU MOBILE =========================================================== */
+@media (max-width: 900px) {
 
-/* -----     NOSSA HISTÓRIA     ----- */
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* ========================== SECTION NOSSA HISTÓRIA ========================== */
 .nossa-historia {
     position: relative;
     max-width: 100%;
@@ -171,11 +234,18 @@ nav a:hover {
     border-radius: 1rem;
 }
 
+/* Ajuste mobile */
+@media (max-width: 600px) {
+    .historia-texto {
+        position: relative;
+        margin: 0 auto 1rem;
+        display: inline-block;
+    }
+}
 
 
 
-
-/*-----     MISSÃO     ----- */
+/* ========================== SECTION MISSÃO ========================== */
 .missao-section {
     max-width: 100%;
 }
@@ -210,7 +280,7 @@ nav a:hover {
     flex-shrink: 0;
     border-radius: 50% 50% 0 0;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .35);
 }
 
 .missao-img-right {
@@ -220,10 +290,8 @@ nav a:hover {
     flex-shrink: 0;
     border-radius: 50% 35% 55% 40%;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .35);
 }
-
-
 
 @media (max-width: 768px) {
     .missao-block {
@@ -246,10 +314,7 @@ nav a:hover {
 }
 
 
-
-
-
-/*-----     VISÃO     -----*/
+/* ========================== SECTION VISÃO ========================== */
 .visao-section {
     max-width: 100%;
 }
@@ -268,7 +333,7 @@ nav a:hover {
     flex-shrink: 0;
     border-radius: 50% 50% 0 0;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .35);
 }
 
 .visao-text-image img {
@@ -290,11 +355,7 @@ nav a:hover {
     }
 }
 
-
-
-
-
-/*-----     VALORES     -----*/
+/* ========================== SECTION VALORES ========================== */
 .valores-section {
     max-width: 62rem;
 
@@ -378,21 +439,17 @@ li {
     }
 }
 
-
-
-
-
-/*-----     FOOTER     -----*/
+/* ========================================================== FOOTER ============================================================= */
 footer {
-    background: #699b80;
+    background-color: #699b80;
     color: #fff;
-    padding: 2rem 1.25rem 1rem;
+    padding: 2.5rem 1.5rem 1rem;
     font-family: 'EB Garamond', serif;
     font-size: 0.9rem;
 }
 
 .footer-container {
-    max-width: 68.75rem;
+    max-width: 70rem;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -401,14 +458,14 @@ footer {
 }
 
 .footer-container>div {
-    flex: 1 1 15rem;
-    min-width: 13.75rem;
+    flex: 1 1 250px;
+    min-width: 220px;
 }
 
 .footer-container h3 {
     font-family: 'Cinzel Decorative', serif;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.8rem;
     color: #c9d6c5;
 }
 
@@ -424,10 +481,10 @@ footer {
 }
 
 .footer-bottom {
+    margin-top: 2rem;
     text-align: center;
-    margin-top: 1.25rem;
     border-top: 1px solid #5a6a5a;
-    padding-top: 0.75rem;
+    padding-top: 1rem;
     font-size: 0.85rem;
     color: #aeb5ab;
 }
