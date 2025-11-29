@@ -158,4 +158,26 @@ router.delete('/:id', verificaAdmin, (req, res) => {
     });
 }); 
 
+// ROTA PÚBLICA PARA VISUALIZAR ARTIGO
+router.get('/public/:id', (req, res) => {
+    const connection = connectionFactory();
+    const artigosDAO = ArtigosDAO(connection);
+    const artigoId = req.params.id;
+
+    artigosDAO.buscarPorId(artigoId, (err, resultado) => {
+        if (err) return res.status(500).json({ erro: 'Erro no servidor' });
+
+        if (!resultado || resultado.length === 0)
+            return res.status(404).json({ erro: 'Artigo não encontrado' });
+
+        const artigo = resultado[0];
+
+        // Incrementa visualizações
+        artigosDAO.incrementarVisualizacao(artigoId, () => { });
+
+        res.json(artigo);
+    });
+});
+
+
 module.exports = router;

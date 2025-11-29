@@ -11,171 +11,196 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/css/nav/style_perguntas_frequentes.css">
 </head>
 
 <body>
-    <!-- ======================================================================================================================-->
     <!--===================================================== MENU ============================================================-->
-    <!--====================================================================================================================== -->
-        <nav>
-        <a href="/" class="img">
-            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
-        </a>
-        <a href="/nav/sobre-nos">Sobre nós</a>
-        <a href="/nav/sobre-cancer">Sobre o câncer</a>
-        <a href="/nav/acomodacoes">Acomodações</a>
-        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
-        <a href="/nav/localizacao">Localizações</a>
-        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
-        <% if (!user) { %>
-            <!-- Usuário não logado -->
-            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-            <% } else { %>
-                <!-- Usuário logado -->
-                <% if (user.tipo==='paciente' ) { %>
-                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
-                    <% } else if (user.tipo==='acompanhante' ) { %>
-                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
-                        <% } else if (user.tipo==='voluntario' ) { %>
-                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
-                            <% } else if (user.tipo==='doador' ) { %>
-                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
-                                <% } else if (user.tipo==='admin' ) { %>
-                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
-                                    <% } else { %>
-                                        <!-- Caso algum outro tipo apareça -->
-                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-                                        <% } %>
-                                            <!-- Botão de logout -->
-                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+    <nav>
+        <div class="nav-links">
+            <a href="/" class="img">
+                <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+            </a>
+            <a href="/nav/sobre-nos">Sobre nós</a>
+            <a href="/nav/sobre-cancer">Sobre o câncer</a>
+            <a href="/nav/acomodacoes">Acomodações</a>
+            <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+            <a href="/nav/localizacao">Localizações</a>
+            <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+            <% if (!user) { %>
+                <!-- Usuário não logado -->
+                <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                <% } else { %>
+                    <!-- Usuário logado -->
+                    <% if (user.tipo==='paciente' ) { %>
+                        <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                        <% } else if (user.tipo==='acompanhante' ) { %>
+                            <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                            <% } else if (user.tipo==='voluntario' ) { %>
+                                <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                                <% } else if (user.tipo==='doador' ) { %>
+                                    <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                    <% } else if (user.tipo==='admin' ) { %>
+                                        <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                        <% } else { %>
+                                            <!-- Caso algum outro tipo apareça -->
+                                            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
                                             <% } %>
+                                                <!-- Botão de logout -->
+                                                <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                                <% } %>
+        </div>
     </nav>
-
 
     <main>
         <h1>Perguntas Frequentes</h1>
 
-        <!-- ======================================================================================================================-->
         <!--==================================================== ARTIGOS ==========================================================-->
-        <!--====================================================================================================================== -->
-        <div class="artigos-container">
-            <h2>Artigos</h2>
-            <div class="artigos-grid">
-                <% if (artigos && artigos.length> 0) { %>
-                    <% artigos.forEach(function(artigo) { %>
-                        <div class="artigo-card" data-id="<%= artigo.id %>">
-                            <img src="<%= artigo.imagem ? artigo.imagem : '/image/default.jpg' %>"
-                                alt="<%= artigo.titulo %>">
-                            <h3>
-                                <%= artigo.titulo %>
-                            </h3>
-                            <button class="abrir-artigo" data-id="<%= artigo.artigo_id %>">Ler mais</button>
-                        </div>
-                        <% }) %>
-                            <% } else { %>
-                                <p>Nenhum artigo publicado ainda.</p>
-                                <% } %>
-            </div>
-        </div>
+        <div class="conteudo-lado-a-lado">
 
-        <!-- ======================================================================================================================-->
-        <!--================================================= MODAL ARTIGO ========================================================-->
-        <!--====================================================================================================================== -->
-        <div id="modal-artigo" class="modal">
-            <div class="modal-overlay"></div>
-            <div class="modal-content animate-modal">
-                <button id="fechar-modal" class="close-btn">&times;</button>
-
-                <div class="modal-header">
-                    <img id="modal-imagem" src="" alt="" class="modal-capa">
-                    <h2 id="modal-titulo" class="modal-titulo"></h2>
-                    <h3 id="modal-subtitulo" class="modal-subtitulo"></h3>
-                    <p class="modal-meta">
-                        <span id="modal-categoria"></span> •
-                        <span id="modal-data"></span> •
-                        <span id="modal-autor"></span>
-                    </p>
-                </div>
-
-                <div class="modal-body">
-                    <p id="modal-resumo" class="modal-resumo"></p>
-                    <div id="modal-conteudo" class="modal-conteudo"></div>
-
-                    <div class="modal-info-extra">
-                        <p><strong>Palavras-chave:</strong> <span id="modal-palavras"></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ======================================================================================================================-->
-        <!--================================================== PERGUNTAS ==========================================================-->
-        <!--====================================================================================================================== -->
-        <div class="perguntas-container">
-            <% if (user) { %>
-                <form action="/perguntas/nova" method="POST">
-                    <h2>Faça sua pergunta!</h2>
-                    <input type="text" name="titulo" placeholder="Título da pergunta" required>
-                    <textarea name="conteudo" placeholder="Escreva sua pergunta..." required></textarea>
-                    <button type="submit">Enviar pergunta</button>
-                </form>
-                <% } else { %>
-                    <div class="aviso-login">
-                        <p>Você precisa <a href="/usuarios/login">entrar</a> para fazer uma pergunta.</p>
-                    </div>
-                    <% } %>
-                        <% perguntas.forEach(function(p) { %>
-                            <div class="pergunta">
+            <div class="artigos-container">
+                <h2>Artigos</h2>
+                <div class="artigos-grid">
+                    <% if (artigos && artigos.length> 0) { %>
+                        <% artigos.forEach(function(artigo) { %>
+                            <div class="artigo-card" data-id="<%= artigo.id %>">
+                                <img src="<%= artigo.imagem ? artigo.imagem : '/image/default.jpg' %>"
+                                    alt="<%= artigo.titulo %>">
                                 <h3>
-                                    <%= p.pergunta_titulo %>
+                                    <%= artigo.titulo %>
                                 </h3>
-                                <p>
-                                    <%= p.pergunta_conteudo %>
-                                </p>
-                                <small>
-                                    Por <%= p.autor_nome %>
-                                        em <%= new Date(p.pergunta_data_criacao).toLocaleString('pt-BR') %>
-                                </small>
-                                <!-- RESPOSTAS -->
-                                <div class="respostas-container">
-                                    <% if (p.respostas && p.respostas.length> 0) { %>
-                                        <h4>Respostas:</h4>
-                                        <ul>
-                                            <% p.respostas.forEach(function(r) { %>
-                                                <li>
-                                                    <p>
-                                                        <%= r.resposta_conteudo %>
-                                                    </p>
-                                                    <small>
-                                                        Por <%= r.autor_nome %>
-                                                            em <%= new
-                                                                Date(r.resposta_data_criacao).toLocaleString('pt-BR') %>
-                                                    </small>
-                                                </li>
-                                                <% }) %>
-                                        </ul>
-                                        <% } %>
-
-                                            <% if (user) { %>
-                                                <form action="/perguntas/<%= p.pergunta_id %>/responder" method="POST">
-                                                    <textarea name="conteudo" placeholder="Escreva sua resposta..."
-                                                        required></textarea>
-                                                    <button type="submit">Responder</button>
-                                                </form>
-                                                <% } %>
-                                </div>
-
+                                <button class="abrir-artigo" data-id="<%= artigo.artigo_id %>">Ler mais</button>
                             </div>
                             <% }) %>
+                                <% } else { %>
+                                    <p>Nenhum artigo publicado ainda.</p>
+                                    <% } %>
+                </div>
+            </div>
+
+            <!--================================================= MODAL ARTIGO ========================================================-->
+            <div id="modal-artigo" class="modal">
+                <div class="modal-overlay"></div>
+                <div class="modal-content animate-modal">
+                    <button id="fechar-modal" class="close-btn">&times;</button>
+
+                    <div class="modal-header">
+                        <img id="modal-imagem" src="" alt="" class="modal-capa">
+                        <h2 id="modal-titulo" class="modal-titulo"></h2>
+                        <h3 id="modal-subtitulo" class="modal-subtitulo"></h3>
+                        <p class="modal-meta">
+                            <span id="modal-categoria"></span> •
+                            <span id="modal-data"></span> •
+                            <span id="modal-autor"></span>
+                        </p>
+                    </div>
+
+                    <div class="modal-body">
+                        <p id="modal-resumo" class="modal-resumo"></p>
+                        <div id="modal-conteudo" class="modal-conteudo"></div>
+
+                        <div class="modal-info-extra">
+                            <p><strong>Palavras-chave:</strong> <span id="modal-palavras"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--================================================== PERGUNTAS ==========================================================-->
+            <div class="perguntas-container">
+                <% if (user) { %>
+                    <form action="/perguntas/nova" method="POST">
+                        <h2>Faça sua pergunta!</h2>
+                        <input type="text" name="titulo" placeholder="Título da pergunta" required>
+                        <textarea name="conteudo" placeholder="Escreva sua pergunta..." required></textarea>
+                        <button type="submit">Enviar pergunta</button>
+                    </form>
+                    <% } else { %>
+                        <div class="aviso-login">
+                            <p>Você precisa <a href="/usuarios/login">entrar</a> para fazer uma pergunta.</p>
+                        </div>
+                        <% } %>
+                            <% perguntas.forEach(function(p) { %>
+                                <div class="pergunta">
+                                    <h3>
+                                        <%= p.pergunta_titulo %>
+                                    </h3>
+                                    <p>
+                                        <%= p.pergunta_conteudo %>
+                                    </p>
+                                    <small>
+                                        Por <%= p.autor_nome %>
+                                            em <%= new Date(p.pergunta_data_criacao).toLocaleString('pt-BR') %>
+                                    </small>
+                                    <!-- RESPOSTAS -->
+                                    <div class="respostas-container">
+                                        <% if (p.respostas && p.respostas.length> 0) { %>
+                                            <h4>Respostas:</h4>
+                                            <ul>
+                                                <% p.respostas.forEach(function(r) { %>
+                                                    <li>
+                                                        <p>
+                                                            <%= r.resposta_conteudo %>
+                                                        </p>
+                                                        <small>
+                                                            Por <%= r.autor_nome %>
+                                                                em <%= new
+                                                                    Date(r.resposta_data_criacao).toLocaleString('pt-BR')
+                                                                    %>
+                                                        </small>
+                                                    </li>
+                                                    <% }) %>
+                                            </ul>
+                                            <% } %>
+
+                                                <% if (user) { %>
+                                                    <form action="/perguntas/<%= p.pergunta_id %>/responder"
+                                                        method="POST">
+                                                        <textarea name="conteudo" placeholder="Escreva sua resposta..."
+                                                            required></textarea>
+                                                        <button type="submit">Responder</button>
+                                                    </form>
+                                                    <% } %>
+                                    </div>
+
+                                </div>
+                                <% }) %>
+            </div>
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <!-- ========================= CARROSSEL DE AVALIAÇÕES ============================= -->
+        <section class="avaliacoes-section">
+            <h2>Avaliações dos Pacientes</h2>
+
+            <div class="swiper avaliacao-swiper">
+                <div class="swiper-wrapper">
+                    <% avaliacoes.forEach(av=> { %>
+                        <div class="swiper-slide avaliacao-card">
+                            <p class="avaliacao-texto">
+                                <%= av.texto %>
+                            </p>
+                            <h4 class="avaliacao-autor">— <%= av.nome_paciente %>
+                            </h4>
+                        </div>
+                        <% }) %>
+                </div>
+
+                <!-- Setas -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- Paginação -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- ======================================================================================================================-->
     <!--==================================================== FOOTER ===========================================================-->
-    <!--====================================================================================================================== -->
     <footer>
         <div class="footer-container">
             <div class="footer-about">
@@ -201,12 +226,11 @@
         </div>
     </footer>
 
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            /* ==========================================================
-               1. Acordeão de perguntas e respostas
-            ========================================================== */
+            /* =================================== 1. Acordeão de perguntas e respostas ========================================= */
             function initPerguntas() {
                 const perguntas = document.querySelectorAll('.pergunta');
                 perguntas.forEach(pergunta => {
@@ -234,9 +258,7 @@
                 });
             }
 
-            /* ==========================================================
-               2. Modal de artigos
-            ========================================================== */
+            /* ================================================ 2. Modal de artigos ========================================= */
             function initArtigoModal() {
                 const botoes = document.querySelectorAll('.abrir-artigo');
                 const modal = document.getElementById('modal-artigo');
@@ -249,7 +271,8 @@
                         if (!artigoId) return alert('ID do artigo não encontrado.');
 
                         try {
-                            const resp = await fetch(`/artigos/${artigoId}`);
+                            const resp = await fetch(`/artigos/public/${artigoId}`);
+
                             if (!resp.ok) throw new Error('Erro ao buscar artigo.');
                             const artigo = await resp.json();
 
@@ -284,29 +307,31 @@
                 }));
             }
 
-
-            /* ==========================================================
-            3. Execução
-            ========================================================== */
+            /* ======================================= 3. Execução =========================================== */
             initPerguntas();
             initArtigoModal();
         });
+
+        /* ======================== 4. Carrossel de Avaliações =========================== */
+        new Swiper('.avaliacao-swiper', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
+
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 

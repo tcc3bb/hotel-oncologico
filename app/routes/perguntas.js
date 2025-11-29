@@ -7,7 +7,10 @@ module.exports = function (PerguntasDAO, ArtigosDAO) {
         const connection = connectionFactory();
 
         const perguntasDAO = new PerguntasDAO(connection);
-        const artigosDAO = ArtigosDAO(connection); // ✅ sem "new"
+        const artigosDAO = ArtigosDAO(connection); // correto
+        const AvaliacaoPacienteDAO = require('../infra/AvaliacaoPacienteDAO');
+        const avaliacaoDAO = new AvaliacaoPacienteDAO(connection);
+        // 🔥 novo
 
         perguntasDAO.listarComRespostas((erro, perguntas) => {
             if (erro) {
@@ -21,14 +24,25 @@ module.exports = function (PerguntasDAO, ArtigosDAO) {
                     return res.status(500).send('Erro no servidor');
                 }
 
-                res.render('nav/perguntas-frequentes', {
-                    user: req.session.user,
-                    perguntas,
-                    artigos
+                // 🔥 Agora buscamos as avaliações também
+                avaliacaoDAO.listarTodas((erro3, avaliacoes) => {
+                    if (erro3) {
+                        console.error('Erro ao buscar avaliações:', erro3);
+                        return res.status(500).send('Erro no servidor');
+                    }
+
+                    // 🔥 Finalmente renderiza tudo junto
+                    res.render('nav/perguntas-frequentes', {
+                        user: req.session.user,
+                        perguntas,
+                        artigos,
+                        avaliacoes
+                    });
                 });
             });
         });
     });
+
 
 
 
