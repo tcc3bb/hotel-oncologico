@@ -15,48 +15,125 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="left">
-            <h1>Já tem uma<br> conta?</h1>
-            <p>Bem vindo novamente, entre com seu e-mail e senha e tenha acesso aos nossos serviços</p>
-            <button onclick="window.location.href='/usuarios/login'">Entrar</button>
+<nav>
+        <div class="nav-links">
+            <a href="/" class="img">
+                <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+            </a>
+            <a href="/nav/sobre-nos">Sobre nós</a>
+            <a href="/nav/sobre-cancer">Sobre o câncer</a>
+            <a href="/nav/acomodacoes">Acomodações</a>
+            <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+            <a href="/nav/localizacao">Localizações</a>
+            <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+            <% if (!user) { %>
+                <!-- Usuário não logado -->
+                <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                <% } else { %>
+                    <!-- Usuário logado -->
+                    <% if (user.tipo==='paciente' ) { %>
+                        <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                        <% } else if (user.tipo==='acompanhante' ) { %>
+                            <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                            <% } else if (user.tipo==='voluntario' ) { %>
+                                <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                                <% } else if (user.tipo==='doador' ) { %>
+                                    <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                    <% } else if (user.tipo==='admin' ) { %>
+                                        <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                        <% } else { %>
+                                            <!-- Caso algum outro tipo apareça -->
+                                            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                            <% } %>
+                                                <!-- Botão de logout -->
+                                                <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                                <% } %>
         </div>
-        <div class="right">
-            <h1>Criar Conta</h1>
-            <small>Faça seu cadastro</small>
+    </nav>
 
-            <form method="POST" action="/usuarios/cadastro">
-                <div class="input-group">
-                    <i class="fa-solid fa-envelope"></i>
-                    <input type="email" name="email" placeholder="E-mail" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" name="senha" placeholder="Senha" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" name="confirma_senha" placeholder="Confirme sua Senha" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-users"></i>
-                    <select name="tipo" id="tipo" required>
-                        <option value="" disabled selected>Selecione o tipo de usuário</option>
-                        <option value="paciente">Paciente</option>
-                        <option value="acompanhante">Acompanhante</option>
-                        <option value="voluntario">Voluntário</option>
-                        <option value="doador">Doador</option>
-                        <% if (user && user.tipo==='admin' ) { %>
-                            <option value="admin">Admin</option>
-                            <%}%>
-                    </select>
-                </div>
-                <button type="submit">Cadastrar</button>
-                <button onclick="window.location.href='/'">Voltar</button>
-            </form>
+    <main>
+        <div class="container">
+            <div class="left">
+                <h1>Já tem uma<br> conta?</h1>
+                <p>Bem vindo novamente, entre com seu e-mail e senha e tenha acesso aos nossos serviços</p>
+                <button onclick="window.location.href='/usuarios/login'">Entrar</button>
+            </div>
+            <div class="right">
+                <h1>Criar Conta</h1>
+                <small>Faça seu cadastro</small>
 
+                <form method="POST" action="/usuarios/cadastro">
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" name="email" placeholder="E-mail" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="senha" placeholder="Senha" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="confirma_senha" placeholder="Confirme sua Senha" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-users"></i>
+                        <select name="tipo" id="tipo" required>
+                            <option value="" disabled selected>Selecione o tipo de usuário</option>
+                            <option value="paciente">Paciente</option>
+                            <option value="acompanhante">Acompanhante</option>
+                            <option value="voluntario">Voluntário</option>
+                            <option value="doador">Doador</option>
+                            <% if (user && user.tipo==='admin' ) { %>
+                                <option value="admin">Admin</option>
+                                <%}%>
+                        </select>
+                    </div>
+                    <button type="submit">Cadastrar</button>
+                    <button onclick="window.location.href='/'">Voltar</button>
+                </form>
+            </div>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        /*====== MENU MOBILE ======*/
+        const hamburger = document.createElement("div");
+        hamburger.classList.add("hamburger");
+        hamburger.innerHTML = "<span></span><span></span><span></span>";
+
+        document.querySelector("nav").prepend(hamburger);
+
+        hamburger.addEventListener("click", () => {
+            document.querySelector(".nav-links").classList.toggle("active");
+        });
+    </script>
 </body>
 
 </html>

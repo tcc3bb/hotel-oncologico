@@ -2,12 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap');
 
 :root {
-    --color-primary: #9ABCA7; /* Verde Principal (Claro) */
-    --color-secondary: #4A7C59; /* Verde Secundário (Escuro) */
-    --color-light: #F9F9F9; /* Fundo/Campos */
-    --color-text-dark: #333333; /* Texto Principal */
-    --color-text-light: #FFFFFF; /* Texto Claro */
-    --color-error: #D9534F; /* Mensagem de Erro */
+    --color-primary: #9ABCA7;
+    /* Verde Principal (Claro) */
+    --color-secondary: #4A7C59;
+    /* Verde Secundário (Escuro) */
+    --color-light: #F9F9F9;
+    /* Fundo/Campos */
+    --color-text-dark: #333333;
+    /* Texto Principal */
+    --color-text-light: #FFFFFF;
+    /* Texto Claro */
+    --color-error: #D9534F;
+    /* Mensagem de Erro */
     --font-heading: 'Cinzel Decorative', serif;
     --font-body: 'EB Garamond', serif;
 }
@@ -19,28 +25,176 @@
 }
 
 body {
-    font-family: var(--font-body);
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #444;
+    line-height: 1.6;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: var(--color-light);
+    padding: 3rem 0;
 }
 
-/* 1. Layout do Container Principal */
+
+/*======================================================== MENU =============================================================== */
+nav {
+    background-color: #699b80;
+    padding: 1rem 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 100%;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 0.4rem;
+}
+
+nav a:hover {
+    background-color: #83aa89;
+}
+
+/* LINKS DESKTOP */
+nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.img {
+    padding: 0;
+}
+
+.img-logo {
+    height: 7vh;
+    max-height: 3.5rem;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.btn-entrar,
+.btn-cadastrar,
+.btn-nav {
+    padding: 0.5rem 1.2rem;
+    background-color: #3b4a3b;
+    color: white;
+    border-radius: 0.6rem;
+    font-weight: 700;
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-entrar:hover,
+.btn-cadastrar:hover {
+    background-color: #83aa89;
+}
+
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+/* HAMBURGUER MENU 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    cursor: pointer;
+}*/
+
+.hamburger {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    flex-direction: column;
+    gap: .4rem;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* =========================================================== MENU MOBILE =========================================================== */
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 .container {
     display: flex;
-    width: 70%; /* Largura otimizada */
+    width: 70%;
     max-width: 1100px;
-    height: 450px; /* Altura fixa para Desktop */
-    border-radius: 20px; /* Borda arredondada suave */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra sutil */
+    height: 450px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     overflow: hidden;
+    margin: 0 auto; 
 }
 
-/* 2. Painel Esquerdo: Login (Fundo Escuro) */
+
 .left-panel {
-    flex: 1; /* Ocupa 50% da largura */
+    flex: 1;
     background-color: var(--color-secondary);
     color: var(--color-text-light);
     display: flex;
@@ -63,9 +217,8 @@ body {
     opacity: 0.9;
 }
 
-/* Botão do Painel Esquerdo (Criar Conta) */
 .btn-create-account {
-    background-color: var(--color-primary); /* Destaque com o verde mais claro */
+    background-color: var(--color-primary);
     color: var(--color-text-light);
     border: none;
     padding: 12px 30px;
@@ -78,12 +231,11 @@ body {
 }
 
 .btn-create-account:hover {
-    background-color: #89AD98; /* Tom mais escuro no hover */
+    background-color: #89AD98;
 }
 
-/* 3. Painel Direito: Cadastro (Fundo Claro) */
 .right-panel {
-    flex: 1; /* Ocupa 50% da largura */
+    flex: 1;
     background-color: var(--color-light);
     color: var(--color-text-dark);
     display: flex;
@@ -108,7 +260,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* Formulário de Login */
 .right-panel form {
     display: flex;
     flex-direction: column;
@@ -116,7 +267,6 @@ body {
     max-width: 350px;
 }
 
-/* Inputs (E-mail e Senha) */
 .right-panel input[type="email"],
 .right-panel input[type="password"] {
     padding: 15px 20px;
@@ -124,7 +274,7 @@ body {
     border: 1px solid #CCCCCC;
     border-radius: 10px;
     font-size: 1rem;
-    background-color: var(--color-light); /* Fundo claro para campos */
+    background-color: var(--color-light);
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -134,7 +284,6 @@ body {
     box-shadow: 0 0 5px rgba(74, 124, 89, 0.5);
 }
 
-/* Link Esqueceu a Senha */
 .forgot-password {
     text-align: right;
     font-size: 0.9rem;
@@ -149,7 +298,6 @@ body {
     text-decoration: underline;
 }
 
-/* Botões de Ação (Entrar e Voltar) */
 .right-panel button {
     padding: 12px 20px;
     margin-bottom: 10px;
@@ -162,17 +310,15 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Botão Entrar (Principal) */
 .right-panel button[type="submit"] {
-    background-color: var(--color-secondary); /* Verde escuro */
+    background-color: var(--color-secondary);
     color: var(--color-text-light);
 }
 
 .right-panel button[type="submit"]:hover {
-    background-color: #3C6649; /* Tom mais escuro no hover */
+    background-color: #3C6649;
 }
 
-/* Botão Voltar (Secundário) */
 .right-panel button:last-of-type {
     background-color: transparent;
     border: 2px solid var(--color-secondary);
@@ -185,7 +331,6 @@ body {
     color: var(--color-text-light);
 }
 
-/* Mensagem de Erro */
 .error-message {
     background-color: #F9E5E5;
     color: var(--color-error);
@@ -198,7 +343,6 @@ body {
     font-size: 0.95rem;
 }
 
-/* Acessibilidade - Screen Reader Only */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -211,7 +355,6 @@ body {
     border-width: 0;
 }
 
-/* Media Queries para Responsividade (Mobile) */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -222,9 +365,8 @@ body {
         box-shadow: none;
     }
 
-    /* Painel Esquerdo (Criar Conta) no topo em Mobile */
     .left-panel {
-        order: 2; /* Coloca o "Criar Conta" para baixo */
+        order: 2;
         padding: 30px 20px;
         border-radius: 0 0 20px 20px;
     }
@@ -233,9 +375,8 @@ body {
         font-size: 1.8rem;
     }
 
-    /* Painel Direito (Login) no topo em Mobile */
     .right-panel {
-        order: 1; /* Coloca o "Login" para cima */
+        order: 1;
         padding: 40px 20px 30px;
         border-radius: 20px 20px 0 0;
     }
@@ -249,4 +390,54 @@ body {
         width: 100%;
         max-width: none;
     }
+}
+
+/* ========================================================== FOOTER ============================================================= */
+footer {
+    background-color: #699b80;
+    color: #fff;
+    padding: 2.5rem 1.5rem 1rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 70rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-container>div {
+    flex: 1 1 250px;
+    min-width: 220px;
+}
+
+.footer-container h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #c9d6c5;
+}
+
+.footer-container p,
+.footer-container a {
+    color: #d4d9d4;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 1px solid #5a6a5a;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: #aeb5ab;
 }
