@@ -20,7 +20,7 @@ module.exports = (connection) => {
         WHERE a.artigo_id = ?
     `;
             connection.query(sql, [artigo_id], callback);
-        },
+        }, 
 
         // 🔹 Criar novo artigo
         criarArtigo(artigo, callback) {
