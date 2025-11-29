@@ -17,52 +17,111 @@
 </head>
 
 <body>
-        <nav>
-        <a href="/" class="img">
-            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
-        </a>
-        <a href="/nav/sobre-nos">Sobre nós</a>
-        <a href="/nav/sobre-cancer">Sobre o câncer</a>
-        <a href="/nav/acomodacoes">Acomodações</a>
-        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
-        <a href="/nav/localizacao">Localizações</a>
-        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
-        <% if (!user) { %>
-            <!-- Usuário não logado -->
-            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-            <% } else { %>
-                <!-- Usuário logado -->
-                <% if (user.tipo==='paciente' ) { %>
-                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
-                    <% } else if (user.tipo==='acompanhante' ) { %>
-                        <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
-                        <% } else if (user.tipo==='voluntario' ) { %>
-                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
-                            <% } else if (user.tipo==='doador' ) { %>
-                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
-                                <% } else if (user.tipo==='admin' ) { %>
-                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
-                                    <% } else { %>
-                                        <!-- Caso algum outro tipo apareça -->
-                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-                                        <% } %>
-                                            <!-- Botão de logout -->
-                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+    <nav>
+        <div class="nav-links">
+            <a href="/" class="img">
+                <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+            </a>
+            <a href="/nav/sobre-nos">Sobre nós</a>
+            <a href="/nav/sobre-cancer">Sobre o câncer</a>
+            <a href="/nav/acomodacoes">Acomodações</a>
+            <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+            <a href="/nav/localizacao">Localizações</a>
+            <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+            <% if (!user) { %>
+                <!-- Usuário não logado -->
+                <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                <% } else { %>
+                    <!-- Usuário logado -->
+                    <% if (user.tipo==='paciente' ) { %>
+                        <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                        <% } else if (user.tipo==='acompanhante' ) { %>
+                            <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                            <% } else if (user.tipo==='voluntario' ) { %>
+                                <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                                <% } else if (user.tipo==='doador' ) { %>
+                                    <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                    <% } else if (user.tipo==='admin' ) { %>
+                                        <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                        <% } else { %>
+                                            <!-- Caso algum outro tipo apareça -->
+                                            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
                                             <% } %>
+                                                <!-- Botão de logout -->
+                                                <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                                <% } %>
+        </div>
     </nav>
 
 
-    <main>
-        <div class="container">
-            <img src="/image/logo.png" class="logo">
-            <div class="message-box">
-                <h1>PÁGINA EM DESENVOLVIMENTO</h1>
-                <p>Nosso hotel oncológico está sendo cuidadosamente preparado para recebê-lo!</p>
-            </div>
+    <!-- HERO -->
+    <section class="hero-cancer">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Informações sobre o Câncer</h1>
+            <p>Conhecimento é cuidado. Entenda cada tipo de câncer e como identificar sinais precoces.</p>
         </div>
-    </main>
+    </section>
+
+    <!-- INTRO TEXTO -->
+    <section class="intro-section">
+        <h2>O que é o câncer?</h2>
+        <p>
+            Câncer é o nome dado a um conjunto de mais de 100 doenças que têm em comum o crescimento desordenado de
+            células,
+            que invadem tecidos e órgãos. Detectar precocemente aumenta significativamente as chances de tratamento
+            eficiente e recuperação.
+        </p>
+    </section>
+
+    <!-- CARDS DE TIPOS DE CÂNCER -->
+    <section class="cards-section">
+        <h2>Principais tipos de câncer</h2>
+
+        <div class="cards-container">
+
+            <div class="card">
+                <h3>Câncer de Mama</h3>
+                <p>Um dos tipos mais comuns. A detecção precoce através da mamografia é essencial.</p>
+                <button>Saiba mais</button>
+            </div>
+
+            <div class="card">
+                <h3>Câncer de Próstata</h3>
+                <p>Atinge principalmente homens acima dos 50 anos. Exames preventivos são fundamentais.</p>
+                <button>Saiba mais</button>
+            </div>
+
+            <div class="card">
+                <h3>Câncer de Pulmão</h3>
+                <p>Fortemente associado ao tabagismo. A prevenção é o ponto-chave.</p>
+                <button>Saiba mais</button>
+            </div>
+
+            <div class="card">
+                <h3>Câncer de Intestino (Colorretal)</h3>
+                <p>Relacionado à alimentação e fatores hereditários. Colonoscopia ajuda no diagnóstico precoce.</p>
+                <button>Saiba mais</button>
+            </div>
+
+            <div class="card">
+                <h3>Câncer de Pele</h3>
+                <p>O mais comum no Brasil. Uso diário de protetor solar reduz riscos significativamente.</p>
+                <button>Saiba mais</button>
+            </div>
+
+            <div class="card">
+                <h3>Leucemia</h3>
+                <p>Atinge o sangue e a medula óssea. Pode ocorrer em crianças e adultos.</p>
+                <button>Saiba mais</button>
+            </div>
+
+        </div>
+    </section>
+
+
 
 
     <footer>

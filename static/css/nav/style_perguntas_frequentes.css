@@ -216,36 +216,6 @@ main h1 {
     padding-bottom: 0.4rem;
 }
 
-.conteudo-lado-a-lado {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-    margin-top: 2rem;
-}
-
-/* Cada bloco metade da tela */
-.artigos-container,
-.perguntas-container {
-    flex: 1;
-    background: var(--cinza-claro);
-    padding: 1.5rem;
-    border-radius: var(--borda-arredondada);
-    box-shadow: 0 4px 8px var(--sombra-leve);
-}
-
-/* Evitar que os cards de artigos fiquem muito esmagados */
-.artigos-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
-/* Responsivo — em telas menores, volta pro empilhado */
-@media (max-width: 900px) {
-    .conteudo-lado-a-lado {
-        flex-direction: column;
-    }
-}
 
 /* ============================= PERGUNTAS / ACORDEÃO ============================= */
 .perguntas-container {

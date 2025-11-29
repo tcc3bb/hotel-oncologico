@@ -1,3 +1,28 @@
+:root {
+    --verde-escuro: #23543b;
+    --verde-claro: #cfe9d1;
+    --verde-medio: #3a7d55;
+    --vermelho: #d9534f;
+    --branco: #fff;
+    --cinza-claro: #f9f9f9;
+    --cinza-medio: #ccc;
+    --cinza-escuro: #666;
+    --sombra-leve: rgba(0, 0, 0, 0.1);
+    --sombra-media: rgba(0, 0, 0, 0.15);
+    --sombra-forte: rgba(0, 0, 0, 0.22);
+
+    --cor-principal: #23543b;
+    --cor-secundaria: #3a7d55;
+    --cor-acento-claro: #cfe9d1;
+    --cor-acento-vibrante: #00bcd4;
+
+    --borda-lg: 18px;
+    --borda-md: 12px;
+
+    --transicao: 0.3s ease;
+    --transicao-lenta: 0.5s ease;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,13 +31,6 @@
 
 html {
     font-size: 100%;
-}
-
-main {
-    max-width: 58rem;
-    margin: 2.5rem auto 5rem;
-    padding: 0 1.25rem;
-    text-align: center;
 }
 
 body {
@@ -30,46 +48,27 @@ p {
     text-align: justify;
 }
 
-.title {
-    font-weight: 700;
-    font-size: 1.75rem;
-    color: #61967e;
-    margin-bottom: 1.8rem;
+main {
+    max-width: 60rem;
+    margin: 3rem auto;
+    padding: 0 1rem;
 }
 
-.highlight-title {
-    color: #2a684e;
+p {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1rem, 1vw + .9rem, 1.25rem);
+    margin-bottom: 1.2rem;
+    text-align: justify;
 }
 
-.dots {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #61967e;
-}
-
-.dot.dark {
-    background-color: #2a684e;
-}
-
-/* =============================================================================================================================== */
 /* =========================================================== MENU ============================================================== */
-/* =============================================================================================================================== */
 nav {
     background-color: #699b80;
-    padding: 12px 20px;
+    padding: 1rem 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 1rem;
     font-weight: 600;
     font-size: 0.9rem;
     max-width: 100%;
@@ -81,13 +80,20 @@ nav a {
     transition: color 0.3s ease;
     cursor: pointer;
     white-space: nowrap;
-    padding: 6px 10px;
-    font-size: 1em;
-    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 0.4rem;
 }
 
 nav a:hover {
     background-color: #83aa89;
+}
+
+/* LINKS DESKTOP */
+nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
 }
 
 .img {
@@ -95,7 +101,8 @@ nav a:hover {
 }
 
 .img-logo {
-    height: 8vh;
+    height: 7vh;
+    max-height: 3.5rem;
     width: auto;
     object-fit: contain;
     display: block;
@@ -105,35 +112,90 @@ nav a:hover {
 .btn-cadastrar,
 .btn-nav {
     padding: 0.5rem 1.2rem;
-    background: #3b4a3b;
-    color: #fff;
-    border-radius: 0.5rem;
+    background-color: #3b4a3b;
+    color: white;
+    border-radius: 0.6rem;
     font-weight: 700;
     font-family: 'Cinzel Decorative', serif;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    transition: background-color 0.3s ease;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .btn-entrar:hover,
 .btn-cadastrar:hover {
-    background: #83aa89;
+    background-color: #83aa89;
 }
 
 .btn-logout {
-    background: #e74c3c;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    margin-left: 0.6rem;
-    font-weight: 700;
-    color: #fff;
+    background-color: #e74c3c;
+    color: white;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
 }
 
 .btn-logout:hover {
-    background: #c0392b;
+    background-color: #c0392b;
+}
+
+/* HAMBURGUER MENU 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    cursor: pointer;
+}*/
+
+.hamburger {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    flex-direction: column;
+    gap: .4rem;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* =========================================================== MENU MOBILE =========================================================== */
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 
@@ -144,19 +206,233 @@ nav a:hover {
 
 
 
-/* =============================================================================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================== */
+/* HERO ESTILIZADO */
+/* ============================== */
+
+.hero-cancer {
+    position: relative;
+    height: 65vh;
+    background: linear-gradient(
+            rgba(35, 84, 59, 0.65),
+            rgba(35, 84, 59, 0.65)
+        ),
+        url('/image/home.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.hero-content {
+    text-align: center;
+    color: var(--branco);
+    padding: 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================== */
+/* INTRO COM FUNDO SUAVE */
+/* ============================== */
+
+.intro-section {
+    background: var(--cinza-claro);
+    padding: 4rem 10%;
+    border-radius: 0 0 40px 40px;
+}
+
+.intro-section h2 {
+    font-size: 2.3rem;
+    color: var(--verde-escuro);
+    margin-bottom: 1rem;
+}
+
+.intro-section p {
+    font-size: 1.2rem;
+    color: var(--cinza-escuro);
+    line-height: 1.7;
+}
+
+/* ============================== */
+/* CARDS SECTION ESTILIZADA */
+/* ============================== */
+
+.cards-section {
+    padding: 5rem 10%;
+    background: linear-gradient(135deg, var(--verde-acento), var(--verde-claro));
+}
+
+.cards-section h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    color: var(--verde-escuro);
+    margin-bottom: 3rem;
+    font-weight: bold;
+}
+
+/* GRID DOS CARDS */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.2rem;
+}
+
+/* ============================== */
+/* CARD — NOVO VISUAL PREMIUM */
+/* ============================== */
+
+.card {
+    background: var(--branco);
+    padding: 2rem;
+    border-radius: var(--borda-lg);
+    box-shadow: 0 8px 20px var(--sombra-media);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    border-top: 6px solid var(--verde-medio);
+    position: relative;
+    overflow: hidden;
+}
+
+/* EFEITO DE BRILHO */
+.card::before {
+    content: "";
+    position: absolute;
+    top: -80%;
+    left: -80%;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
+    transform: rotate(45deg);
+    transition: var(--transicao-lenta);
+    opacity: 0;
+}
+
+.card:hover::before {
+    opacity: 1;
+    top: -40%;
+    left: -40%;
+}
+
+/* ANIMAÇÃO DO CARD */
+.card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 12px 26px var(--sombra-forte);
+}
+
+.card h3 {
+    color: var(--verde-escuro);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    color: var(--cinza-escuro);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* BOTÃO */
+.card button {
+    width: 100%;
+    background: var(--verde-escuro);
+    color: var(--branco);
+    border: none;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: var(--borda-md);
+    cursor: pointer;
+    transition: var(--transicao);
+}
+
+.card button:hover {
+    background: var(--verde-medio);
+    transform: scale(1.03);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ========================================================== FOOTER ============================================================= */
-/* =============================================================================================================================== */
 footer {
-    background: #699b80;
+    background-color: #699b80;
     color: #fff;
-    padding: 2rem 1.25rem 1rem;
+    padding: 2.5rem 1.5rem 1rem;
     font-family: 'EB Garamond', serif;
     font-size: 0.9rem;
 }
 
 .footer-container {
-    max-width: 68.75rem;
+    max-width: 70rem;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -165,14 +441,14 @@ footer {
 }
 
 .footer-container>div {
-    flex: 1 1 15rem;
-    min-width: 13.75rem;
+    flex: 1 1 250px;
+    min-width: 220px;
 }
 
 .footer-container h3 {
     font-family: 'Cinzel Decorative', serif;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.8rem;
     color: #c9d6c5;
 }
 
@@ -188,75 +464,10 @@ footer {
 }
 
 .footer-bottom {
+    margin-top: 2rem;
     text-align: center;
-    margin-top: 1.25rem;
     border-top: 1px solid #5a6a5a;
-    padding-top: 0.75rem;
+    padding-top: 1rem;
     font-size: 0.85rem;
     color: #aeb5ab;
-}
-
-
-
-
-
-
-
-
-
-/* =============================================================================================================================== */
-/* =================================================== PÁGINA EM CONSTRUÇÃO ====================================================== */
-/* =============================================================================================================================== */
-.container {
-    text-align: center;
-    padding: 30px;
-    position: relative;
-    z-index: 1;
-}
-
-.logo {
-    width: 90px;
-    height: 90px;
-}
-
-.message-box {
-    background-color: #699b80;
-    color: #ffffff;
-    padding: 30px 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.message-box h1 {
-    font-size: 2.2em;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-align: center;
-    font-family: 'EB Garamond', serif;
-}
-
-.message-box p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    font-weight: 400;
-    text-align: center;
-}
-
-@media (max-width: 768px) {
-    .message-box h1 {
-        font-size: 1.8em;
-    }
-
-    .message-box p {
-        font-size: 1em;
-    }
-
-    .footer-icon {
-        bottom: 10px;
-        right: 10px;
-    }
 }
