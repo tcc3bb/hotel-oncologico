@@ -46,44 +46,61 @@ body {
     min-height: 100vh;
 }
 
-/* ================================================
-NAVBAR
-================================================ */
+/*=================================================== MENU =========================================== */
 nav {
     background-color: #699b80;
-    padding: 12px 20px;
+    padding: 1rem 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 1rem;
     font-weight: 600;
     font-size: 0.9rem;
+    max-width: 100%;
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s ease;
     cursor: pointer;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 0.4rem;
 }
 
 nav a:hover {
     background-color: #83aa89;
 }
 
-.img-logo {
-    height: 8vh;
-    object-fit: contain;
+/* LINKS DESKTOP */
+nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
 }
 
+.img {
+    padding: 0;
+}
+
+.img-logo {
+    height: 7vh;
+    max-height: 3.5rem;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.btn-entrar,
+.btn-cadastrar,
 .btn-nav {
-    padding: 8px 18px;
+    padding: 0.5rem 1.2rem;
     background-color: #3b4a3b;
     color: white;
-    border-radius: 8px;
-    font-weight: 700; 
+    border-radius: 0.6rem;
+    font-weight: 700;
     font-family: 'Cinzel Decorative', serif;
     box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
     transition: background-color 0.3s ease;
@@ -91,15 +108,79 @@ nav a:hover {
     cursor: pointer;
 }
 
+.btn-entrar:hover,
+.btn-cadastrar:hover {
+    background-color: #83aa89;
+}
+
 .btn-logout {
     background-color: #e74c3c;
-    padding: 8px 15px;
-    border-radius: 4px;
-    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
 }
 
 .btn-logout:hover {
     background-color: #c0392b;
+}
+
+/* HAMBURGUER MENU 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    cursor: pointer;
+}*/
+
+.hamburger {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    flex-direction: column;
+    gap: .4rem;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* =========================================================== MENU MOBILE =========================================================== */
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 /* ================================================

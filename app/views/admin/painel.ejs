@@ -17,39 +17,41 @@
 <body>
     <!--===================================================== MENU ============================================================-->
     <nav>
-        <a href="/">
-            <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
-        </a>
-        <a href="/nav/sobre-nos">Sobre nós</a>
-        <a href="/nav/sobre-cancer">Sobre o câncer</a>
-        <a href="/nav/acomodacoes">Acomodações</a>
-        <a href="/nav/apoio-paciente">Apoio ao paciente</a>
-        <a href="/nav/localizacao">Localizações</a>
-        <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
-        <% if (!user) { %>
-            <!-- Usuário não logado -->
-            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-            <% } else { %>
-                <!-- Usuário logado -->
-                <% if (user.tipo==='paciente' ) { %>
-                    <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
-                    <% } else if (user.tipo==='acompanhante' ) { %>
-                        <a href="/acompanhante/minhas-acomodacoes" class="btn-nav">Apoio ao Paciente</a>
-                        <% } else if (user.tipo==='voluntario' ) { %>
-                            <a href="/voluntario/minhas-ajudas" class="btn-nav">Área do Voluntários</a>
-                            <% } else if (user.tipo==='doador' ) { %>
-                                <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
-                                <% } else if (user.tipo==='admin' ) { %>
-                                    <a href="/admin/painel" class="btn-nav">Configurações</a>
-                                    <% } else { %>
-                                        <!-- Caso algum outro tipo apareça -->
-                                        <a href="/usuarios/login" class="btn-entrar">Entrar</a>
-                                        <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
-                                        <% } %>
-                                            <!-- Botão de logout -->
-                                            <a href="/usuarios/logout" class="btn-logout">Sair</a>
+        <div class="nav-links">
+            <a href="/" class="img">
+                <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+            </a>
+            <a href="/nav/sobre-nos">Sobre nós</a>
+            <a href="/nav/sobre-cancer">Sobre o câncer</a>
+            <a href="/nav/acomodacoes">Acomodações</a>
+            <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+            <a href="/nav/localizacao">Localizações</a>
+            <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+            <% if (!user) { %>
+                <!-- Usuário não logado -->
+                <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                <% } else { %>
+                    <!-- Usuário logado -->
+                    <% if (user.tipo==='paciente' ) { %>
+                        <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                        <% } else if (user.tipo==='acompanhante' ) { %>
+                            <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                            <% } else if (user.tipo==='voluntario' ) { %>
+                                <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                                <% } else if (user.tipo==='doador' ) { %>
+                                    <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                    <% } else if (user.tipo==='admin' ) { %>
+                                        <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                        <% } else { %>
+                                            <!-- Caso algum outro tipo apareça -->
+                                            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
                                             <% } %>
+                                                <!-- Botão de logout -->
+                                                <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                                <% } %>
+        </div>
     </nav>
 
     <div class="painel-container">
@@ -914,28 +916,52 @@
             </section>
 
             <script>
-                /* ===================================================== MOSTRAR O SIDEBAR ======================================================= */
-                document.addEventListener('DOMContentLoaded', () => {
+                document.addEventListener('DOMContentLoaded', function () {
                     const sidebarItems = document.querySelectorAll('.sidebar-item');
-                    const sections = document.querySelectorAll('.conteudo');
+                    const contentSections = document.querySelectorAll('.conteudo');
+
+                    // 1. Função para mostrar o conteúdo e definir o item ativo
+                    function showContent(targetId) {
+                        // Oculta todas as seções de conteúdo
+                        contentSections.forEach(section => {
+                            section.classList.remove('ativo');
+                        });
+
+                        // Remove a classe 'active' de todos os itens da sidebar
+                        sidebarItems.forEach(item => {
+                            item.classList.remove('active');
+                        });
+
+                        // Mostra a seção alvo e define o item da sidebar como ativo
+                        const targetSection = document.getElementById(targetId);
+                        if (targetSection) {
+                            targetSection.classList.add('ativo');
+                        }
+
+                        // Encontra e ativa o item da sidebar correspondente
+                        const activeSidebarItem = document.querySelector(`.sidebar-item[data-target="${targetId}"]`);
+                        if (activeSidebarItem) {
+                            activeSidebarItem.classList.add('active');
+                        }
+                    }
+
+                    // 2. Adiciona o listener de evento para cada item da sidebar
                     sidebarItems.forEach(item => {
                         item.addEventListener('click', function () {
-                            // 1. Remover 'active' de todos os itens da sidebar e remover 'ativo' de todas as seções
-                            sidebarItems.forEach(i => i.classList.remove('active'));
-                            sections.forEach(s => s.classList.remove('ativo'));
-                            // 2. Adicionar 'active' ao item clicado na sidebar
-                            this.classList.add('active');
-                            // 3. Obter o alvo (ID da seção)
-                            const targetId = this.getAttribute('data-target');
-                            // 4. Encontrar e adicionar 'ativo' à seção alvo
-                            const targetSection = document.getElementById(targetId);
-                            if (targetSection) {
-                                targetSection.classList.add('ativo');
-                            }
+                            const targetId = this.dataset.target; // Obtém o valor do atributo data-target
+                            showContent(targetId);
                         });
                     });
+
+                    // 3. Inicializa: Garante que apenas a seção marcada como 'ativo' no HTML esteja visível ao carregar.
+                    // Se nenhuma estiver marcada no HTML, ele mostra a primeira.
+                    const initialActiveSection = document.querySelector('.conteudo.ativo');
+                    if (!initialActiveSection && contentSections.length > 0) {
+                        showContent(contentSections[0].id);
+                    }
                 });
             </script>
+
 
 </body>
 
