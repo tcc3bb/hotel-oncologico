@@ -15,326 +15,413 @@
 </head>
 
 <body>
-    <div class="form-wrapper">
-        <!-- O título h2 está no lugar de onde o CSS espera -->
-        <h2>Cadastro do Paciente</h2>
+    <nav>
+        <div class="nav-links">
+            <a href="/" class="img">
+                <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
+            </a>
+            <a href="/nav/sobre-nos">Sobre nós</a>
+            <a href="/nav/sobre-cancer">Sobre o câncer</a>
+            <a href="/nav/acomodacoes">Acomodações</a>
+            <a href="/nav/apoio-paciente">Apoio ao paciente</a>
+            <a href="/nav/localizacao">Localizações</a>
+            <a href="/perguntas/perguntas-frequentes">Perguntas frequentes</a>
+            <% if (!user) { %>
+                <!-- Usuário não logado -->
+                <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                <% } else { %>
+                    <!-- Usuário logado -->
+                    <% if (user.tipo==='paciente' ) { %>
+                        <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
+                        <% } else if (user.tipo==='acompanhante' ) { %>
+                            <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
+                            <% } else if (user.tipo==='voluntario' ) { %>
+                                <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
+                                <% } else if (user.tipo==='doador' ) { %>
+                                    <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
+                                    <% } else if (user.tipo==='admin' ) { %>
+                                        <a href="/admin/painel" class="btn-nav">Configurações</a>
+                                        <% } else { %>
+                                            <!-- Caso algum outro tipo apareça -->
+                                            <a href="/usuarios/login" class="btn-entrar">Entrar</a>
+                                            <a href="/usuarios/cadastro" class="btn-cadastrar">Cadastrar</a>
+                                            <% } %>
+                                                <!-- Botão de logout -->
+                                                <a href="/usuarios/logout" class="btn-logout">Sair</a>
+                                                <% } %>
+        </div>
+    </nav>
 
-        <form method="POST">
-            <!-- EJS placeholder (mantido como valor vazio para rodar no HTML) -->
-            <input type="hidden" name="usuario_id" value="">
+    <main>
+        <div class="form-wrapper">
+            <!-- O título h2 está no lugar de onde o CSS espera -->
+            <h2>Cadastro do Paciente</h2>
 
-            <!-- 1. DADOS PESSOAIS -->
-            <fieldset>
-                <legend>Dados Pessoais</legend>
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="paciente_nome">Nome completo:</label>
-                        <input type="text" id="paciente_nome" name="paciente_nome" required>
+            <form method="POST">
+                <!-- EJS placeholder (mantido como valor vazio para rodar no HTML) -->
+                <input type="hidden" name="usuario_id" value="">
+
+                <!-- 1. DADOS PESSOAIS -->
+                <fieldset>
+                    <legend>Dados Pessoais</legend>
+                    <div class="field-group">
+                        <div class="form-control">
+                            <label for="paciente_nome">Nome completo:</label>
+                            <input type="text" id="paciente_nome" name="paciente_nome" required>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_cpf">CPF:</label>
+                            <input type="text" id="paciente_cpf" name="paciente_cpf" maxlength="14"
+                                placeholder="000.000.000-00" required>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_rg">RG:</label>
+                            <input type="text" id="paciente_rg" name="paciente_rg">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_data_nascimento">Data de nascimento:</label>
+                            <input type="date" id="paciente_data_nascimento" name="paciente_data_nascimento">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_sexo">Sexo:</label>
+                            <select id="paciente_sexo" name="paciente_sexo">
+                                <option value="">Selecione</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_estado_civil">Estado civil:</label>
+                            <select id="paciente_estado_civil" name="paciente_estado_civil">
+                                <option value="">Selecione</option>
+                                <option value="Solteiro">Solteiro</option>
+                                <option value="Casado">Casado</option>
+                                <option value="Divorciado">Divorciado</option>
+                                <option value="Viúvo">Viúvo</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-control">
-                        <label for="paciente_cpf">CPF:</label>
-                        <input type="text" id="paciente_cpf" name="paciente_cpf" maxlength="14"
-                            placeholder="000.000.000-00" required>
+                        <label for="paciente_profissao">Profissão:</label>
+                        <input type="text" id="paciente_profissao" name="paciente_profissao"
+                            placeholder="Ex: Professor, Engenheiro...">
                     </div>
 
-                    <div class="form-control">
-                        <label for="paciente_rg">RG:</label>
-                        <input type="text" id="paciente_rg" name="paciente_rg">
+                    <div class="field-group">
+                        <div class="form-control">
+                            <label for="paciente_nacionalidade">Nacionalidade:</label>
+                            <input type="text" id="paciente_nacionalidade" name="paciente_nacionalidade"
+                                placeholder="Ex: Brasileira">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_tipo_sanguineo">Tipo sanguíneo:</label>
+                            <select id="paciente_tipo_sanguineo" name="paciente_tipo_sanguineo">
+                                <option value="">Selecione</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_altura">Altura (m):</label>
+                            <input type="number" id="paciente_altura" name="paciente_altura" step="0.01"
+                                placeholder="Ex: 1.75">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_peso">Peso (kg):</label>
+                            <input type="number" id="paciente_peso" name="paciente_peso" step="0.1"
+                                placeholder="Ex: 70.5">
+                        </div>
+
                     </div>
 
-                    <div class="form-control">
-                        <label for="paciente_data_nascimento">Data de nascimento:</label>
-                        <input type="date" id="paciente_data_nascimento" name="paciente_data_nascimento">
+                    <div class="field-group">
+                        <div class="form-control">
+                            <label for="paciente_telefone">Telefone:</label>
+                            <input type="tel" id="paciente_telefone" name="paciente_telefone" maxlength="20"
+                                placeholder="(00) 00000-0000">
+                        </div>
                     </div>
 
-                    <div class="form-control">
-                        <label for="paciente_sexo">Sexo:</label>
-                        <select id="paciente_sexo" name="paciente_sexo">
-                            <option value="">Selecione</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Feminino">Feminino</option>
-                            <option value="Outro">Outro</option>
-                        </select>
+                    <div class="field-group full-width" style="margin-top: 20px;">
+                        <div class="form-control">
+                            <label for="paciente_logradouro">Logradouro / Endereço:</label>
+                            <input type="text" id="paciente_logradouro" name="paciente_logradouro">
+                        </div>
                     </div>
 
-                    <div class="form-control">
-                        <label for="paciente_estado_civil">Estado civil:</label>
-                        <select id="paciente_estado_civil" name="paciente_estado_civil">
-                            <option value="">Selecione</option>
-                            <option value="Solteiro">Solteiro</option>
-                            <option value="Casado">Casado</option>
-                            <option value="Divorciado">Divorciado</option>
-                            <option value="Viúvo">Viúvo</option>
-                            <option value="Outro">Outro</option>
-                        </select>
+                    <div class="field-group">
+                        <div class="form-control">
+                            <label for="paciente_numero">Número:</label>
+                            <input type="text" id="paciente_numero" name="paciente_numero">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_complemento">Complemento:</label>
+                            <input type="text" id="paciente_complemento" name="paciente_complemento">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_bairro">Bairro:</label>
+                            <input type="text" id="paciente_bairro" name="paciente_bairro">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_cidade">Cidade:</label>
+                            <input type="text" id="paciente_cidade" name="paciente_cidade">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_estado">Estado:</label>
+                            <input type="text" id="paciente_estado" name="paciente_estado">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_cep">CEP:</label>
+                            <input type="text" id="paciente_cep" name="paciente_cep">
+                        </div>
                     </div>
-                </div>
+                </fieldset>
 
-                <div class="form-control">
-                    <label for="paciente_profissao">Profissão:</label>
-                    <input type="text" id="paciente_profissao" name="paciente_profissao"
-                        placeholder="Ex: Professor, Engenheiro...">
-                </div>
+                <!-- 2. CONTATOS DE EMERGÊNCIA -->
+                <fieldset>
+                    <legend>Contatos de Emergência</legend>
+                    <div class="field-group">
+                        <div class="form-control">
+                            <label for="paciente_contato_emergencia_1_nome">Contato 1 - Nome:</label>
+                            <input type="text" id="paciente_contato_emergencia_1_nome"
+                                name="paciente_contato_emergencia_1_nome" required>
+                        </div>
 
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="paciente_nacionalidade">Nacionalidade:</label>
-                        <input type="text" id="paciente_nacionalidade" name="paciente_nacionalidade"
-                            placeholder="Ex: Brasileira">
+                        <div class="form-control">
+                            <label for="paciente_contato_emergencia_2_nome">Contato 2 - Nome:</label>
+                            <input type="text" id="paciente_contato_emergencia_2_nome"
+                                name="paciente_contato_emergencia_2_nome">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_contato_emergencia_1_parentesco">Contato 1 - Parentesco:</label>
+                            <input type="text" id="paciente_contato_emergencia_1_parentesco"
+                                name="paciente_contato_emergencia_1_parentesco" required>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_contato_emergencia_2_parentesco">Contato 2 - Parentesco:</label>
+                            <input type="text" id="paciente_contato_emergencia_2_parentesco"
+                                name="paciente_contato_emergencia_2_parentesco">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_contato_emergencia_1_telefone">Contato 1 - Telefone:</label>
+                            <input type="tel" id="paciente_contato_emergencia_1_telefone"
+                                name="paciente_contato_emergencia_1_telefone" required>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_contato_emergencia_2_telefone">Contato 2 - Telefone:</label>
+                            <input type="tel" id="paciente_contato_emergencia_2_telefone"
+                                name="paciente_contato_emergencia_2_telefone">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_responsavel_legal_nome">Responsável legal - Nome:</label>
+                            <input type="text" id="paciente_responsavel_legal_nome"
+                                name="paciente_responsavel_legal_nome">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_responsavel_legal_parentesco">Responsável legal - Parentesco:</label>
+                            <input type="text" id="paciente_responsavel_legal_parentesco"
+                                name="paciente_responsavel_legal_parentesco">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_responsavel_legal_telefone">Responsável legal - Telefone:</label>
+                            <input type="tel" id="paciente_responsavel_legal_telefone"
+                                name="paciente_responsavel_legal_telefone">
+                        </div>
                     </div>
+                </fieldset>
 
-                    <div class="form-control">
-                        <label for="paciente_tipo_sanguineo">Tipo sanguíneo:</label>
-                        <select id="paciente_tipo_sanguineo" name="paciente_tipo_sanguineo">
-                            <option value="">Selecione</option>
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                        </select>
-                    </div>
+                <!-- 3. TRATAMENTO -->
+                <fieldset>
+                    <legend>Dados do Tratamento</legend>
+                    <div class="field-group">
+                        <div class="form-control">
+                            <label for="paciente_centro_tratamento_nome">Centro de tratamento:</label>
+                            <input type="text" id="paciente_centro_tratamento_nome"
+                                name="paciente_centro_tratamento_nome">
+                        </div>
 
-                    <div class="form-control">
-                        <label for="paciente_altura">Altura (m):</label>
-                        <input type="number" id="paciente_altura" name="paciente_altura" step="0.01"
-                            placeholder="Ex: 1.75">
-                    </div>
+                        <div class="form-control">
+                            <label for="paciente_medico_assistente_nome">Médico assistente:</label>
+                            <input type="text" id="paciente_medico_assistente_nome"
+                                name="paciente_medico_assistente_nome">
+                        </div>
 
-                    <div class="form-control">
-                        <label for="paciente_peso">Peso (kg):</label>
-                        <input type="number" id="paciente_peso" name="paciente_peso" step="0.1" placeholder="Ex: 70.5">
-                    </div>
+                        <div class="form-control full-width">
+                            <label for="paciente_diagnostico">Diagnóstico:</label>
+                            <textarea id="paciente_diagnostico" name="paciente_diagnostico" rows="2"></textarea>
+                        </div>
 
-                </div>
+                        <div class="form-control">
+                            <label for="paciente_fase_tratamento">Fase do tratamento:</label>
+                            <input type="text" id="paciente_fase_tratamento" name="paciente_fase_tratamento">
+                        </div>
 
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="paciente_telefone">Telefone:</label>
-                        <input type="tel" id="paciente_telefone" name="paciente_telefone" maxlength="20"
-                            placeholder="(00) 00000-0000">
-                    </div>
-                </div>
+                        <div class="form-control">
+                            <label for="paciente_tipo_tratamento">Tipo de tratamento:</label>
+                            <input type="text" id="paciente_tipo_tratamento" name="paciente_tipo_tratamento">
+                        </div>
 
-                <div class="field-group full-width" style="margin-top: 20px;">
-                    <div class="form-control">
-                        <label for="paciente_logradouro">Logradouro / Endereço:</label>
-                        <input type="text" id="paciente_logradouro" name="paciente_logradouro">
-                    </div>
-                </div>
+                        <div class="form-control">
+                            <label for="paciente_tempo_tratamento">Tempo de tratamento:</label>
+                            <input type="text" id="paciente_tempo_tratamento" name="paciente_tempo_tratamento">
+                        </div>
 
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="paciente_numero">Número:</label>
-                        <input type="text" id="paciente_numero" name="paciente_numero">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_complemento">Complemento:</label>
-                        <input type="text" id="paciente_complemento" name="paciente_complemento">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_bairro">Bairro:</label>
-                        <input type="text" id="paciente_bairro" name="paciente_bairro">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_cidade">Cidade:</label>
-                        <input type="text" id="paciente_cidade" name="paciente_cidade">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_estado">Estado:</label>
-                        <input type="text" id="paciente_estado" name="paciente_estado">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_cep">CEP:</label>
-                        <input type="text" id="paciente_cep" name="paciente_cep">
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- 2. CONTATOS DE EMERGÊNCIA -->
-            <fieldset>
-                <legend>Contatos de Emergência</legend>
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="paciente_contato_emergencia_1_nome">Contato 1 - Nome:</label>
-                        <input type="text" id="paciente_contato_emergencia_1_nome"
-                            name="paciente_contato_emergencia_1_nome" required>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_contato_emergencia_2_nome">Contato 2 - Nome:</label>
-                        <input type="text" id="paciente_contato_emergencia_2_nome"
-                            name="paciente_contato_emergencia_2_nome">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_contato_emergencia_1_parentesco">Contato 1 - Parentesco:</label>
-                        <input type="text" id="paciente_contato_emergencia_1_parentesco"
-                            name="paciente_contato_emergencia_1_parentesco" required>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_contato_emergencia_2_parentesco">Contato 2 - Parentesco:</label>
-                        <input type="text" id="paciente_contato_emergencia_2_parentesco"
-                            name="paciente_contato_emergencia_2_parentesco">
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_contato_emergencia_1_telefone">Contato 1 - Telefone:</label>
-                        <input type="tel" id="paciente_contato_emergencia_1_telefone"
-                            name="paciente_contato_emergencia_1_telefone" required>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_contato_emergencia_2_telefone">Contato 2 - Telefone:</label>
-                        <input type="tel" id="paciente_contato_emergencia_2_telefone"
-                            name="paciente_contato_emergencia_2_telefone">
+                        <div class="form-control">
+                            <label for="paciente_data_ultima_sessao">Data da última sessão:</label>
+                            <input type="date" id="paciente_data_ultima_sessao" name="paciente_data_ultima_sessao">
+                        </div>
                     </div>
 
-                    <div class="form-control">
-                        <label for="paciente_responsavel_legal_nome">Responsável legal - Nome:</label>
-                        <input type="text" id="paciente_responsavel_legal_nome" name="paciente_responsavel_legal_nome">
+                    <div class="field-group full-width" style="margin-top: 20px;">
+                        <div class="form-control">
+                            <label for="paciente_historico_medico_resumido">Histórico médico resumido:</label>
+                            <textarea id="paciente_historico_medico_resumido" name="paciente_historico_medico_resumido"
+                                rows="2"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- 4. SAÚDE -->
+                <fieldset>
+                    <legend>Saúde e Observações</legend>
+                    <div class="field-group full-width">
+                        <div class="form-control">
+                            <label for="paciente_alergias_risco">Alergias e riscos:</label>
+                            <textarea id="paciente_alergias_risco" name="paciente_alergias_risco" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_medicamentos_uso_essenciais">Medicamentos de uso essencial:</label>
+                            <textarea id="paciente_medicamentos_uso_essenciais"
+                                name="paciente_medicamentos_uso_essenciais" rows="2"></textarea>
+                        </div>
                     </div>
 
-                    <div class="form-control">
-                        <label for="paciente_responsavel_legal_parentesco">Responsável legal - Parentesco:</label>
-                        <input type="text" id="paciente_responsavel_legal_parentesco"
-                            name="paciente_responsavel_legal_parentesco">
+                    <div class="field-group" style="margin-top: 20px;">
+                        <div class="form-control">
+                            <label for="paciente_vulnerabilidade_imunossupressao">Vulnerabilidade /
+                                imunossupressão:</label>
+                            <select id="paciente_vulnerabilidade_imunossupressao"
+                                name="paciente_vulnerabilidade_imunossupressao">
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="paciente_preferencia_horario_refeicao">Preferência de horário de
+                                refeição:</label>
+                            <select id="paciente_preferencia_horario_refeicao"
+                                name="paciente_preferencia_horario_refeicao">
+                                <option value="Indiferente">Indiferente</option>
+                                <option value="Manhã">Manhã</option>
+                                <option value="Tarde">Tarde</option>
+                                <option value="Noite">Noite</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-control">
-                        <label for="paciente_responsavel_legal_telefone">Responsável legal - Telefone:</label>
-                        <input type="tel" id="paciente_responsavel_legal_telefone"
-                            name="paciente_responsavel_legal_telefone">
-                    </div>
-                </div>
-            </fieldset>
+                    <div class="field-group full-width" style="margin-top: 20px;">
+                        <div class="form-control">
+                            <label for="paciente_restricoes_mobilidade">Restrições de mobilidade:</label>
+                            <textarea id="paciente_restricoes_mobilidade" name="paciente_restricoes_mobilidade"
+                                rows="2"></textarea>
+                        </div>
 
-            <!-- 3. TRATAMENTO -->
-            <fieldset>
-                <legend>Dados do Tratamento</legend>
-                <div class="field-group">
-                    <div class="form-control">
-                        <label for="paciente_centro_tratamento_nome">Centro de tratamento:</label>
-                        <input type="text" id="paciente_centro_tratamento_nome" name="paciente_centro_tratamento_nome">
-                    </div>
+                        <div class="form-control">
+                            <label for="paciente_restricoes_alimentares">Restrições alimentares:</label>
+                            <textarea id="paciente_restricoes_alimentares" name="paciente_restricoes_alimentares"
+                                rows="2"></textarea>
+                        </div>
 
-                    <div class="form-control">
-                        <label for="paciente_medico_assistente_nome">Médico assistente:</label>
-                        <input type="text" id="paciente_medico_assistente_nome" name="paciente_medico_assistente_nome">
-                    </div>
+                        <div class="form-control">
+                            <label for="paciente_observacoes_gerais">Observações gerais:</label>
+                            <textarea id="paciente_observacoes_gerais" name="paciente_observacoes_gerais"
+                                rows="3"></textarea>
+                        </div>
 
-                    <div class="form-control full-width">
-                        <label for="paciente_diagnostico">Diagnóstico:</label>
-                        <textarea id="paciente_diagnostico" name="paciente_diagnostico" rows="2"></textarea>
+                        <div class="form-control">
+                            <label for="paciente_observacoes_enfermagem">Observações de enfermagem:</label>
+                            <textarea id="paciente_observacoes_enfermagem" name="paciente_observacoes_enfermagem"
+                                rows="3"></textarea>
+                        </div>
                     </div>
+                </fieldset>
 
-                    <div class="form-control">
-                        <label for="paciente_fase_tratamento">Fase do tratamento:</label>
-                        <input type="text" id="paciente_fase_tratamento" name="paciente_fase_tratamento">
-                    </div>
+                <button type="submit">Enviar</button>
+            </form>
 
-                    <div class="form-control">
-                        <label for="paciente_tipo_tratamento">Tipo de tratamento:</label>
-                        <input type="text" id="paciente_tipo_tratamento" name="paciente_tipo_tratamento">
-                    </div>
+        </div>
+    </main>
 
-                    <div class="form-control">
-                        <label for="paciente_tempo_tratamento">Tempo de tratamento:</label>
-                        <input type="text" id="paciente_tempo_tratamento" name="paciente_tempo_tratamento">
-                    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Sobre a Empresa</h3>
+                <p>Somos uma organização dedicada a oferecer hospedagem com amor, cuidado e dignidade para pacientes e
+                    familiares.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@empresa.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+                <p>Endereço: Rua Exemplo, 123 - São Paulo, SP</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Úteis</h3>
+                <a href="#">Política de Privacidade</a><br>
+                <a href="#">Termos de Uso</a><br>
+                <a href="#">Ajuda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-                    <div class="form-control">
-                        <label for="paciente_data_ultima_sessao">Data da última sessão:</label>
-                        <input type="date" id="paciente_data_ultima_sessao" name="paciente_data_ultima_sessao">
-                    </div>
-                </div>
+    <script>
+        /*====== MENU MOBILE ======*/
+        const hamburger = document.createElement("div");
+        hamburger.classList.add("hamburger");
+        hamburger.innerHTML = "<span></span><span></span><span></span>";
 
-                <div class="field-group full-width" style="margin-top: 20px;">
-                    <div class="form-control">
-                        <label for="paciente_historico_medico_resumido">Histórico médico resumido:</label>
-                        <textarea id="paciente_historico_medico_resumido" name="paciente_historico_medico_resumido"
-                            rows="2"></textarea>
-                    </div>
-                </div>
-            </fieldset>
+        document.querySelector("nav").prepend(hamburger);
 
-            <!-- 4. SAÚDE -->
-            <fieldset>
-                <legend>Saúde e Observações</legend>
-                <div class="field-group full-width">
-                    <div class="form-control">
-                        <label for="paciente_alergias_risco">Alergias e riscos:</label>
-                        <textarea id="paciente_alergias_risco" name="paciente_alergias_risco" rows="2"></textarea>
-                    </div>
+        hamburger.addEventListener("click", () => {
+            document.querySelector(".nav-links").classList.toggle("active");
+        });
+    </script>
 
-                    <div class="form-control">
-                        <label for="paciente_medicamentos_uso_essenciais">Medicamentos de uso essencial:</label>
-                        <textarea id="paciente_medicamentos_uso_essenciais" name="paciente_medicamentos_uso_essenciais"
-                            rows="2"></textarea>
-                    </div>
-                </div>
-
-                <div class="field-group" style="margin-top: 20px;">
-                    <div class="form-control">
-                        <label for="paciente_vulnerabilidade_imunossupressao">Vulnerabilidade / imunossupressão:</label>
-                        <select id="paciente_vulnerabilidade_imunossupressao"
-                            name="paciente_vulnerabilidade_imunossupressao">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
-                        </select>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_preferencia_horario_refeicao">Preferência de horário de refeição:</label>
-                        <select id="paciente_preferencia_horario_refeicao" name="paciente_preferencia_horario_refeicao">
-                            <option value="Indiferente">Indiferente</option>
-                            <option value="Manhã">Manhã</option>
-                            <option value="Tarde">Tarde</option>
-                            <option value="Noite">Noite</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="field-group full-width" style="margin-top: 20px;">
-                    <div class="form-control">
-                        <label for="paciente_restricoes_mobilidade">Restrições de mobilidade:</label>
-                        <textarea id="paciente_restricoes_mobilidade" name="paciente_restricoes_mobilidade"
-                            rows="2"></textarea>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_restricoes_alimentares">Restrições alimentares:</label>
-                        <textarea id="paciente_restricoes_alimentares" name="paciente_restricoes_alimentares"
-                            rows="2"></textarea>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_observacoes_gerais">Observações gerais:</label>
-                        <textarea id="paciente_observacoes_gerais" name="paciente_observacoes_gerais"
-                            rows="3"></textarea>
-                    </div>
-
-                    <div class="form-control">
-                        <label for="paciente_observacoes_enfermagem">Observações de enfermagem:</label>
-                        <textarea id="paciente_observacoes_enfermagem" name="paciente_observacoes_enfermagem"
-                            rows="3"></textarea>
-                    </div>
-                </div>
-            </fieldset>
-
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
 </body>
 
 </html>

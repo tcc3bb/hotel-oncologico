@@ -1,213 +1,403 @@
-        /* Variáveis CSS da sua paleta */
-        :root {
-            --color-primary: #9ABCA7;
-            /* Verde Principal (Claro) */
-            --color-secondary: #4A7C59;
-            /* Verde Secundário (Escuro) */
-            --color-light: #F9F9F9;
-            /* Fundo/Campos */
-            --color-text-dark: #333333;
-            /* Texto Principal */
-            --color-text-light: #FFFFFF;
-            /* Texto Claro */
-            --font-heading: 'Cinzel Decorative', serif;
-            --font-body: 'EB Garamond', serif;
-        }
+:root {
+    --color-primary: #9ABCA7;
+    --color-secondary: #4A7C59;
+    --color-light: #F9F9F9;
+    --color-text-dark: #333333;
+    --color-text-light: #FFFFFF;
+    --font-heading: 'Cinzel Decorative', serif;
+    --font-body: 'EB Garamond', serif;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: var(--font-body);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            /* Altera para alinhar ao topo para formas longas */
-            min-height: 100vh;
-            background-color: var(--color-primary);
-            /* Fundo um pouco mais escuro para destaque */
-            padding: 40px 20px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color-primary);
+    color: #444;
+    line-height: 1.6;
 
-        /* Estrutura principal adaptada para um único formulário longo */
-        .form-wrapper {
-            background-color: var(--color-light);
-            color: var(--color-text-dark);
-            width: 100%;
-            max-width: 800px;
-            /* Limite maior para formulário com 2 colunas */
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-        }
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-        /* Título principal */
-        .form-wrapper h2 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--color-secondary);
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 3px solid var(--color-primary);
-            padding-bottom: 10px;
-        }
-
-        /* Estilo de erro EJS (mantido, mas não usado neste HTML) */
-        .error-message {
-            color: red;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        /* Estilizando o formulário e fieldsets */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            /* Espaçamento entre fieldsets */
-        }
-
-        fieldset {
-            border: 2px solid var(--color-primary);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        legend {
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--color-secondary);
-            padding: 0 10px;
-            margin-left: -5px;
-        }
-
-        /* Estrutura de campos em duas colunas para telas maiores */
-        .field-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .form-control {
-            display: flex;
-            flex-direction: column;
-            /* Garante que o textarea/observações ocupe a largura total */
-            grid-column: span 2;
-        }
-
-        /* Ajuste para que a maioria dos campos use apenas uma coluna */
-        .field-group .form-control:not(.full-width) {
-            grid-column: span 1;
-        }
-
-        /* Garantir que o campo de observação ocupe 2 colunas */
-        .full-width {
-            grid-column: 1 / -1;
-        }
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+}
 
 
-        /* Labels */
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: var(--color-text-dark);
-            font-size: 1rem;
-        }
 
-        /* Inputs, Selects e Textarea */
-        input[type="text"],
-        input[type="number"],
-        input[type="date"],
-        input[type="tel"],
-        input[type="email"],
-        /* Adicionado email */
-        select,
-        textarea {
-            padding: 12px 15px;
-            border: 1px solid var(--color-primary);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: var(--font-body);
-            color: var(--color-text-dark);
-            background-color: var(--color-text-light);
-            transition: border-color 0.3s, box-shadow 0.3s;
-            width: 100%;
-            /* Garante que ocupem a largura do form-control */
-        }
+/*=================================================== MENU =========================================== */
+nav {
+    background-color: #699b80;
+    padding: 1rem 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 100%;
+}
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: var(--color-secondary);
-            box-shadow: 0 0 5px rgba(74, 124, 89, 0.5);
-            outline: none;
-        }
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 0.4rem;
+}
 
-        textarea {
-            resize: vertical;
-        }
+nav a:hover {
+    background-color: #83aa89;
+}
 
-        /* Botão de Envio */
-        button[type="submit"] {
-            background-color: var(--color-secondary);
-            color: var(--color-text-light);
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 50%;
-            margin: 20px auto 0;
-            /* Centraliza o botão */
-        }
+/* LINKS DESKTOP */
+nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
 
-        button[type="submit"]:hover {
-            background-color: #3C6649;
-            transform: translateY(-2px);
-        }
+.img {
+    padding: 0;
+}
 
-        /* Responsividade para telas menores */
-        @media (max-width: 600px) {
-            body {
-                padding: 20px 10px;
-            }
+.img-logo {
+    height: 7vh;
+    max-height: 3.5rem;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
 
-            .field-group {
-                grid-template-columns: 1fr;
-                /* Volta para 1 coluna em telas pequenas */
-                gap: 15px;
-            }
+.btn-entrar,
+.btn-cadastrar,
+.btn-nav {
+    padding: 0.5rem 1.2rem;
+    background-color: #3b4a3b;
+    color: white;
+    border-radius: 0.6rem;
+    font-weight: 700;
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
 
-            /* Remove a limitação de coluna em mobile */
-            .field-group .form-control:not(.full-width) {
-                grid-column: span 1;
-            }
+.btn-entrar:hover,
+.btn-cadastrar:hover {
+    background-color: #83aa89;
+}
 
-            .form-wrapper {
-                padding: 20px;
-            }
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
+}
 
-            .form-wrapper h2 {
-                font-size: 1.7rem;
-            }
+.btn-logout:hover {
+    background-color: #c0392b;
+}
 
-            button[type="submit"] {
-                width: 100%;
-            }
-        }
+/* HAMBURGUER MENU 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    cursor: pointer;
+}*/
 
-        @media (min-width: 601px) and (max-width: 850px) {
-            .field-group {
-                /* Permite que o grid se ajuste, mas com um mínimo menor */
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-        }
+.hamburger {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    flex-direction: column;
+    gap: .4rem;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* =========================================================== MENU MOBILE =========================================================== */
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Estrutura principal adaptada para um único formulário longo */
+.form-wrapper {
+    background-color: var(--color-light);
+    color: var(--color-text-dark);
+    width: 100%;
+    max-width: 800px;
+    /* Limite maior para formulário com 2 colunas */
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+}
+
+/* Título principal */
+.form-wrapper h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-secondary);
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 3px solid var(--color-primary);
+    padding-bottom: 10px;
+}
+
+/* Estilo de erro EJS (mantido, mas não usado neste HTML) */
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Estilizando o formulário e fieldsets */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Espaçamento entre fieldsets */
+}
+
+fieldset {
+    border: 2px solid var(--color-primary);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    padding: 0 10px;
+    margin-left: -5px;
+}
+
+/* Estrutura de campos em duas colunas para telas maiores */
+.field-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    /* Garante que o textarea/observações ocupe a largura total */
+    grid-column: span 2;
+}
+
+/* Ajuste para que a maioria dos campos use apenas uma coluna */
+.field-group .form-control:not(.full-width) {
+    grid-column: span 1;
+}
+
+/* Garantir que o campo de observação ocupe 2 colunas */
+.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* Labels */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--color-text-dark);
+    font-size: 1rem;
+}
+
+/* Inputs, Selects e Textarea */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+/* Adicionado email */
+select,
+textarea {
+    padding: 12px 15px;
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    color: var(--color-text-dark);
+    background-color: var(--color-text-light);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    /* Garante que ocupem a largura do form-control */
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 5px rgba(74, 124, 89, 0.5);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Botão de Envio */
+button[type="submit"] {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    margin: 20px auto 0;
+    /* Centraliza o botão */
+}
+
+button[type="submit"]:hover {
+    background-color: #3C6649;
+    transform: translateY(-2px);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .field-group {
+        grid-template-columns: 1fr;
+        /* Volta para 1 coluna em telas pequenas */
+        gap: 15px;
+    }
+
+    /* Remove a limitação de coluna em mobile */
+    .field-group .form-control:not(.full-width) {
+        grid-column: span 1;
+    }
+
+    .form-wrapper {
+        padding: 20px;
+    }
+
+    .form-wrapper h2 {
+        font-size: 1.7rem;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 850px) {
+    .field-group {
+        /* Permite que o grid se ajuste, mas com um mínimo menor */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+/* ========================================================== FOOTER ============================================================= */
+footer {
+    background-color: #699b80;
+    color: #fff;
+    padding: 2.5rem 1.5rem 1rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 70rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-container>div {
+    flex: 1 1 250px;
+    min-width: 220px;
+}
+
+.footer-container h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #c9d6c5;
+}
+
+.footer-container p,
+.footer-container a {
+    color: #d4d9d4;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 1px solid #5a6a5a;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: #aeb5ab;
+}
