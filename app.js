@@ -1,6 +1,9 @@
 var express = require('express');
 var app = require('./config/express.js')();
 
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 // Rotas home
 require('./app/routes/home.js')(app);
 const flash = require('connect-flash');
@@ -68,8 +71,7 @@ require('./app/routes/reservas')(app);
 // Arquivos estáticos
 app.use(express.static('static'));
 app.use(express.static('app/public'));
-const methodOverride = require('method-override');
-app.use(methodOverride('_method'));
+
 
 
 // Servidor Laragon

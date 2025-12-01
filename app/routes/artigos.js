@@ -1,5 +1,8 @@
 /** ROTAS DE ARTIGOS - ADMIN **/
 
+console.log("Rotas de ARTIGOS carregadas!");
+
+
 const express = require('express');
 const router = express.Router();
 const connectionFactory = require('../infra/connectionFactory');
@@ -64,7 +67,7 @@ router.get('/', verificaAdmin, (req, res) => {
     log('Requisição GET /admin/artigos');
 
     const connection = connectionFactory();
-    const artigosDAO = ArtigosDAO(connection);
+    const artigosDAO = new ArtigosDAO(connection);
 
     log('Consultando artigos no banco...');
 
@@ -117,7 +120,7 @@ router.post('/novo', verificaAdmin, upload.single('artigo_imagem_capa'), (req, r
             // 🔥 CRIAÇÃO DO ARTIGO (com admin_id CORRETO)
             // =============================
 
-            const artigosDAO = ArtigosDAO(connection);
+            const artigosDAO = new ArtigosDAO(connection);
 
             const {
                 artigo_titulo,
@@ -169,72 +172,6 @@ router.post('/novo', verificaAdmin, upload.single('artigo_imagem_capa'), (req, r
     );
 });
 
-
-// =============================
-// EDITAR ARTIGO
-// =============================
-router.put('/:id', verificaAdmin, upload.single('artigo_imagem_capa'), (req, res) => {
-    const artigo_id = req.params.id;
-    const connection = connectionFactory();
-    const artigosDAO = ArtigosDAO(connection);
-
-    const {
-        artigo_titulo,
-        artigo_subtitulo,
-        artigo_resumo,
-        artigo_conteudo,
-        artigo_palavras_chave,
-        artigo_categoria,
-        artigo_slug
-    } = req.body;
-
-    const dadosAtualizados = {
-        artigo_titulo,
-        artigo_subtitulo,
-        artigo_resumo,
-        artigo_conteudo,
-        artigo_palavras_chave,
-        artigo_categoria,
-        artigo_slug: artigo_slug || gerarSlug(artigo_titulo)
-    };
-
-    // se enviou nova imagem, atualiza
-    if (req.file) {
-        dadosAtualizados.artigo_imagem_capa = `/image/artigos/${req.file.filename}`;
-    }
-
-    artigosDAO.atualizar(artigo_id, dadosAtualizados, (err) => {
-        if (err) {
-            console.error("Erro ao atualizar artigo:", err);
-            return res.status(500).send("Erro ao atualizar artigo.");
-        }
-
-        res.redirect('/admin/painel');
-    });
-});
-
-
-// =============================
-// EXCLUIR ARTIGO
-// =============================
-router.delete('/:id', verificaAdmin, (req, res) => {
-    const artigo_id = req.params.id;
-
-    const connection = connectionFactory();
-    const artigosDAO = ArtigosDAO(connection);
-
-    artigosDAO.deletar(artigo_id, (err) => {
-        if (err) {
-            console.error("Erro ao deletar artigo:", err);
-            return res.status(500).send("Erro ao excluir artigo.");
-        }
-
-        res.redirect('/admin/painel');
-    });
-});
-
-
-
 // ==============================
 // 🔥 ROTA PARA BUSCAR ARTIGO PÚBLICO POR ID
 // ==============================
@@ -276,23 +213,92 @@ router.get('/public/:id', (req, res) => {
 // =============================
 router.get('/:id', verificaAdmin, (req, res) => {
     const artigo_id = req.params.id;
-
     const connection = connectionFactory();
-    const artigosDAO = ArtigosDAO(connection);
+    const artigosDAO = new ArtigosDAO(connection);
 
-    artigosDAO.buscarPorId(artigo_id, (err, artigo) => {
+    artigosDAO.buscarPorId(artigo_id, (err, artigos) => {  // Renomeie para 'artigos' para clareza (é um array)
         if (err) {
             console.error("Erro ao buscar artigo:", err);
             return res.status(500).json({ erro: "Erro ao buscar artigo" });
         }
 
-        if (!artigo) {
+        if (!artigos || artigos.length === 0) {
             return res.status(404).json({ erro: "Artigo não encontrado" });
         }
 
-        res.json(artigo);
+        res.json(artigos[0]);  // ✅ Retorna apenas o objeto do artigo
     });
 });
+
+
+// =============================
+// EDITAR ARTIGO
+// =============================
+router.put('/:id', verificaAdmin, upload.single('artigo_imagem_capa'), (req, res) => {
+    const artigo_id = req.params.id;
+    const connection = connectionFactory();
+    const artigosDAO = new ArtigosDAO(connection);
+
+    const {
+        artigo_titulo,
+        artigo_subtitulo,
+        artigo_resumo,
+        artigo_conteudo,
+        artigo_palavras_chave,
+        artigo_categoria,
+        artigo_slug
+    } = req.body;
+
+    const dadosAtualizados = {
+        artigo_titulo,
+        artigo_subtitulo,
+        artigo_resumo,
+        artigo_conteudo,
+        artigo_palavras_chave,
+        artigo_categoria,
+        artigo_slug: artigo_slug || gerarSlug(artigo_titulo)
+    };
+
+    // se enviou nova imagem, atualiza
+    if (req.file) {
+        dadosAtualizados.artigo_imagem_capa = `/image/artigos/${req.file.filename}`;
+    }
+
+    artigosDAO.atualizarArtigo(artigo_id, dadosAtualizados, (err) => {
+        if (err) {
+            console.error("Erro ao atualizar artigo:", err);
+            return res.status(500).send("Erro ao atualizar artigo.");
+        }
+
+        res.redirect('/admin/painel');
+    });
+});
+
+
+// =============================
+// EXCLUIR ARTIGO
+// =============================
+router.delete('/:id', verificaAdmin, (req, res) => {
+    const artigo_id = req.params.id;
+
+    const connection = connectionFactory();
+    const artigosDAO = new ArtigosDAO(connection);
+
+    artigosDAO.deletar(artigo_id, (err) => {
+        if (err) {
+            console.error("Erro ao deletar artigo:", err);
+            return res.status(500).send("Erro ao excluir artigo.");
+        }
+
+        res.redirect('/admin/painel');
+    });
+});
+
+
+
+
+
+
 
 
 

@@ -181,7 +181,7 @@
                         document.getElementById('fotoPerfilEdicao').value = '';
                         document.getElementById('fotoPreviewImg').style.display = 'none';
                         const form = document.getElementById('formEdicao');
-                        form.action = `/admin/usuarios/${id}/editar`;
+                        form.action = `/artigos/${id}?_method=PUT`;
                         document.getElementById('modalEdicao').style.display = 'block';
                     }
                     function fecharModalEdicao() {
@@ -443,8 +443,7 @@
                                         <td class="acoes">
                                             <button class="btn-primary" type="button" data-id="<%= artigo.artigo_id %>"
                                                 onclick="abrirModalEditarArtigo(this.dataset.id)">✏️</button>
-                                            <form action="/admin/artigos/<%= artigo.artigo_id %>?_method=DELETE"
-                                                method="POST">
+                                            <form action="/artigos/<%= artigo.artigo_id %>?_method=DELETE" method="POST">
                                                 <button type="submit" class="delete">🗑️</button>
                                             </form>
 
@@ -501,9 +500,8 @@
                             </div>
                         </div>
 
+                        <!--========================== SCRIPT: NOVO ARTIGO ===============================-->
                         <script>
-                            /* ======================================== SCRIPT: NOVO ARTIGO ============================================== */
-
                             // Abrir modal de novo artigo
                             function abrirModalNovo() {
                                 const form = document.getElementById('formNovoArtigo');
@@ -576,15 +574,22 @@
                             });
                         </script>
 
+                        <!--========================== SCRIPT: EDITAR ARTIGO ===============================-->
                         <script>
-                            /* ======================================================================== */
-                            /* ======================= SCRIPT: EDITAR ARTIGO ========================== */
-                            /* ======================================================================== */
                             async function abrirModalEditarArtigo(id) {
                                 try {
-                                    const response = await fetch(`/admin/artigos/${id}`);
-                                    if (!response.ok) throw new Error('Erro ao buscar o artigo.');
+                                    console.log('🔍 Buscando artigo ID:', id);  // Log do ID enviado
+                                    const response = await fetch(`/artigos/${id}`);
+                                    console.log('📡 Response status:', response.status);  // Log do status HTTP (ex.: 200, 404, 500)
+
+                                    if (!response.ok) {
+                                        const text = await response.text();  // Pega o corpo da resposta como texto
+                                        console.log('❌ Response body:', text);  // Log do erro retornado (ex.: {"erro": "Artigo não encontrado"})
+                                        throw new Error('Erro ao buscar o artigo.');
+                                    }
+
                                     const artigo = await response.json();
+                                    console.log('✅ Artigo recebido:', artigo);  // Log do JSON retornado (deve ser um objeto, não array)
 
                                     // Abre o modal
                                     const modal = document.getElementById('modalNovoArtigo');
@@ -620,18 +625,18 @@
 
                                     // Define o action do formulário como PUT
                                     const form = document.getElementById('formNovoArtigo');
-                                    form.action = `/admin/artigos/${id}?_method=PUT`;
+                                    form.action = `/artigos/${id}?_method=PUT`;
+
 
                                 } catch (err) {
-                                    console.error('Erro ao abrir modal de edição:', err);
+                                    console.error('💥 Erro ao abrir modal de edição:', err);
                                     alert('Não foi possível carregar o artigo para edição.');
                                 }
                             }
                         </script>
 
-                        <script
-                            src="https://cdn.tiny.cloud/1/dap6c3mpzxaz4rfmtgm5rr0za2vkn7k17uwv3zsqfpn908g1/tinymce/6/tinymce.min.js"
-                            referrerpolicy="origin"></script>
+                        <!--========================== EDITOR DE TEXTO ===============================-->
+                        <script src="https://cdn.tiny.cloud/1/dap6c3mpzxaz4rfmtgm5rr0za2vkn7k17uwv3zsqfpn908g1/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
                         <script>
                             tinymce.init({
                                 selector: '#artigo_conteudo',

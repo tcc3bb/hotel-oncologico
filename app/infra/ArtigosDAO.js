@@ -120,7 +120,7 @@ class ArtigosDAO {
     // 🔹 Excluir artigo
     deletar(id, callback) {
     this._connection.query(
-        "DELETE FROM artigos WHERE artigo_id = ?",
+        "DELETE FROM artigo WHERE artigo_id = ?",  // ✅ Tabela correta
         [id],
         callback
     );
