@@ -56,22 +56,24 @@
     </nav>
 
     <main>
-        <h1>Perguntas Frequentes</h1> 
+        <h1>Perguntas Frequentes</h1>
 
         <!--==================================================== ARTIGOS ==========================================================-->
         <div class="conteudo-lado-a-lado">
 
             <div class="artigos-container">
                 <h2>Artigos</h2>
+
                 <div class="artigos-grid">
                     <% if (artigos && artigos.length> 0) { %>
                         <% artigos.forEach(function(artigo) { %>
-                            <div class="artigo-card" data-id="<%= artigo.id %>">
-                                <img src="<%= artigo.imagem ? artigo.imagem : '/image/default.jpg' %>"
-                                    alt="<%= artigo.titulo %>">
+                            <div class="artigo-card" data-id="<%= artigo.artigo_id %>">
+                                <img src="<%= artigo.artigo_imagem_capa ? artigo.artigo_imagem_capa : '/image/default.jpg' %>"
+                                    alt="<%= artigo.artigo_titulo %>">
                                 <h3>
-                                    <%= artigo.titulo %>
+                                    <%= artigo.artigo_titulo %>
                                 </h3>
+
                                 <button class="abrir-artigo" data-id="<%= artigo.artigo_id %>">Ler mais</button>
                             </div>
                             <% }) %>
@@ -79,6 +81,7 @@
                                     <p>Nenhum artigo publicado ainda.</p>
                                     <% } %>
                 </div>
+
             </div>
 
             <!--================================================= MODAL ARTIGO ========================================================-->
@@ -94,7 +97,6 @@
                         <p class="modal-meta">
                             <span id="modal-categoria"></span> •
                             <span id="modal-data"></span> •
-                            <span id="modal-autor"></span>
                         </p>
                     </div>
 
@@ -283,7 +285,6 @@
                             document.getElementById('modal-resumo').textContent = artigo.artigo_resumo || '';
                             document.getElementById('modal-conteudo').innerHTML = artigo.artigo_conteudo || '';
                             document.getElementById('modal-palavras').textContent = artigo.artigo_palavras_chave || '';
-                            document.getElementById('modal-autor').textContent = artigo.artigo_autor || 'Autor desconhecido';
                             document.getElementById('modal-data').textContent = artigo.artigo_data_publicacao
                                 ? new Date(artigo.artigo_data_publicacao).toLocaleDateString('pt-BR')
                                 : '';

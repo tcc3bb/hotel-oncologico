@@ -20,7 +20,7 @@ const PerguntasDAO = require('./app/infra/PerguntasDAO');
 const perguntasDAO = new PerguntasDAO(connection);
 
 const ArtigosDAO = require('./app/infra/ArtigosDAO');
-const artigosDAO = ArtigosDAO(connection);
+const artigosDAO = new ArtigosDAO(connection);
 
 const ReservasDAO = require('./app/infra/ReservasDAO');
 const reservasDAO = new ReservasDAO(connection);
@@ -61,7 +61,6 @@ app.use('/doador', doadorRouter);
 
 const doacoesRouter = require('./app/routes/doacoes');
 app.use('/doacoes', doacoesRouter);
-
 
 require('./app/routes/reservas')(app);
 

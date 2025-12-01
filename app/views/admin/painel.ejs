@@ -443,27 +443,25 @@
                                         <td class="acoes">
                                             <button class="btn-primary" type="button" data-id="<%= artigo.artigo_id %>"
                                                 onclick="abrirModalEditarArtigo(this.dataset.id)">✏️</button>
-                                            <form action="/admin/artigos/<%= artigo.artigo_id %>/delete" method="post"
-                                                style="display:inline">
-                                                <button type="submit" class="delete" title="Excluir">🗑️</button>
+                                            <form action="/admin/artigos/<%= artigo.artigo_id %>?_method=DELETE"
+                                                method="POST">
+                                                <button type="submit" class="delete">🗑️</button>
                                             </form>
+
                                         </td>
                                     </tr>
                                     <% }) %>
                             </tbody>
                         </table>
 
-                        <!-- ============================================================================-->
                         <!--========================== MODAL: NOVO ARTIGO ===============================-->
-                        <!--============================================================================ -->
                         <div id="modalNovoArtigo" class="modal" style="display:none;">
                             <div class="modal-content">
                                 <span class="close" onclick="fecharModalNovo()">&times;</span>
                                 <h3>Novo Artigo</h3>
 
-                                <form action="/admin/artigos/novo" method="POST"
-                                    enctype="multipart/form-data">
-
+                                <form action="/artigos/novo" method="POST" enctype="multipart/form-data"
+                                    id="formNovoArtigo">
                                     <label for="artigo_titulo">Título:</label>
                                     <input type="text" id="artigo_titulo" name="artigo_titulo" required>
 
@@ -478,7 +476,7 @@
                                     <textarea id="artigo_resumo" name="artigo_resumo" rows="3" required></textarea>
 
                                     <label for="artigo_conteudo">Conteúdo completo:</label>
-                                    <textarea id="artigo_conteudo" name="artigo_conteudo" rows="8" required></textarea>
+                                    <textarea id="artigo_conteudo" name="artigo_conteudo" rows="8"></textarea>
 
                                     <label for="artigo_palavras_chave">Palavras-chave:</label>
                                     <input type="text" id="artigo_palavras_chave" name="artigo_palavras_chave"
@@ -502,24 +500,29 @@
                                 </form>
                             </div>
                         </div>
+
                         <script>
-                            /* =========================================================================================================== */
                             /* ======================================== SCRIPT: NOVO ARTIGO ============================================== */
-                            /* =========================================================================================================== */
+
                             // Abrir modal de novo artigo
                             function abrirModalNovo() {
+                                const form = document.getElementById('formNovoArtigo');
+                                form.reset();
+
                                 document.getElementById('modalNovoArtigo').style.display = 'block';
-                                document.getElementById('formNovoArtigo').reset();
                                 document.getElementById('capaPreviewImg').style.display = 'none';
                             }
+
                             // Fechar modal
                             function fecharModalNovo() {
                                 document.getElementById('modalNovoArtigo').style.display = 'none';
                             }
+
                             // Pré-visualização da imagem de capa
                             document.getElementById('artigo_imagem_capa').addEventListener('change', function (event) {
                                 const file = event.target.files[0];
                                 const imgPreview = document.getElementById('capaPreviewImg');
+
                                 if (file) {
                                     const reader = new FileReader();
                                     reader.onload = e => {
@@ -531,14 +534,48 @@
                                     imgPreview.style.display = 'none';
                                 }
                             });
+
+                            // Validação do formulário (conteúdo obrigatório)
+                            document.getElementById("formNovoArtigo").addEventListener("submit", function (e) {
+                                const titulo = document.getElementById("artigo_titulo").value.trim();
+                                const resumo = document.getElementById("artigo_resumo").value.trim();
+                                const categoria = document.getElementById("artigo_categoria").value.trim();
+
+                                const editor = tinymce.get("artigo_conteudo");
+                                const conteudo = editor ? editor.getContent({ format: "text" }).trim() : "";
+
+                                if (!titulo) {
+                                    e.preventDefault();
+                                    return alert("O título é obrigatório.");
+                                }
+
+                                if (!resumo) {
+                                    e.preventDefault();
+                                    return alert("O resumo é obrigatório.");
+                                }
+
+                                if (conteudo.length < 20) {
+                                    e.preventDefault();
+                                    return alert("O conteúdo do artigo é muito curto.");
+                                }
+
+                                if (!categoria) {
+                                    e.preventDefault();
+                                    return alert("A categoria é obrigatória.");
+                                }
+                            });
+
                             // Fechar o modal clicando fora dele
                             window.addEventListener('click', function (event) {
                                 const modal = document.getElementById('modalNovoArtigo');
-                                if (event.target === modal) {
+                                const content = modal.querySelector('.modal-content');
+
+                                if (event.target === modal && !content.contains(event.target)) {
                                     fecharModalNovo();
                                 }
                             });
                         </script>
+
                         <script>
                             /* ======================================================================== */
                             /* ======================= SCRIPT: EDITAR ARTIGO ========================== */

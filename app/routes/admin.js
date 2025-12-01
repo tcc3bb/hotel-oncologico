@@ -7,7 +7,8 @@ module.exports = function (painelAdminDAO) {
     const ArtigosDAO = require('../infra/ArtigosDAO');
     const connectionFactory = require('../infra/connectionFactory');
     const connection = connectionFactory();
-    const artigosDAO = ArtigosDAO(connection);
+    const artigosDAO = new ArtigosDAO(connection);
+    
     const PerguntasDAO = require('../infra/PerguntasDAO');
     const perguntasDAO = new PerguntasDAO(connection);
     const reservasController = require('../controllers/reservasController');
@@ -185,111 +186,6 @@ module.exports = function (painelAdminDAO) {
             });
         });
     });
-
-    // =====================================================
-    // 🔹 Criar novo artigo
-    // =====================================================
-    router.post('/artigos/novo', multer({ dest: 'uploads/' }).single('artigo_imagem_capa'), (req, res) => {
-        const connection = connectionFactory();
-
-        // INSTANCIANDO O DAO CORRETAMENTE (se for uma classe)
-        const artigosDAO = new ArtigosDAO(connection);
-
-        const {
-            artigo_titulo,
-            artigo_subtitulo,
-            artigo_categoria,
-            artigo_resumo,
-            artigo_conteudo,
-            artigo_palavras_chave,
-            artigo_slug
-        } = req.body;
-
-        const artigo_imagem_capa = req.file ? req.file.filename : null;
-
-        // 1️⃣ Pegamos o ID do usuário logado
-        const usuarioId = req.session.user.id;
-
-        // 2️⃣ Buscamos o admin_id correspondente
-        connection.query('SELECT admin_id FROM admin WHERE usuario_id = ?', [usuarioId], (err, results) => {
-            connection.end(); // Fechar a conexão após a query
-            if (err) {
-                console.error('Erro ao buscar admin_id:', err);
-                return res.status(500).send('Erro ao buscar administrador.');
-            }
-
-            if (results.length === 0) {
-                console.error('Nenhum admin encontrado para o usuário:', usuarioId);
-                return res.status(400).send('Administrador não encontrado.');
-            }
-
-            const adminId = results[0].admin_id;
-
-            // 3️⃣ Criamos o artigo com o admin_id correto
-            const artigo = {
-                artigo_titulo,
-                artigo_subtitulo,
-                artigo_categoria,
-                artigo_resumo,
-                artigo_conteudo,
-                artigo_palavras_chave,
-                artigo_slug,
-                artigo_status: 'rascunho',
-                artigo_data_publicacao: new Date(),
-                artigo_imagem_capa,
-                admin_id: adminId // 🔹 agora é o ID correto (3)
-            };
-
-            artigosDAO.criarArtigo(artigo, (err) => {
-                if (err) {
-                    console.error('Erro ao criar artigo:', err);
-                    return res.status(500).send('Erro ao criar artigo.');
-                }
-                res.redirect('/admin/painel');
-            });
-        });
-    });
-
-    // Editar artigo
-    router.post('/artigos/:id/editar', upload.single('artigo_imagem_capa'), (req, res) => {
-        const { id } = req.params;
-        const dados = {
-            artigo_titulo: req.body.artigo_titulo,
-            artigo_subtitulo: req.body.artigo_subtitulo,
-            artigo_resumo: req.body.artigo_resumo,
-            artigo_conteudo: req.body.artigo_conteudo,
-            artigo_imagem_capa: req.file ? `/uploads/artigos/${req.file.filename}` : req.body.artigo_imagem_capa_atual,
-            artigo_imagens_extras: req.body.artigo_imagens_extras || null,
-            artigo_slug: req.body.artigo_slug,
-            artigo_palavras_chave: req.body.artigo_palavras_chave,
-            artigo_descricao_meta: req.body.artigo_descricao_meta,
-            artigo_categoria: req.body.artigo_categoria,
-            artigo_tags: req.body.artigo_tags,
-            artigo_status: req.body.artigo_status,
-            artigo_data_publicacao: req.body.artigo_data_publicacao || null,
-            artigo_destacado: req.body.artigo_destacado ? 1 : 0,
-            artigo_aprovado_admin: req.body.artigo_aprovado_admin ? 1 : 0,
-            artigo_observacoes_internas: req.body.artigo_observacoes_internas
-        };
-
-        artigosDAO.atualizarArtigo(id, dados, (err) => {
-            if (err) return res.status(500).send('Erro ao atualizar artigo');
-            res.redirect('/admin/painel');
-        });
-    });
-
-    // Excluir artigo
-    router.post('/artigos/:id/delete', (req, res) => {
-        const { id } = req.params;
-        artigosDAO.excluirArtigo(id, (err) => {
-            if (err) {
-                console.error('Erro ao excluir artigo:', err);
-                return res.status(500).send('Erro ao excluir artigo');
-            }
-            res.redirect('/admin/painel');
-        });
-    });
-
 
     router.get('/reservas', reservasController.listar);
     router.get('/reservas/nova', reservasController.formNova);
