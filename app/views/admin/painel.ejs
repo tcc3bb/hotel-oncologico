@@ -313,56 +313,79 @@
                 </table>
 
                 <!-- ============== MODAL: NOVA RESERVA ================= -->
-                <div id="modalNovaReserva" class="modal">
+                <div id="modalNovaReserva" class="modal" style="display:none;">
                     <div class="modal-content">
                         <span class="close">&times;</span>
-                        <h3>Nova Reserva</h3>
+                        <h3>📅 Nova Reserva</h3>
                         <form action="/reservas/nova" method="POST">
-                            <label>Paciente ID:</label>
-                            <input type="number" name="paciente_id" required>
+                            <div class="form-grid">
+                                <div>
+                                    <label>Paciente ID:</label>
+                                    <input type="number" name="paciente_id" required>
+                                </div>
 
-                            <label>Quarto ID:</label>
-                            <input type="number" name="quarto_id" required>
+                                <div>
+                                    <label>Quarto ID:</label>
+                                    <input type="number" name="quarto_id" required>
+                                </div>
 
-                            <label>Check-in previsto:</label>
-                            <input type="datetime-local" name="reserva_data_checkin_previsto" required>
+                                <div>
+                                    <label>Check-in previsto:</label>
+                                    <input type="datetime-local" name="reserva_data_checkin_previsto" required>
+                                </div>
 
-                            <label>Check-out previsto:</label>
-                            <input type="datetime-local" name="reserva_data_checkout_previsto" required>
+                                <div>
+                                    <label>Check-out previsto:</label>
+                                    <input type="datetime-local" name="reserva_data_checkout_previsto" required>
+                                </div>
+                            </div>
 
-                            <label>Motivo da estadia:</label>
-                            <textarea name="reserva_motivo"></textarea>
+                            <div class="full-width">
+                                <label>Motivo da estadia:</label>
+                                <textarea name="reserva_motivo"
+                                    placeholder="Descreva o motivo da reserva..."></textarea>
+                            </div>
 
-                            <button type="submit" class="btn-primary">Salvar</button>
+                            <button type="submit" class="btn-primary">Salvar Nova Reserva</button>
                         </form>
                     </div>
                 </div>
 
                 <!-- ============== MODAL: EDITAR RESERVA ================= -->
-                <div id="modalEditarReserva" class="modal">
+                <div id="modalEditarReserva" class="modal" style="display:none;">
                     <div class="modal-content">
                         <span class="close">&times;</span>
-                        <h3>Editar Reserva</h3>
+                        <h3>✏️ Editar Reserva</h3>
                         <form id="formEditarReserva" method="POST">
-                            <label>Status:</label>
-                            <select name="reserva_status">
-                                <option value="pendente">Pendente</option>
-                                <option value="confirmada">Confirmada</option>
-                                <option value="em_andamento">Em andamento</option>
-                                <option value="concluida">Concluída</option>
-                                <option value="cancelada">Cancelada</option>
-                            </select>
+                            <div class="form-grid">
+                                <div>
+                                    <label>Status:</label>
+                                    <select name="reserva_status">
+                                        <option value="pendente">Pendente</option>
+                                        <option value="confirmada">Confirmada</option>
+                                        <option value="em_andamento">Em andamento</option>
+                                        <option value="concluida">Concluída</option>
+                                        <option value="cancelada">Cancelada</option>
+                                    </select>
+                                </div>
 
-                            <label>Check-in previsto:</label>
-                            <input type="datetime-local" name="reserva_data_checkin_previsto" required>
+                                <div>
+                                    <label>Check-in previsto:</label>
+                                    <input type="datetime-local" name="reserva_data_checkin_previsto" required>
+                                </div>
 
-                            <label>Check-out previsto:</label>
-                            <input type="datetime-local" name="reserva_data_checkout_previsto" required>
+                                <div class="full-width">
+                                    <label>Check-out previsto:</label>
+                                    <input type="datetime-local" name="reserva_data_checkout_previsto" required>
+                                </div>
+                            </div>
 
-                            <label>Motivo:</label>
-                            <textarea name="reserva_motivo"></textarea>
+                            <div class="full-width">
+                                <label>Motivo:</label>
+                                <textarea name="reserva_motivo" placeholder="Motivo da estadia..."></textarea>
+                            </div>
 
-                            <button type="submit" class="btn-primary">Salvar alterações</button>
+                            <button type="submit" class="btn-primary">Salvar Alterações</button>
                         </form>
                     </div>
                 </div>
@@ -443,7 +466,8 @@
                                         <td class="acoes">
                                             <button class="btn-primary" type="button" data-id="<%= artigo.artigo_id %>"
                                                 onclick="abrirModalEditarArtigo(this.dataset.id)">✏️</button>
-                                            <form action="/artigos/<%= artigo.artigo_id %>?_method=DELETE" method="POST">
+                                            <form action="/artigos/<%= artigo.artigo_id %>?_method=DELETE"
+                                                method="POST">
                                                 <button type="submit" class="delete">🗑️</button>
                                             </form>
 
@@ -457,45 +481,66 @@
                         <div id="modalNovoArtigo" class="modal" style="display:none;">
                             <div class="modal-content">
                                 <span class="close" onclick="fecharModalNovo()">&times;</span>
-                                <h3>Novo Artigo</h3>
+                                <h3>📝 Criar Novo Artigo</h3>
 
                                 <form action="/artigos/novo" method="POST" enctype="multipart/form-data"
                                     id="formNovoArtigo">
-                                    <label for="artigo_titulo">Título:</label>
-                                    <input type="text" id="artigo_titulo" name="artigo_titulo" required>
+                                    <div class="form-grid">
+                                        <div class="full-width">
+                                            <label for="artigo_titulo">Título Principal:</label>
+                                            <input type="text" id="artigo_titulo" name="artigo_titulo" required
+                                                placeholder="Título que aparece no artigo">
+                                        </div>
 
-                                    <label for="artigo_subtitulo">Subtítulo:</label>
-                                    <input type="text" id="artigo_subtitulo" name="artigo_subtitulo">
+                                        <div class="full-width">
+                                            <label for="artigo_subtitulo">Subtítulo:</label>
+                                            <input type="text" id="artigo_subtitulo" name="artigo_subtitulo"
+                                                placeholder="Subtítulo de apoio ou breve descrição">
+                                        </div>
 
-                                    <label for="artigo_categoria">Categoria:</label>
-                                    <input type="text" id="artigo_categoria" name="artigo_categoria"
-                                        placeholder="Ex: Saúde, Psicologia...">
+                                        <div>
+                                            <label for="artigo_categoria">Categoria:</label>
+                                            <input type="text" id="artigo_categoria" name="artigo_categoria"
+                                                placeholder="Ex: Saúde, Psicologia...">
+                                        </div>
 
-                                    <label for="artigo_resumo">Resumo:</label>
-                                    <textarea id="artigo_resumo" name="artigo_resumo" rows="3" required></textarea>
+                                        <div>
+                                            <label for="artigo_palavras_chave">Palavras-chave (SEO):</label>
+                                            <input type="text" id="artigo_palavras_chave" name="artigo_palavras_chave"
+                                                placeholder="separadas por vírgula">
+                                        </div>
 
-                                    <label for="artigo_conteudo">Conteúdo completo:</label>
-                                    <textarea id="artigo_conteudo" name="artigo_conteudo" rows="8"></textarea>
+                                        <div class="full-width">
+                                            <label for="artigo_slug">Slug (URL amigável):</label>
+                                            <input type="text" id="artigo_slug" name="artigo_slug"
+                                                placeholder="ex: cuidados-pos-cirurgia-avancados">
+                                        </div>
 
-                                    <label for="artigo_palavras_chave">Palavras-chave:</label>
-                                    <input type="text" id="artigo_palavras_chave" name="artigo_palavras_chave"
-                                        placeholder="separadas por vírgula">
+                                        <div>
+                                            <label for="artigo_resumo">Resumo (Max 250 caracteres):</label>
+                                            <textarea id="artigo_resumo" name="artigo_resumo" rows="4" required
+                                                placeholder="Resumo curto para listagem ou preview."></textarea>
+                                        </div>
 
-                                    <label for="artigo_slug">Slug (URL amigável):</label>
-                                    <input type="text" id="artigo_slug" name="artigo_slug"
-                                        placeholder="ex: cuidados-pos-cirurgia">
+                                        <div>
+                                            <label for="artigo_imagem_capa">Imagem de Capa:</label>
+                                            <input type="file" id="artigo_imagem_capa" name="artigo_imagem_capa"
+                                                accept="image/*">
+                                            <div id="previewCapa">
+                                                <p>Prévia da Capa:</p>
+                                                <img id="capaPreviewImg" src="" alt="Prévia da capa"
+                                                    style="display:none;">
+                                            </div>
+                                        </div>
 
-                                    <label for="artigo_imagem_capa">Imagem de capa:</label>
-                                    <input type="file" id="artigo_imagem_capa" name="artigo_imagem_capa"
-                                        accept="image/*">
-
-                                    <div id="previewCapa" style="margin-top:10px;">
-                                        <img id="capaPreviewImg" src="" alt="Prévia da capa"
-                                            style="max-width:150px; display:none; border-radius:8px;">
+                                        <div class="full-width">
+                                            <label for="artigo_conteudo">Conteúdo Completo (Editor Rich Text):</label>
+                                            <textarea id="artigo_conteudo" name="artigo_conteudo" rows="10"
+                                                placeholder="Insira o texto e formatação do artigo aqui."></textarea>
+                                        </div>
                                     </div>
 
-                                    <button type="submit" class="btn-primary" style="margin-top:15px;">Salvar
-                                        Artigo</button>
+                                    <button type="submit" class="btn-primary">Publicar Artigo</button>
                                 </form>
                             </div>
                         </div>
@@ -636,7 +681,9 @@
                         </script>
 
                         <!--========================== EDITOR DE TEXTO ===============================-->
-                        <script src="https://cdn.tiny.cloud/1/dap6c3mpzxaz4rfmtgm5rr0za2vkn7k17uwv3zsqfpn908g1/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+                        <script
+                            src="https://cdn.tiny.cloud/1/dap6c3mpzxaz4rfmtgm5rr0za2vkn7k17uwv3zsqfpn908g1/tinymce/6/tinymce.min.js"
+                            referrerpolicy="origin"></script>
                         <script>
                             tinymce.init({
                                 selector: '#artigo_conteudo',
