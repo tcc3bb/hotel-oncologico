@@ -8,7 +8,7 @@
     --cinza-medio: #ccc;
     --cinza-escuro: #666;
     --sombra-leve: rgba(0, 0, 0, 0.1);
-    --borda-arredondada: 8px;
+    --borda-arredondada: 8px; 
     --cor-principal: #23543b;
     --cor-secundaria: #3a7d55;
     --cor-acento-claro: #cfe9d1;
@@ -50,7 +50,7 @@ p {
 }
 
 main {
-    max-width: 58rem;
+    max-width: 68rem;
     margin: 2.5rem auto 5rem;
     padding: 0 1.25rem;
     text-align: center;
@@ -222,8 +222,8 @@ main h1 {
     align-items: flex-start;
     gap: 2rem;
     width: 100%;
-    max-width: 1400px;
-    margin: 2rem auto;
+    max-width: 2000px;
+    margin: 1rem auto;
     padding: 1rem;
 }
 
@@ -1014,28 +1014,129 @@ footer {
 
 
 /* ================================================== SECTION AVALIAÇÃO ===================================================== */
+
+.root{
+--verde-escuro: #23543b;
+--verde-claro: #cfe9d1;
+--verde-medio: #3a7d55;
+--vermelho: #d9534f;
+--branco: #fff;
+}
+
+/* ====== Seção ====== */
 .avaliacoes-section {
     margin-top: 4rem;
     padding: 2rem 1rem;
     text-align: center;
 }
 
+/* ====== Swiper Wrapper (para múltiplos slides) ====== */
+.swiper-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem; /* Espaço entre cards */
+}
+
+/* ====== Cartão ====== */
 .avaliacao-card {
-    background: #f9f9f9;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    background: var(--branco);
+    padding: 1.5rem; /* Reduzido para cards menores */
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+    max-width: 300px; /* Limita largura para caber 3-4 na tela */
+    border: 2px solid var(--verde-claro); /* Detalhe verde: borda */
+    flex: 1; /* Permite ajuste automático em flex */
 }
 
-.avaliacao-texto {
-    font-size: 1.1rem;
+.avaliacao-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    background: rgba(207, 233, 209, 0.1); /* Detalhe verde: fundo leve no hover */
+}
+
+/* ====== Estrelas ====== */
+.avaliacao-estrelas {
     margin-bottom: 1rem;
+    font-size: 1.4rem; /* Reduzido para cards menores */
 }
 
+.estrela {
+    margin: 0 2px;
+    transition: transform .3s ease;
+}
+
+.estrela.cheia {
+    color: #f7c600; /* dourado */
+    text-shadow: 0 0 6px rgba(247,198,0,.6);
+}
+
+.estrela.vazia {
+    color: #ccc;
+}
+
+.avaliacao-card:hover .estrela.cheia {
+    transform: scale(1.1);
+}
+
+/* ====== Texto ====== */
+.avaliacao-texto {
+    font-size: 1rem; /* Reduzido para cards menores */
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+/* ====== Autor ====== */
 .avaliacao-autor {
     font-weight: bold;
-    color: #3a7d55;
+    color: var(--verde-medio);
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
 }
+
+.icone-verde {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--verde-medio); /* Detalhe verde: ícone */
+}
+
+/* ====== Swiper Arrows ====== */
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--verde-medio);
+    transition: .3s ease;
+    opacity: 0.8;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    color: var(--verde-escuro);
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+/* ====== Paginação ====== */
+.swiper-pagination-bullet {
+    background: var(--verde-claro);
+    opacity: .7;
+    width: 10px;
+    height: 10px;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--verde-escuro);
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+}
+
+
+
+
+
+
+
 
 /* Responsividade para tablets e móveis */
 @media (max-width: 768px) {

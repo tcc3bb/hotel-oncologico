@@ -178,26 +178,67 @@
         <section class="avaliacoes-section">
             <h2>Avaliações dos Pacientes</h2>
 
-            <div class="swiper avaliacao-swiper">
-                <div class="swiper-wrapper">
-                    <% avaliacoes.forEach(av=> { %>
-                        <div class="swiper-slide avaliacao-card">
-                            <p class="avaliacao-texto">
-                                <%= av.texto %>
-                            </p>
-                            <h4 class="avaliacao-autor">— <%= av.nome_paciente %>
-                            </h4>
+            <div class="swiper-wrapper">
+                <% avaliacoes.forEach(av=> { %>
+                    <div class="swiper-slide avaliacao-card">
+
+                        <!-- ⭐ NOTA EM ESTRELAS -->
+                        <div class="avaliacao-estrelas">
+                            <% for(let i=1; i<=5; i++){ %>
+                                <% if(i <=av.nota){ %>
+                                    <span class="estrela cheia">★</span>
+                                    <% } else { %>
+                                        <span class="estrela vazia">☆</span>
+                                        <% } %>
+                                            <% } %>
                         </div>
-                        <% }) %>
-                </div>
 
-                <!-- Setas -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                        <!-- COMENTÁRIO -->
+                        <p class="avaliacao-texto">
+                            <%= av.comentario %>
+                        </p>
 
-                <!-- Paginação -->
-                <div class="swiper-pagination"></div>
+                        <!-- AUTOR -->
+                        <h4 class="avaliacao-autor">
+                            <span class="icone-verde">🌿</span> — <%= av.nome_paciente || "Paciente" %>
+                        </h4>
+
+                    </div>
+                    <% }) %>
             </div>
+
+            <script>
+                new Swiper('.avaliacao-swiper', {
+                    loop: true,
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev'
+                    },
+
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false
+                    },
+
+                    centeredSlides: false,
+
+                    breakpoints: {
+                        640: { slidesPerView: 2 },
+                        900: { slidesPerView: 3 },
+                        1200: { slidesPerView: 4 }
+                    }
+                });
+
+            </script>
+
         </section>
 
     </main>

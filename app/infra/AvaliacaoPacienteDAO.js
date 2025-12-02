@@ -17,16 +17,18 @@ class AvaliacaoPacienteDAO {
     }
 
     listarTodas(callback) {
-        console.log("📌 Executando SELECT listarTodas");
+    console.log("📌 Executando SELECT listarTodas");
 
-        const sql = `
-            SELECT *
-            FROM avaliacao_paciente
-            ORDER BY data_avaliacao DESC
-        `;
+    const sql = `
+        SELECT a.*, p.paciente_nome AS paciente_nome
+        FROM avaliacao_paciente a
+        JOIN paciente p ON p.paciente_id = a.paciente_id
+        ORDER BY a.data_avaliacao DESC
+    `;
 
-        this._connection.query(sql, callback);
-    }
+    this._connection.query(sql, callback);
+}
+
 
     salvar(dados, callback) {
         console.log("📌 Executando INSERT salvar:", dados);
