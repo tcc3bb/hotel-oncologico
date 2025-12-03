@@ -1451,10 +1451,7 @@ input[readonly] {
     }
 }
 
-
-/* =============================================================================================================================== */
 /* ========================================================== FOOTER ============================================================= */
-/* =============================================================================================================================== */
 footer {
     background-color: #699b80;
     color: #fff;
@@ -1502,4 +1499,352 @@ footer {
     padding-top: 12px;
     font-size: 0.85rem;
     color: #aeb5ab;
+}
+
+/* ========================================================== RESPONSIVIDADE ============================================================= */
+
+/* Mobile pequeno */
+@media (max-width: 360px) {
+    nav {
+        padding: 0.8rem 1rem;
+    }
+    
+    .img-logo {
+        height: 5vh;
+    }
+    
+    .cabecalho-vita h1 {
+        font-size: 24px;
+    }
+    
+    .imagem-rodape-cabecalho {
+        width: 200px;
+        height: 180px;
+        bottom: -30px;
+    }
+    
+    .grid-cancer {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 25px;
+    }
+    
+    .item-cancer {
+        width: 180px;
+        height: 180px;
+        padding: 20px 15px;
+    }
+    
+    .item-cancer img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .item-cancer p {
+        font-size: 16px;
+    }
+}
+
+/* Mobile padrão */
+@media (max-width: 480px) {
+    nav {
+        padding: 1rem 1.5rem;
+    }
+    
+    .cabecalho-vita {
+        padding: 30px 15px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    
+    .cabecalho-vita h1 {
+        font-size: 26px;
+    }
+    
+    .imagem-rodape-cabecalho {
+        width: 250px;
+        height: 200px;
+        bottom: -30px;
+    }
+    
+    .grid-cancer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .item-cancer {
+        width: 180px;
+        height: 180px;
+        padding: 20px;
+    }
+    
+    .container {
+        width: 95%;
+        margin: 30px auto;
+    }
+    
+    .section-title {
+        font-size: 22px;
+    }
+    
+    .texto {
+        font-size: 16px;
+    }
+}
+
+/* Mobile grande / Tablets pequenos */
+@media (max-width: 576px) {
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    nav a {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.6rem;
+    }
+    
+    .cabecalho-vita h1 {
+        font-size: 28px;
+    }
+    
+    .imagem-rodape-cabecalho {
+        width: 280px;
+        height: 220px;
+    }
+    
+    .grid-cancer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .item-cancer {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .footer-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .footer-container > div {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem 2rem;
+    }
+    
+    .cabecalho-vita {
+        padding: 35px 20px;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+    }
+    
+    .imagem-rodape-cabecalho {
+        width: 300px;
+        height: 250px;
+        bottom: -35px;
+    }
+    
+    .grid-cancer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+    
+    .item-cancer {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .info {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    .btn-entrar,
+    .btn-cadastrar,
+    .btn-nav {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet horizontal / Notebook pequeno */
+@media (max-width: 992px) {
+    nav {
+        padding: 1rem 3rem;
+    }
+    
+    .grid-cancer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+    }
+    
+    .item-cancer {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .imagem-rodape-cabecalho {
+        width: 320px;
+        height: 260px;
+    }
+    
+    .cabecalho-vita h1 {
+        font-size: 30px;
+    }
+    
+    .container {
+        width: 92%;
+    }
+}
+
+/* Notebook padrão */
+@media (max-width: 1200px) {
+    .grid-cancer {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 35px;
+    }
+    
+    .item-cancer {
+        width: 210px;
+        height: 210px;
+    }
+    
+    .container {
+        max-width: 1100px;
+    }
+    
+    .footer-container {
+        max-width: 90%;
+    }
+}
+
+/* Desktop */
+@media (max-width: 1400px) {
+    .grid-cancer {
+        gap: 40px;
+    }
+    
+    .item-cancer {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .container {
+        max-width: 1200px;
+    }
+    
+    nav {
+        padding: 1rem 4rem;
+    }
+}
+
+/* Telas muito grandes */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .grid-cancer {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 45px;
+    }
+    
+    .item-cancer {
+        width: 230px;
+        height: 230px;
+    }
+    
+    .imagem-rodape-cabecalho {
+        width: 380px;
+        height: 320px;
+    }
+    
+    nav {
+        padding: 1rem 6rem;
+    }
+    
+    .footer-container {
+        max-width: 1300px;
+    }
+}
+
+/* Ajustes gerais para navegação mobile */
+@media (max-width: 900px) {
+    .nav-links {
+        flex-direction: column;
+        padding: 1.5rem 0;
+    }
+    
+    nav a {
+        width: 90%;
+        text-align: center;
+        padding: 0.8rem;
+    }
+    
+    .btn-entrar,
+    .btn-cadastrar,
+    .btn-nav,
+    .btn-logout {
+        width: 80%;
+        margin: 0.3rem auto;
+    }
+    
+    /* Esconde as imagens no cabeçalho em telas menores */
+    .imagem-rodape-cabecalho {
+        display: none;
+    }
+    
+    .conteudo-cabecalho {
+        min-height: 150px;
+    }
+}
+
+/* Ajustes para orientação paisagem em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .grid-cancer {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .item-cancer {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .item-cancer img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .cabecalho-vita {
+        padding: 20px 15px;
+    }
+}
+
+/* Ajustes para melhor legibilidade em telas pequenas */
+@media (max-width: 768px) {
+    .info {
+        font-size: 13px;
+        padding: 8px;
+        overflow-y: auto;
+        max-height: 80px;
+    }
+    
+    .item-cancer:hover .info {
+        opacity: 0.95;
+    }
+}
+
+/* Impedir zoom em inputs em iOS */
+@media (max-width: 480px) {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
 }

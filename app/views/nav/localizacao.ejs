@@ -265,138 +265,165 @@
             document.querySelector(".nav-links").classList.toggle("active");
         });
     </script>
-</body>
 
-<script>
-    // MODAL
-    const modal = document.getElementById('infoModal');
-    const modalTitulo = document.getElementById('modalTitulo');
-    const modalDescricao = document.getElementById('modalDescricao');
-    const fechar = document.querySelector('.fechar');
 
-    document.querySelectorAll('.card, .farmacia-card').forEach(card => {
-        card.addEventListener('click', (e) => {
-            // se o clique for no botão de mapa, ignora o modal de info
-            if (e.target.classList.contains('mapa-sobre-img') || e.target.closest('.mapa-sobre-img')) {
-                return;
-            }
+    <script>
+        // MODAL DE INFORMAÇÕES
+        const modal = document.getElementById('infoModal');
+        const modalTitulo = document.getElementById('modalTitulo');
+        const modalDescricao = document.getElementById('modalDescricao');
+        const fechar = document.querySelector('.fechar');
 
-            modalTitulo.textContent = card.querySelector('h3').textContent;
-            modalDescricao.textContent = card.dataset.info || 'Mais informações indisponíveis.';
-            modal.style.display = 'flex';
+        document.querySelectorAll('.card, .farmacia-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Se o clique for no botão de mapa, ignora o modal de info
+                if (e.target.classList.contains('mapa-sobre-img') || e.target.closest('.mapa-sobre-img')) {
+                    return;
+                }
+
+                modalTitulo.textContent = card.querySelector('h3').textContent;
+                modalDescricao.textContent = card.dataset.info || 'Mais informações indisponíveis.';
+                modal.style.display = 'flex';
+            });
         });
-    });
 
+        fechar.onclick = () => modal.style.display = 'none';
+        window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; }
 
-    fechar.onclick = () => modal.style.display = 'none';
-    window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; }
+        // CARROSSEL DAS FARMÁCIAS
+        const track = document.querySelector('.farmacias-track');
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
 
-    // CARROSSEL PARADO COM SETAS
-    const track = document.querySelector('.farmacias-track');
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const nextBtn = document.querySelector('.carousel-btn.next');
+        let scrollAmount = 0;
+        const cardWidth = 300; // Largura aproximada dos cards
 
-    let scrollAmount = 0;
-    const cardWidth = 300; // Largura aproximada dos cards
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
 
-    nextBtn.addEventListener('click', () => {
-        track.scrollBy({ left: cardWidth, behavior: 'smooth' });
-    });
-    prevBtn.addEventListener('click', () => {
-        track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-    });
+        // MODAL DO MAPA
+        const mapModal = document.getElementById('mapModal');
+        const fecharMapa = document.getElementById('fecharMapa');
+        const tituloMapa = document.getElementById('tituloMapa');
+        let map; // Variável global para o mapa
 
+        document.querySelectorAll('.mapa-sobre-img').forEach(botao => {
+            botao.addEventListener('click', async (e) => {
+                e.stopPropagation();
 
-    // MODAL DO MAPA
-    const mapModal = document.getElementById('mapModal');
-    const fecharMapa = document.getElementById('fecharMapa');
-    const tituloMapa = document.getElementById('tituloMapa');
-    let map; // variável global para o mapa
+                const card = botao.closest('.card, .farmacia-card');
+                const nome = card.querySelector('h3').textContent;
+                const endereco = card.querySelector('p').textContent;
 
-    document.querySelectorAll('.mapa-sobre-img').forEach(botao => {
-        botao.addEventListener('click', async (e) => {
-            e.stopPropagation();
+                tituloMapa.textContent = `Mapa de ${nome}`;
+                mapModal.style.display = 'flex';
 
-            const card = botao.closest('.card, .farmacia-card');
-            const nome = card.querySelector('h3').textContent;
-            const endereco = card.querySelector('p').textContent;
+                // Remove o mapa anterior antes de criar o novo
+                const mapContainer = document.getElementById('map');
+                if (map) {
+                    map.remove();
+                    map = null;
+                }
+                mapContainer.innerHTML = '<p>Carregando mapa...</p>'; // Placeholder enquanto carrega
 
-            tituloMapa.textContent = nome;
-            mapModal.style.display = 'flex';
+                // Tenta obter coordenadas: primeiro de data attributes, senão geocodifica
+                let coords = null;
+                if (card.dataset.lat && card.dataset.lng) {
+                    coords = {
+                        lat: parseFloat(card.dataset.lat),
+                        lng: parseFloat(card.dataset.lng)
+                    };
+                } else {
+                    coords = await getCoordinates(endereco);
+                }
 
-            // Remove o mapa anterior antes de criar o novo
-            const mapContainer = document.getElementById('map');
+                if (!coords) {
+                    mapContainer.innerHTML = '<p>Erro: Endereço não encontrado. Verifique o endereço ou tente novamente.</p>';
+                    tituloMapa.textContent = `${nome} - Localização não disponível`;
+                    return;
+                }
+
+                // Cria um novo mapa
+                map = L.map(mapContainer).setView([coords.lat, coords.lng], 16);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                L.marker([coords.lat, coords.lng])
+                    .addTo(map)
+                    .bindPopup(`<b>${nome}</b><br>${endereco}`)
+                    .openPopup();
+            });
+        });
+
+        // Fechar o modal do mapa
+        fecharMapa.onclick = () => {
+            mapModal.style.display = 'none';
             if (map) {
                 map.remove();
                 map = null;
             }
-            mapContainer.innerHTML = ''; // limpa o container por completo
-
-            // Busca as coordenadas
-            const coords = await getCoordinates(endereco);
-            if (!coords) {
-                tituloMapa.textContent = `${nome} - Endereço não encontrado`;
-                return;
+        };
+        window.onclick = e => {
+            if (e.target === mapModal) {
+                mapModal.style.display = 'none';
+                if (map) {
+                    map.remove();
+                    map = null;
+                }
             }
+        };
 
-            // Cria um novo mapa do zero
-            map = L.map(mapContainer).setView([coords.lat, coords.lng], 16);
+        // Função para geocodificar endereço via Nominatim (API gratuita)
+        async function getCoordinates(address) {
+            try {
+                // Limpa o endereço: remove prefixos e caracteres problemáticos
+                let cleanAddress = address
+                    .replace(/Endereço:/gi, '')
+                    .replace(/[–—]/g, '-') // Substitui travessões por hífen
+                    .trim();
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
+                // Adiciona cidade e estado se não estiverem presentes (assume São Paulo)
+                if (!cleanAddress.toLowerCase().includes('são paulo') && !cleanAddress.toLowerCase().includes('sp')) {
+                    cleanAddress += ', São Paulo, SP, Brasil';
+                }
 
-            L.marker([coords.lat, coords.lng])
-                .addTo(map)
-                .bindPopup(nome)
-                .openPopup();
-        });
-    });
+                // URL da API Nominatim
+                const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cleanAddress)}&addressdetails=1&limit=1&countrycodes=BR`;
 
+                const response = await fetch(url, {
+                    headers: {
+                        'User-Agent': 'InstitutoVita/1.0 (contato@institutovita.org)' // Identifica sua app para evitar bloqueios
+                    }
+                });
 
+                if (!response.ok) {
+                    throw new Error(`Erro na API: ${response.status}`);
+                }
 
-    // Fechar o modal
-    fecharMapa.onclick = () => mapModal.style.display = 'none';
-    window.onclick = e => { if (e.target === mapModal) mapModal.style.display = 'none'; }
+                const data = await response.json();
 
-    // Função para buscar coordenadas automaticamente com base no endereço
-    // Função para buscar coordenadas automaticamente com base no endereço
-    async function getCoordinates(address) {
-        try {
-            // Remove prefixos como "Endereço:" e caracteres problemáticos
-            let cleanAddress = address
-                .replace(/Endereço:/gi, '')
-                .replace(/[–—]/g, '-') // substitui travessões por hífen
-                .trim();
-
-            // Adiciona cidade e estado se não estiverem presentes
-            if (!cleanAddress.toLowerCase().includes('são paulo')) {
-                cleanAddress += ', São Paulo, SP';
-            }
-
-            // Monta a URL da busca no Nominatim
-            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cleanAddress)}&addressdetails=1&limit=1`;
-
-            const response = await fetch(url, {
-                headers: { 'User-Agent': 'InstitutoVita/1.0 (contato@institutovita.org)' }
-            });
-
-            const data = await response.json();
-
-            if (data && data.length > 0) {
-                return {
-                    lat: parseFloat(data[0].lat),
-                    lng: parseFloat(data[0].lon)
-                };
-            } else {
-                console.warn("Endereço não encontrado:", cleanAddress);
+                if (data && data.length > 0) {
+                    return {
+                        lat: parseFloat(data[0].lat),
+                        lng: parseFloat(data[0].lon)
+                    };
+                } else {
+                    console.warn("Endereço não encontrado:", cleanAddress);
+                    return null;
+                }
+            } catch (error) {
+                console.error("Erro ao buscar coordenadas:", error);
                 return null;
             }
-        } catch (error) {
-            console.error("Erro ao buscar coordenadas:", error);
-            return null;
         }
-    }
-</script>
+    </script>
+</body>
+
 
 </html>

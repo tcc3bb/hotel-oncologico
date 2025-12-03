@@ -145,7 +145,7 @@ nav .nav-links {
     .nav-links.active {
         transform: translateY(0);
         opacity: 1;
-        visibility: visible;
+        visibility: visible; 
     }
 }
 
@@ -307,43 +307,358 @@ footer {
 }
 
 /* ====================================================== RESPONSIVIDADE ========================================================= */
-@media (max-width: 720px) {
+/* ====================================================== MEDIA QUERIES ========================================================= */
+
+/* Desktop (1400px) */
+@media (max-width: 1400px) {
     nav {
-        flex-wrap: wrap;
-        gap: 16px;
-        font-size: 0.85rem;
+        padding: 1rem 4rem;
     }
-
-    .hero {
-        height: 400px;
-        padding: 16px;
-    }
-
+    
     .hero h1 {
-        font-size: 1.6rem;
-        margin-bottom: 16px;
+        font-size: 2rem;
     }
+    
+    main {
+        max-width: 55rem;
+    }
+}
 
-    .btn {
+/* Notebook padrão (1200px) */
+@media (max-width: 1200px) {
+    nav {
+        padding: 1rem 3rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    main {
+        max-width: 50rem;
+    }
+    
+    .location-section {
+        gap: 30px;
+    }
+}
+
+/* Tablet horizontal / Notebook pequeno (992px) */
+@media (max-width: 992px) {
+    nav {
+        padding: 1rem 2rem;
+    }
+    
+    .nav-links {
+        gap: 0.8rem;
+    }
+    
+    nav a {
         font-size: 0.9rem;
-        padding: 10px 22px;
+        padding: 0.3rem 0.6rem;
     }
-
+    
+    .hero {
+        height: 65vh;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    main {
+        max-width: 45rem;
+        margin: 2.5rem auto;
+    }
+    
     .location-section {
         flex-direction: column;
-        padding: 0 12px;
+        align-items: center;
+        text-align: center;
     }
-
-    .location-image,
+    
     .location-text {
+        width: 100%;
+    }
+    
+    .location-image img {
         max-width: 100%;
+    }
+}
+
+/* Tablets (768px) */
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem 1.5rem;
+        justify-content: space-between;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 2rem 1.5rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.35s ease-in-out;
+        z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+    
+    .hero {
+        height: 60vh;
+        padding: 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.6rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 250px;
+        padding: 0.8rem 1.5rem;
+    }
+    
+    main {
+        padding: 0 1rem;
+        margin: 2rem auto;
+    }
+    
+    section[aria-labelledby] h2 {
+        font-size: 1.7rem;
+    }
+    
+    section p {
+        font-size: 1rem;
+    }
+    
+    .location-section {
+        margin-top: 30px;
+        gap: 25px;
+    }
+    
+    .footer-container {
+        padding: 0 1rem;
+    }
+}
+
+/* Mobile grande / Tablets pequenos (576px) */
+@media (max-width: 576px) {
+    nav {
+        padding: 0.8rem 1rem;
+    }
+    
+    .img-logo {
+        height: 6vh;
+        max-height: 3rem;
+    }
+    
+    .hero {
+        height: 55vh;
+        min-height: 350px;
+        padding: 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-content {
+        padding: 0 0.5rem;
+    }
+    
+    main {
+        margin: 1.5rem auto;
+        padding: 0 0.8rem;
+    }
+    
+    section[aria-labelledby] h2 {
+        font-size: 1.5rem;
+    }
+    
+    section p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    .location-section {
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .footer-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .footer-container > div {
         flex: 1 1 100%;
     }
 }
 
-@media (max-width: 720px) {
+/* Mobile padrão (480px) */
+@media (max-width: 480px) {
+    .hero {
+        height: 50vh;
+        min-height: 300px;
+    }
+    
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+    
+    .btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        max-width: 220px;
+    }
+    
+    main {
+        padding: 0 0.6rem;
+    }
+    
+    section[aria-labelledby] h2 {
+        font-size: 1.4rem;
+    }
+    
+    section p {
+        font-size: 0.9rem;
+    }
+    
+    .location-image img {
+        max-height: 200px;
+    }
+    
+    footer {
+        padding: 2rem 1rem 0.8rem;
+    }
+    
+    .footer-bottom {
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile pequeno (360px) */
+@media (max-width: 360px) {
+    nav {
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .img-logo {
+        height: 5vh;
+        max-height: 2.5rem;
+    }
+    
+    .hero {
+        height: 45vh;
+        min-height: 280px;
+        padding: 0.8rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.2rem;
+    }
+    
+    .hero-buttons {
+        gap: 0.8rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        max-width: 200px;
+    }
+    
+    section[aria-labelledby] h2 {
+        font-size: 1.3rem;
+    }
+    
+    section p {
+        font-size: 0.85rem;
+    }
+    
     .footer-container {
-        flex-direction: column;
-        gap: 20px;
+        gap: 1.2rem;
+    }
+    
+    .footer-container h3 {
+        font-size: 1rem;
+    }
+}
+
+/* Telas muito grandes (1600px+) */
+@media (min-width: 1600px) {
+    nav {
+        padding: 1.2rem 6rem;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+    }
+    
+    nav a {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .hero {
+        height: 80vh;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    main {
+        max-width: 70rem;
+    }
+    
+    .btn {
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+    }
+    
+    section[aria-labelledby] h2 {
+        font-size: 2.2rem;
+    }
+    
+    section p {
+        font-size: 1.15rem;
+    }
+    
+    .footer-container {
+        max-width: 80rem;
     }
 }

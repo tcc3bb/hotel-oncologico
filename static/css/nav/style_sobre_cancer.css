@@ -35,9 +35,10 @@ html {
 
 body {
     font-family: Arial, sans-serif;
-    background: #fff;
-    color: #444;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    color: #2c3e50;
 }
 
 p {
@@ -223,185 +224,228 @@ nav .nav-links {
 
 
 
-
-
-/* ============================== */
-/* HERO ESTILIZADO */
-/* ============================== */
-
-.hero-cancer {
-    position: relative;
-    height: 65vh;
-    background: linear-gradient(
-            rgba(35, 84, 59, 0.65),
-            rgba(35, 84, 59, 0.65)
-        ),
-        url('/image/home.jpg') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
-}
-
-.hero-content {
-    text-align: center;
-    color: var(--branco);
-    padding: 2rem;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
-    animation: fadeInDown 1s ease;
-}
-
-.hero-content p {
-    font-size: 1.3rem;
-    opacity: 0.9;
-    animation: fadeInUp 1s ease;
-}
-
-/* ANIMAÇÕES */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================== */
-/* INTRO COM FUNDO SUAVE */
-/* ============================== */
-
-.intro-section {
-    background: var(--cinza-claro);
-    padding: 4rem 10%;
-    border-radius: 0 0 40px 40px;
-}
-
-.intro-section h2 {
-    font-size: 2.3rem;
-    color: var(--verde-escuro);
-    margin-bottom: 1rem;
-}
-
-.intro-section p {
-    font-size: 1.2rem;
-    color: var(--cinza-escuro);
-    line-height: 1.7;
-}
-
-/* ============================== */
-/* CARDS SECTION ESTILIZADA */
-/* ============================== */
-
-.cards-section {
-    padding: 5rem 10%;
-    background: linear-gradient(135deg, var(--verde-acento), var(--verde-claro));
-}
-
-.cards-section h2 {
-    text-align: center;
-    font-size: 2.4rem;
-    color: var(--verde-escuro);
-    margin-bottom: 3rem;
-    font-weight: bold;
-}
-
-/* GRID DOS CARDS */
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.2rem;
-}
-
-/* ============================== */
-/* CARD — NOVO VISUAL PREMIUM */
-/* ============================== */
-
-.card {
-    background: var(--branco);
-    padding: 2rem;
-    border-radius: var(--borda-lg);
-    box-shadow: 0 8px 20px var(--sombra-media);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    border-top: 6px solid var(--verde-medio);
+.cabecalho-vita {
+    background: linear-gradient(135deg, #3f7752, #5ca77a);
+    color: white;
+    padding: 40px 20px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
     position: relative;
     overflow: hidden;
 }
 
-/* EFEITO DE BRILHO */
-.card::before {
-    content: "";
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+} 
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.imagem-rodape-cabecalho {
     position: absolute;
-    top: -80%;
-    left: -80%;
-    width: 250%;
-    height: 250%;
-    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
-    transform: rotate(45deg);
-    transition: var(--transicao-lenta);
-    opacity: 0;
+    right: 0;
+    bottom: -40px;
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+
+    z-index: 10;
 }
 
-.card:hover::before {
-    opacity: 1;
-    top: -40%;
-    left: -40%;
+.conteudo-cabecalho {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    min-height: 200px;
 }
 
-/* ANIMAÇÃO DO CARD */
-.card:hover {
-    transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 12px 26px var(--sombra-forte);
-}
-
-.card h3 {
-    color: var(--verde-escuro);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.card p {
-    color: var(--cinza-escuro);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-/* BOTÃO */
-.card button {
-    width: 100%;
-    background: var(--verde-escuro);
-    color: var(--branco);
-    border: none;
-    padding: 0.9rem;
-    font-size: 1.1rem;
+.cabecalho-vita h1 {
+    font-size: 32px;
     font-weight: bold;
-    border-radius: var(--borda-md);
-    cursor: pointer;
-    transition: var(--transicao);
+    margin: 0 0 10px 0;
+    text-align: center;
 }
 
-.card button:hover {
-    background: var(--verde-medio);
-    transform: scale(1.03);
+.cabecalho-vita h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.container-imagens-cabecalho {
+    position: absolute;
+    left: 50px;
+    bottom: -40px;
+    width: 350px;
+    height: 300px;
+    z-index: 10;
 }
 
 
+.circulo-fundo {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    top: -30px;
+    left: -10px;
+    z-index: 1;
+    opacity: 0.8;
+    transform: rotate(0deg);
+}
 
 
+.imagem-principal-cabecalho {
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    top: 10px;
+    left: 25px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #3f7752;
+    border-left: 4px solid #3f7752;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.texto {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    text-align: justify;
+}
+
+.grid-cancer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    justify-items: center;
+}
 
 
+.item-cancer {
+    position: relative;
+    background: white;
+    border: 3px solid #a4cfb1;
+    border-radius: 18px;
+    padding: 30px 20px;
+    width: 220px;
+    height: 220px;
+    text-align: center;
+    transition: 0.3s ease;
+    overflow: hidden;
 
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.item-cancer:hover {
+    transform: scale(1.08);
+    border-color: #3f7752;
+}
 
+.item-cancer img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+    object-fit: contain;
+    display: block;
+}
 
+.item-cancer p {
+    font-size: 18px;
+    color: #3f7752;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(25, 116, 60, 0.8);
+    color: #fff;
+    font-size: 15px;
+    padding: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-align: center;
+}
+
+.item-cancer:hover .info {
+    opacity: 1;
+}
+
+.contato-box {
+    background: #9ac9ac;
+    margin-top: 60px;
+    padding: 40px 20px;
+    text-align: center;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+}
+
+.contato-box h2 {
+    color: white;
+    font-size: 26px;
+}
+
+.contato-info {
+    background: rgba(255, 255, 255, 0.2);
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+}
+
+footer {
+    background: #2c5e3d;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    margin-top: -5px;
+}
 
 
 
