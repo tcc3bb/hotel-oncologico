@@ -8,7 +8,7 @@ module.exports = function (painelAdminDAO) {
     const connectionFactory = require('../infra/connectionFactory');
     const connection = connectionFactory();
     const artigosDAO = new ArtigosDAO(connection);
-    
+    const PainelAdminDAO = require('../infra/PainelAdminDAO');
     const PerguntasDAO = require('../infra/PerguntasDAO');
     const perguntasDAO = new PerguntasDAO(connection);
     const reservasController = require('../controllers/reservasController');
@@ -29,43 +29,55 @@ module.exports = function (painelAdminDAO) {
     // 🔹 Página principal do painel (lista de usuários)
     // Rota para Gestão do Chat
     router.get('/painel', (req, res) => {
-        painelAdminDAO.listarUsuarios((err, usuarios) => {
-            if (err) return res.status(500).send('Erro ao listar usuários');
+        const usuarioId = req.session.user.id;
 
-            artigosDAO.listarArtigos((err, artigos) => {
-                if (err) return res.status(500).send('Erro ao listar artigos');
+        // 🔥 BUSCAR INFORMAÇÕES DO ADMIN
+        painelAdminDAO.getAdminByUsuarioId(usuarioId, (err, adminInfo) => {
+            if (err) {
+                console.error("Erro ao buscar admin:", err);
+                return res.status(500).send("Erro ao carregar informações do admin");
+            }
 
-                perguntasDAO.listarComRespostas((err, perguntas) => {
-                    if (err) return res.status(500).send('Erro ao listar perguntas');
+            const admin = adminInfo || {};
 
-                    const connection2 = require('../infra/connectionFactory')();
-                    const reservasDAO = new ReservasDAO(connection2);
+            painelAdminDAO.listarUsuarios((err, usuarios) => {
+                if (err) return res.status(500).send('Erro ao listar usuários');
 
-                    reservasDAO.listar((err, reservas) => {
-                        if (err) {
-                            console.error('Erro ao listar reservas:', err);
-                            return res.status(500).send('Erro ao listar reservas');
-                        }
+                artigosDAO.listarArtigos((err, artigos) => {
+                    if (err) return res.status(500).send('Erro ao listar artigos');
 
-                        // 💥 ADICIONAR A BUSCA DAS DOAÇÕES AQUI
-                        const connection3 = require('../infra/connectionFactory')();
-                        const doacaoDAO = new DoacaoDAO(connection3);
+                    perguntasDAO.listarComRespostas((err, perguntas) => {
+                        if (err) return res.status(500).send('Erro ao listar perguntas');
 
-                        doacaoDAO.listarTodas((err, doacoes) => {
-                            connection3.end();
+                        const connection2 = require('../infra/connectionFactory')();
+                        const reservasDAO = new ReservasDAO(connection2);
 
+                        reservasDAO.listar((err, reservas) => {
                             if (err) {
-                                console.error('Erro ao listar doações:', err);
-                                return res.status(500).send('Erro ao listar doações');
+                                console.error('Erro ao listar reservas:', err);
+                                return res.status(500).send('Erro ao listar reservas');
                             }
 
-                            res.render('admin/painel', {
-                                user: req.session.user,
-                                usuarios,
-                                artigos,
-                                perguntas,
-                                reservas,
-                                doacoes   // <<< 🔥 agora EXISTE
+                            const connection3 = require('../infra/connectionFactory')();
+                            const doacaoDAO = new DoacaoDAO(connection3);
+
+                            doacaoDAO.listarTodas((err, doacoes) => {
+                                connection3.end();
+
+                                if (err) {
+                                    console.error('Erro ao listar doações:', err);
+                                    return res.status(500).send('Erro ao listar doações');
+                                }
+
+                                res.render('admin/painel', {
+                                    user: req.session.user,
+                                    admin,       // <<<< 🔥 AGORA EXISTE
+                                    usuarios,
+                                    artigos,
+                                    perguntas,
+                                    reservas,
+                                    doacoes
+                                });
                             });
                         });
                     });
@@ -73,9 +85,6 @@ module.exports = function (painelAdminDAO) {
             });
         });
     });
-
-
-
 
     // 🔹 Excluir usuário 
     router.post('/usuarios/:id/delete', (req, res) => {
@@ -174,7 +183,18 @@ module.exports = function (painelAdminDAO) {
     // =========================================================
 
     // Listar artigos
-    router.get('/painel/artigos', (req, res) => {
+
+
+// 🔹 GESTÃO DE CONTEÚDO (ARTIGOS) - MODIFICAR PARA BUSCAR ADMIN
+router.get('/painel/artigos', (req, res) => {
+    const usuarioId = req.session.user.id;
+    painelAdminDAO.getAdminByUsuarioId(usuarioId, (err, adminInfo) => {
+        if (err) {
+            console.error("Erro ao buscar admin:", err);
+            return res.status(500).send("Erro ao carregar informações do admin");
+        }
+        const admin = adminInfo || {};
+        
         artigosDAO.listarArtigos((err, artigos) => {
             if (err) {
                 console.error('Erro ao listar artigos:', err);
@@ -182,10 +202,17 @@ module.exports = function (painelAdminDAO) {
             }
             res.render('admin/painel', {
                 user: req.session.user,
-                artigos
+                admin,  // <<<< ADICIONADO
+                artigos,
+                usuarios: [],  // Adicionar listas vazias para consistência
+                perguntas: [],
+                reservas: [],
+                doacoes: []
             });
         });
     });
+});
+
 
     router.get('/reservas', reservasController.listar);
     router.get('/reservas/nova', reservasController.formNova);
@@ -198,28 +225,36 @@ module.exports = function (painelAdminDAO) {
     // GESTÃO DE DOAÇÕES — ADMIN
     // =========================
     router.get("/doacoes", (req, res) => {
+    const usuarioId = req.session.user.id;
+    painelAdminDAO.getAdminByUsuarioId(usuarioId, (err, adminInfo) => {
+        if (err) {
+            console.error("Erro ao buscar admin:", err);
+            return res.status(500).send("Erro ao carregar informações do admin");
+        }
+        const admin = adminInfo || {};
+        
         const connection = connectionFactory();
         const DoacaoDAO = require("../infra/DoacaoDAO");
         const dao = new DoacaoDAO(connection);
 
         dao.listarTodas((err, doacoes) => {
             connection.end();
-
             if (err) {
                 console.log(err);
                 return res.status(500).send("Erro ao buscar doações.");
             }
-
             res.render("admin/painel", {
+                user: req.session.user,  // <<<< ADICIONADO
+                admin,  // <<<< ADICIONADO
                 usuarios: [],
                 artigos: [],
                 perguntas: [],
                 reservas: [],
-                doacoes: doacoes   // <<<<<< AQUI!
+                doacoes: doacoes
             });
         });
     });
-
+});
 
     return router;
 };

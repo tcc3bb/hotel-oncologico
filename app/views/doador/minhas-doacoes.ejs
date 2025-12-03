@@ -18,7 +18,7 @@
     <!-- ======================================================================================================================-->
     <!--===================================================== MENU ============================================================-->
     <!--====================================================================================================================== -->
-<nav>
+    <nav>
         <div class="nav-links">
             <a href="/" class="img">
                 <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
@@ -61,13 +61,13 @@
     <!--====================================================================================================================== -->
     <div class="painel-container">
         <aside class="sidebar">
-            <div class="sidebar-item active" data-target="minhas-doacoes" tabindex="0">
-                <span class="icon" aria-hidden="true">💰</span>
-                <span>Minhas Doações</span>
-            </div>
-            <div class="sidebar-item" data-target="conta" tabindex="0">
+            <div class="sidebar-item active" data-target="conta" tabindex="0">
                 <span class="icon" aria-hidden="true">👤</span>
                 <span>Minha Conta</span>
+            </div>
+            <div class="sidebar-item " data-target="minhas-doacoes" tabindex="0">
+                <span class="icon" aria-hidden="true">💰</span>
+                <span>Minhas Doações</span>
             </div>
             <div class="sidebar-item" data-target="campanhas" tabindex="0">
                 <span class="icon" aria-hidden="true">📢</span>
@@ -77,9 +77,198 @@
 
         <main>
 
-            <!-- ======================================================================================================================-->
+            <!--===================================================== MINHA CONTA =====================================================-->
+            <section id="conta" class="conteudo">
+                <h2 class="section-title">👤 Minha Conta</h2>
+
+                <form id="formConta" class="info-form">
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Conta</h3>
+                        <div class="campo">
+                            <label>Email:</label>
+                            <input type="email" name="usuario_email" value="<%= user.email %>" readonly>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Tipo de Pessoa</h3>
+                        <div class="campo">
+                            <label>Tipo:</label>
+                            <select name="doador_tipo" id="doador_tipo" readonly>
+                                <option value="Pessoa Física" <%=doador.doador_tipo==="Pessoa Física" ? "selected" : ""
+                                    %>>Pessoa Física</option>
+                                <option value="Pessoa Jurídica" <%=doador.doador_tipo==="Pessoa Jurídica" ? "selected"
+                                    : "" %>>Pessoa Jurídica</option>
+                            </select>
+                        </div>
+
+                        <!-- CAMPOS DE PESSOA FÍSICA -->
+                        <fieldset id="pf_fields" <%=doador.doador_tipo !=='Pessoa Física' ? 'hidden' : '' %>>
+                            <legend class="section-subtitle">Dados - Pessoa Física</legend>
+                            <div class="campo">
+                                <label>Nome:</label>
+                                <input type="text" name="doador_nome" value="<%= doador.doador_nome %>" readonly>
+                            </div>
+                            <div class="campo-duplo">
+                                <div>
+                                    <label>CPF:</label>
+                                    <input type="text" name="doador_cpf" value="<%= doador.doador_cpf %>" readonly>
+                                </div>
+                                <div>
+                                    <label>RG:</label>
+                                    <input type="text" name="doador_rg" value="<%= doador.doador_rg %>" readonly>
+                                </div>
+                            </div>
+                            <div class="campo-duplo">
+                                <div>
+                                    <label>Data de Nascimento:</label>
+                                    <input type="date" name="doador_data_nascimento"
+                                        value="<%= doador.doador_data_nascimento %>" readonly>
+                                </div>
+                                <div>
+                                    <label>Sexo:</label>
+                                    <select name="doador_sexo" readonly>
+                                        <option value="">Selecione</option>
+                                        <option value="Masculino" <%=doador.doador_sexo==='Masculino' ? 'selected' : ''
+                                            %>>Masculino</option>
+                                        <option value="Feminino" <%=doador.doador_sexo==='Feminino' ? 'selected' : '' %>
+                                            >Feminino</option>
+                                        <option value="Outro" <%=doador.doador_sexo==='Outro' ? 'selected' : '' %>>Outro
+                                        </option>
+                                        <option value="Prefiro não informar"
+                                            <%=doador.doador_sexo==='Prefiro não informar' ? 'selected' : '' %>>Prefiro
+                                            não informar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="campo">
+                                <label>Telefone:</label>
+                                <input type="text" name="doador_telefone" value="<%= doador.doador_telefone %>"
+                                    readonly>
+                            </div>
+                        </fieldset>
+
+                        <!-- CAMPOS DE PESSOA JURÍDICA -->
+                        <fieldset id="pj_fields" <%=doador.doador_tipo !=='Pessoa Jurídica' ? 'hidden' : '' %>>
+                            <legend class="section-subtitle">Dados - Pessoa Jurídica</legend>
+                            <div class="campo">
+                                <label>Nome Empresa:</label>
+                                <input type="text" name="doador_nome_empresa" value="<%= doador.doador_nome_empresa %>"
+                                    readonly>
+                            </div>
+                            <div class="campo">
+                                <label>Área de Atuação:</label>
+                                <input type="text" name="doador_area_atuacao_empresa"
+                                    value="<%= doador.doador_area_atuacao_empresa %>" readonly>
+                            </div>
+                            <div class="campo-duplo">
+                                <div>
+                                    <label>CNPJ:</label>
+                                    <input type="text" name="doador_cnpj" value="<%= doador.doador_cnpj %>" readonly>
+                                </div>
+                                <div>
+                                    <label>Telefone Empresa:</label>
+                                    <input type="text" name="doador_telefone_empresa"
+                                        value="<%= doador.doador_telefone_empresa %>" readonly>
+                                </div>
+                            </div>
+                            <div class="campo-duplo">
+                                <div>
+                                    <label>Representante:</label>
+                                    <input type="text" name="doador_representante"
+                                        value="<%= doador.doador_representante %>" readonly>
+                                </div>
+                                <div>
+                                    <label>CPF do Representante:</label>
+                                    <input type="text" name="doador_cpf_representante"
+                                        value="<%= doador.doador_cpf_representante %>" readonly>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Endereço</h3>
+                        <div class="campo">
+                            <label>Logradouro:</label>
+                            <input type="text" name="doador_logradouro" value="<%= doador.doador_logradouro %>"
+                                readonly>
+                        </div>
+                        <div class="campo-trio">
+                            <div>
+                                <label>Número:</label>
+                                <input type="text" name="doador_numero" value="<%= doador.doador_numero %>" readonly>
+                            </div>
+                            <div>
+                                <label>Complemento:</label>
+                                <input type="text" name="doador_complemento" value="<%= doador.doador_complemento %>"
+                                    readonly>
+                            </div>
+                            <div>
+                                <label>Bairro:</label>
+                                <input type="text" name="doador_bairro" value="<%= doador.doador_bairro %>" readonly>
+                            </div>
+                            <div>
+                                <label>CEP:</label>
+                                <input type="text" name="doador_cep" value="<%= doador.doador_cep %>" readonly>
+                            </div>
+                        </div>
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Cidade:</label>
+                                <input type="text" name="doador_cidade" value="<%= doador.doador_cidade %>" readonly>
+                            </div>
+                            <div>
+                                <label>Estado:</label>
+                                <input type="text" name="doador_estado" value="<%= doador.doador_estado %>" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botão fixo -->
+                    <div class="botoes-fixas">
+                        <button type="submit" id="btnSalvar" class="btn-success">Salvar Alterações</button>
+                        <button type="button" class="delete" id="btnExcluir">Excluir Conta</button>
+                    </div>
+                </form>
+
+                <script>
+                    // Tornar campo editável ao clicar
+                    document.querySelectorAll('#formConta input, #formConta select').forEach(input => {
+                        input.addEventListener('focus', () => input.removeAttribute('readonly'));
+                    });
+
+                    // Salvamento com confirmação
+                    document.getElementById('formConta').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        if (!confirm('Tem certeza de que deseja salvar estas alterações?')) return;
+
+                        const formData = new FormData(e.target);
+                        const data = Object.fromEntries(formData.entries());
+
+                        const resp = await fetch('/doador/atualizar', {  // Ajuste a rota conforme necessário
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+
+                        const result = await resp.json();
+                        alert(result.mensagem);
+                        if (result.ok) location.reload();
+                    });
+
+                    // Exclusão
+                    document.getElementById('btnExcluir').addEventListener('click', async () => {
+                        if (!confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')) return;
+                        const resp = await fetch('/doador/excluir', { method: 'DELETE' });  // Ajuste a rota conforme necessário
+                        const result = await resp.json();
+                        alert(result.mensagem);
+                        if (result.ok) window.location.href = '/';
+                    });
+                </script>
+            </section>
+
             <!--============================================== SECTION HISTÓRICO DE DOAÇÕES =============================================-->
-            <!--====================================================================================================================== -->
             <section id="minhas-doacoes" class="conteudo">
                 <h2 class="section-title">💰 Histórico de Doações</h2>
                 <a href="/doacoes/nova" class="btn">Nova Doação</a>
@@ -314,202 +503,7 @@
 
             </section>
 
-            <!-- ======================================================================================================================-->
-            <!--===================================================== MINHA CONTA =====================================================-->
-            <!--====================================================================================================================== -->
-            <section id="conta" class="conteudo">
-                <h2 class="section-title">👤 Minha Conta — Doador</h2>
-
-                <form id="formConta" class="info-form">
-                    <div class="info-card">
-                        <h3 class="section-subtitle">Conta</h3>
-                        <div class="campo">
-                            <label>Email:</label>
-                            <input type="email" name="usuario_email" value="<%= user.email %>" readonly>
-                        </div>
-                    </div>
-
-                    <div class="info-card">
-                        <h3 class="section-subtitle">Tipo de Pessoa</h3>
-                        <div class="campo">
-                            <label>Tipo:</label>
-                            <select name="doador_tipo" id="doador_tipo" readonly>
-                                <option value="Pessoa Física" <%=doador.doador_tipo==="Pessoa Física" ? "selected" : ""
-                                    %>>Pessoa Física</option>
-                                <option value="Pessoa Jurídica" <%=doador.doador_tipo==="Pessoa Jurídica" ? "selected"
-                                    : "" %>>Pessoa Jurídica</option>
-                            </select>
-                        </div>
-
-                        <!-- CAMPOS DE PESSOA FÍSICA -->
-                        <fieldset id="pf_fields" <%=doador.doador_tipo !=='Pessoa Física' ? 'hidden' : '' %>>
-                            <legend class="section-subtitle">Dados - Pessoa Física</legend>
-                            <div class="campo">
-                                <label>Nome:</label>
-                                <input type="text" name="doador_nome" value="<%= doador.doador_nome %>" readonly>
-                            </div>
-                            <div class="campo-duplo">
-                                <div>
-                                    <label>CPF:</label>
-                                    <input type="text" name="doador_cpf" value="<%= doador.doador_cpf %>" readonly>
-                                </div>
-                                <div>
-                                    <label>RG:</label>
-                                    <input type="text" name="doador_rg" value="<%= doador.doador_rg %>" readonly>
-                                </div>
-                            </div>
-                            <div class="campo-duplo">
-                                <div>
-                                    <label>Data de Nascimento:</label>
-                                    <input type="date" name="doador_data_nascimento"
-                                        value="<%= doador.doador_data_nascimento %>" readonly>
-                                </div>
-                                <div>
-                                    <label>Sexo:</label>
-                                    <select name="doador_sexo" readonly>
-                                        <option value="">Selecione</option>
-                                        <option value="Masculino" <%=doador.doador_sexo==='Masculino' ? 'selected' : ''
-                                            %>>Masculino</option>
-                                        <option value="Feminino" <%=doador.doador_sexo==='Feminino' ? 'selected' : '' %>
-                                            >Feminino</option>
-                                        <option value="Outro" <%=doador.doador_sexo==='Outro' ? 'selected' : '' %>>Outro
-                                        </option>
-                                        <option value="Prefiro não informar"
-                                            <%=doador.doador_sexo==='Prefiro não informar' ? 'selected' : '' %>>Prefiro
-                                            não informar</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="campo">
-                                <label>Telefone:</label>
-                                <input type="text" name="doador_telefone" value="<%= doador.doador_telefone %>"
-                                    readonly>
-                            </div>
-                        </fieldset>
-
-                        <!-- CAMPOS DE PESSOA JURÍDICA -->
-                        <fieldset id="pj_fields" <%=doador.doador_tipo !=='Pessoa Jurídica' ? 'hidden' : '' %>>
-                            <legend class="section-subtitle">Dados - Pessoa Jurídica</legend>
-                            <div class="campo">
-                                <label>Nome Empresa:</label>
-                                <input type="text" name="doador_nome_empresa" value="<%= doador.doador_nome_empresa %>"
-                                    readonly>
-                            </div>
-                            <div class="campo">
-                                <label>Área de Atuação:</label>
-                                <input type="text" name="doador_area_atuacao_empresa"
-                                    value="<%= doador.doador_area_atuacao_empresa %>" readonly>
-                            </div>
-                            <div class="campo-duplo">
-                                <div>
-                                    <label>CNPJ:</label>
-                                    <input type="text" name="doador_cnpj" value="<%= doador.doador_cnpj %>" readonly>
-                                </div>
-                                <div>
-                                    <label>Telefone Empresa:</label>
-                                    <input type="text" name="doador_telefone_empresa"
-                                        value="<%= doador.doador_telefone_empresa %>" readonly>
-                                </div>
-                            </div>
-                            <div class="campo-duplo">
-                                <div>
-                                    <label>Representante:</label>
-                                    <input type="text" name="doador_representante"
-                                        value="<%= doador.doador_representante %>" readonly>
-                                </div>
-                                <div>
-                                    <label>CPF do Representante:</label>
-                                    <input type="text" name="doador_cpf_representante"
-                                        value="<%= doador.doador_cpf_representante %>" readonly>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <div class="info-card">
-                        <h3 class="section-subtitle">Endereço</h3>
-                        <div class="campo">
-                            <label>Logradouro:</label>
-                            <input type="text" name="doador_logradouro" value="<%= doador.doador_logradouro %>"
-                                readonly>
-                        </div>
-                        <div class="campo-trio">
-                            <div>
-                                <label>Número:</label>
-                                <input type="text" name="doador_numero" value="<%= doador.doador_numero %>" readonly>
-                            </div>
-                            <div>
-                                <label>Complemento:</label>
-                                <input type="text" name="doador_complemento" value="<%= doador.doador_complemento %>"
-                                    readonly>
-                            </div>
-                            <div>
-                                <label>Bairro:</label>
-                                <input type="text" name="doador_bairro" value="<%= doador.doador_bairro %>" readonly>
-                            </div>
-                            <div>
-                                <label>CEP:</label>
-                                <input type="text" name="doador_cep" value="<%= doador.doador_cep %>" readonly>
-                            </div>
-                        </div>
-                        <div class="campo-duplo">
-                            <div>
-                                <label>Cidade:</label>
-                                <input type="text" name="doador_cidade" value="<%= doador.doador_cidade %>" readonly>
-                            </div>
-                            <div>
-                                <label>Estado:</label>
-                                <input type="text" name="doador_estado" value="<%= doador.doador_estado %>" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Botão fixo -->
-                    <div class="botoes-fixas">
-                        <button type="submit" id="btnSalvar" class="btn-success">Salvar Alterações</button>
-                        <button type="button" class="delete" id="btnExcluir">Excluir Conta</button>
-                    </div>
-                </form>
-
-                <script>
-                    // Tornar campo editável ao clicar
-                    document.querySelectorAll('#formConta input, #formConta select').forEach(input => {
-                        input.addEventListener('focus', () => input.removeAttribute('readonly'));
-                    });
-
-                    // Salvamento com confirmação
-                    document.getElementById('formConta').addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        if (!confirm('Tem certeza de que deseja salvar estas alterações?')) return;
-
-                        const formData = new FormData(e.target);
-                        const data = Object.fromEntries(formData.entries());
-
-                        const resp = await fetch('/doador/atualizar', {  // Ajuste a rota conforme necessário
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(data)
-                        });
-
-                        const result = await resp.json();
-                        alert(result.mensagem);
-                        if (result.ok) location.reload();
-                    });
-
-                    // Exclusão
-                    document.getElementById('btnExcluir').addEventListener('click', async () => {
-                        if (!confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')) return;
-                        const resp = await fetch('/doador/excluir', { method: 'DELETE' });  // Ajuste a rota conforme necessário
-                        const result = await resp.json();
-                        alert(result.mensagem);
-                        if (result.ok) window.location.href = '/';
-                    });
-                </script>
-            </section>
-
-            <!-- ======================================================================================================================-->
             <!--============================================== SECTION CAMPANHAS ATIVAS ================================================-->
-            <!--====================================================================================================================== -->
             <section id="campanhas" class="conteudo">
                 <h2 class="section-title">📢 Campanhas Ativas</h2>
                 <p class="subtitle">Espaço dedicado às campanhas em andamento e oportunidades de ajudar.</p>

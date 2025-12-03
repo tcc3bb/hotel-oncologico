@@ -56,7 +56,7 @@
     </nav>
 
     <div class="container my-5">
-        <h2 class="text-center">Escolha seu quarto e preencha os dados da reserva</h2>
+        <!--<h2 class="text-center">Escolha seu quarto e preencha os dados da reserva</h2>
         <% if (flashMessage && flashMessage.length> 0) { %>
             <div class="alert alert-danger" role="alert">
                 <%= flashMessage %>
@@ -71,11 +71,9 @@
                                 <div class="tipo-card">
 
                                     <% if (tipo.fotos.length> 0) { %>
-                                        <!-- Imagem principal -->
                                         <img class="main-img" id="main-img-<%= tipo.tipo_quarto_id %>"
                                             src="<%= tipo.fotos[0].foto_caminho %>">
 
-                                        <!-- Thumbnails -->
                                         <div class="thumbnails mt-2 px-3 pb-2">
                                             <% tipo.fotos.forEach(foto=> { %>
                                                 <img src="<%= foto.foto_caminho %>"
@@ -88,7 +86,6 @@
                                             <img class="main-img" src="/img/quartos/sem-imagem.jpg">
                                             <% } %>
 
-                                                <!-- Conteúdo -->
                                                 <div class="tipo-card-conteudo">
                                                     <h3>
                                                         <%= tipo.tipo_quarto_nome %>
@@ -98,7 +95,6 @@
                                                     </p>
                                                 </div>
 
-                                                <!-- Seleção -->
                                                 <div class="px-3 pb-3">
                                                     <label class="select-label">
                                                         <input type="radio" name="tipo_quarto_id"
@@ -113,32 +109,72 @@
                                     <% } else { %>
                                         <p class="text-center w-100">Nenhum tipo de quarto disponível no momento.</p>
                                         <% } %>
+                    </div>-->
+
+
+   <!-- ========================== CONTEÚDO ========================== -->
+    <div class="container my-5">
+
+        <h2 class="text-center mb-5 fw-bold" style="color:#356b52;">Escolha seu quarto e finalize a reserva</h2>
+
+        <div class="row g-4">
+
+            <!-- ====================== CARROSSEL ====================== -->
+            <div class="col-lg-6">
+                <div id="carouselQuartos" class="carousel slide shadow-lg rounded overflow-hidden" data-bs-ride="carousel">
+
+                    <div class="carousel-inner">
+                        <% tipos.forEach((tipo, index) => { %>
+                        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+
+                            <img src="<%= tipo.fotos[0] ? tipo.fotos[0].foto_caminho : '/img/quartos/sem-imagem.jpg' %>"
+                                class="d-block w-100 carrossel-img">
+
+                            <div class="p-4 bg-white">
+                                <h4 class="text-success fw-semibold"><%= tipo.tipo_quarto_nome %></h4>
+                                <p class="text-muted"><%= tipo.tipo_quarto_descricao %></p>
+
+                                <label class="select-label d-flex align-items-center mt-3">
+                                    <input type="radio" name="tipo_quarto_id"
+                                        value="<%= tipo.tipo_quarto_id %>" required>
+                                    <span class="ms-2">Selecionar este quarto</span>
+                                </label>
+                            </div>
+
+                        </div>
+                        <% }) %>
                     </div>
 
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselQuartos" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselQuartos" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
 
-                    <!-- ====================================================== -->
-                    <!-- DADOS DA RESERVA                                        -->
-                    <!-- ====================================================== -->
+                </div>
+            </div>
 
-                    <h3 class="mt-5 mb-3">Detalhes da Reserva</h3>
+            <!-- ====================== FORMULÁRIO ====================== -->
+            <div class="col-lg-6">
+                <form action="/reservas/nova" method="POST" class="card p-4 shadow-lg border-0">
 
-                    <div class="mb-3">
-                        <label class="form-label">Selecione o período da estadia:</label>
-                        <input type="text" id="dateRange" class="form-control" placeholder="Escolha as datas" required>
-                        <input type="hidden" name="reserva_data_checkin_previsto" id="checkin">
-                        <input type="hidden" name="reserva_data_checkout_previsto" id="checkout">
-                    </div>
+                    <h4 class="text-success fw-semibold mb-4">Detalhes da Reserva</h4>
 
-                    <div class="mb-3">
-                        <label class="form-label">E-mail do acompanhante (opcional):</label>
-                        <input type="email" class="form-control" name="acompanhante_email"
-                            placeholder="Digite o e-mail do acompanhante (se houver)">
-                    </div>
+                    <label class="form-label">Período da estadia:</label>
+                    <input type="text" id="dateRange" class="form-control mb-3" placeholder="Escolha as datas" required>
 
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-success btn-lg px-4">Confirmar Reserva</button>
-                    </div>
+                    <input type="hidden" name="reserva_data_checkin_previsto" id="checkin">
+                    <input type="hidden" name="reserva_data_checkout_previsto" id="checkout">
+
+                    <label class="form-label">E-mail do acompanhante (opcional):</label>
+                    <input type="email" class="form-control mb-4" name="acompanhante_email"
+                        placeholder="Informe o e-mail do acompanhante">
+
+                    <button type="submit" class="btn btn-success w-100 py-2 fs-5">Confirmar Reserva</button>
                 </form>
+            </div>
+        </div>
     </div>
 
     <!-- FLATPICKR -->

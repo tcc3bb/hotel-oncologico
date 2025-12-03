@@ -55,7 +55,7 @@ nav {
     align-items: center;
     gap: 1rem;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.9rem; 
     max-width: 100%;
 }
 
@@ -420,10 +420,9 @@ textarea {
     border-radius: var(--borda-arredondada);
     box-shadow: 0 2px 6px var(--sombra-leve);
     transition: var(--transicao-rapida);
-}
+    padding: 1rem;
+    margin: 1rem ;
 
-.info-card:hover {
-    transform: translateY(-2px);
 }
 
 .form-group {
@@ -493,13 +492,6 @@ select[disabled],
 textarea[disabled] {
     background: #f8f8f8;
     cursor: pointer;
-}
-
-input:not([disabled]),
-select:not([disabled]),
-textarea:not([disabled]) {
-    border: 2px solid #2ecc71;
-    background: #fff;
 }
 
 

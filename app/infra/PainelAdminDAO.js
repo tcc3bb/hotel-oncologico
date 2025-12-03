@@ -3,6 +3,19 @@ class PainelAdminDAO {
         this._connection = connection;
     }
 
+    // 🔥 Buscar informações completas do admin
+    getAdminByUsuarioId(usuarioId, callback) {
+        const sql = `
+               SELECT * FROM admin 
+                WHERE usuario_id = ?
+                LIMIT 1
+            `;
+        this._connection.query(sql, [usuarioId], (err, results) => {  // <<<< CORRIGIDO: era 'this.connection', agora 'this._connection'
+            if (err) return callback(err);
+            callback(null, results[0]);
+        });
+    }
+
     // 🔹 Listar todos os usuários
     listarUsuarios(callback) {
         const sql = `

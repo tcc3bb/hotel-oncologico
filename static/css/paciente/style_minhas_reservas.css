@@ -20,10 +20,17 @@
     --cor-aviso: #FFC107;
     --cor-perigo: #E91E63;
     --cor-info: #2196F3;
+    --cor-info: #2196F3;
     --sombra-elevada: 0 4px 12px rgba(0, 0, 0, 0.08);
     --borda-arredondada-lg: 12px;
     --borda-arredondada-md: 8px;
     --transicao-rapida: all 0.3s ease;
+
+    --cor-concluida: #ecc32e;
+    --cor-confirmada: #1ab824;
+    --cor-em_andamento: #1668d3;
+    --cor-pendente: #fff53e;
+    --cor-cancelada: #f32121;
 }
 
 
@@ -455,6 +462,14 @@ textarea {
     padding: 6px;
 }
 
+input {
+    padding: .6rem .8rem;
+    border: 1px solid var(--cinza-medio);
+    border-radius: var(--borda-arredondada);
+    background: var(--cinza-claro);
+    transition: var(--transicao-rapida); 
+}
+
 /* -------------------- Conteúdo Principal (main) -------------------- */
 main {
     flex-grow: 1;
@@ -692,17 +707,25 @@ tbody td {
     color: var(--cor-texto-claro);
 }
 
-.badge-success {
-    background-color: var(--cor-sucesso);
+.badge-confirmada {
+    background-color: var(--cor-confirmada);
 }
 
-.badge-warning {
-    background-color: var(--cor-aviso);
+.badge-pendente {
+    background-color: var(--cor-pendente);
     color: var(--cor-texto-escuro);
 }
 
-.badge-danger {
-    background-color: var(--cor-perigo);
+.badge-cancelada {
+    background-color: var(--cor-cancelada);
+}
+
+.badge-concluida {
+    background-color: var(--cor-concluida);
+}
+
+.badge-em_andamento {
+    background-color: var(--cor-em_andamento);
 }
 
 .badge-info {
@@ -878,34 +901,129 @@ tbody td {
 }
 
 /* -------------------- Avaliação Section -------------------- */
-.card-avaliacao {
-    text-align: center;
-    border-top: 5px solid var(--cor-perigo);
-}
+    #avaliacao {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
 
-.estrelas {
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
+    .section-title {
+        font-size: 2.5rem;
+        color: #343a40;
+        text-align: center;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
 
-.star {
-    color: gold;
-}
+    .subtitle {
+        font-size: 1.2rem;
+        color: #6c757d;
+        text-align: center;
+        margin-bottom: 30px;
+        font-style: italic;
+    }
 
-.star-vazia {
-    color: #ccc;
-}
+    .card-avaliacao {
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        max-width: 600px;
+        margin: 0 auto;
+    }
 
-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: var(--borda-arredondada-md);
-    border: 1px solid var(--cor-acento-claro);
-    resize: vertical;
-    font-family: inherit;
-    font-size: 1rem;
-    margin-top: 5px;
-}
+    .campo {
+        margin-bottom: 25px;
+    }
+
+    .campo label {
+        display: block;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+    }
+
+    /* Estilos para as estrelas */
+    .estrelas-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .estrelas {
+        display: flex;
+        gap: 10px;
+        font-size: 2.5rem;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .estrela {
+        color: #ddd;
+        transition: color 0.3s ease;
+    }
+
+    .estrela:hover,
+    .estrela.active {
+        color: #ffc107;
+    }
+
+    .avaliacao-texto {
+        font-size: 1rem;
+        color: #6c757d;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #ced4da;
+        border-radius: 10px;
+        font-size: 1rem;
+        resize: vertical;
+        transition: border-color 0.3s ease;
+    }
+
+    textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 2rem;
+        }
+        .estrelas {
+            font-size: 2rem;
+        }
+        .card-avaliacao {
+            padding: 20px;
+        }
+    }
 
 /* -------------------- Modals -------------------- */
 .modal {
@@ -1001,6 +1119,8 @@ textarea {
     border-radius: var(--borda-arredondada);
     box-shadow: 0 2px 6px var(--sombra-leve);
     transition: var(--transicao-rapida);
+    padding: 1rem;
+    margin: 1rem;
 }
 
 .info-card:hover {
@@ -1105,10 +1225,6 @@ input[readonly] {
     cursor: pointer;
 }
 
-input:not([readonly]) {
-    border: 2px solid #2ecc71;
-    background: #fff;
-}
 
 /* =============================================================================================================================== */
 /* ===================================================== MINHAS RESERVAS ========================================================= */
@@ -1129,7 +1245,7 @@ input:not([readonly]) {
     margin-top: 5px;
 }
 
-#reservas .card{
+#reservas .card {
     margin-top: 20px;
 }
 
@@ -1163,7 +1279,7 @@ input:not([readonly]) {
     height: 80px;
     object-fit: cover;
     border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 

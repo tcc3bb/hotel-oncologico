@@ -57,7 +57,11 @@
     <div class="painel-container">
         <!--==================================================== SIDEBAR ==========================================================-->
         <aside class="sidebar">
-            <div class="sidebar-item active" tabindex="0" data-target="usuarios">
+            <div class="sidebar-item active" tabindex="0" data-target="conta">
+                <span class="icon" aria-hidden="true">👤</span>
+                <span>Minha Conta</span>
+            </div>
+            <div class="sidebar-item" tabindex="0" data-target="usuarios">
                 <span class="icon" aria-hidden="true">👥</span>
                 <span>Gestão de Usuários</span>
             </div>
@@ -80,8 +84,234 @@
         </aside>
 
         <main>
+            <!--============================================== MINHA CONTA =====================================================-->
+            <section id="conta" class="conteudo ativo">
+                <h2 class="section-title">👤 Minha Conta</h2>
+                <form id="formAdmin" class="info-form">
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Conta</h3>
+                        <div class="campo">
+                            <label>Email:</label>
+                            <input type="email" name="usuario_email" value="<%= user.email %>" readonly>
+                        </div>
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Cargo:</label>
+                                <input type="text" name="admin_cargo" value="<%= admin.admin_cargo || '' %>" readonly>
+                            </div>
+                            <div>
+                                <label>Nível de Acesso:</label>
+                                <input type="text" name="admin_nivel_acesso"
+                                    value="<%= admin.admin_nivel_acesso || '' %>" readonly>
+                            </div>
+                        </div>
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Status:</label>
+                                <input type="text" name="admin_status" value="<%= admin.admin_status || '' %>" readonly>
+                            </div>
+                            <div>
+                                <label>Bloqueado:</label>
+                                <input type="text" name="admin_bloqueado"
+                                    value="<%= admin.admin_bloqueado ? 'Sim' : 'Não' %>" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Informações Pessoais</h3>
+                        <div class="campo">
+                            <label>Nome Completo:</label>
+                            <input type="text" name="admin_nome" value="<%= admin.admin_nome || '' %>" readonly>
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div>
+                                <label>CPF:</label>
+                                <input type="text" name="admin_cpf" value="<%= admin.admin_cpf || '' %>" readonly>
+                            </div>
+                            <div>
+                                <label>RG:</label>
+                                <input type="text" name="admin_rg" value="<%= admin.admin_rg || '' %>" readonly>
+                            </div>
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Data de Nascimento:</label>
+                                <input type="date" name="admin_data_nascimento"
+                                    value="<%= admin.admin_data_nascimento ? admin.admin_data_nascimento.toString().substring(0,10) : '' %>"
+                                    readonly>
+                            </div>
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Sexo:</label>
+                                <input type="text" name="admin_sexo" value="<%= admin.admin_sexo || '' %>" readonly>
+                            </div>
+                            <div>
+                                <label>Estado Civil:</label>
+                                <input type="text" name="admin_estado_civil"
+                                    value="<%= admin.admin_estado_civil || '' %>" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Endereço e Contato</h3>
+
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Telefone:</label>
+                                <input type="text" name="admin_telefone" value="<%= admin.admin_telefone || '' %>"
+                                    readonly>
+                            </div>
+                            <div>
+                                <label>Celular:</label>
+                                <input type="text" name="admin_celular" value="<%= admin.admin_celular || '' %>"
+                                    readonly>
+                            </div>
+                        </div>
+
+                        <div class="campo">
+                            <label>Email Alternativo:</label>
+                            <input type="email" name="admin_email_alternativo"
+                                value="<%= admin.admin_email_alternativo || '' %>" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label>Endereço:</label>
+                            <input type="text" name="admin_endereco" value="<%= admin.admin_endereco || '' %>" readonly>
+                        </div>
+
+                        <div class="campo-trio">
+                            <div>
+                                <label>Número:</label>
+                                <input type="text" name="admin_numero" value="<%= admin.admin_numero || '' %>" readonly>
+                            </div>
+                            <div>
+                                <label>Bairro:</label>
+                                <input type="text" name="admin_bairro" value="<%= admin.admin_bairro || '' %>" readonly>
+                            </div>
+                            <div>
+                                <label>CEP:</label>
+                                <input type="text" name="admin_cep" value="<%= admin.admin_cep || '' %>" readonly>
+                            </div>
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Cidade:</label>
+                                <input type="text" name="admin_cidade" value="<%= admin.admin_cidade || '' %>" readonly>
+                            </div>
+                            <div>
+                                <label>Estado:</label>
+                                <input type="text" name="admin_estado" value="<%= admin.admin_estado || '' %>" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="section-subtitle">Dados Administrativos</h3>
+
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Data de Início:</label>
+                                <input type="date" name="admin_data_inicio"
+                                    value="<%= admin.admin_data_inicio ? admin.admin_data_inicio.toString().substring(0,10) : '' %>"
+                                    readonly>
+                            </div>
+                            <div>
+                                <label>Data de Saída:</label>
+                                <input type="date" name="admin_data_saida"
+                                    value="<%= admin.admin_data_saida ? admin.admin_data_saida.toString().substring(0,10) : '' %>"
+                                    readonly>
+                            </div>
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Data de Cadastro:</label>
+                                <input type="datetime-local" name="admin_data_cadastro"
+                                    value="<%= admin.admin_data_cadastro ? admin.admin_data_cadastro.toISOString().substring(0,16) : '' %>"
+                                    readonly>
+                            </div>
+                            <div>
+                                <label>Última Alteração:</label>
+                                <input type="datetime-local" name="admin_data_ultima_alteracao"
+                                    value="<%= admin.admin_data_ultima_alteracao ? admin.admin_data_ultima_alteracao.toISOString().substring(0,16) : '' %>"
+                                    readonly>
+                            </div>
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div>
+                                <label>Último Login:</label>
+                                <input type="datetime-local" name="admin_ultimo_login"
+                                    value="<%= admin.admin_ultimo_login ? admin.admin_ultimo_login.toISOString().substring(0,16) : '' %>"
+                                    readonly>
+                            </div>
+        
+                        </div>>
+
+                        <div class="campo">
+                            <label>Observações:</label>
+                            <textarea name="admin_observacoes" readonly><%= admin.admin_observacoes || '' %></textarea>
+                        </div>
+
+                        <div class="campo">
+                            <label>Observações Internas:</label>
+                            <textarea name="admin_observacoes_internas"
+                                readonly><%= admin.admin_observacoes_internas || '' %></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Botão fixo -->
+                    <div class="botoes-fixas">
+                        <button type="submit" id="btnSalvar" class="btn-success">Salvar Alterações</button>
+                        <button type="button" class="delete" id="btnExcluir">Excluir Conta</button>
+                    </div>
+                </form>
+
+                <script>
+                    // Tornar campo editável ao clicar
+                    document.querySelectorAll('#formAdmin input, #formAdmin textarea').forEach(input => {
+                        input.addEventListener('focus', () => input.removeAttribute('readonly'));
+                    });
+
+                    // Salvamento com confirmação
+                    document.getElementById('formAdmin').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        if (!confirm('Tem certeza de que deseja salvar estas alterações?')) return;
+
+                        const formData = new FormData(e.target);
+                        const data = Object.fromEntries(formData.entries());
+
+                        const resp = await fetch('/admin/atualizar', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+
+                        const result = await resp.json();
+                        alert(result.mensagem);
+                        if (result.ok) location.reload();
+                    });
+
+                    // Exclusão
+                    document.getElementById('btnExcluir').addEventListener('click', async () => {
+                        if (!confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')) return;
+                        const resp = await fetch('/admin/excluir', { method: 'DELETE' });
+                        const result = await resp.json();
+                        alert(result.mensagem);
+                        if (result.ok) window.location.href = '/';
+                    });
+                </script>
+            </section>
+
             <!--============================================== GESTÃO DE USUÁRIOS =====================================================-->
-            <section id="usuarios" class="conteudo ativo">
+            <section id="usuarios" class="conteudo">
                 <h2 class="section-title">Gestão de Usuários</h2>
                 <button class="btn-primary" type="button" onclick="location.href='/usuarios/cadastro'">
                     Adicionar usuário
@@ -534,7 +764,8 @@
                                         </div>
 
                                         <div class="full-width">
-                                            <label for="artigo_conteudo">Conteúdo Completo (Editor Rich Text):</label>
+                                            <label for="artigo_conteudo">Conteúdo Completo (Editor Rich
+                                                Text):</label>
                                             <textarea id="artigo_conteudo" name="artigo_conteudo" rows="10"
                                                 placeholder="Insira o texto e formatação do artigo aqui."></textarea>
                                         </div>
@@ -769,7 +1000,7 @@
                     <input type="number" id="filtroAno" placeholder="2025">
 
                     <button id="btnAplicarFiltros" class="btn-primary" type="button">Aplicar filtros</button>
-                    <button id="btnLimparFiltros" class="btn-secondary" type="button">Limpar</button>
+                    <button id="btnLimparFiltros" class="btn-primary" type="button">Limpar</button>
                 </div>
 
                 <!-- Lista de doações -->

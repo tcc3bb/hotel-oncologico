@@ -80,7 +80,7 @@
             <!--===================================================== MINHA CONTA =====================================================-->
             <!--====================================================================================================================== -->
             <section id="conta" class="conteudo ativo">
-                <h2 class="section-title">👤 Minha Conta — Acompanhante</h2>
+                <h2 class="section-title">👤 Minha Conta</h2>
 
                 <form id="formConta" class="info-form">
 
@@ -98,13 +98,13 @@
                         <div class="form-group">
                             <label>Nome Completo:</label>
                             <input type="text" id="acompanhante_nome" name="acompanhante_nome"
-                                value="<%= dados.acompanhante_nome %>">
+                                value="<%= dados.acompanhante_nome %>" readonly>
                         </div>
 
                         <div class="form-group">
                             <label>CPF:</label>
                             <input type="text" id="acompanhante_cpf" name="acompanhante_cpf"
-                                value="<%= dados.acompanhante_cpf %>">
+                                value="<%= dados.acompanhante_cpf %>" readonly>
                         </div>
 
                         <div class="form-group">
@@ -356,41 +356,130 @@
             <!-- ======================================================================================================================-->
             <!--======================================================= AGENDA ========================================================-->
             <!--====================================================================================================================== -->
-            <section id="agenda" class="conteudo">
-                <h2 class="section-title">📅 Agenda do Paciente</h2>
-                <p class="subtitle">Visualize as próximas atividades e compromissos.</p>
-                <div class="card">
-                    <h3 class="card-title">Próximos Eventos</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Horário</th>
-                                <th>Atividade</th>
-                                <th>Local</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>24/10/2025</td>
-                                <td>09:00</td>
-                                <td>Quimioterapia</td>
-                                <td>Sala 02</td>
-                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td>
-                            </tr>
-                            <tr>
-                                <td>26/10/2025</td>
-                                <td>14:30</td>
-                                <td>Consulta médica</td>
-                                <td>Consultório 3</td>
-                                <td><button class="btn-sm btn-secondary">Acompanhar</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button class="btn-download mt-3">Exportar Agenda (PDF)</button>
-                </div>
-            </section>
+<section id="agenda" class="conteudo">
+    <h2 class="section-title">📅 Agenda do Paciente</h2>
+    <p class="subtitle">Acompanhe todas as reservas e compromissos do paciente.</p>
+
+    <!-- RESERVAS CONFIRMADAS -->
+    <div class="card">
+        <h3 class="card-title">✔️ Reservas Confirmadas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Procedimento</th>
+                    <th>Local</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12/11/2025</td>
+                    <td>08:00</td>
+                    <td>Consulta com Oncologista</td>
+                    <td>Consultório 1</td>
+                    <td><button class="btn-sm btn-secondary">Ver detalhes</button></td>
+                </tr>
+                <tr>
+                    <td>15/11/2025</td>
+                    <td>10:30</td>
+                    <td>Aplicação de Medicamento</td>
+                    <td>Sala de Infusão</td>
+                    <td><button class="btn-sm btn-secondary">Ver detalhes</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- RESERVAS EM ANDAMENTO -->
+    <div class="card">
+        <h3 class="card-title">⏳ Em Andamento</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Procedimento</th>
+                    <th>Local</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hoje</td>
+                    <td>09:00</td>
+                    <td>Sessão de Quimioterapia</td>
+                    <td>Sala 02</td>
+                    <td><span class="badge badge-warning">Em andamento</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- RESERVAS PENDENTES -->
+    <div class="card">
+        <h3 class="card-title">🕐 Pendentes de Confirmação</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Procedimento</th>
+                    <th>Local</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>20/11/2025</td>
+                    <td>15:00</td>
+                    <td>Exame de Sangue</td>
+                    <td>Laboratório 2</td>
+                    <td>
+                        <button class="btn-sm btn-primary">Confirmar</button>
+                        <button class="btn-sm btn-danger">Cancelar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- RESERVAS CONCLUÍDAS -->
+    <div class="card">
+        <h3 class="card-title">🏁 Reservas Concluídas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Procedimento</th>
+                    <th>Local</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>05/11/2025</td>
+                    <td>09:30</td>
+                    <td>Tomografia</td>
+                    <td>Imagem 1</td>
+                    <td><button class="btn-sm btn-secondary">Visualizar</button></td>
+                </tr>
+                <tr>
+                    <td>02/11/2025</td>
+                    <td>14:00</td>
+                    <td>Consulta de Retorno</td>
+                    <td>Consultório 4</td>
+                    <td><button class="btn-sm btn-secondary">Visualizar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+
 
             <!-- ======================================================================================================================-->
             <!--===================================================== ORIENTAÇÕES =====================================================-->

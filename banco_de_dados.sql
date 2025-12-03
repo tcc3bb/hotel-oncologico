@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `artigo` (
   CONSTRAINT `fk_artigo_admin` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.artigo: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.artigo: ~8 rows (aproximadamente)
 DELETE FROM `artigo`;
 INSERT INTO `artigo` (`artigo_id`, `admin_id`, `artigo_titulo`, `artigo_subtitulo`, `artigo_resumo`, `artigo_conteudo`, `artigo_imagem_capa`, `artigo_imagens_extras`, `artigo_slug`, `artigo_palavras_chave`, `artigo_descricao_meta`, `artigo_categoria`, `artigo_tags`, `artigo_status`, `artigo_data_publicacao`, `artigo_data_criacao`, `artigo_data_atualizacao`, `artigo_visualizacoes`, `artigo_curtidas`, `artigo_comentarios`, `artigo_destacado`, `artigo_aprovado_admin`, `artigo_observacoes_internas`) VALUES
 	(8, 3, 'Câncer: Compreendendo a Doença, Mecanismos Biológicos e Avanços no Tratamento', 'Uma Perspectiva Molecular sobre a Proliferação Celular Descontrolada', 'O câncer é um termo genérico que engloba um grupo de doenças caracterizadas pelo crescimento descontrolado de células anormais que podem invadir partes adjacentes do corpo e se espalhar para outros órgãos (metástase). Este artigo explora a base molecular do câncer, abordando as características distintivas das células cancerosas, os principais fatores de risco, as diversas modalidades de diagnóstico e tratamento, e os promissores avanços da medicina de precisão.', '<h4><strong>1. O Que &eacute; C&acirc;ncer? A Base Molecular da Doen&ccedil;a</strong></h4>\r\n<p data-path-to-node="10">O c&acirc;ncer n&atilde;o &eacute; uma entidade &uacute;nica, mas sim uma cole&ccedil;&atilde;o de mais de 100 doen&ccedil;as distintas que compartilham uma caracter&iacute;stica fundamental: a perda da regula&ccedil;&atilde;o do <strong>ciclo celular</strong>. O desenvolvimento do c&acirc;ncer &eacute; um processo <strong>multi-etapas</strong> (ou multistep) impulsionado por muta&ccedil;&otilde;es gen&eacute;ticas acumuladas que afetam dois tipos principais de genes:</p>\r\n<ul data-path-to-node="11">\r\n<li>\r\n<p data-path-to-node="11,0,0"><strong>Proto-oncogenes:</strong> Genes normais que promovem o crescimento celular. Quando sofrem muta&ccedil;&atilde;o, tornam-se <strong>oncogenes</strong>, levando &agrave; superativa&ccedil;&atilde;o das vias de prolifera&ccedil;&atilde;o.</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="11,1,0"><strong>Genes Supressores de Tumor (GTS):</strong> Genes que, em condi&ccedil;&otilde;es normais, atuam como "freios", reparando o DNA ou induzindo a morte celular programada (<strong>apoptose</strong>). A perda da fun&ccedil;&atilde;o dos GTS (como o <span class="math-inline" data-math="TP53">$TP53$</span> e o <span class="math-inline" data-math="RB">$RB$</span>) remove esses freios, permitindo a prolifera&ccedil;&atilde;o descontrolada.</p>\r\n</li>\r\n</ul>\r\n<p data-path-to-node="12">Em 2011, Hanahan e Weinberg definiram as <strong>"Hallmarks of Cancer"</strong> (Caracter&iacute;sticas Distintivas do C&acirc;ncer), que descrevem as capacidades biol&oacute;gicas essenciais adquiridas pelas c&eacute;lulas cancerosas:</p>\r\n<ul data-path-to-node="13">\r\n<li>\r\n<p data-path-to-node="13,0,0">Sustentar o sinal proliferativo</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="13,1,0">Evitar os supressores de crescimento</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="13,2,0">Resistir &agrave; morte celular</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="13,3,0">Alcan&ccedil;ar a imortalidade replicativa</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="13,4,0">Induzir a angiog&ecirc;nese (forma&ccedil;&atilde;o de novos vasos sangu&iacute;neos)</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="13,5,0">Ativar invas&atilde;o e met&aacute;stase</p>\r\n</li>\r\n</ul>\r\n<h4><strong>2. Fatores de Risco e Preven&ccedil;&atilde;o</strong></h4>\r\n<p data-path-to-node="16">O c&acirc;ncer &eacute; o resultado de uma intera&ccedil;&atilde;o complexa entre predisposi&ccedil;&atilde;o gen&eacute;tica e exposi&ccedil;&atilde;o a fatores ambientais. Os principais fatores de risco incluem:</p>\r\n<ul data-path-to-node="17">\r\n<li>\r\n<p data-path-to-node="17,0,0"><strong>Estilo de Vida:</strong> <strong>Tabagismo</strong> (o fator de risco evit&aacute;vel mais significativo), <strong>consumo excessivo de &aacute;lcool</strong>, <strong>obesidade</strong> e <strong>sedentarismo</strong>.</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="17,1,0"><strong>Agentes Infecciosos:</strong> Certos v&iacute;rus, como o Papilomav&iacute;rus Humano (<strong>HPV</strong>), o v&iacute;rus da Hepatite B e C (<strong>HBV/HCV</strong>), e a bact&eacute;ria <em>Helicobacter pylori</em>, s&atilde;o carcin&oacute;genos conhecidos.</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="17,2,0"><strong>Exposi&ccedil;&atilde;o Ambiental:</strong> Radia&ccedil;&atilde;o (incluindo UV solar), poluentes qu&iacute;micos (benzeno, amianto) e outros agentes carcin&oacute;genos.</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="17,3,0"><strong>Gen&eacute;tica:</strong> Uma pequena percentagem (cerca de 5-10%) dos c&acirc;nceres est&aacute; ligada a s&iacute;ndromes de c&acirc;ncer heredit&aacute;rio, como muta&ccedil;&otilde;es nos genes <span class="math-inline" data-math="BRCA1">$BRCA1$</span> e <span class="math-inline" data-math="BRCA2">$BRCA2$</span>.</p>\r\n</li>\r\n</ul>\r\n<p data-path-to-node="18">A <strong>preven&ccedil;&atilde;o prim&aacute;ria</strong> foca na modifica&ccedil;&atilde;o dos fatores de risco, incluindo a vacina&ccedil;&atilde;o (ex: HPV) e a ado&ccedil;&atilde;o de um estilo de vida saud&aacute;vel.</p>\r\n<h4><strong>3. Diagn&oacute;stico e Estadiamento</strong></h4>\r\n<p data-path-to-node="20">O diagn&oacute;stico definitivo do c&acirc;ncer &eacute; feito por meio de <strong>bi&oacute;psia</strong>, onde uma amostra de tecido &eacute; examinada por um patologista. O <strong>estadiamento</strong> (determina&ccedil;&atilde;o da extens&atilde;o da doen&ccedil;a) &eacute; crucial para definir o progn&oacute;stico e o plano de tratamento, utilizando o sistema <strong>TNM</strong> (Tamanho do tumor, N&oacute;dulos linf&aacute;ticos envolvidos, Met&aacute;stase distante). Exames de imagem (tomografia, resson&acirc;ncia magn&eacute;tica, PET scan) s&atilde;o ferramentas vitais no estadiamento.</p>\r\n<h4><strong>4. Modalidades de Tratamento</strong></h4>\r\n<p data-path-to-node="22">O tratamento oncol&oacute;gico &eacute;, na maioria das vezes, <strong>multidisciplinar</strong> e individualizado. As principais estrat&eacute;gias incluem:</p>\r\n<ul data-path-to-node="23">\r\n<li>\r\n<p data-path-to-node="23,0,0"><strong>Cirurgia:</strong> Remo&ccedil;&atilde;o f&iacute;sica do tumor prim&aacute;rio.</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="23,1,0"><strong>Radioterapia:</strong> Uso de radia&ccedil;&atilde;o de alta energia para destruir as c&eacute;lulas cancerosas.</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="23,2,0"><strong>Quimioterapia:</strong> Uso de medicamentos sist&ecirc;micos que matam c&eacute;lulas de crescimento r&aacute;pido.</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="23,3,0"><strong>Terapia-Alvo (Targeted Therapy):</strong> F&aacute;rmacos que se concentram em alvos moleculares espec&iacute;ficos (prote&iacute;nas, vias de sinaliza&ccedil;&atilde;o) que s&atilde;o essenciais para o crescimento do tumor, minimizando o dano &agrave;s c&eacute;lulas saud&aacute;veis. Exemplo: inibidores de tirosina-quinase no C&acirc;ncer de Pulm&atilde;o.</p>\r\n</li>\r\n<li>\r\n<p data-path-to-node="23,4,0"><strong>Imunoterapia:</strong> O tratamento mais revolucion&aacute;rio da &uacute;ltima d&eacute;cada. Utiliza o pr&oacute;prio sistema imunol&oacute;gico do paciente para reconhecer e atacar as c&eacute;lulas cancerosas. Os <strong>inibidores de <em>checkpoint</em></strong> (ex: PD-1/PD-L1) s&atilde;o a classe mais famosa, "liberando os freios" do sistema imunol&oacute;gico.</p>\r\n</li>\r\n</ul>\r\n<h4><strong>5. Avan&ccedil;os e o Futuro: Medicina de Precis&atilde;o</strong></h4>\r\n<p data-path-to-node="25">A oncologia caminha rapidamente para a <strong>Medicina de Precis&atilde;o</strong>. A <strong>sequencia&ccedil;&atilde;o gen&ocirc;mica tumoral</strong> permite identificar o perfil de muta&ccedil;&otilde;es de cada tumor, direcionando o tratamento mais eficaz. A pesquisa em <strong>bi&oacute;psia l&iacute;quida</strong> (detec&ccedil;&atilde;o de DNA tumoral circulante no sangue) promete revolucionar a detec&ccedil;&atilde;o precoce e o monitoramento da recorr&ecirc;ncia.</p>', '/image/artigos/1764634107081-578045364.jpg', NULL, 'cancer-compreendendo-a-doenca-mecanismos-biologicos-e-avancos-no-tratamento', 'Câncer, Oncologia, Tumor, Metástase, Quimioterapia, Imunoterapia, Radioterapia, Mutações Genéticas, Medicina de Precisão, Biologia Molecular, HPV, Tabagismo', NULL, 'Saúde e Ciências Biomédicas', NULL, 'rascunho', NULL, '2025-12-02 00:08:30', '2025-12-02 00:08:30', 0, 0, 0, 0, 0, NULL),
@@ -158,14 +158,22 @@ CREATE TABLE IF NOT EXISTS `avaliacao_paciente` (
   KEY `fk_paciente_id` (`paciente_id`),
   CONSTRAINT `fk_paciente_id` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`paciente_id`) ON DELETE CASCADE,
   CONSTRAINT `avaliacao_paciente_chk_1` CHECK ((`nota` between 1 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.avaliacao_paciente: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.avaliacao_paciente: ~11 rows (aproximadamente)
 DELETE FROM `avaliacao_paciente`;
 INSERT INTO `avaliacao_paciente` (`id`, `paciente_id`, `nota`, `comentario`, `data_avaliacao`) VALUES
 	(8, 8, 4, 'legal', '2025-11-24 20:32:11'),
 	(9, 8, 4, 'joia', '2025-11-24 20:43:58'),
-	(10, 8, 5, 'amei', '2025-11-24 20:47:34');
+	(10, 8, 5, 'amei', '2025-11-24 20:47:34'),
+	(11, 6, 3, 'legal', '2025-12-02 16:13:33'),
+	(12, 6, 4, 'legal', '2025-12-02 16:13:39'),
+	(13, 6, 2, 'show de bola', '2025-12-02 16:14:27'),
+	(14, 6, 4, 'legal', '2025-12-02 16:27:40'),
+	(15, 6, 4, 'legal', '2025-12-02 16:27:51'),
+	(16, 6, 4, 'legal', '2025-12-02 16:27:55'),
+	(17, 6, 3, 'legal', '2025-12-02 16:27:58'),
+	(18, 6, 3, 'legal', '2025-12-02 16:28:02');
 
 -- Copiando estrutura para tabela hotel.doacao
 CREATE TABLE IF NOT EXISTS `doacao` (
@@ -328,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `paciente` (
 -- Copiando dados para a tabela hotel.paciente: ~3 rows (aproximadamente)
 DELETE FROM `paciente`;
 INSERT INTO `paciente` (`paciente_id`, `usuario_id`, `paciente_email`, `paciente_nome`, `paciente_cpf`, `paciente_rg`, `paciente_data_nascimento`, `paciente_sexo`, `paciente_estado_civil`, `paciente_profissao`, `paciente_nacionalidade`, `paciente_tipo_sanguineo`, `paciente_altura`, `paciente_peso`, `paciente_telefone`, `paciente_logradouro`, `paciente_numero`, `paciente_complemento`, `paciente_bairro`, `paciente_cidade`, `paciente_estado`, `paciente_cep`, `paciente_contato_emergencia_1_nome`, `paciente_contato_emergencia_1_parentesco`, `paciente_contato_emergencia_1_telefone`, `paciente_contato_emergencia_2_nome`, `paciente_contato_emergencia_2_parentesco`, `paciente_contato_emergencia_2_telefone`, `paciente_responsavel_legal_nome`, `paciente_responsavel_legal_parentesco`, `paciente_responsavel_legal_telefone`, `paciente_centro_tratamento_nome`, `paciente_medico_assistente_nome`, `paciente_diagnostico`, `paciente_fase_tratamento`, `paciente_tipo_tratamento`, `paciente_tempo_tratamento`, `paciente_data_ultima_sessao`, `paciente_historico_medico_resumido`, `paciente_alergias_risco`, `paciente_medicamentos_uso_essenciais`, `paciente_vulnerabilidade_imunossupressao`, `paciente_restricoes_alimentares`, `paciente_restricoes_mobilidade`, `paciente_preferencia_horario_refeicao`, `paciente_observacoes_enfermagem`, `paciente_observacoes_gerais`) VALUES
-	(6, 43, 'paciente@gmail.com', 'paciente', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', NULL, 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'nenhum', '5', 'quimioterapia', '4 anos', '2025-11-04', 'nenhum', 'nenhum', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum'),
+	(6, 43, 'paciente@gmail.com', 'olívia', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', '', 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'Câncer de Mama', 'Estágio 1', 'quimioterapia', '2 anos', '2025-11-04', 'nenhum', 'Amendoim', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum'),
 	(7, 44, 'teste@gmail.com', 'teste', '75395165425', '9638745632', '2001-02-21', 'Feminino', 'Casado', 'professor', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', NULL, 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', '', '4', 'quimioterapia', '4 anos', '2025-11-07', '', '', '', 0, '', '', 'Indiferente', '', ''),
 	(8, 45, 'joao.silva@email.com', 'João Silva', '98653212495', '356752362', '1980-01-15', 'Masculino', 'Casado', 'arquiteto', 'brasileira', 'B+', 1.75, 70.00, '11975632654', 'Rua das Flores', '123', 'bloco 1', 'Centro', 'São Paulo', 'SP', '035698623', 'Maria Silva', 'Esposa', '11963852653', 'Pedro Silva', 'Filho', '11945685230', 'Maria Silva', 'Esposa', '11963852653', 'Hospital Oncológico ABC', 'Dr. Carlos Mendes', 'Câncer de garganta não pequenas células, estágio II, adenocarcinoma.', 'Tratamento ativo', 'Quimioterapia combinada com radioterapia', '6 meses (iniciado em abril de 2023)', '2023-10-01', 'Paciente com histórico de tabagismo por 20 anos (parou em 2020). Diagnosticado em março de 2023 após sintomas de tosse persistente e perda de peso. Sem outras comorbidades significativas.', 'Alérgico a penicilina (reação cutânea). Risco de infecções devido ao tratamento oncológico.', 'Analgésicos (paracetamol), antieméticos (ondansetrona), suplementos vitamínicos.', 1, 'Dieta leve, evitar alimentos ácidos e picantes para reduzir náuseas. Preferência por alimentos moles e fáceis de digerir.\n', 'Mobilidade reduzida devido à fadiga e fraqueza causadas pelo tratamento. Recomendado uso de cadeira de rodas para longas distâncias.', 'Indiferente', 'Monitorar sinais vitais diariamente. Observar sinais de infecção (febre, calafrios). Administrar medicações conforme prescrito. Avaliar nível de dor e fadiga.', 'Paciente motivado e cooperativo. Família apoiadora e presente. Recomendado acompanhamento psicológico para suporte emocional. Próxima consulta em 15 dias.');
 
@@ -358,13 +366,19 @@ CREATE TABLE IF NOT EXISTS `pergunta` (
   PRIMARY KEY (`pergunta_id`),
   KEY `fk_pergunta_usuario` (`usuario_id`),
   CONSTRAINT `fk_pergunta_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.pergunta: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.pergunta: ~8 rows (aproximadamente)
 DELETE FROM `pergunta`;
 INSERT INTO `pergunta` (`pergunta_id`, `usuario_id`, `pergunta_titulo`, `pergunta_conteudo`, `pergunta_categoria`, `pergunta_tags`, `pergunta_status`, `pergunta_destacada`, `pergunta_visualizacoes`, `pergunta_curtidas`, `pergunta_qtd_respostas`, `pergunta_aprovada_admin`, `pergunta_data_criacao`, `pergunta_data_atualizacao`, `pergunta_data_ultima_resposta`, `pergunta_editada`, `pergunta_editada_por`, `pergunta_deletada`, `pergunta_ip_criacao`, `pergunta_observacoes`, `pergunta_observacoes_internas`) VALUES
 	(10, 26, 'Reservas', 'aaa', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-11-29 17:24:33', '2025-11-29 17:24:33', NULL, 0, NULL, 0, '::1', NULL, NULL),
-	(11, 43, 'a', 'a', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-11-29 17:25:54', '2025-11-29 17:25:54', NULL, 0, NULL, 0, '::1', NULL, NULL);
+	(12, 43, 'Suporte', 'Vocês têm equipe 24h?', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-12-03 01:04:09', '2025-12-03 01:04:09', NULL, 0, NULL, 0, '::1', NULL, NULL),
+	(13, 43, 'Acompanhante', 'Posso levar um acompanhante?', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-12-03 01:04:30', '2025-12-03 01:04:30', NULL, 0, NULL, 0, '::1', NULL, NULL),
+	(14, 43, 'Imunidade', 'O ambiente é seguro para quem tem imunidade baixa?\r\n', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-12-03 01:04:52', '2025-12-03 01:04:52', NULL, 0, NULL, 0, '::1', NULL, NULL),
+	(15, 53, 'Suporte', 'Tem suporte emocional para familiares?', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-12-03 01:06:38', '2025-12-03 01:06:38', NULL, 0, NULL, 0, '::1', NULL, NULL),
+	(16, 53, 'Descanso', 'Tem lugar para descansar enquanto o paciente está no hospital?\r\n', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-12-03 01:06:54', '2025-12-03 01:06:54', NULL, 0, NULL, 0, '::1', NULL, NULL),
+	(17, 48, 'Doação', 'Posso doar itens em vez de dinheiro?\r\n', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-12-03 01:07:18', '2025-12-03 01:07:18', NULL, 0, NULL, 0, '::1', NULL, NULL),
+	(18, 48, 'Voluntário', 'Posso ajudar como voluntário?', NULL, NULL, 'publicada', 0, 0, 0, 0, 0, '2025-12-03 01:07:38', '2025-12-03 01:07:38', NULL, 0, NULL, 0, '::1', NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.quarto
 CREATE TABLE IF NOT EXISTS `quarto` (
@@ -385,20 +399,20 @@ CREATE TABLE IF NOT EXISTS `quarto` (
 -- Copiando dados para a tabela hotel.quarto: ~14 rows (aproximadamente)
 DELETE FROM `quarto`;
 INSERT INTO `quarto` (`quarto_id`, `tipo_quarto_id`, `quarto_numero`, `quarto_andar`, `quarto_status`, `quarto_observacoes`, `quarto_data_criacao`, `quarto_data_atualizacao`) VALUES
-	(6, 6, '101', '1º Andar', 'reservado', 'Vista para o jardim, próximo à rampa de acesso', '2025-11-13 19:22:43', '2025-11-13 23:55:45'),
-	(7, 6, '102', '1º Andar', 'reservado', 'Próximo à enfermagem', '2025-11-13 19:22:43', '2025-11-17 23:18:38'),
-	(8, 6, '201', '2º Andar', 'ocupado', 'Quarto silencioso', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(9, 7, '205', '2º Andar', 'ocupado', 'Vista para a cidade', '2025-11-13 19:22:43', '2025-11-14 18:02:55'),
-	(10, 7, '206', '2º Andar', 'em_limpeza', 'Quarto recém-liberado', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(11, 7, '301', '3º Andar', 'reservado', NULL, '2025-11-13 19:22:43', '2025-11-15 01:31:59'),
-	(12, 8, '305', '3º Andar', 'reservado', 'Suíte de canto, mais espaçosa', '2025-11-13 19:22:43', '2025-11-17 21:15:55'),
-	(13, 8, '306', '3º Andar', 'reservado', 'Manutenção no ar-condicionado', '2025-11-13 19:22:43', '2025-11-18 23:07:09'),
-	(14, 8, '401', '4º Andar', 'reservado', 'Com cozinha compacta completa', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(15, 9, '103', '1º Andar', 'reservado', 'Acessibilidade total, mais perto do elevador', '2025-11-13 19:22:43', '2025-11-17 22:24:36'),
-	(16, 9, '104', '1º Andar', 'ocupado', 'Próximo à saída de emergência', '2025-11-13 19:22:43', '2025-11-13 19:22:43'),
-	(17, 10, '405', '4º Andar', 'reservado', 'Equipamentos de monitoramento instalados', '2025-11-13 19:22:43', '2025-11-18 20:39:45'),
-	(18, 10, '406', '4º Andar', 'ocupado', 'Com isolamento acústico', '2025-11-13 19:22:43', '2025-11-14 18:02:38'),
-	(19, 10, '407', '4º Andar', 'ocupado', 'Próximo à sala da equipe médica', '2025-11-13 19:22:43', '2025-11-13 19:22:43');
+	(6, 6, '101', '1º Andar', 'disponivel', 'Vista para o jardim, próximo à rampa de acesso', '2025-11-13 19:22:43', '2025-12-03 01:26:45'),
+	(7, 6, '102', '1º Andar', 'disponivel', 'Próximo à enfermagem', '2025-11-13 19:22:43', '2025-12-03 01:26:47'),
+	(8, 6, '201', '2º Andar', 'disponivel', 'Quarto silencioso', '2025-11-13 19:22:43', '2025-12-03 01:26:49'),
+	(9, 7, '205', '2º Andar', 'disponivel', 'Vista para a cidade', '2025-11-13 19:22:43', '2025-12-03 01:26:52'),
+	(10, 7, '206', '2º Andar', 'disponivel', 'Quarto recém-liberado', '2025-11-13 19:22:43', '2025-12-03 01:26:54'),
+	(11, 7, '301', '3º Andar', 'disponivel', NULL, '2025-11-13 19:22:43', '2025-12-03 01:26:56'),
+	(12, 8, '305', '3º Andar', 'disponivel', 'Suíte de canto, mais espaçosa', '2025-11-13 19:22:43', '2025-12-03 01:26:58'),
+	(13, 8, '306', '3º Andar', 'disponivel', 'Manutenção no ar-condicionado', '2025-11-13 19:22:43', '2025-12-03 01:27:00'),
+	(14, 8, '401', '4º Andar', 'disponivel', 'Com cozinha compacta completa', '2025-11-13 19:22:43', '2025-12-03 01:27:03'),
+	(15, 9, '103', '1º Andar', 'disponivel', 'Acessibilidade total, mais perto do elevador', '2025-11-13 19:22:43', '2025-12-03 01:27:05'),
+	(16, 9, '104', '1º Andar', 'disponivel', 'Próximo à saída de emergência', '2025-11-13 19:22:43', '2025-12-03 01:27:07'),
+	(17, 10, '405', '4º Andar', 'disponivel', 'Equipamentos de monitoramento instalados', '2025-11-13 19:22:43', '2025-12-03 01:27:09'),
+	(18, 10, '406', '4º Andar', 'disponivel', 'Com isolamento acústico', '2025-11-13 19:22:43', '2025-12-03 01:27:11'),
+	(19, 10, '407', '4º Andar', 'disponivel', 'Próximo à sala da equipe médica', '2025-11-13 19:22:43', '2025-12-03 01:27:14');
 
 -- Copiando estrutura para tabela hotel.quarto_fotos
 CREATE TABLE IF NOT EXISTS `quarto_fotos` (
@@ -496,12 +510,18 @@ CREATE TABLE IF NOT EXISTS `resposta` (
   CONSTRAINT `fk_resposta_pai` FOREIGN KEY (`resposta_pai_id`) REFERENCES `resposta` (`resposta_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_resposta_pergunta` FOREIGN KEY (`pergunta_id`) REFERENCES `pergunta` (`pergunta_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_resposta_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.resposta: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.resposta: ~7 rows (aproximadamente)
 DELETE FROM `resposta`;
 INSERT INTO `resposta` (`resposta_id`, `pergunta_id`, `usuario_id`, `resposta_conteudo`, `resposta_pai_id`, `resposta_status`, `resposta_curtidas`, `resposta_visualizacoes`, `resposta_aprovada_admin`, `resposta_data_criacao`, `resposta_data_atualizacao`, `resposta_editada`, `resposta_editada_por`, `resposta_deletada`, `resposta_ip_criacao`, `resposta_observacoes`, `resposta_observacoes_internas`) VALUES
-	(2, 10, 26, 'aaaa', NULL, 'publicada', 0, 0, 0, '2025-11-29 17:24:39', '2025-11-29 17:24:39', 0, NULL, 0, '::1', NULL, NULL);
+	(3, 18, 26, 'Pode! Temos programas de voluntariado abertos ao público.', NULL, 'publicada', 0, 0, 0, '2025-12-03 01:08:12', '2025-12-03 01:08:12', 0, NULL, 0, '::1', NULL, NULL),
+	(4, 16, 26, 'Temos sala de descanso exclusiva para acompanhantes.', NULL, 'publicada', 0, 0, 0, '2025-12-03 01:08:22', '2025-12-03 01:08:22', 0, NULL, 0, '::1', NULL, NULL),
+	(5, 17, 26, 'Sim, aceitamos alimentos, produtos de higiene e roupas.', NULL, 'publicada', 0, 0, 0, '2025-12-03 01:08:31', '2025-12-03 01:08:31', 0, NULL, 0, '::1', NULL, NULL),
+	(6, 15, 26, 'Sim, oferecemos atendimento psicológico também para acompanhantes.', NULL, 'publicada', 0, 0, 0, '2025-12-03 01:08:52', '2025-12-03 01:08:52', 0, NULL, 0, '::1', NULL, NULL),
+	(7, 14, 26, 'Totalmente. Mantemos protocolos rígidos de higiene e desinfecção.', NULL, 'publicada', 0, 0, 0, '2025-12-03 01:10:07', '2025-12-03 01:10:07', 0, NULL, 0, '::1', NULL, NULL),
+	(8, 13, 26, 'Pode. Temos opções de quartos que acomodam acompanhantes sem custo adicional.', NULL, 'publicada', 0, 0, 0, '2025-12-03 01:10:30', '2025-12-03 01:10:30', 0, NULL, 0, '::1', NULL, NULL),
+	(9, 12, 26, 'Sim. Há suporte o tempo todo para qualquer necessidade básica ou orientação.', NULL, 'publicada', 0, 0, 0, '2025-12-03 01:10:44', '2025-12-03 01:10:44', 0, NULL, 0, '::1', NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.servico_adicional
 CREATE TABLE IF NOT EXISTS `servico_adicional` (
@@ -558,19 +578,20 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`usuario_id`),
   UNIQUE KEY `usuario_email` (`usuario_email`),
   UNIQUE KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.usuario: ~8 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.usuario: ~9 rows (aproximadamente)
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_tipo`, `usuario_data_criacao`, `usuario_estado`, `usuario_ultimo_login`, `usuario_foto_perfil`) VALUES
-	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-12-01 19:39:27', '/uploads/usuarios/padrao.png'),
+	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-12-02 22:07:54', '/uploads/usuarios/padrao.png'),
 	(41, 'voluntario@gmail.com', '$2b$10$pRMCCoTzoeOyPzY97BFrVe7DIskU8lvgKTHTKIjbKz4guHV8l0AL2', 'voluntario', '2025-11-13 16:32:00', 'ativo', '2025-11-18 16:47:47', '/uploads/usuarios/padrao.png'),
-	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-11-30 16:49:59', '/uploads/usuarios/padrao.png'),
+	(43, 'paciente@gmail.com', '$2b$10$zszYS2HEMzVO7mc5Yeza4uOBRNU7c3eKbdXe6wTJUp1ivlH5N5t0S', 'paciente', '2025-11-13 19:20:43', 'ativo', '2025-12-02 21:06:00', '/uploads/usuarios/padrao.png'),
 	(44, 'teste@gmail.com', '$2b$10$Ec6r8jkNprK0gLBbIrdvNeDoFRbF5eBTo6gRoLnKDU608sdUbmTuG', 'acompanhante', '2025-11-17 16:16:09', 'ativo', '2025-11-22 17:58:29', '/uploads/usuarios/padrao.png'),
 	(45, 'joao.silva@email.com', '$2b$10$2TCAFBsUaQNhf6VEpBVm4O56UN4ohu0M5sBQxQklOYvz29w6o0Z/2', 'paciente', '2025-11-18 17:32:52', 'ativo', '2025-11-24 20:43:50', '/uploads/usuarios/padrao.png'),
-	(48, 'doador3@gmail.com', '$2b$10$8aTdnjmoTHa4i/SnGAHtBurdR3YjqJ/kD9IAkT/IWnq3HjZlCJWCO', 'doador', '2025-11-21 17:52:50', 'ativo', '2025-11-29 21:19:50', '/uploads/usuarios/padrao.png'),
-	(53, 'acompanhante@gmail.com', '$2b$10$KNjWTFJIDMPXAkJIPdI0o.f.gd9PQndpkk98AcolMc2jqhM.ZMkc2', 'acompanhante', '2025-11-22 21:06:11', 'ativo', '2025-11-29 21:22:53', '/uploads/usuarios/padrao.png'),
-	(54, 'teste2@gmail.com', '$2b$10$nbuXtY0IZe4v9IXycL6ii.kyDO9kWzVOTW64cT.qHyfE51pImlPcq', 'acompanhante', '2025-11-24 16:03:20', 'ativo', '2025-11-24 16:05:26', '/uploads/usuarios/padrao.png');
+	(48, 'doador3@gmail.com', '$2b$10$8aTdnjmoTHa4i/SnGAHtBurdR3YjqJ/kD9IAkT/IWnq3HjZlCJWCO', 'doador', '2025-11-21 17:52:50', 'ativo', '2025-12-02 22:07:04', '/uploads/usuarios/padrao.png'),
+	(53, 'acompanhante@gmail.com', '$2b$10$KNjWTFJIDMPXAkJIPdI0o.f.gd9PQndpkk98AcolMc2jqhM.ZMkc2', 'acompanhante', '2025-11-22 21:06:11', 'ativo', '2025-12-02 22:06:22', '/uploads/usuarios/padrao.png'),
+	(54, 'teste2@gmail.com', '$2b$10$nbuXtY0IZe4v9IXycL6ii.kyDO9kWzVOTW64cT.qHyfE51pImlPcq', 'acompanhante', '2025-11-24 16:03:20', 'ativo', '2025-11-24 16:05:26', '/uploads/usuarios/padrao.png'),
+	(55, 'adminn@gmail.com', '$2b$10$IWwuTmEnUKUaBtfAhPi8mePL8Rt6iJqYVoH9DfL7p7d2dWtx4Vn/G', 'admin', '2025-12-02 19:10:22', 'ativo', NULL, '/uploads/usuarios/padrao.png');
 
 -- Copiando estrutura para tabela hotel.voluntario
 CREATE TABLE IF NOT EXISTS `voluntario` (

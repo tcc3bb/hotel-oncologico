@@ -56,9 +56,6 @@ app.use('/paciente', pacienteRouter);
 const acompanhanteRouter = require('./app/routes/acompanhante')(connectionFactory);
 app.use('/acompanhante', acompanhanteRouter);
 
-const voluntarioRouter = require('./app/routes/voluntario')(connectionFactory);
-app.use('/voluntario', voluntarioRouter);
-
 const doadorRouter = require('./app/routes/doador')(connectionFactory);
 app.use('/doador', doadorRouter);
 

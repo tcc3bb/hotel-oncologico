@@ -69,20 +69,8 @@
             <span class="icon" aria-hidden="true">❤️</span>
             <span>Perfil de Saúde</span>
          </div>
-         <div class="sidebar-item" data-target="historico" tabindex="0">
-            <span class="icon" aria-hidden="true">📜</span>
-            <span>Histórico</span>
-         </div>
-         <div class="sidebar-item" data-target="documentos" tabindex="0">
-            <span class="icon" aria-hidden="true">📂</span>
-            <span>Documentos</span>
-         </div>
-         <div class="sidebar-item" data-target="alimentacao" tabindex="0">
-            <span class="icon" aria-hidden="true">🍽️</span>
-            <span>Alimentação</span>
-         </div>
          <div class="sidebar-item" data-target="avaliacao" tabindex="0">
-            <span class="icon" aria-hidden="true">🌸</span>
+            <span class="icon" aria-hidden="true">⭐</span>
             <span>Avaliação</span>
          </div>
       </aside>
@@ -290,9 +278,11 @@
                                  </td>
                                  <td>
                                     <span class="badge badge-<%= 
-                                    r.reserva_status === 'confirmada' ? 'success' :
-                                    r.reserva_status === 'pendente' ? 'warning' :
-                                    r.reserva_status === 'cancelada' ? 'danger' : 'secondary'
+                                    r.reserva_status === 'confirmada' ? 'confirmada' :
+                                    r.reserva_status === 'concluida' ? 'concluida' :
+                                    r.reserva_status === 'em andamento' ? 'em_andamento' :
+                                    r.reserva_status === 'pendente' ? 'pendente' :
+                                    r.reserva_status === 'cancelada' ? 'cancelada' : 'secondary'
                                  %>">
                                        <%= r.reserva_status %>
                                     </span>
@@ -606,107 +596,6 @@
             </script>
          </section>
 
-         <!--=============================================== SECTION HISTÓRICO =====================================================-->
-         <section id="historico" class="conteudo">
-            <h2 class="section-title">Histórico Completo</h2>
-            <p class="subtitle">Acompanhe todos os seus registros passados de serviços e interações.</p>
-
-            <div class="card card-historico">
-               <div class="historico-filtros">
-                  <label for="filtro-tipo">Filtrar por Tipo:</label>
-                  <select id="filtro-tipo">
-                     <option>Todos</option>
-                     <option>Consultas</option>
-                     <option>Hospedagens</option>
-                     <option>Exames</option>
-                  </select>
-                  <button class="btn-secondary" type="button">Buscar</button>
-                  <button class="btn-download" type="button">Exportar PDF</button>
-               </div>
-
-               <ul class="lista-historico">
-                  <li class="historico-item">
-                     <span class="historico-data">01/12/2024</span>
-                     <span class="historico-desc">Consulta de rotina com Dra. Ana</span>
-                     <span class="historico-tag badge badge-info">Consulta</span>
-                     <button class="btn-sm btn-secondary">Ver Resumo</button>
-                  </li>
-                  <li class="historico-item">
-                     <span class="historico-data">10/11/2024</span>
-                     <span class="historico-desc">Check-out de Hospedagem (5 dias)</span>
-                     <span class="historico-tag badge badge-service">Hospedagem</span>
-                     <button class="btn-sm btn-secondary">Detalhes Acomodação</button>
-                  </li>
-               </ul>
-            </div>
-         </section>
-
-         <!--============================================== SECTION DOCUMENTOS =====================================================-->
-         <section id="documentos" class="conteudo">
-            <h2 class="section-title">Documentos e Resultados</h2>
-            <p class="subtitle">Gerencie seus arquivos médicos, exames e laudos.</p>
-
-            <div class="card card-documentos">
-               <h3 class="card-title">Meus Arquivos</h3>
-               <div class="lista-arquivos">
-                  <div class="arquivo-item">
-                     <span class="file-icon">📄</span>
-                     <span class="file-name">Resultado Biópsia_15_12_2024.pdf</span>
-                     <span class="file-size">2.3 MB</span>
-                     <button class="btn-sm btn-secondary">Baixar</button>
-                     <button class="btn-sm btn-danger">Excluir</button>
-                  </div>
-                  <div class="arquivo-item">
-                     <span class="file-icon">🖼️</span>
-                     <span class="file-name">Raio X Tórax_05_01_2025.jpg</span>
-                     <span class="file-size">1.1 MB</span>
-                     <button class="btn-sm btn-secondary">Baixar</button>
-                     <button class="btn-sm btn-danger">Excluir</button>
-                  </div>
-               </div>
-
-               <h3 class="card-title mt-4">Enviar Novo Documento</h3>
-               <div class="upload-area">
-                  <label for="upload" class="upload-label">
-                     Clique para selecionar ou arraste arquivos aqui. (Máx: 10MB)
-                  </label>
-                  <input type="file" id="upload" multiple style="display: none;">
-                  <button class="btn-primary" type="button">Enviar Arquivos</button>
-               </div>
-            </div>
-         </section>
-
-         <!--============================================== SECTION ALIMENTAÇÃO ====================================================-->
-         <section id="alimentacao" class="conteudo">
-            <h2 class="section-title">Alimentação e Refeições</h2>
-            <p class="subtitle">Confira o cardápio e personalize sua dieta.</p>
-
-            <div class="card card-alimentacao">
-               <h3 class="card-title">Cardápio do Dia - <%= new Date().toLocaleDateString('pt-BR', { weekday: 'long' ,
-                     day: 'numeric' , month: 'long' }) %>
-               </h3>
-               <div class="cardapio-grid">
-                  <div class="refeicao-item">
-                     <h4>Café da Manhã (8:00)</h4>
-                     <p>Pão integral, Queijo branco, Suco de laranja natural.</p>
-                  </div>
-                  <div class="refeicao-item">
-                     <h4>Almoço (12:00)</h4>
-                     <p>Arroz, Feijão, Frango grelhado, Purê de batata, Salada mista.</p>
-                  </div>
-                  <div class="refeicao-item">
-                     <h4>Jantar (19:00)</h4>
-                     <p>Sopa de legumes, Torradas integrais.</p>
-                  </div>
-               </div>
-
-               <h3 class="card-title mt-4">Minha Dieta Especial</h3>
-               <p><strong>Restrições:</strong> Sem glúten, Sem lactose.</p>
-               <p>Seus pedidos especiais estão sendo atendidos. Caso precise de alteração, solicite abaixo.</p>
-               <button class="btn-primary mt-3">Solicitar Alteração de Dieta</button>
-            </div>
-         </section>
-
          <!--===================================================== SECTION AVALIAÇÃO ================================================-->
          <section id="avaliacao" class="conteudo">
             <h2 class="section-title">Avaliação do Alojamento</h2>
@@ -717,14 +606,15 @@
 
             <% if (typeof msgSucesso !=="undefined" && msgSucesso) { %>
                <div class="alert alert-success" style="
-                  background: #cfe9d1;
-                  color: #23543b;
-                  padding: 15px;
-                  border-radius: 8px;
-                  margin-bottom: 20px;
-                  border-left: 6px solid #3a7d55;
-                  font-weight: 600;
-               ">
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 8px solid #28a745;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            ">
                   <%= msgSucesso %>
                </div>
                <% } %>
@@ -733,14 +623,17 @@
                      <form id="formAvaliacao" action="/paciente/avaliacoes" method="POST">
                         <div class="campo">
                            <label>Como você avalia sua estadia?</label>
-                           <select name="avaliacao_nota" required>
-                              <option value="">Selecione...</option>
-                              <option value="5">⭐⭐⭐⭐⭐ — Excelente</option>
-                              <option value="4">⭐⭐⭐⭐ — Muito Boa</option>
-                              <option value="3">⭐⭐⭐ — Boa</option>
-                              <option value="2">⭐⭐ — Regular</option>
-                              <option value="1">⭐ — Ruim</option>
-                           </select>
+                           <div class="estrelas-container">
+                              <div class="estrelas">
+                                 <span class="estrela" data-value="1">☆</span>
+                                 <span class="estrela" data-value="2">☆</span>
+                                 <span class="estrela" data-value="3">☆</span>
+                                 <span class="estrela" data-value="4">☆</span>
+                                 <span class="estrela" data-value="5">☆</span>
+                              </div>
+                              <input type="hidden" name="avaliacao_nota" id="avaliacao_nota" required>
+                           </div>
+                           <div class="avaliacao-texto" id="avaliacao-texto">Selecione uma avaliação</div>
                         </div>
 
                         <div class="campo">
@@ -752,8 +645,59 @@
                         <button class="btn-success" type="submit">Enviar Avaliação</button>
                      </form>
                   </div>
-         </section>
 
+                  
+         <script>
+            // JavaScript para interatividade das estrelas
+            document.addEventListener('DOMContentLoaded', function () {
+               const estrelas = document.querySelectorAll('.estrela');
+               const avaliacaoNota = document.getElementById('avaliacao_nota');
+               const avaliacaoTexto = document.getElementById('avaliacao-texto');
+               const textos = {
+                  1: '⭐ — Ruim',
+                  2: '⭐⭐ — Regular',
+                  3: '⭐⭐⭐ — Boa',
+                  4: '⭐⭐⭐⭐ — Muito Boa',
+                  5: '⭐⭐⭐⭐⭐ — Excelente'
+               };
+
+               estrelas.forEach(estrela => {
+                  estrela.addEventListener('click', function () {
+                     const value = this.getAttribute('data-value');
+                     avaliacaoNota.value = value;
+                     avaliacaoTexto.textContent = textos[value];
+
+                     // Remove active de todas
+                     estrelas.forEach(e => e.classList.remove('active'));
+                     // Adiciona active até a clicada
+                     for (let i = 0; i < value; i++) {
+                        estrelas[i].classList.add('active');
+                     }
+                  });
+
+                  estrela.addEventListener('mouseover', function () {
+                     const value = this.getAttribute('data-value');
+                     // Destaque temporário
+                     for (let i = 0; i < value; i++) {
+                        estrelas[i].style.color = '#ffc107';
+                     }
+                  });
+
+                  estrela.addEventListener('mouseout', function () {
+                     // Restaura baseado na seleção atual
+                     const currentValue = avaliacaoNota.value;
+                     estrelas.forEach((e, index) => {
+                        if (index < currentValue) {
+                           e.style.color = '#ffc107';
+                        } else {
+                           e.style.color = '#ddd';
+                        }
+                     });
+                  });
+               });
+            });
+         </script>
+         </section>
       </main>
    </div>
 

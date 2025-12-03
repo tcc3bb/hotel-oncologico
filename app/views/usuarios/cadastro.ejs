@@ -36,8 +36,6 @@
                         <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
                         <% } else if (user.tipo==='acompanhante' ) { %>
                             <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
-                            <% } else if (user.tipo==='voluntario' ) { %>
-                                <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
                                 <% } else if (user.tipo==='doador' ) { %>
                                     <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
                                     <% } else if (user.tipo==='admin' ) { %>
@@ -83,7 +81,6 @@
                             <option value="" disabled selected>Selecione o tipo de usuário</option>
                             <option value="paciente">Paciente</option>
                             <option value="acompanhante">Acompanhante</option>
-                            <option value="voluntario">Voluntário</option>
                             <option value="doador">Doador</option>
                             <% if (user && user.tipo==='admin' ) { %>
                                 <option value="admin">Admin</option>
