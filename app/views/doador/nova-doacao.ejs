@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Vita</title>
+    <title>Nova Doação - Instituto Vita</title>
     <link rel="icon" href="/image/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,12 +12,11 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/doador/style_nova_doacao.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <!-- ======================================================================================================================-->
     <!--===================================================== MENU ============================================================-->
-    <!--====================================================================================================================== -->
     <nav>
         <a href="/" class="img">
             <img src="/image/logo.png" alt="Logo da Empresa" class="img-logo">
@@ -38,8 +37,6 @@
                     <a href="/paciente/minhas-reservas" class="btn-nav">Minhas Reservas</a>
                     <% } else if (user.tipo==='acompanhante' ) { %>
                         <a href="/acompanhante/apoio-ao-paciente" class="btn-nav">Apoio ao Paciente</a>
-                        <% } else if (user.tipo==='voluntario' ) { %>
-                            <a href="/voluntario/area-do-voluntario" class="btn-nav">Área do Voluntários</a>
                             <% } else if (user.tipo==='doador' ) { %>
                                 <a href="/doador/minhas-doacoes" class="btn-nav">Minhas Doações</a>
                                 <% } else if (user.tipo==='admin' ) { %>
@@ -72,48 +69,56 @@
                     <% } %>
 
                         <div class="card">
-                            <h3 class="card-title">Escolha o Tipo de Doação</h3>
+                            <h3 class="card-title">Faça uma Doação</h3>
+                            <p class="card-subtitle">Escolha a forma como deseja contribuir para o cuidado e acolhimento de pacientes oncológicos e suas famílias.</p>
 
                             <div class="doacao-opcoes">
-
                                 <div class="opcao-item">
                                     <span class="opcao-icon">💵</span>
-                                    <h4>Financeira</h4>
-                                    <p>Ajude via PIX, cartão ou depósito.</p>
-                                    <button class="btn-primary btn-escolher" data-tipo="financeira">Doar
-                                        Financeiro</button>
+                                    <h4>Doação Financeira</h4>
+                                    <p>Contribuição em dinheiro via PIX, cartão de crédito, boleto ou depósito bancário. Sua doação será direcionada para onde é mais necessária.</p>
+                                    <button class="btn-primary btn-escolher" data-tipo="financeira">
+                                        <i class="fas fa-heart"></i> Doar Agora
+                                    </button>
                                 </div>
 
                                 <div class="opcao-item">
                                     <span class="opcao-icon">🎁</span>
-                                    <h4>Produto</h4>
-                                    <p>Roupas, livros, itens de higiene etc.</p>
-                                    <button class="btn-primary btn-escolher" data-tipo="produto">Doar Produto</button>
+                                    <h4>Doação de Produtos</h4>
+                                    <p>Roupas, cobertores, livros, materiais de higiene e outros itens essenciais para o conforto dos pacientes durante o tratamento.</p>
+                                    <button class="btn-primary btn-escolher" data-tipo="produto">
+                                        <i class="fas fa-box-open"></i> Doar Produto
+                                    </button>
                                 </div>
 
                                 <div class="opcao-item">
                                     <span class="opcao-icon">🍎</span>
-                                    <h4>Alimento</h4>
-                                    <p>Cestas básicas, perecíveis e não perecíveis.</p>
-                                    <button class="btn-primary btn-escolher" data-tipo="alimento">Doar Alimento</button>
+                                    <h4>Doação de Alimentos</h4>
+                                    <p>Cestas básicas, alimentos perecíveis e não perecíveis para garantir nutrição adequada aos pacientes e acompanhantes.</p>
+                                    <button class="btn-primary btn-escolher" data-tipo="alimento">
+                                        <i class="fas fa-utensils"></i> Doar Alimento
+                                    </button>
                                 </div>
-
                             </div>
-
 
                             <!-- FORMULÁRIO GERAL -->
                             <form id="form-doacao" action="/doacoes/nova" method="POST" style="display:none">
+                                <div class="form-header">
+                                    <i class="fas fa-hand-holding-heart" style="color: var(--cor-principal); font-size: 1.5rem;"></i>
+                                    <h3>Complete os Dados da Sua Doação</h3>
+                                </div>
 
                                 <input type="hidden" name="doacao_tipo" id="doacao_tipo">
 
                                 <!-- DESTINO DA DOAÇÃO -->
                                 <div class="campo">
-                                    <label>Destino da Doação:</label>
-                                    <select name="doacao_destino" required>
-                                        <option value="Apoiar Pacientes">Apoiar Pacientes</option>
-                                        <option value="Atividades de Bem-Estar">Atividades de Bem-Estar</option>
-                                        <option value="Manutenção do Hotel">Manutenção do Hotel</option>
-                                        <option value="Campanhas Específicas">Campanhas Específicas</option>
+                                    <label for="destino-doacao"><i class="fas fa-bullseye"></i> Destino da Doação:</label>
+                                    <select name="doacao_destino" id="destino-doacao" required>
+                                        <option value="" disabled selected>Selecione para onde sua doação será direcionada</option>
+                                        <option value="Apoiar Pacientes">Apoiar Pacientes (Hospedagem e Alimentação)</option>
+                                        <option value="Atividades de Bem-Estar">Atividades de Bem-Estar (Terapias e Oficinas)</option>
+                                        <option value="Manutenção do Hotel">Manutenção do Hotel (Infraestrutura)</option>
+                                        <option value="Campanhas Específicas">Campanhas Específicas (Emergências)</option>
                                         <option value="Medicamentos e Insumos">Medicamentos e Insumos</option>
                                         <option value="Eventos Solidários">Eventos Solidários</option>
                                         <option value="Infraestrutura e Obras">Infraestrutura e Obras</option>
@@ -122,70 +127,87 @@
 
                                 <!-- RECORRÊNCIA -->
                                 <div class="campo">
-                                    <label>Doação Recorrente:</label>
-                                    <select name="doacao_recorrencia">
-                                        <option value="Única">Única</option>
-                                        <option value="Mensal">Mensal</option>
-                                        <option value="Trimestral">Trimestral</option>
-                                        <option value="Anual">Anual</option>
+                                    <label for="recorrencia-doacao"><i class="fas fa-redo"></i> Recorrência da Doação:</label>
+                                    <select name="doacao_recorrencia" id="recorrencia-doacao">
+                                        <option value="Única">Doação Única</option>
+                                        <option value="Mensal">Doação Mensal</option>
+                                        <option value="Trimestral">Doação Trimestral</option>
+                                        <option value="Anual">Doação Anual</option>
                                     </select>
                                 </div>
 
                                 <!-- FORM FINANCEIRO -->
                                 <div id="form-financeiro" class="form-bloco" style="display:none">
-                                    <h3>Doação Financeira</h3>
+                                    <h3>Detalhes da Doação Financeira</h3>
 
-                                    <label>Valor (R$):</label>
-                                    <input type="number" step="0.01" name="doacao_valor" id="valor-input">
+                                    <div class="campo">
+                                        <label for="valor-input"><i class="fas fa-money-bill-wave"></i> Valor da Doação (R$):</label>
+                                        <input type="number" step="0.01" name="doacao_valor" id="valor-input" min="1" placeholder="Ex: 50,00">
+                                    </div>
 
-                                    <label>Método de Pagamento:</label>
-                                    <select name="doacao_metodo_pagamento">
-                                        <option value="Pix">Pix</option>
-                                        <option value="Boleto">Boleto</option>
-                                        <option value="Cartão de Crédito">Cartão de Crédito</option>
-                                        <option value="Depósito Bancário">Depósito Bancário</option>
-                                        <option value="Outro">Outro</option>
-                                    </select>
+                                    <div class="campo">
+                                        <label for="metodo-pagamento"><i class="fas fa-credit-card"></i> Método de Pagamento:</label>
+                                        <select name="doacao_metodo_pagamento" id="metodo-pagamento">
+                                            <option value="Pix">PIX (Mais rápido e sem taxas)</option>
+                                            <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                            <option value="Boleto">Boleto Bancário</option>
+                                            <option value="Depósito Bancário">Depósito Bancário</option>
+                                            <option value="Outro">Outro</option>
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <!-- FORM PRODUTOS -->
                                 <div id="form-produto" class="form-bloco" style="display:none">
-                                    <h3>Doação de Produto</h3>
+                                    <h3>Detalhes da Doação de Produto</h3>
 
-                                    <label>Categoria:</label>
-                                    <input type="text" name="produto_categoria_item">
+                                    <div class="campo">
+                                        <label for="produto-categoria"><i class="fas fa-tags"></i> Categoria do Produto:</label>
+                                        <input type="text" name="produto_categoria_item" id="produto-categoria" placeholder="Ex: Roupas, Livros, Material de Higiene">
+                                    </div>
 
-                                    <label>Quantidade:</label>
-                                    <input type="number" name="produto_quantidade">
+                                    <div class="campo">
+                                        <label for="produto-quantidade"><i class="fas fa-calculator"></i> Quantidade:</label>
+                                        <input type="number" name="produto_quantidade" id="produto-quantidade" min="1" placeholder="Ex: 5">
+                                    </div>
 
-                                    <label>Condição do Item:</label>
-                                    <select name="doacao_condicao">
-                                        <option value="Novo">Novo</option>
-                                        <option value="Seminovo">Seminovo</option>
-                                        <option value="Usado em bom estado">Usado em bom estado</option>
-                                    </select>
+                                    <div class="campo">
+                                        <label for="condicao-item"><i class="fas fa-check-circle"></i> Condição do Item:</label>
+                                        <select name="doacao_condicao" id="condicao-item">
+                                            <option value="Novo">Novo (Lacrado/Com etiqueta)</option>
+                                            <option value="Seminovo">Seminovo (Pouco uso, em ótimo estado)</option>
+                                            <option value="Usado em bom estado">Usado em bom estado</option>
+                                        </select>
+                                    </div>
                                 </div>
-
 
                                 <!-- FORM ALIMENTOS -->
                                 <div id="form-alimento" class="form-bloco" style="display:none">
-                                    <h3>Doação de Alimentos</h3>
+                                    <h3>Detalhes da Doação de Alimentos</h3>
 
-                                    <label>Tipo de Alimento:</label>
-                                    <input type="text" name="alimento_categoria_item">
+                                    <div class="campo">
+                                        <label for="alimento-categoria"><i class="fas fa-apple-alt"></i> Tipo de Alimento:</label>
+                                        <input type="text" name="alimento_categoria_item" id="alimento-categoria" placeholder="Ex: Arroz, Feijão, Leite, Frutas">
+                                    </div>
 
-                                    <label>Quantidade:</label>
-                                    <input type="number" name="alimento_quantidade">
+                                    <div class="campo">
+                                        <label for="alimento-quantidade"><i class="fas fa-weight"></i> Quantidade:</label>
+                                        <input type="number" name="alimento_quantidade" id="alimento-quantidade" min="1" placeholder="Ex: 10">
+                                    </div>
 
-                                    <label>Unidade (kg, pacotes, litros):</label>
-                                    <input type="text" name="alimento_unidade">
+                                    <div class="campo">
+                                        <label for="alimento-unidade"><i class="fas fa-balance-scale"></i> Unidade de Medida:</label>
+                                        <input type="text" name="alimento_unidade" id="alimento-unidade" placeholder="Ex: kg, pacotes, litros, caixas">
+                                    </div>
                                 </div>
 
+                                <div id="impacto-texto">
+                                    <strong><i class="fas fa-heartbeat"></i> Impacto da Sua Doação:</strong> Escolha o tipo de doação e preencha os dados para calcular o impacto.
+                                </div>
 
-                                <p id="impacto-texto"><strong>Impacto Estimado:</strong> Escolha ou preencha os dados
-                                    acima.</p>
-
-                                <button class="btn-primary" type="submit">Confirmar Doação</button>
+                                <button class="btn-primary btn-confirmar" type="submit">
+                                    <i class="fas fa-paper-plane"></i> Confirmar e Enviar Doação
+                                </button>
                             </form>
                         </div>
     </section>
@@ -193,14 +215,31 @@
     <script>
         document.querySelectorAll(".btn-escolher").forEach(btn => {
             btn.addEventListener("click", () => {
-
                 const tipo = btn.dataset.tipo;
                 const form = document.getElementById("form-doacao");
                 const tipoInput = document.getElementById("doacao_tipo");
+                const cardTitle = document.querySelector(".card-title");
+                const cardSubtitle = document.querySelector(".card-subtitle");
 
+                // Animação suave para mostrar o formulário
                 form.style.display = "block";
+                setTimeout(() => {
+                    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
 
-                // Corrige para ficar capitalizado como o banco espera
+                // Atualiza o título e subtítulo
+                if (tipo === "financeira") {
+                    cardTitle.textContent = "Doação Financeira";
+                    cardSubtitle.textContent = "Sua contribuição financeira será transformada em cuidados diretos para pacientes e famílias.";
+                } else if (tipo === "produto") {
+                    cardTitle.textContent = "Doação de Produtos";
+                    cardSubtitle.textContent = "Produtos de qualidade melhoram o conforto e bem-estar durante o tratamento.";
+                } else if (tipo === "alimento") {
+                    cardTitle.textContent = "Doação de Alimentos";
+                    cardSubtitle.textContent = "Alimentos nutritivos são essenciais para a recuperação e força durante o tratamento.";
+                }
+
+                // Define o tipo de doação no campo oculto
                 let formatoFinal =
                     tipo === "financeira" ? "Financeira" :
                         tipo === "produto" ? "Produto" :
@@ -209,18 +248,20 @@
 
                 tipoInput.value = formatoFinal;
 
-                // Esconde tudo primeiro
+                // Esconde todos os formulários específicos primeiro
                 document.querySelectorAll(".form-bloco").forEach(b => b.style.display = "none");
 
+                // Mostra o formulário específico
                 if (tipo === "financeira") {
                     document.getElementById("form-financeiro").style.display = "block";
-                }
-                if (tipo === "produto") {
+                } else if (tipo === "produto") {
                     document.getElementById("form-produto").style.display = "block";
-                }
-                if (tipo === "alimento") {
+                } else if (tipo === "alimento") {
                     document.getElementById("form-alimento").style.display = "block";
                 }
+
+                // Atualiza o texto de impacto inicial
+                updateImpactText(tipo);
             });
         });
 
@@ -230,25 +271,59 @@
             const impacto = document.getElementById("impacto-texto");
 
             if (!v || v <= 0) {
-                impacto.innerHTML = "<strong>Impacto Estimado:</strong> Informe um valor para calcular.";
+                impacto.innerHTML = `<strong><i class="fas fa-heartbeat"></i> Impacto da Sua Doação:</strong> Informe um valor para calcular o impacto da sua contribuição.`;
                 return;
             }
 
             const pacientes = Math.round(v / 10);
             const dias = Math.max(1, Math.round(v / 30));
+            const refeicoes = Math.round(v / 5);
 
             impacto.innerHTML = `
-        <strong>Impacto Estimado:</strong> Com R$${v.toFixed(2)}, você apoia cerca de 
-        <b>${pacientes} pacientes</b> por <b>${dias} dias</b>.
-    `;
+                <strong><i class="fas fa-heartbeat"></i> Impacto da Sua Doação:</strong> Com R$${v.toFixed(2)}, você pode fornecer aproximadamente 
+                <b>${refeicoes} refeições nutritivas</b> e apoiar o cuidado de <b>${pacientes} pacientes</b> por <b>${dias} dias</b>. 
+                Sua doação faz uma diferença real!
+            `;
+        });
+
+        // Função para atualizar o texto de impacto baseado no tipo
+        function updateImpactText(tipo) {
+            const impacto = document.getElementById("impacto-texto");
+            
+            if (tipo === "financeira") {
+                impacto.innerHTML = `<strong><i class="fas fa-heartbeat"></i> Impacto da Sua Doação:</strong> Informe o valor para calcular o impacto da sua contribuição financeira.`;
+            } else if (tipo === "produto") {
+                impacto.innerHTML = `<strong><i class="fas fa-heartbeat"></i> Impacto da Sua Doação:</strong> Produtos doados trazem conforto, dignidade e bem-estar aos pacientes durante o tratamento.`;
+            } else if (tipo === "alimento") {
+                impacto.innerHTML = `<strong><i class="fas fa-heartbeat"></i> Impacto da Sua Doação:</strong> Alimentos nutritivos são fundamentais para a recuperação e força dos pacientes durante o tratamento.`;
+            }
+        }
+
+        // Adiciona validação básica ao formulário
+        document.getElementById("form-doacao")?.addEventListener("submit", function(e) {
+            const tipo = document.getElementById("doacao_tipo").value;
+            let isValid = true;
+            
+            if (tipo === "Financeira") {
+                const valor = document.getElementById("valor-input").value;
+                if (!valor || parseFloat(valor) <= 0) {
+                    alert("Por favor, informe um valor válido para a doação.");
+                    isValid = false;
+                }
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+            } else {
+                // Animação de envio
+                const btn = document.querySelector(".btn-confirmar");
+                btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processando Doação...`;
+                btn.disabled = true;
+            }
         });
     </script>
 
-
-
-    <!-- ======================================================================================================================-->
     <!--==================================================== FOOTER ===========================================================-->
-    <!--====================================================================================================================== -->
     <footer>
         <div class="footer-container">
             <div class="footer-about">

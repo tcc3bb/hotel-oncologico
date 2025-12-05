@@ -1,3 +1,36 @@
+:root {
+    --verde-escuro: #23543b;
+    --verde-claro: #cfe9d1;
+    --verde-medio: #3a7d55;
+    --vermelho: #d9534f;
+    --branco: #fff;
+    --cinza-claro: #f9f9f9;
+    --cinza-medio: #ccc;
+    --cinza-escuro: #666;
+    --sombra-leve: rgba(0, 0, 0, 0.1);
+    --borda-arredondada: 8px;
+    --cor-principal: #23543b;
+    --cor-secundaria: #3a7d55;
+    --cor-acento-claro: #cfe9d1;
+    --cor-acento-vibrante: #00bcd4;
+    --cor-fundo-dashboard: #f4f7f6;
+    --cor-texto-escuro: #333;
+    --cor-texto-claro: #fff;
+    --cor-sucesso: #065008;
+    --cor-aviso: #FFC107;
+    --cor-perigo: #E91E63;
+    --cor-info: #06477c;
+    --cor-service: #4e045b;
+    --sombra-elevada: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --borda-arredondada-lg: 12px;
+    --borda-arredondada-md: 8px;
+    --transicao-rapida: all 0.3s ease;
+    --cor-destaque: #2e8b57;
+    --cor-fundo-form: #f8fdf9;
+    --cor-borda-suave: #e0f0e5;
+    --cor-texto-secundario: #5a6d5e;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -16,47 +49,16 @@ body {
 }
 
 p {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.7;
     margin-bottom: 1rem;
-    text-align: justify;
+    color: var(--cor-texto-escuro);
 }
 
-main { 
-    max-width: 58rem;
-    margin: 2.5rem auto 5rem;
-    padding: 0 1.25rem;
-    text-align: center;
-}
-
-.title {
-    font-weight: 700;
-    font-size: 1.75rem;
-    color: #61967e;
-    margin-bottom: 1.8rem;
-}
-
-.highlight-title {
-    color: #2a684e;
-}
-
-.dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    margin: 2rem 0;
-}
-
-.dot {
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background-color: #61967e;
-}
-
-.dot.dark {
-    background-color: #2a684e;
+main {
+    max-width: 70rem;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
 }
 
 /* =========================================================== MENU ============================================================== */
@@ -185,172 +187,170 @@ nav .nav-links {
     }
 }
 
-/* =========================================================== MAIN  ============================================================== */
 
-.main-container {
-    flex: 1;
-    max-width: 75rem;
-    margin: 2rem auto;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-}
-
-/* Seções Gerais */
-section {
-    background: #fff;
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-section:hover {
-    transform: translateY(-5px);
-}
-
-section h2 {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 2.5rem;
-    color: #2a684e;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-section .descricao,
-.farmacias-container p,
-.clinicas-container p {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 2rem;
-}
-
-/*Localização*/
-/* Definições de variáveis CSS para consistência com o padrão (caso não estejam definidas em outro arquivo) */
-:root {
-    --branco: #fff;
-    --cor-principal: #2a684e;
-    --cor-secundaria: #61967e;
-    --cor-acento-claro: #83aa89;
-    --cor-texto-escuro: #444;
-    --borda-arredondada-md: 0.8rem;
-    --borda-arredondada-lg: 1rem;
-    --sombra-elevada: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
-    --transicao-rapida: 0.3s ease;
-}
-
-/* Estilos para .localizacao-card, seguindo o padrão do CSS fornecido */
+/* ====================================================== Card do Hotel ========================================================= */
 .localizacao-card {
     display: flex;
     align-items: center;
     background: var(--branco);
     border-radius: var(--borda-arredondada-lg);
-    padding: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     box-shadow: var(--sombra-elevada);
-    gap: 15px;
     transition: var(--transicao-rapida);
-    margin-bottom: 2rem; /* Ajuste para espaçamento consistente com outras seções */
-}
-
-.localizacao-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-.localizacao-card h2 {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 2rem;
-    color: var(--cor-principal);
-    margin: 0;
-    text-align: left;
-}
-
-.mini-mapa img {
-    width: 120px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: var(--borda-arredondada-md);
-    border: 2px solid var(--cor-acento-claro);
-}
-
-.localizacao-info h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: var(--cor-principal);
-    font-weight: bold;
-}
-
-.localizacao-info p {
-    margin: 5px 0 10px;
-    color: var(--cor-texto-escuro);
-    font-size: 1rem;
-}
-
-.localizacao-info .mapa-sobre-img {
-    background: var(--cor-secundaria);
-    color: var(--branco);
-    padding: 8px 14px;
-    border: none;
-    border-radius: var(--borda-arredondada-md);
-    cursor: pointer;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: var(--transicao-rapida);
-}
-
-.localizacao-info .mapa-sobre-img:hover {
-    background: var(--cor-principal);
-}
-
-/* Responsividade para .localizacao-card */
-@media (max-width: 768px) {
-    .localizacao-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-
-    .localizacao-card h2 {
-        font-size: 1.5rem;
-    }
-
-    .mini-mapa img {
-        width: 100%;
-        height: 80px;
-    }
-}
-
-
-/* Hospitais */
-.hospitais-section .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
-    gap: 2rem;
-}
-
-.card {
-    background: #fff;
-    border-radius: 0.8rem;
-    overflow: hidden;
-    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
+    border-left: 5px solid var(--verde-medio);
     position: relative;
 }
 
-.card:hover {
-    transform: scale(1.02);
+.localizacao-card .mapa-sobre-img {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(35, 84, 59, 0.9);
+    color: var(--branco);
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: var(--borda-arredondada-md);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transicao-rapida);
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+.localizacao-card .mapa-sobre-img:hover {
+    background: var(--verde-escuro);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.localizacao-card:hover {
+    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.mini-mapa {
+    flex-shrink: 0;
+    margin-right: 2rem;
+}
+
+.mini-mapa img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--borda-arredondada-md);
+    border: 3px solid var(--cor-acento-claro);
+}
+
+.mini-mapa .mapa-sobre-img {
+    display: none;
+}
+
+.localizacao-info {
+    flex: 1;
+    text-align: left;
+}
+
+.localizacao-info h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: var(--verde-escuro);
+    margin-bottom: 0.5rem;
+}
+
+.localizacao-info h3 {
+    font-size: 1.4rem;
+    color: var(--cor-texto-escuro);
+    margin-bottom: 0.5rem;
+}
+
+.localizacao-info p {
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* ======================================================== Sessões =========================================================== */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--cor-borda-suave);
+}
+
+.section-header h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.2rem;
+    color: var(--verde-escuro);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--verde-medio);
+}
+
+.section-header .descricao {
+    font-size: 1.2rem;
+    color: var(--cor-texto-secundario);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.card {
+    background: var(--branco);
+    border-radius: var(--borda-arredondada-lg);
+    overflow: hidden;
+    box-shadow: var(--sombra-elevada);
+    transition: var(--transicao-rapida);
+    position: relative;
+    border: 1px solid var(--cor-borda-suave);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--verde-medio) 0%, var(--cor-acento-claro) 100%);
 }
 
 .card img {
     width: 100%;
-    height: 14rem;
+    height: 200px;
     object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
 }
 
 .card-content {
@@ -358,59 +358,68 @@ section .descricao,
 }
 
 .card-content h3 {
-    font-size: 1.5rem;
-    color: #1e5a3c;
-    margin-bottom: 0.5rem;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.4rem;
+    color: var(--verde-escuro);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
 }
 
 .card-content p {
+    color: var(--cor-texto-secundario);
     font-size: 1rem;
-    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
 }
 
 .mapa-sobre-img {
     position: absolute;
-    bottom: 1rem;
+    top: 1rem;
     right: 1rem;
-    background: rgba(30, 90, 60, 0.9);
-    color: #fff;
+    background: rgba(35, 84, 59, 0.9);
+    color: var(--branco);
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: var(--borda-arredondada-md);
     cursor: pointer;
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transicao-rapida);
+    backdrop-filter: blur(5px);
+    z-index: 2;
 }
 
 .mapa-sobre-img:hover {
-    background: #1e5a3c;
-    transform: scale(1.1);
+    background: var(--verde-escuro);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Farmácias */
-.farmacias-section .farmacias-container {
-    background: linear-gradient(90deg, #6aa986 0%, #2a684e 100%);
-    color: #fff;
-    border-radius: 1rem;
-    padding: 2rem;
-    margin-top: 9rem;
-    margin-bottom: 2rem;
-    text-align: center;
+.mapa-sobre-img i {
+    font-size: 1rem;
+}
+
+/* ====================================================== Farmácias ========================================================= */
+.farmacias-section {
+    margin-bottom: 4rem;
 }
 
 .farmacias-carousel {
     position: relative;
-    overflow: hidden;
-    border-radius: 1rem;
+    padding: 1rem 0;
 }
 
 .farmacias-track {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: 1rem 0;
+    padding: 1rem;
+    margin: 0 -1rem;
 }
 
 .farmacias-track::-webkit-scrollbar {
@@ -418,109 +427,432 @@ section .descricao,
 }
 
 .farmacia-card {
-    flex: 0 0 clamp(16rem, 35vw, 20rem);
-    background: #2a684e;
-    border-radius: 12px;
+    flex: 0 0 280px;
+    background: var(--branco);
+    border-radius: var(--borda-arredondada-lg);
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
+    box-shadow: var(--sombra-elevada);
+    transition: var(--transicao-rapida);
+    border: 1px solid var(--cor-borda-suave);
 }
 
 .farmacia-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .farmacia-card img {
     width: 100%;
-    height: 11rem;
+    height: 160px;
     object-fit: cover;
 }
 
 .farmacia-card h3 {
-    color: #fff;
-    font-size: 1.3rem;
-    margin: 1rem;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem;
+    color: var(--verde-escuro);
+    margin: 1rem 1rem 0.5rem;
 }
 
 .farmacia-card p {
-    color: #e0e0e0;
-    font-size: 1rem;
+    color: var(--cor-texto-secundario);
+    font-size: 0.95rem;
     margin: 0 1rem 1rem;
+    line-height: 1.5;
+}
+
+.farmacias-section .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.farmacias-carousel,
+.farmacias-track,
+.carousel-btn {
+    display: none;
+}
+
+.farmacia-card {
+    background: var(--branco);
+    border-radius: var(--borda-arredondada-lg);
+    overflow: hidden;
+    box-shadow: var(--sombra-elevada);
+    transition: var(--transicao-rapida);
+    position: relative;
+    border: 1px solid var(--cor-borda-suave);
+    height: 100%;
+}
+
+.farmacia-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.farmacia-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--cor-service) 0%, #9c27b0 100%);
+}
+
+.farmacia-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.farmacia-card:hover img {
+    transform: scale(1.05);
+}
+
+.farmacia-card-content {
+    padding: 1.5rem;
+}
+
+.farmacia-card-content h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.3rem;
+    color: var(--verde-escuro);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+}
+
+.farmacia-card-content p {
+    color: var(--cor-texto-secundario);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.farmacia-card-content .descricao {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+.farmacia-card .mapa-sobre-img {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(35, 84, 59, 0.9);
+    color: var(--branco);
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: var(--borda-arredondada-md);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transicao-rapida);
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+.farmacia-card .mapa-sobre-img:hover {
+    background: var(--verde-escuro);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.farmacia-card .category-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--cor-service);
+    color: var(--branco);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .farmacias-section .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .farmacia-card {
+        max-width: 100%;
+    }
+}
+
+.localizacao-hero {
+    display: none;
 }
 
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    color: #2a684e;
+    background: var(--branco);
+    color: var(--verde-escuro);
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     cursor: pointer;
     font-size: 1.2rem;
-    transition: all 0.3s ease;
+    transition: var(--transicao-rapida);
     z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-btn:hover {
-    background: #fff;
+    background: var(--verde-escuro);
+    color: var(--branco);
     transform: translateY(-50%) scale(1.1);
 }
 
 .carousel-btn.prev {
-    left: 10px;
+    left: -20px;
 }
 
 .carousel-btn.next {
-    right: 10px;
+    right: -20px;
 }
 
-/* ========================================================== SECTION CLÍNICAS ============================================================= */
-.clinicas-section .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-}
-
-/* Botão Carregar Mais */
-.btn-carregar {
-    display: block;
-    margin: 2rem auto 0;
-    padding: 0.8rem 2rem;
-    background: linear-gradient(90deg, #1e5a3c 0%, #2a684e 100%);
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-carregar:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* ========================================================== MODAIS ============================================================= */
+/* =========================================================== Modais ============================================================== */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85);
     justify-content: center;
     align-items: center;
     animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    overflow: hidden;
+}
+
+.modal-content {
+    background: var(--branco);
+    width: 95%;
+    max-width: 1000px;
+    height: 90vh;
+    border-radius: var(--borda-arredondada-lg);
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.4s ease;
+    border: 1px solid var(--cor-borda-suave);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+
+.modal-header {
+    padding: 1.5rem 2rem;
+    background: var(--branco);
+    border-bottom: 2px solid var(--cor-borda-suave);
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.modal-header h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: var(--verde-escuro);
+    margin: 0;
+    padding-right: 40px;
+    line-height: 1.3;
+}
+
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.map-container {
+    flex-shrink: 0;
+    padding: 0;
+}
+
+#map {
+    height: 400px;
+    min-height: 400px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--cor-borda-suave);
+    margin: 0;
+}
+
+.map-details {
+    padding: 2rem;
+}
+
+.map-info {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cor-borda-suave);
+}
+
+.map-info p {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.map-info strong {
+    min-width: 120px;
+    color: var(--verde-escuro);
+    font-weight: 600;
+}
+
+.additional-info {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--cor-texto-secundario);
+}
+
+.additional-info p {
+    margin-bottom: 1rem;
+}
+
+.fechar {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: var(--verde-escuro);
+    transition: var(--transicao-rapida);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 11;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.fechar:hover {
+    color: var(--vermelho);
+    background: var(--cor-acento-claro);
+    transform: rotate(90deg);
+}
+
+.modal-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: var(--cor-acento-claro);
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: var(--verde-medio);
+    border-radius: 5px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--verde-escuro);
+}
+
+/* ===================================================== Responsividade ======================================================= */
+@media (max-width: 768px) {
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 100%;
+        height: 95vh;
+        max-width: none;
+        border-radius: 10px;
+    }
+
+    .modal-header {
+        padding: 1rem 1.2rem;
+    }
+
+    .modal-header h3 {
+        font-size: 1.4rem;
+        padding-right: 35px;
+    }
+
+    #map {
+        height: 350px;
+        min-height: 350px;
+    }
+
+    .map-details {
+        padding: 1.5rem;
+    }
+
+    .fechar {
+        top: 0.8rem;
+        right: 1rem;
+        width: 35px;
+        height: 35px;
+        font-size: 1.8rem;
+    }
+
+    .map-info p {
+        flex-direction: column;
+    }
+
+    .map-info strong {
+        min-width: auto;
+        margin-bottom: 0.3rem;
+    }
+}
+
+@media (max-height: 700px) {
+    #map {
+        height: 300px;
+        min-height: 300px;
+    }
+
+    .modal-content {
+        height: 85vh;
+    }
+}
+
+@media (max-height: 500px) {
+    #map {
+        height: 250px;
+        min-height: 250px;
+    }
+
+    .modal-content {
+        height: 80vh;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @keyframes fadeIn {
@@ -533,78 +865,207 @@ section .descricao,
     }
 }
 
-.modal-content {
-    background: #fff;
-    width: 90%;
-    max-width: 600px;
-    border-radius: 15px;
-    padding: 2rem;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    animation: slideIn 0.3s ease;
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: var(--cor-acento-claro);
+    color: var(--verde-escuro);
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
+.loading::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--cor-acento-claro);
+    border-top-color: var(--verde-medio);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 1rem;
+}
 
+@keyframes spin {
     to {
-        transform: translateY(0);
-        opacity: 1;
+        transform: rotate(360deg);
     }
 }
 
-.fechar {
+@media (max-width: 480px) {
+    .modal-header h3 {
+        font-size: 1.2rem;
+    }
+
+    #map {
+        height: 250px;
+        min-height: 250px;
+    }
+
+    .map-details {
+        padding: 1rem;
+    }
+
+    .map-info p {
+        font-size: 1rem;
+    }
+
+    .additional-info p {
+        font-size: 0.95rem;
+    }
+}
+
+.category-badge {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: #1e5a3c;
-    transition: color 0.3s ease;
+    top: 1rem;
+    left: 1rem;
+    background: var(--cor-service);
+    color: var(--branco);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
 }
 
-.fechar:hover {
-    color: #c94a4a;
+.hospitais-section .card::before {
+    background: linear-gradient(90deg, var(--cor-info) 0%, var(--cor-acento-vibrante) 100%);
 }
 
-#map {
-    height: 400px;
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 1rem;
+.farmacias-section .farmacia-card::before {
+    background: linear-gradient(90deg, var(--cor-service) 0%, #9c27b0 100%);
 }
 
-/* Responsividade */
+.clinicas-section .card::before {
+    background: linear-gradient(90deg, var(--cor-sucesso) 0%, var(--verde-medio) 100%);
+}
+
+/* ===================================================== Responsividade ======================================================= */
 @media (max-width: 768px) {
-    .main-container {
+    main {
         padding: 0 1rem;
-        gap: 2rem;
+        margin: 1rem auto 3rem;
     }
 
-    section {
+
+    .localizacao-card {
+        flex-direction: column;
+        text-align: center;
         padding: 1.5rem;
+    }
+
+    .mini-mapa {
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .mini-mapa img {
+        width: 100%;
+        max-width: 300px;
+        height: 150px;
     }
 
     .cards-container {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .carousel-btn {
+        display: none;
     }
 
     .farmacias-track {
         gap: 1rem;
+        padding: 0.5rem;
     }
 
     .farmacia-card {
-        flex: 0 0 280px;
+        flex: 0 0 260px;
     }
 
-    .carousel-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
     }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .localizacao-info h2 {
+        font-size: 1.4rem;
+    }
+
+    .mapa-sobre-img {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    #map {
+        height: 300px;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Loading State */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: var(--cor-texto-secundario);
+}
+
+.loading::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--cor-acento-claro);
+    border-top-color: var(--verde-medio);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Utilitários */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
 }
 
 /* ========================================================== FOOTER ============================================================= */
@@ -655,15 +1116,4 @@ footer {
     padding-top: 1rem;
     font-size: 0.85rem;
     color: #aeb5ab;
-}
-
-
-
-
-
-#map {
-    height: 400px;
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 15px;
 }

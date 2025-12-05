@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Vita</title>
+    <title>Localizações - Instituto Vita</title>
     <link rel="icon" href="/image/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +15,6 @@
     <script src="https://kit.fontawesome.com/7df7a5cfa1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-</head>
-
 </head>
 
 <body>
@@ -58,193 +56,218 @@
         </div>
     </nav>
 
-
     <main>
-        <div class="localizacao-card" data-lat="-23.559616" data-lng="-46.658439" data-nome="Casa de Apoio Vita"
-            data-endereco="Rua Exemplo, 123 - São Paulo, SP">
-            <h2>Nosso Hotel</h2>
-
+        <!-- NOSSO HOTEL COM ENDEREÇO REAL -->
+        <div class="localizacao-card" data-lat="-23.5620" data-lng="-46.6550"
+            data-nome="Instituto Vita - Casa de Apoio Oncológico"
+            data-endereco="Av. Dr. Enéas Carvalho de Aguiar, 255 - Cerqueira César, São Paulo - SP">
             <div class="mini-mapa">
-                <img src="/image/apoio-paciente/hospital1.jpg" alt="Hospital do Câncer de São Paulo">
+                <img src="/image/apoio-paciente/hospital1.jpg" alt="Instituto Vita - Casa de Apoio Oncológico">
             </div>
 
             <div class="localizacao-info">
-                <h3>Casa de Apoio Vita</h3>
-                <p>Rua Exemplo, 123 - São Paulo, SP</p>
-
-                    <button class="mapa-sobre-img">Mapa</button>
-
+                <h2>📍 Nossa Localização</h2>
+                <h3>Instituto Vita - Casa de Apoio Oncológico</h3>
+                <p>Av. Dr. Enéas Carvalho de Aguiar, 255 - Cerqueira César, São Paulo - SP, 05403-000</p>
+                <p class="descricao">Nossa casa de apoio está estrategicamente localizada próxima aos principais centros
+                    de tratamento oncológico de São Paulo, oferecendo conforto, segurança e proximidade para pacientes e
+                    familiares durante o tratamento.</p>
+                <p class="descricao"><strong>Horário de funcionamento:</strong> 24 horas, 7 dias por semana</p>
+                <p class="descricao"><strong>Telefone:</strong> (11) 3061-7000</p>
             </div>
-        </div>
 
+            <!-- BOTÃO MAPA NO CANTO SUPERIOR DIREITO -->
+            <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+        </div>
 
         <!-- HOSPITAIS -->
         <section class="hospitais-section">
-            <h2>Hospitais Próximos</h2>
-            <p class="descricao">
-                Esses são os hospitais mais próximos da nossa casa de apoio, oferecendo atendimento
-                comum e especializado no tratamento do câncer.
-            </p>
+            <div class="section-header">
+                <h2> Hospitais Próximos</h2>
+                <p class="descricao">
+                    Esses são os hospitais mais próximos da nossa casa de apoio, oferecendo atendimento
+                    comum e especializado no tratamento do câncer.
+                </p>
+            </div>
 
             <div class="cards-container hospitais-cards">
                 <div class="card"
-                    data-info="Hospital do Câncer de São Paulo é referência nacional no tratamento oncológico."
+                    data-info="Hospital do Câncer de São Paulo é referência nacional no tratamento oncológico, oferecendo atendimento multidisciplinar e tecnologia de ponta."
                     data-lat="-23.5565" data-lng="-46.6601">
+                    <span class="category-badge">Hospital Oncológico</span>
                     <img src="/image/apoio-paciente/hospital1.jpg" alt="Hospital do Câncer de São Paulo">
-                    <button class="mapa-sobre-img">Mapa</button>
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
                     <div class="card-content">
                         <h3>Hospital do Câncer de São Paulo</h3>
-                        <p> R. Dr. Arnaldo, 251, Cerqueira Cezar, São Paulo, SP</p>
+                        <p>R. Dr. Arnaldo, 251, Cerqueira Cezar, São Paulo, SP</p>
+                        <p class="descricao">Referência nacional em oncologia com atendimento 24 horas e equipe
+                            especializada.</p>
                     </div>
                 </div>
 
                 <div class="card"
-                    data-info="Santa Casa é uma instituição filantrópica com atendimento gratuito e especializado.">
+                    data-info="Santa Casa é uma instituição filantrópica com atendimento gratuito e especializado em diversas áreas da saúde."
+                    data-lat="-23.5500" data-lng="-46.6550">
+                    <span class="category-badge">Hospital Geral</span>
                     <img src="/image/apoio-paciente/hospital2.png" alt="Santa Casa de Misericórdia de São Paulo">
-                    <button class="mapa-sobre-img">Mapa</button>
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
                     <div class="card-content">
                         <h3>Santa Casa de Misericórdia de São Paulo</h3>
                         <p>Av. Santa de Carvalho Aguiar, 255, Cerqueira César, São Paulo, SP</p>
-                    </div>
-                </div>
-
-                <div class="card" data-info="Hospital Oswaldo Cruz é referência em oncologia privada.">
-                    <img src="/image/apoio-paciente/hospital3.jpg" alt="Hospital Alemão Oswaldo Cruz">
-                    <button class="mapa-sobre-img">Mapa</button>
-                    <div class="card-content">
-                        <h3>Hospital Alemão Oswaldo Cruz</h3>
-                        <p>Rua das Três Irmãs, 100, Paraíso, São Paulo, SP</p>
+                        <p class="descricao">Instituição filantrópica com mais de 400 anos de história no atendimento à
+                            saúde.</p>
                     </div>
                 </div>
 
                 <div class="card"
-                    data-info="Hospital do Câncer de São Paulo é referência nacional no tratamento oncológico."
-                    data-lat="-23.5565" data-lng="-46.6601">
-                    <img src="/image/apoio-paciente/hospital1.jpg" alt="Hospital do Câncer de São Paulo">
-                    <button class="mapa-sobre-img">Mapa</button>
+                    data-info="Hospital Oswaldo Cruz é referência em oncologia privada com equipe multidisciplinar e tecnologia avançada."
+                    data-lat="-23.5620" data-lng="-46.6570">
+                    <span class="category-badge">Hospital Privado</span>
+                    <img src="/image/apoio-paciente/hospital3.jpg" alt="Hospital Alemão Oswaldo Cruz">
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
                     <div class="card-content">
-                        <h3>Hospital do Câncer de São Paulo</h3>
-                        <p> R. Dr. Arnaldo, 251, Cerqueira Cezar, São Paulo, SP</p>
+                        <h3>Hospital Alemão Oswaldo Cruz</h3>
+                        <p>Rua das Três Irmãs, 100, Paraíso, São Paulo, SP</p>
+                        <p class="descricao">Excelência em oncologia com estrutura moderna e equipe especializada.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FARMÁCIAS -->
+        <!-- FARMÁCIAS - AGORA EM GRID CENTRALIZADO -->
         <section class="farmacias-section">
-            <div class="farmacias-container">
+            <div class="section-header">
                 <h2>Farmácias Próximas</h2>
-                <p>Essas são as farmácias mais próximas da nossa casa de apoio.</p>
+                <p class="descricao">Essas são as farmácias mais próximas da nossa casa de apoio, oferecendo
+                    medicamentos, produtos de saúde e atendimento especializado.</p>
             </div>
 
-            <div class="farmacias-carousel">
-                <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
-
-                <div class="farmacias-track">
-                    <div class="farmacia-card" data-info="Drogasil possui ampla variedade de medicamentos.">
-                        <img src="/image/apoio-paciente/farmacia1.jpg" alt="Drogasil">
-                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+            <div class="cards-container">
+                <div class="farmacia-card"
+                    data-info="Drogasil possui ampla variedade de medicamentos, produtos de beleza e cuidados pessoais com atendimento qualificado."
+                    data-lat="-23.5580" data-lng="-46.6590">
+                    <span class="category-badge">Farmácia Popular</span>
+                    <img src="/image/apoio-paciente/farmacia1.jpg" alt="Drogasil">
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                    <div class="farmacia-card-content">
                         <h3>Drogasil</h3>
                         <p>R. Br. de Itapetininga, 40 - Centro, São Paulo, SP</p>
-                    </div>
-
-                    <div class="farmacia-card" data-info="Ambulatório especializado em medicamentos de alto custo.">
-                        <img src="/image/apoio-paciente/farmacia2.jpg" alt="Ambulatório Dr. Geraldo Bourroul">
-                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
-                        <h3>Ambulatório Dr. Geraldo Bourroul</h3>
-                        <p>Rua Martins Fontes, 208, São Paulo, SP</p>
-                    </div>
-
-                    <div class="farmacia-card" data-info="Ame Marsz Zélia - atendimento público e gratuito.">
-                        <img src="/image/apoio-paciente/farmacia3.jpg" alt="Ame Marsz Zélia">
-                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
-                        <h3>Ame Marsz Zélia</h3>
-                        <p>R. Jequitinhonha, 368 - Belenzinho</p>
-                    </div>
-
-                    <div class="farmacia-card" data-info="Pague Menos - ampla rede de farmácias.">
-                        <img src="/image/apoio-paciente/farmacia1.jpg" alt="Pague Menos">
-                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
-                        <h3>Pague Menos</h3>
-                        <p>Av. Paulista, 1010</p>
-                    </div>
-
-                    <div class="farmacia-card" data-info="Ultrafarma - descontos em medicamentos genéricos.">
-                        <img src="/image/apoio-paciente/farmacia2.jpg" alt="Ultrafarma">
-                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
-                        <h3>Ultrafarma</h3>
-                        <p>Rua das Flores, 55</p>
-                    </div>
-
-                    <div class="farmacia-card" data-info="Droga Raia - atendimento 24 horas.">
-                        <img src="/image/apoio-paciente/farmacia3.jpg" alt="Droga Raia">
-                        <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
-                        <h3>Droga Raia</h3>
-                        <p>Av. Consolação, 500</p>
+                        <p class="descricao">Aberta 24 horas • Entrega em domicílio • Programa de descontos</p>
                     </div>
                 </div>
 
-                <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                <div class="farmacia-card"
+                    data-info="Ambulatório especializado em medicamentos de alto custo com atendimento humanizado."
+                    data-lat="-23.5575" data-lng="-46.6585">
+                    <span class="category-badge">Medicamentos Especiais</span>
+                    <img src="/image/apoio-paciente/farmacia2.jpg" alt="Ambulatório Dr. Geraldo Bourroul">
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                    <div class="farmacia-card-content">
+                        <h3>Ambulatório Dr. Geraldo Bourroul</h3>
+                        <p>Rua Martins Fontes, 208, São Paulo, SP</p>
+                        <p class="descricao">Especializada em medicamentos de alto custo • Atendimento personalizado</p>
+                    </div>
+                </div>
+
+                <div class="farmacia-card"
+                    data-info="Ame Marsz Zélia oferece atendimento público e gratuito com medicamentos básicos e especializados."
+                    data-lat="-23.5590" data-lng="-46.6575">
+                    <span class="category-badge">Atendimento Público</span>
+                    <img src="/image/apoio-paciente/farmacia3.jpg" alt="Ame Marsz Zélia">
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
+                    <div class="farmacia-card-content">
+                        <h3>Ame Marsz Zélia</h3>
+                        <p>R. Jequitinhonha, 368 - Belenzinho, São Paulo</p>
+                        <p class="descricao">Atendimento público gratuito • Medicamentos do SUS • Horário comercial</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- CLÍNICAS -->
         <section class="clinicas-section">
-            <div class="clinicas-container">
+            <div class="section-header">
                 <h2>Clínicas Próximas</h2>
-                <p>Essas são as clínicas mais próximas da nossa casa de apoio.</p>
+                <p class="descricao">Essas são as clínicas mais próximas da nossa casa de apoio, oferecendo consultas,
+                    exames e tratamentos especializados.</p>
             </div>
 
             <div class="cards-container clinicas-cards">
-                <div class="card" data-info="Atendimento especializado em oncologia.">
+                <div class="card"
+                    data-info="Atendimento especializado em oncologia com equipe multidisciplinar e tecnologia avançada."
+                    data-lat="-23.5610" data-lng="-46.6555">
+                    <span class="category-badge">Oncologia</span>
                     <img src="/image/apoio-paciente/hospital1.jpg" alt="Clínica Oncológica São Camilo">
-                    <button class="mapa-sobre-img">Mapa</button>
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
                     <div class="card-content">
                         <h3>Clínica Oncológica São Camilo</h3>
                         <p>Av. Albert Einstein, 627, Morumbi, São Paulo, SP</p>
+                        <p class="descricao">Oncologia especializada • Quimioterapia • Acompanhamento multidisciplinar
+                        </p>
                     </div>
                 </div>
 
-                <div class="card" data-info="Consultas populares em diversas especialidades.">
+                <div class="card"
+                    data-info="Consultas populares em diversas especialidades médicas com preços acessíveis."
+                    data-lat="-23.5630" data-lng="-46.6545">
+                    <span class="category-badge">Clínica Geral</span>
                     <img src="/image/apoio-paciente/hospital2.png" alt="Clínica da Cidade">
-                    <button class="mapa-sobre-img">Mapa</button>
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
                     <div class="card-content">
                         <h3>Clínica da Cidade</h3>
-                        <p>Av. Brigadeiro Luís Antônio, 483</p>
+                        <p>Av. Brigadeiro Luís Antônio, 483 - São Paulo, SP</p>
+                        <p class="descricao">Consultas acessíveis • Várias especialidades • Atendimento rápido</p>
                     </div>
                 </div>
 
-                <div class="card" data-info="Rede Dr. Consulta - consultas e exames rápidos.">
+                <div class="card" data-info="Rede Dr. Consulta - consultas e exames rápidos com agilidade e qualidade."
+                    data-lat="-23.5650" data-lng="-46.6535">
+                    <span class="category-badge">Consultas Rápidas</span>
                     <img src="/image/apoio-paciente/hospital3.jpg" alt="Dr. Consulta">
-                    <button class="mapa-sobre-img">Mapa</button>
+                    <button class="mapa-sobre-img"><i class="fas fa-map-marker-alt"></i> Mapa</button>
                     <div class="card-content">
                         <h3>Dr. Consulta</h3>
-                        <p>R. Brg. Tobias, 600 - Centro</p>
+                        <p>R. Brg. Tobias, 600 - Centro, São Paulo, SP</p>
+                        <p class="descricao">Consultas rápidas • Exames no local • Atendimento por plano e particular
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- MODAL -->
-    <div class="modal" id="infoModal">
-        <div class="modal-content">
-            <span class="fechar">&times;</span>
-            <h3 id="modalTitulo"></h3>
-            <p id="modalDescricao"></p>
-        </div>
-    </div>
-
-    <!-- MODAL DO MAPA -->
+    <!-- MODAL DO MAPA COM SCROLL -->
     <div class="modal" id="mapModal">
         <div class="modal-content">
             <span class="fechar" id="fecharMapa">&times;</span>
-            <h3 id="tituloMapa"></h3>
-            <div id="map" style="height:400px; width:100%; border-radius:10px;"></div>
+
+            <!-- Cabeçalho fixo -->
+            <div class="modal-header">
+                <h3 id="tituloMapa"></h3>
+            </div>
+
+            <!-- Corpo do modal com scroll -->
+            <div class="modal-body">
+                <!-- Mapa grande -->
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+
+                <!-- Informações abaixo do mapa -->
+                <div class="map-details">
+                    <div class="map-info">
+                        <p><strong>📍 Endereço:</strong> <span id="mapEndereco"></span></p>
+                        <p><strong>📏 Distância:</strong> <span id="mapDistancia"></span></p>
+                    </div>
+
+                    <!-- Informações adicionais -->
+                    <div class="additional-info" id="additionalInfo">
+                        <!-- As informações extras serão inseridas aqui pelo JavaScript -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-
 
     <footer>
         <div class="footer-container">
@@ -282,166 +305,339 @@
         hamburger.addEventListener("click", () => {
             document.querySelector(".nav-links").classList.toggle("active");
         });
-    </script>
 
-
-    <script>
-        // MODAL DE INFORMAÇÕES
-        const modal = document.getElementById('infoModal');
-        const modalTitulo = document.getElementById('modalTitulo');
-        const modalDescricao = document.getElementById('modalDescricao');
-        const fechar = document.querySelector('.fechar');
-
-        document.querySelectorAll('.card, .farmacia-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                // Se o clique for no botão de mapa, ignora o modal de info
-                if (e.target.classList.contains('mapa-sobre-img') || e.target.closest('.mapa-sobre-img')) {
-                    return;
-                }
-
-                modalTitulo.textContent = card.querySelector('h3').textContent;
-                modalDescricao.textContent = card.dataset.info || 'Mais informações indisponíveis.';
-                modal.style.display = 'flex';
-            });
-        });
-
-        fechar.onclick = () => modal.style.display = 'none';
-        window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; }
-
-        // CARROSSEL DAS FARMÁCIAS
-        const track = document.querySelector('.farmacias-track');
-        const prevBtn = document.querySelector('.carousel-btn.prev');
-        const nextBtn = document.querySelector('.carousel-btn.next');
-
-        let scrollAmount = 0;
-        const cardWidth = 300; // Largura aproximada dos cards
-
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        });
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        });
-
-        // MODAL DO MAPA
+        // ==================== MODAL DO MAPA ====================
         const mapModal = document.getElementById('mapModal');
         const fecharMapa = document.getElementById('fecharMapa');
         const tituloMapa = document.getElementById('tituloMapa');
-        let map; // Variável global para o mapa
+        const mapEndereco = document.getElementById('mapEndereco');
+        const mapDistancia = document.getElementById('mapDistancia');
+        let map = null;
 
-        document.querySelectorAll('.mapa-sobre-img').forEach(botao => {
-            botao.addEventListener('click', async (e) => {
-                e.stopPropagation();
+        // Coordenadas do Instituto Vita
+        const institutoVitaCoords = {
+            lat: -23.5620,
+            lng: -46.6550
+        };
 
-                const card = botao.closest('.card, .farmacia-card');
-                const nome = card.querySelector('h3').textContent;
-                const endereco = card.querySelector('p').textContent;
+        // Função para calcular distância (fórmula Haversine)
+        function calcularDistancia(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Raio da Terra em km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
 
-                tituloMapa.textContent = `Mapa de ${nome}`;
-                mapModal.style.display = 'flex';
+        // Função para ajustar a altura do mapa
+        function ajustarAlturaMapa() {
+            const mapContainer = document.getElementById('map');
+            if (!mapContainer) return;
 
-                // Remove o mapa anterior antes de criar o novo
-                const mapContainer = document.getElementById('map');
-                if (map) {
-                    map.remove();
-                    map = null;
-                }
-                mapContainer.innerHTML = '<p>Carregando mapa...</p>'; // Placeholder enquanto carrega
+            const alturaTela = window.innerHeight;
+            const larguraTela = window.innerWidth;
 
-                // Tenta obter coordenadas: primeiro de data attributes, senão geocodifica
-                let coords = null;
-                if (card.dataset.lat && card.dataset.lng) {
-                    coords = {
-                        lat: parseFloat(card.dataset.lat),
-                        lng: parseFloat(card.dataset.lng)
-                    };
-                } else {
-                    coords = await getCoordinates(endereco);
-                }
+            if (alturaTela < 700 || larguraTela < 768) {
+                mapContainer.style.height = '250px';
+                mapContainer.style.minHeight = '200px';
+            } else if (alturaTela < 500) {
+                mapContainer.style.height = '200px';
+                mapContainer.style.minHeight = '150px';
+            } else {
+                mapContainer.style.height = '400px';
+                mapContainer.style.minHeight = '300px';
+            }
 
-                if (!coords) {
-                    mapContainer.innerHTML = '<p>Erro: Endereço não encontrado. Verifique o endereço ou tente novamente.</p>';
-                    tituloMapa.textContent = `${nome} - Localização não disponível`;
-                    return;
-                }
+            // Redimensiona o mapa se já existir
+            if (map) {
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 100);
+            }
+        }
 
-                // Cria um novo mapa
-                map = L.map(mapContainer).setView([coords.lat, coords.lng], 16);
+        // Adiciona event listener para todos os botões "Mapa"
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.mapa-sobre-img').forEach(botao => {
+                botao.addEventListener('click', async function (e) {
+                    e.stopPropagation();
+                    console.log('Botão mapa clicado');
 
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
+                    const card = this.closest('.card, .farmacia-card, .localizacao-card');
+                    if (!card) {
+                        console.error('Card não encontrado');
+                        return;
+                    }
 
-                L.marker([coords.lat, coords.lng])
-                    .addTo(map)
-                    .bindPopup(`<b>${nome}</b><br>${endereco}`)
-                    .openPopup();
+                    const nomeElement = card.querySelector('h3');
+                    if (!nomeElement) {
+                        console.error('Elemento h3 não encontrado');
+                        return;
+                    }
+                    const nome = nomeElement.textContent;
+
+                    let endereco = '';
+
+                    // Busca o endereço em diferentes elementos dependendo do tipo de card
+                    if (card.classList.contains('localizacao-card')) {
+                        const enderecoElement = card.querySelector('.localizacao-info p:first-of-type');
+                        endereco = enderecoElement ? enderecoElement.textContent : '';
+                    } else if (card.classList.contains('farmacia-card')) {
+                        const enderecoElement = card.querySelector('.farmacia-card-content p:first-of-type');
+                        endereco = enderecoElement ? enderecoElement.textContent : '';
+                    } else {
+                        const enderecoElement = card.querySelector('.card-content p:first-of-type');
+                        endereco = enderecoElement ? enderecoElement.textContent : '';
+                    }
+
+                    if (!endereco) {
+                        console.error('Endereço não encontrado');
+                        return;
+                    }
+
+                    // Tenta obter coordenadas
+                    let coords = null;
+                    if (card.dataset.lat && card.dataset.lng) {
+                        coords = {
+                            lat: parseFloat(card.dataset.lat),
+                            lng: parseFloat(card.dataset.lng)
+                        };
+                        console.log('Coordenadas do data attribute:', coords);
+                    } else {
+                        console.log('Buscando coordenadas para:', endereco);
+                        coords = await getCoordinates(endereco);
+                        console.log('Coordenadas obtidas:', coords);
+                    }
+
+                    // Atualiza modal
+                    tituloMapa.textContent = `Localização: ${nome}`;
+                    mapEndereco.textContent = `📍 ${endereco}`;
+
+                    if (coords) {
+                        const distancia = calcularDistancia(
+                            institutoVitaCoords.lat, institutoVitaCoords.lng,
+                            coords.lat, coords.lng
+                        );
+                        mapDistancia.textContent = `📏 Aproximadamente ${distancia.toFixed(1)} km do Instituto Vita`;
+                    } else {
+                        mapDistancia.textContent = '📏 Distância não disponível';
+                    }
+
+                    // Mostra o modal
+                    mapModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Previne scroll no body
+
+                    // Ajusta a altura do mapa antes de criar
+                    ajustarAlturaMapa();
+
+                    // Remove mapa anterior
+                    const mapContainer = document.getElementById('map');
+                    if (map) {
+                        map.remove();
+                        map = null;
+                    }
+                    mapContainer.innerHTML = '<div class="loading">Carregando mapa...</div>';
+
+                    // Se não tem coordenadas, mostra mensagem de erro
+                    if (!coords) {
+                        mapContainer.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--cor-texto-secundario);">❌ Não foi possível carregar o mapa para este endereço.</div>';
+                        return;
+                    }
+
+                    // Cria novo mapa com pequeno delay para garantir que o container esteja visível
+                    setTimeout(() => {
+                        try {
+                            map = L.map(mapContainer).setView([coords.lat, coords.lng], 15);
+
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                                maxZoom: 19
+                            }).addTo(map);
+
+                            // Marcador do local
+                            L.marker([coords.lat, coords.lng])
+                                .addTo(map)
+                                .bindPopup(`<b>${nome}</b><br>${endereco}`)
+                                .openPopup();
+
+                            // Marcador do Instituto Vita
+                            L.marker([institutoVitaCoords.lat, institutoVitaCoords.lng], {
+                                icon: L.divIcon({
+                                    className: 'instituto-marker',
+                                    html: '<div style="background: var(--verde-escuro); color: white; padding: 5px 10px; border-radius: 20px; font-weight: bold;">🏠 Instituto Vita</div>',
+                                    iconSize: [120, 40],
+                                    iconAnchor: [60, 20]
+                                })
+                            }).addTo(map).bindPopup('<b>Instituto Vita</b><br>Av. Dr. Enéas Carvalho de Aguiar, 255');
+
+                            // Linha conectando os pontos
+                            const pontos = [
+                                [institutoVitaCoords.lat, institutoVitaCoords.lng],
+                                [coords.lat, coords.lng]
+                            ];
+
+                            L.polyline(pontos, {
+                                color: 'var(--verde-medio)',
+                                weight: 3,
+                                opacity: 0.7,
+                                dashArray: '10, 10'
+                            }).addTo(map);
+
+                            // Ajusta o zoom para mostrar ambos os pontos
+                            const bounds = L.latLngBounds(pontos);
+                            map.fitBounds(bounds, { padding: [50, 50] });
+
+                            // Ajusta novamente após o mapa carregar completamente
+                            setTimeout(() => {
+                                map.invalidateSize();
+                            }, 300);
+
+                        } catch (error) {
+                            console.error('Erro ao criar mapa:', error);
+                            mapContainer.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--cor-texto-secundario);">❌ Erro ao carregar o mapa. Por favor, tente novamente.</div>';
+                        }
+                    }, 100);
+                });
             });
         });
 
-        // Fechar o modal do mapa
-        fecharMapa.onclick = () => {
-            mapModal.style.display = 'none';
-            if (map) {
-                map.remove();
-                map = null;
-            }
-        };
-        window.onclick = e => {
-            if (e.target === mapModal) {
-                mapModal.style.display = 'none';
-                if (map) {
-                    map.remove();
-                    map = null;
-                }
-            }
-        };
-
-        // Função para geocodificar endereço via Nominatim (API gratuita)
+        // Função para geocodificar endereço
         async function getCoordinates(address) {
             try {
-                // Limpa o endereço: remove prefixos e caracteres problemáticos
                 let cleanAddress = address
                     .replace(/Endereço:/gi, '')
-                    .replace(/[–—]/g, '-') // Substitui travessões por hífen
+                    .replace(/[–—]/g, '-')
                     .trim();
 
-                // Adiciona cidade e estado se não estiverem presentes (assume São Paulo)
+                // Adiciona São Paulo se não estiver no endereço
                 if (!cleanAddress.toLowerCase().includes('são paulo') && !cleanAddress.toLowerCase().includes('sp')) {
                     cleanAddress += ', São Paulo, SP, Brasil';
                 }
 
-                // URL da API Nominatim
+                console.log('Buscando coordenadas para:', cleanAddress);
+
                 const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cleanAddress)}&addressdetails=1&limit=1&countrycodes=BR`;
 
                 const response = await fetch(url, {
                     headers: {
-                        'User-Agent': 'InstitutoVita/1.0 (contato@institutovita.org)' // Identifica sua app para evitar bloqueios
+                        'User-Agent': 'InstitutoVitaLocalizacao/1.0',
+                        'Accept-Language': 'pt-BR'
                     }
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Erro na API: ${response.status}`);
+                    console.error('Erro na resposta:', response.status, response.statusText);
+                    throw new Error(`Erro: ${response.status}`);
                 }
 
                 const data = await response.json();
+                console.log('Resposta da API:', data);
 
                 if (data && data.length > 0) {
                     return {
                         lat: parseFloat(data[0].lat),
                         lng: parseFloat(data[0].lon)
                     };
-                } else {
-                    console.warn("Endereço não encontrado:", cleanAddress);
-                    return null;
                 }
+                console.warn('Nenhum resultado encontrado para:', cleanAddress);
+                return null;
             } catch (error) {
-                console.error("Erro ao buscar coordenadas:", error);
+                console.error("Erro na geocodificação:", error);
                 return null;
             }
         }
-    </script>
-</body>
 
+        // Fechar modal
+        fecharMapa.onclick = () => {
+            mapModal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaura scroll no body
+            if (map) {
+                map.remove();
+                map = null;
+            }
+        };
+
+        // Fechar modal ao clicar fora
+        window.onclick = e => {
+            if (e.target === mapModal) {
+                mapModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                if (map) {
+                    map.remove();
+                    map = null;
+                }
+            }
+        };
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mapModal.style.display === 'flex') {
+                mapModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                if (map) {
+                    map.remove();
+                    map = null;
+                }
+            }
+        });
+
+        // Redimensiona o mapa quando a janela é redimensionada
+        window.addEventListener('resize', ajustarAlturaMapa);
+
+        // ==================== ANIMAÇÃO DE SCROLL ====================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observa os cards para animação
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.card, .farmacia-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Debug: Verifica se os elementos foram encontrados
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Botões mapa encontrados:', document.querySelectorAll('.mapa-sobre-img').length);
+            console.log('Modal encontrado:', document.getElementById('mapModal'));
+            console.log('Botão fechar encontrado:', document.getElementById('fecharMapa'));
+        });
+    </script>
+
+    <style>
+        /* Estilos adicionais para o mapa */
+        .instituto-marker {
+            background: none !important;
+            border: none !important;
+        }
+
+        .leaflet-popup-content {
+            font-family: 'EB Garamond', serif;
+            font-size: 1rem;
+        }
+
+        .leaflet-popup-content b {
+            color: var(--verde-escuro);
+            font-family: 'Cinzel Decorative', serif;
+        }
+    </style>
+</body>
 
 </html>

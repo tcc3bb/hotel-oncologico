@@ -195,14 +195,17 @@ CREATE TABLE IF NOT EXISTS `doacao` (
   PRIMARY KEY (`doacao_id`),
   KEY `idx_doador_doacao` (`doador_id`),
   CONSTRAINT `fk_doacao_doador` FOREIGN KEY (`doador_id`) REFERENCES `doador` (`doador_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela hotel.doacao: ~3 rows (aproximadamente)
 DELETE FROM `doacao`;
 INSERT INTO `doacao` (`doacao_id`, `doador_id`, `doacao_tipo`, `doacao_valor`, `doacao_metodo_pagamento`, `doacao_comprovante`, `doacao_categoria_item`, `doacao_quantidade`, `doacao_unidade`, `doacao_status`, `doacao_data`, `doacao_destino`, `doacao_recorrencia`, `doacao_condicao`, `servico_tipo`) VALUES
 	(11, 5, 'Financeira', 500.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2025-11-22 16:38:52', 'Apoiar Pacientes', 'Única', NULL, NULL),
 	(12, 5, 'Financeira', 1002.00, 'Pix', NULL, NULL, NULL, NULL, 'Pendente', '2024-01-22 17:05:15', 'Apoiar Pacientes', 'Única', NULL, NULL),
-	(13, 5, 'Produto', NULL, NULL, NULL, 'móvel', 2, NULL, 'Pendente', '2025-11-22 17:05:21', 'Apoiar Pacientes', 'Única', 'Novo', NULL);
+	(13, 5, 'Produto', NULL, NULL, NULL, 'móvel', 2, NULL, 'Pendente', '2025-11-22 17:05:21', 'Apoiar Pacientes', 'Única', 'Novo', NULL),
+	(14, 6, 'Financeira', 500.00, 'Boleto', NULL, NULL, NULL, NULL, 'Pendente', '2025-12-05 16:00:54', 'Campanhas Específicas', 'Mensal', NULL, NULL),
+	(15, 6, 'Financeira', 500.00, 'Boleto', NULL, NULL, NULL, NULL, 'Pendente', '2025-12-05 16:10:17', 'Campanhas Específicas', 'Mensal', NULL, NULL),
+	(16, 6, 'Financeira', 500.00, 'Boleto', NULL, NULL, NULL, NULL, 'Pendente', '2025-12-05 16:10:24', 'Campanhas Específicas', 'Mensal', NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.doador
 CREATE TABLE IF NOT EXISTS `doador` (
@@ -353,10 +356,21 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `token` (`token`),
   KEY `fk_pr_usuario` (`usuario_id`),
   CONSTRAINT `fk_pr_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela hotel.password_resets: ~0 rows (aproximadamente)
 DELETE FROM `password_resets`;
+INSERT INTO `password_resets` (`id`, `usuario_id`, `token`, `expires_at`, `used`, `created_at`) VALUES
+	(1, 56, '042b6735087784f19be926753902dc85c77e6119fc9d3b7c16a917e5c963e9e0', '2025-12-04 19:30:38', 0, '2025-12-04 18:30:37'),
+	(2, 56, 'eed4896ece92747714371bf0bd03bb562e4c4f0e60f837984519f3541cc89d0f', '2025-12-04 20:04:02', 0, '2025-12-04 19:04:02'),
+	(3, 56, '4d34c37b7003c6b952b13715e57a064ef97c40e490453b0c9384a47ed318f313', '2025-12-04 20:08:55', 0, '2025-12-04 19:08:55'),
+	(4, 56, '3da3673c5cbe2a755fa02629e66df9b40dd33c26f60e1c40284d6d4a612fff79', '2025-12-04 20:09:01', 0, '2025-12-04 19:09:01'),
+	(5, 56, 'd8bd72ed2b60d641928c460f8969346cfe507e1e587d85fdda1b258195904bed', '2025-12-04 20:25:06', 0, '2025-12-04 19:25:06'),
+	(6, 56, '38c5736d9089dff1096b6b1b7650592a02e3bc20801c23318600d8527ba193b6', '2025-12-04 20:25:43', 0, '2025-12-04 19:25:42'),
+	(7, 56, '29cc2c98342fed2875376a921c20fcb0f3addba46b49e25b1fb21eadea71641f', '2025-12-04 20:28:19', 0, '2025-12-04 19:28:19'),
+	(8, 56, '050e53ae664d7b1bdcb39ff29ebb9b2cb470c0f8fb806ce330da7d27dc8bd86e', '2025-12-04 20:28:29', 0, '2025-12-04 19:28:28'),
+	(9, 56, 'c31e3f0b102fc1d46ccb63e0851455cd0019b3a009976cce4576833017f8cb37', '2025-12-04 20:28:58', 0, '2025-12-04 19:28:58'),
+	(10, 56, '4432a86b8939fcbf609c10d1e25c70cf1e5d41b8eca80678b9cd0da626edc51f', '2025-12-04 20:49:59', 0, '2025-12-04 19:49:59');
 
 -- Copiando estrutura para tabela hotel.pergunta
 CREATE TABLE IF NOT EXISTS `pergunta` (
@@ -610,7 +624,7 @@ INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_
 	(53, 'acompanhante@gmail.com', '$2b$10$KNjWTFJIDMPXAkJIPdI0o.f.gd9PQndpkk98AcolMc2jqhM.ZMkc2', 'acompanhante', '2025-11-22 21:06:11', 'ativo', '2025-12-02 22:06:22', '/uploads/usuarios/padrao.png'),
 	(54, 'teste2@gmail.com', '$2b$10$nbuXtY0IZe4v9IXycL6ii.kyDO9kWzVOTW64cT.qHyfE51pImlPcq', 'acompanhante', '2025-11-24 16:03:20', 'ativo', '2025-11-24 16:05:26', '/uploads/usuarios/padrao.png'),
 	(55, 'adminn@gmail.com', '$2b$10$IWwuTmEnUKUaBtfAhPi8mePL8Rt6iJqYVoH9DfL7p7d2dWtx4Vn/G', 'admin', '2025-12-02 19:10:22', 'ativo', NULL, '/uploads/usuarios/padrao.png'),
-	(56, 'oliviaa.souuza@gmail.com', '$2b$10$3pOUJZLeuGSEMsEbl4.v8e2cLXkzSCv/Rdd2kO5CzKaQhWtc4Su.K', 'doador', '2025-12-04 16:56:59', 'ativo', NULL, '/uploads/usuarios/padrao.png');
+	(56, 'oliviaa.souuza@gmail.com', '$2b$10$3pOUJZLeuGSEMsEbl4.v8e2cLXkzSCv/Rdd2kO5CzKaQhWtc4Su.K', 'doador', '2025-12-04 16:56:59', 'ativo', '2025-12-05 12:42:38', '/uploads/usuarios/padrao.png');
 
 -- Copiando estrutura para tabela hotel.voluntario
 CREATE TABLE IF NOT EXISTS `voluntario` (

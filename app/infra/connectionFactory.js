@@ -1,22 +1,24 @@
 const mysql = require('mysql2');
 
 module.exports = function () {
+    // Ambiente de produção (Render)
     if (process.env.RENDER) {
         return mysql.createConnection({
-            host: process.env.DB_HOST || '127.0.0.1',
-            user: process.env.DB_USER || 'root',
-            password: process.env.DB_PASS || '',
-            database: process.env.DB_NAME || 'hotel',
-            port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306,
-            connectTimeout: 10000
+            host: process.env.DB_HOST,       // maglev.proxy.rlwy.net
+            user: process.env.DB_USER,       // root
+            password: process.env.DB_PASS,   // senha gigante
+            database: process.env.DB_NAME,   // railway
+            port: Number(process.env.DB_PORT), // porta tipo 14468
+            connectTimeout: 15000
         });
     }
 
-    // Se estiver local, usa o banco do Laragon.
+    // Ambiente local (Laragon / XAMPP)
     return mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'hotel'
+        database: 'hotel',
+        port: 3306
     });
 };

@@ -46,7 +46,6 @@ p {
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 1rem;
-    text-align: justify;
 }
 
 main {
@@ -56,18 +55,11 @@ main {
     text-align: center;
 }
 
-p {
-    font-family: 'EB Garamond', serif;
-    font-size: clamp(1rem, 1vw + .9rem, 1.25rem);
-    margin-bottom: 1.2rem;
-    text-align: justify;
-}
-
 /* =========================================================== MENU ============================================================== */
 nav {
     background-color: #699b80;
     padding: 1rem 5rem;
-    display: flex;
+    display: flex; 
     justify-content: center;
     align-items: center;
     gap: 1rem;

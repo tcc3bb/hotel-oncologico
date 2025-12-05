@@ -20,20 +20,12 @@ p {
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 1rem;
-    text-align: justify;
 }
 
 main {
     max-width: 60rem;
     margin: 3rem auto;
     padding: 0 1rem;
-}
-
-p {
-    font-family: 'EB Garamond', serif;
-    font-size: clamp(1rem, 1vw + .9rem, 1.25rem);
-    margin-bottom: 1.2rem;
-    text-align: justify;
 }
 
 .title {
@@ -147,22 +139,11 @@ nav .nav-links {
     background-color: #c0392b;
 }
 
-/* HAMBURGUER MENU 
+/* HAMBURGUER MENU */
 .hamburger {
     display: none;
     flex-direction: column;
     gap: 0.35rem;
-    cursor: pointer;
-}*/
-
-.hamburger {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    display: none;
-    flex-direction: column;
-    gap: .4rem;
     cursor: pointer;
 }
 
@@ -496,7 +477,7 @@ footer {
     nav {
         padding: 0.8rem 1rem;
     }
-    
+
     .historia-texto {
         position: relative;
         top: 0;
@@ -505,28 +486,31 @@ footer {
         text-align: center;
         width: 100%;
     }
-    
+
     .historia-texto h1 {
         font-size: 1.5rem;
     }
-    
+
     .valores-list li {
         font-size: 1rem;
     }
-    
+
     .footer-container {
         flex-direction: column;
         text-align: center;
         gap: 1.5rem;
     }
-    
+
     .nav-links a {
         padding: 0.8rem;
         width: 100%;
         text-align: center;
     }
-    
-    .btn-entrar, .btn-cadastrar, .btn-nav, .btn-logout {
+
+    .btn-entrar,
+    .btn-cadastrar,
+    .btn-nav,
+    .btn-logout {
         width: 100%;
         margin: 0.3rem 0;
         padding: 0.8rem;
@@ -539,15 +523,15 @@ footer {
         margin: 1.5rem auto;
         padding: 0 0.8rem;
     }
-    
+
     .historia-texto {
         padding: 0.5rem 1rem;
     }
-    
+
     .historia-texto h1 {
         font-size: 1.8rem;
     }
-    
+
     .missao-img-left,
     .missao-img-right,
     .visao-image-text img {
@@ -555,22 +539,22 @@ footer {
         height: 200px;
         border-radius: 1rem;
     }
-    
+
     .valores-content {
         flex-direction: column;
     }
-    
+
     .valores-list {
         width: 100%;
         margin-bottom: 1.5rem;
     }
-    
+
     .valores-image-container img {
         width: 100%;
         height: auto;
         max-height: 250px;
     }
-    
+
     .footer-container {
         flex-direction: column;
         gap: 1.5rem;
@@ -582,11 +566,11 @@ footer {
     nav {
         padding: 1rem;
     }
-    
+
     .hamburger {
         display: flex;
     }
-    
+
     .nav-links {
         position: fixed;
         top: 0;
@@ -602,25 +586,25 @@ footer {
         overflow-y: auto;
         gap: 0.5rem;
     }
-    
+
     .nav-links.active {
         left: 0;
     }
-    
+
     .nav-links a {
         padding: 1rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         width: 100%;
         text-align: left;
     }
-    
+
     .img-logo {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
         height: 40px;
     }
-    
+
     .historia-texto {
         position: relative;
         top: 0;
@@ -628,19 +612,19 @@ footer {
         margin: 1rem 0;
         text-align: center;
     }
-    
+
     .missao-block,
     .missao-block.invert {
         flex-direction: column;
         text-align: center;
         gap: 1.5rem;
     }
-    
+
     .visao-content {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .visao-text-image img {
         display: block;
         width: 100%;
@@ -649,7 +633,7 @@ footer {
         margin: 1rem auto;
         border-radius: 1rem;
     }
-    
+
     .visao-image-text {
         display: none;
     }
@@ -660,52 +644,52 @@ footer {
     nav {
         padding: 1rem 2rem;
     }
-    
+
     .nav-links {
         gap: 0.8rem;
     }
-    
+
     .nav-links a {
         font-size: 0.85rem;
         padding: 0.3rem 0.6rem;
     }
-    
+
     .missao-block {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .missao-img-left,
     .missao-img-right {
         width: 200px;
         height: 200px;
     }
-    
+
     .visao-content {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .visao-image-text img {
         width: 200px;
         height: 200px;
     }
-    
+
     .valores-content {
         flex-direction: column;
         gap: 2rem;
     }
-    
+
     .valores-list {
         text-align: left;
         width: 100%;
     }
-    
+
     .footer-container {
         flex-wrap: wrap;
     }
-    
-    .footer-container > div {
+
+    .footer-container>div {
         flex: 1 1 calc(50% - 1rem);
         min-width: 200px;
     }
@@ -716,43 +700,43 @@ footer {
     main {
         max-width: 95%;
     }
-    
+
     nav {
         padding: 1rem 3rem;
     }
-    
+
     .nav-links {
         gap: 1rem;
     }
-    
+
     .missao-block {
         gap: 1.5rem;
     }
-    
+
     .missao-img-left {
         width: 12rem;
         height: 13rem;
     }
-    
+
     .missao-img-right {
         width: 16rem;
         height: 13rem;
     }
-    
+
     .visao-image-text img {
         width: 12rem;
         height: 13rem;
     }
-    
+
     .valores-image-container img {
         width: 16rem;
         height: 13rem;
     }
-    
+
     .historia-texto {
         padding: 0.5rem 1rem;
     }
-    
+
     .historia-texto h1 {
         font-size: 2.2rem;
     }
@@ -763,30 +747,30 @@ footer {
     main {
         max-width: 90%;
     }
-    
+
     nav {
         padding: 1rem 4rem;
     }
-    
+
     .nav-links {
         gap: 1.1rem;
     }
-    
+
     .missao-img-left {
         width: 13rem;
         height: 14rem;
     }
-    
+
     .missao-img-right {
         width: 18rem;
         height: 14rem;
     }
-    
+
     .visao-image-text img {
         width: 13rem;
         height: 14rem;
     }
-    
+
     .valores-image-container img {
         width: 18rem;
         height: 14rem;
@@ -798,7 +782,7 @@ footer {
     .nav-links {
         gap: 1.2rem;
     }
-    
+
     nav a {
         font-size: 0.9rem;
     }
@@ -809,40 +793,40 @@ footer {
     main {
         max-width: 75rem;
     }
-    
+
     nav {
         padding: 1.2rem 6rem;
     }
-    
+
     .nav-links {
         gap: 1.5rem;
     }
-    
+
     nav a {
         font-size: 1rem;
         padding: 0.5rem 1rem;
     }
-    
+
     .missao-img-left {
         width: 16rem;
         height: 17rem;
     }
-    
+
     .missao-img-right {
         width: 22rem;
         height: 17rem;
     }
-    
+
     .visao-image-text img {
         width: 16rem;
         height: 17rem;
     }
-    
+
     .valores-image-container img {
         width: 22rem;
         height: 17rem;
     }
-    
+
     .footer-container {
         max-width: 80rem;
     }
@@ -853,15 +837,15 @@ footer {
     .historia-texto h1 {
         font-size: 1.3rem;
     }
-    
+
     .title {
         font-size: 1.5rem;
     }
-    
+
     p {
         font-size: 0.95rem;
     }
-    
+
     .valores-list li {
         font-size: 0.9rem;
     }
@@ -872,15 +856,15 @@ footer {
     .nav-links {
         padding-top: 3rem;
     }
-    
+
     .nav-links a {
         padding: 0.6rem;
     }
-    
+
     .historia-imagem img {
         max-height: 250px;
     }
-    
+
     .missao-img-left,
     .missao-img-right,
     .visao-image-text img {
@@ -889,12 +873,13 @@ footer {
 }
 
 /* Ajustes para telas com alta densidade de pixels */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
     .dots .dot {
         width: 10px;
         height: 10px;
     }
-    
+
     .bullet {
         width: 10px;
         height: 10px;

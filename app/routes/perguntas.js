@@ -11,26 +11,21 @@ module.exports = function (PerguntasDAO, ArtigosDAO) {
         const AvaliacaoPacienteDAO = require('../infra/AvaliacaoPacienteDAO');
         const avaliacaoDAO = new AvaliacaoPacienteDAO(connection);
 
-        console.log("🚀 [GET /perguntas-frequentes] Iniciando busca...");
 
         // =============================
         // 1️⃣ BUSCAR PERGUNTAS
         // =============================
         perguntasDAO.listarComRespostas((erro, perguntas) => {
 
-            console.log("🔍 Buscando perguntas...");
-
             if (erro) {
                 console.error("❌ ERRO ao buscar perguntas:", erro);
                 return res.status(500).send("Erro no servidor ao buscar perguntas.");
             }
 
-            console.log(`✅ Perguntas carregadas: ${perguntas.length}`);
 
             // =============================
             // 2️⃣ BUSCAR ARTIGOS
             // =============================
-            console.log("🔍 Buscando artigos...");
 
             artigosDAO.listarArtigos((erro2, artigos) => {
 
@@ -39,15 +34,9 @@ module.exports = function (PerguntasDAO, ArtigosDAO) {
                     return res.status(500).send("Erro no servidor ao buscar artigos.");
                 }
 
-                console.log(`📚 Artigos encontrados: ${artigos.length}`);
-
-                // 👀 Logar os 2 primeiros artigos para inspeção
-                console.log("📄 Exemplo de artigo retornado:", artigos[0] || "(nenhum)");
-
                 // =============================
                 // 3️⃣ BUSCAR AVALIAÇÕES
                 // =============================
-                console.log("🔍 Buscando avaliações...");
 
                 avaliacaoDAO.listarTodas((erro3, avaliacoes) => {
 
@@ -56,13 +45,10 @@ module.exports = function (PerguntasDAO, ArtigosDAO) {
                         return res.status(500).send("Erro no servidor ao buscar avaliações.");
                     }
 
-                    console.log(`⭐ Avaliações carregadas: ${avaliacoes.length}`);
 
                     // =============================
                     // 4️⃣ FINALMENTE, RENDERIZAR
                     // =============================
-                    console.log("🎨 Renderizando página perguntas-frequentes...");
-
                     res.render('nav/perguntas-frequentes', {
                         user: req.session.user,
                         perguntas,
@@ -70,7 +56,6 @@ module.exports = function (PerguntasDAO, ArtigosDAO) {
                         avaliacoes
                     });
 
-                    console.log("🎉 Página enviada ao cliente com sucesso!");
                 });
             });
         });

@@ -1,6 +1,6 @@
 :root {
     --verde-escuro: #23543b;
-    --verde-claro: #cfe9d1;
+    --verde-claro: #699b80;
     --verde-medio: #3a7d55;
     --vermelho: #d9534f;
     --branco: #fff;
@@ -14,7 +14,7 @@
     --cor-acento-claro: #cfe9d1;
     --cor-acento-vibrante: #00bcd4;
     --cor-fundo-dashboard: #f4f7f6;
-    --cor-texto-escuro: #333;
+    --cor-texto-escuro: #333; 
     --cor-texto-claro: #fff;
     --cor-sucesso: #4CAF50;
     --cor-aviso: #FFC107;
@@ -140,7 +140,7 @@ nav .nav-links {
 
 /* =========================================================== HEADER ============================================================== */
 .header-hero {
-    background: linear-gradient(135deg, var(--verde-escuro) 0%, var(--verde-medio) 100%);
+    background: linear-gradient(135deg, var(--verde-medio) 0%, var(--verde-claro) 100%);
     color: var(--branco);
     padding: 4rem 2rem 8rem;
     border-bottom-left-radius: 80px;
@@ -181,7 +181,6 @@ nav .nav-links {
 }
 
 .header-content h1 {
-    font-family: 'Cinzel Decorative', serif;
     font-size: 3.2rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
