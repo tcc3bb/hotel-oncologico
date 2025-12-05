@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `avaliacao_paciente` (
   CONSTRAINT `avaliacao_paciente_chk_1` CHECK ((`nota` between 1 and 5))
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.avaliacao_paciente: ~11 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.avaliacao_paciente: ~9 rows (aproximadamente)
 DELETE FROM `avaliacao_paciente`;
 INSERT INTO `avaliacao_paciente` (`id`, `paciente_id`, `nota`, `comentario`, `data_avaliacao`) VALUES
 	(8, 8, 4, 'legal', '2025-11-24 20:32:11'),
@@ -246,12 +246,13 @@ CREATE TABLE IF NOT EXISTS `doador` (
   UNIQUE KEY `doador_cpf` (`doador_cpf`),
   UNIQUE KEY `doador_cnpj` (`doador_cnpj`),
   CONSTRAINT `fk_doador_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.doador: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.doador: ~2 rows (aproximadamente)
 DELETE FROM `doador`;
 INSERT INTO `doador` (`doador_id`, `usuario_id`, `doador_tipo`, `doador_nome`, `doador_cpf`, `doador_rg`, `doador_data_nascimento`, `doador_sexo`, `doador_telefone`, `doador_logradouro`, `doador_numero`, `doador_complemento`, `doador_bairro`, `doador_cidade`, `doador_estado`, `doador_cep`, `doador_nome_empresa`, `doador_area_atuacao_empresa`, `doador_cnpj`, `doador_telefone_empresa`, `doador_representante`, `doador_cpf_representante`, `doador_qtd_total_doacoes`, `doador_valor_total_doado`, `doador_valor_medio`, `doador_data_ultima_doacao`, `doador_documento_comprovante`, `doador_documento_identidade`, `doador_documento_cnpj`, `doador_data_cadastro`, `doador_verificado`, `doador_aprovado_admin`, `doador_observacoes`, `doador_observacoes_internas`) VALUES
-	(5, 48, 'Pessoa Jurídica', NULL, NULL, NULL, NULL, NULL, NULL, 'avenida um ', '2', '2', 'portal', 'São Paulo', 'SP', '07790852', 'Doacoes', 'ccvvj', '866026000', '45630306809', 'cvcvhvhe', '9652521307', 0, 0.00, NULL, NULL, NULL, NULL, NULL, '2025-11-21 20:59:37', 0, 0, NULL, NULL);
+	(5, 48, 'Pessoa Jurídica', NULL, NULL, NULL, NULL, NULL, NULL, 'avenida um ', '2', '2', 'portal', 'São Paulo', 'SP', '07790852', 'Doacoes', 'ccvvj', '866026000', '45630306809', 'cvcvhvhe', '9652521307', 0, 0.00, NULL, NULL, NULL, NULL, NULL, '2025-11-21 20:59:37', 0, 0, NULL, NULL),
+	(6, 56, 'Pessoa Física', 'Olívia Freitas', '51950963847', '537568968', '2008-01-15', 'Feminino', '11963725619', 'Avenida das Açucenas', '134', 'Casa', 'Portal dos Ipês', 'Cajamar', 'SP', '07790890', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0.00, NULL, NULL, NULL, NULL, NULL, '2025-12-04 19:57:35', 0, 0, NULL, NULL);
 
 -- Copiando estrutura para tabela hotel.historico_quarto
 CREATE TABLE IF NOT EXISTS `historico_quarto` (
@@ -339,6 +340,23 @@ INSERT INTO `paciente` (`paciente_id`, `usuario_id`, `paciente_email`, `paciente
 	(6, 43, 'paciente@gmail.com', 'olívia', '3685976351263', '963852741', '2025-11-19', 'Feminino', 'Casado', 'professora', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', '', 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', 'Câncer de Mama', 'Estágio 1', 'quimioterapia', '2 anos', '2025-11-04', 'nenhum', 'Amendoim', 'nenhum', 1, 'nenhum', 'nenhum', 'Tarde', 'nenhum', 'nenhum'),
 	(7, 44, 'teste@gmail.com', 'teste', '75395165425', '9638745632', '2001-02-21', 'Feminino', 'Casado', 'professor', 'brasileira', 'AB+', 1.70, 70.00, '11963852741', 'Avenida Um', '133', NULL, 'Portal', 'Cajamar', 'SP', '05690630', 'contato1', 'mãe', '11963852741', 'contato2', 'pai', '11963852741', 'responsável', 'mãe', '11963852741', 'Sírio Libanês', 'médico', '', '4', 'quimioterapia', '4 anos', '2025-11-07', '', '', '', 0, '', '', 'Indiferente', '', ''),
 	(8, 45, 'joao.silva@email.com', 'João Silva', '98653212495', '356752362', '1980-01-15', 'Masculino', 'Casado', 'arquiteto', 'brasileira', 'B+', 1.75, 70.00, '11975632654', 'Rua das Flores', '123', 'bloco 1', 'Centro', 'São Paulo', 'SP', '035698623', 'Maria Silva', 'Esposa', '11963852653', 'Pedro Silva', 'Filho', '11945685230', 'Maria Silva', 'Esposa', '11963852653', 'Hospital Oncológico ABC', 'Dr. Carlos Mendes', 'Câncer de garganta não pequenas células, estágio II, adenocarcinoma.', 'Tratamento ativo', 'Quimioterapia combinada com radioterapia', '6 meses (iniciado em abril de 2023)', '2023-10-01', 'Paciente com histórico de tabagismo por 20 anos (parou em 2020). Diagnosticado em março de 2023 após sintomas de tosse persistente e perda de peso. Sem outras comorbidades significativas.', 'Alérgico a penicilina (reação cutânea). Risco de infecções devido ao tratamento oncológico.', 'Analgésicos (paracetamol), antieméticos (ondansetrona), suplementos vitamínicos.', 1, 'Dieta leve, evitar alimentos ácidos e picantes para reduzir náuseas. Preferência por alimentos moles e fáceis de digerir.\n', 'Mobilidade reduzida devido à fadiga e fraqueza causadas pelo tratamento. Recomendado uso de cadeira de rodas para longas distâncias.', 'Indiferente', 'Monitorar sinais vitais diariamente. Observar sinais de infecção (febre, calafrios). Administrar medicações conforme prescrito. Avaliar nível de dor e fadiga.', 'Paciente motivado e cooperativo. Família apoiadora e presente. Recomendado acompanhamento psicológico para suporte emocional. Próxima consulta em 15 dias.');
+
+-- Copiando estrutura para tabela hotel.password_resets
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NOT NULL,
+  `token` varchar(128) NOT NULL,
+  `expires_at` datetime NOT NULL,
+  `used` tinyint(1) DEFAULT '0',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `token` (`token`),
+  KEY `fk_pr_usuario` (`usuario_id`),
+  CONSTRAINT `fk_pr_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela hotel.password_resets: ~0 rows (aproximadamente)
+DELETE FROM `password_resets`;
 
 -- Copiando estrutura para tabela hotel.pergunta
 CREATE TABLE IF NOT EXISTS `pergunta` (
@@ -578,9 +596,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`usuario_id`),
   UNIQUE KEY `usuario_email` (`usuario_email`),
   UNIQUE KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela hotel.usuario: ~9 rows (aproximadamente)
+-- Copiando dados para a tabela hotel.usuario: ~10 rows (aproximadamente)
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_tipo`, `usuario_data_criacao`, `usuario_estado`, `usuario_ultimo_login`, `usuario_foto_perfil`) VALUES
 	(26, 'admin@gmail.com', '$2b$10$LDsQserWeAQGEfUpat7R2eYhXFlO14WtwOu00uwAi91PCQB/XXfoa', 'admin', '2025-10-23 22:05:20', 'ativo', '2025-12-02 22:07:54', '/uploads/usuarios/padrao.png'),
@@ -591,7 +609,8 @@ INSERT INTO `usuario` (`usuario_id`, `usuario_email`, `usuario_senha`, `usuario_
 	(48, 'doador3@gmail.com', '$2b$10$8aTdnjmoTHa4i/SnGAHtBurdR3YjqJ/kD9IAkT/IWnq3HjZlCJWCO', 'doador', '2025-11-21 17:52:50', 'ativo', '2025-12-02 22:07:04', '/uploads/usuarios/padrao.png'),
 	(53, 'acompanhante@gmail.com', '$2b$10$KNjWTFJIDMPXAkJIPdI0o.f.gd9PQndpkk98AcolMc2jqhM.ZMkc2', 'acompanhante', '2025-11-22 21:06:11', 'ativo', '2025-12-02 22:06:22', '/uploads/usuarios/padrao.png'),
 	(54, 'teste2@gmail.com', '$2b$10$nbuXtY0IZe4v9IXycL6ii.kyDO9kWzVOTW64cT.qHyfE51pImlPcq', 'acompanhante', '2025-11-24 16:03:20', 'ativo', '2025-11-24 16:05:26', '/uploads/usuarios/padrao.png'),
-	(55, 'adminn@gmail.com', '$2b$10$IWwuTmEnUKUaBtfAhPi8mePL8Rt6iJqYVoH9DfL7p7d2dWtx4Vn/G', 'admin', '2025-12-02 19:10:22', 'ativo', NULL, '/uploads/usuarios/padrao.png');
+	(55, 'adminn@gmail.com', '$2b$10$IWwuTmEnUKUaBtfAhPi8mePL8Rt6iJqYVoH9DfL7p7d2dWtx4Vn/G', 'admin', '2025-12-02 19:10:22', 'ativo', NULL, '/uploads/usuarios/padrao.png'),
+	(56, 'oliviaa.souuza@gmail.com', '$2b$10$3pOUJZLeuGSEMsEbl4.v8e2cLXkzSCv/Rdd2kO5CzKaQhWtc4Su.K', 'doador', '2025-12-04 16:56:59', 'ativo', NULL, '/uploads/usuarios/padrao.png');
 
 -- Copiando estrutura para tabela hotel.voluntario
 CREATE TABLE IF NOT EXISTS `voluntario` (

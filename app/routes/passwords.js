@@ -45,7 +45,7 @@ module.exports = () => {
             const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hora
 
             passwordResetDAO.salvar({
-                user_id: usuario.id,
+                user_id: usuario.usuario_id,
                 token: token,
                 expires_at: expiresAt
             }, (errInsert) => {
@@ -69,15 +69,18 @@ module.exports = () => {
 
                 const mailOptions = {
                     from: `"${process.env.FROM_NAME || 'Suporte'}" <${process.env.FROM_EMAIL || process.env.SMTP_USER}>`,
-                    to: usuario.email,
+                    to: usuario.usuario_email,  
                     subject: 'Redefinição de senha',
                     html: `
             <p>Você (ou alguém que solicitou) pediu para redefinir a senha da sua conta.</p>
             <p>Clique no link abaixo para criar uma nova senha (válido por 1 hora):</p>
             <p><a href="${resetUrl}">${resetUrl}</a></p>
             <p>Se você não solicitou, ignore este e-mail.</p>
-          `
+            `
                 };
+
+                console.log("EMAIL PARA ENVIAR:", usuario.email);
+
 
                 transporter.sendMail(mailOptions, (mailErr, info) => {
                     if (mailErr) {
@@ -109,7 +112,7 @@ module.exports = () => {
 
             const pr = results[0];
             if (pr.used || new Date(pr.expires_at) < new Date()) {
-                return res.render('usuarios/resetar-senha', { erro: 'Token inválido ou expirado.', token: null, sucesso: null  });
+                return res.render('usuarios/resetar-senha', { erro: 'Token inválido ou expirado.', token: null, sucesso: null });
             }
 
             res.render('usuarios/resetar-senha', { erro: null, token: token, sucesso: null });
@@ -134,16 +137,16 @@ module.exports = () => {
         passwordResetDAO.buscarPorToken(token, (err, results) => {
             if (err) {
                 console.error('Erro DB buscarPorToken:', err);
-                return res.render('usuarios/resetar-senha', { erro: 'Erro no servidor.', token: null, sucesso: null  });
+                return res.render('usuarios/resetar-senha', { erro: 'Erro no servidor.', token: null, sucesso: null });
             }
 
             if (!results || results.length === 0) {
-                return res.render('usuarios/resetar-senha', { erro: 'Token inválido ou expirado.', token: null, sucesso: null  });
+                return res.render('usuarios/resetar-senha', { erro: 'Token inválido ou expirado.', token: null, sucesso: null });
             }
 
             const pr = results[0];
             if (pr.used || new Date(pr.expires_at) < new Date()) {
-                return res.render('usuarios/resetar-senha', { erro: 'Token inválido ou expirado.', token: null, sucesso: null  });
+                return res.render('usuarios/resetar-senha', { erro: 'Token inválido ou expirado.', token: null, sucesso: null });
             }
 
             // Hash da nova senha

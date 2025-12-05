@@ -227,6 +227,104 @@ section .descricao,
     margin-bottom: 2rem;
 }
 
+/*Localização*/
+/* Definições de variáveis CSS para consistência com o padrão (caso não estejam definidas em outro arquivo) */
+:root {
+    --branco: #fff;
+    --cor-principal: #2a684e;
+    --cor-secundaria: #61967e;
+    --cor-acento-claro: #83aa89;
+    --cor-texto-escuro: #444;
+    --borda-arredondada-md: 0.8rem;
+    --borda-arredondada-lg: 1rem;
+    --sombra-elevada: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+    --transicao-rapida: 0.3s ease;
+}
+
+/* Estilos para .localizacao-card, seguindo o padrão do CSS fornecido */
+.localizacao-card {
+    display: flex;
+    align-items: center;
+    background: var(--branco);
+    border-radius: var(--borda-arredondada-lg);
+    padding: 15px;
+    box-shadow: var(--sombra-elevada);
+    gap: 15px;
+    transition: var(--transicao-rapida);
+    margin-bottom: 2rem; /* Ajuste para espaçamento consistente com outras seções */
+}
+
+.localizacao-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.localizacao-card h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2rem;
+    color: var(--cor-principal);
+    margin: 0;
+    text-align: left;
+}
+
+.mini-mapa img {
+    width: 120px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--borda-arredondada-md);
+    border: 2px solid var(--cor-acento-claro);
+}
+
+.localizacao-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--cor-principal);
+    font-weight: bold;
+}
+
+.localizacao-info p {
+    margin: 5px 0 10px;
+    color: var(--cor-texto-escuro);
+    font-size: 1rem;
+}
+
+.localizacao-info .mapa-sobre-img {
+    background: var(--cor-secundaria);
+    color: var(--branco);
+    padding: 8px 14px;
+    border: none;
+    border-radius: var(--borda-arredondada-md);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transicao-rapida);
+}
+
+.localizacao-info .mapa-sobre-img:hover {
+    background: var(--cor-principal);
+}
+
+/* Responsividade para .localizacao-card */
+@media (max-width: 768px) {
+    .localizacao-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .localizacao-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .mini-mapa img {
+        width: 100%;
+        height: 80px;
+    }
+}
+
+
 /* Hospitais */
 .hospitais-section .cards-container {
     display: grid;

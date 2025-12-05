@@ -35,10 +35,9 @@ html {
 
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f4f4;
-    color: #2c3e50;
+    background: #fff;
+    color: #444;
+    line-height: 1.6;
 }
 
 p {
@@ -46,20 +45,13 @@ p {
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 1rem;
-    text-align: justify;
 }
 
 main {
-    max-width: 60rem;
-    margin: 3rem auto;
-    padding: 0 1rem;
-}
-
-p {
-    font-family: 'EB Garamond', serif;
-    font-size: clamp(1rem, 1vw + .9rem, 1.25rem);
-    margin-bottom: 1.2rem;
-    text-align: justify;
+    max-width: 58rem;
+    margin: 2.5rem auto 5rem;
+    padding: 0 1.25rem;
+    text-align: center;
 }
 
 /* =========================================================== MENU ============================================================== */
@@ -118,7 +110,7 @@ nav .nav-links {
     border-radius: 0.6rem;
     font-weight: 700;
     font-family: 'Cinzel Decorative', serif;
-    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    box-shadow: 0 0.125rem 0.3125rem rgb(0 0 0 / 0.1);
     transition: background-color 0.3s ease;
     border: none;
     cursor: pointer;
@@ -133,7 +125,7 @@ nav .nav-links {
     background-color: #e74c3c;
     color: white;
     text-decoration: none;
-    margin-left: 10px;
+    margin-left: 0.625rem;
     padding: 0.5rem 1rem;
     border-radius: 0.4rem;
     font-weight: 700;
@@ -234,7 +226,7 @@ nav .nav-links {
     overflow: hidden;
 }
 
-.menu {
+.menu { 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -438,15 +430,6 @@ nav .nav-links {
     color: white;
     font-size: 18px;
 }
-
-footer {
-    background: #2c5e3d;
-    text-align: center;
-    padding: 20px;
-    color: white;
-    margin-top: -5px;
-}
-
 
 
 
