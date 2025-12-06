@@ -15,7 +15,7 @@ module.exports = (connectionFactory) => {
         const { id } = req.params;
         const body = req.body;
 
-        console.log('POST /questionarios/paciente/:id -> body:', body);
+        console.log('POST /questionarios/paciente/:id -> body:', body); 
 
         // Passo 1: Consulta para pegar o e-mail do usuário logado
         connection.query('SELECT usuario_email FROM usuario WHERE usuario_id = ?', [id], (err, rows) => {

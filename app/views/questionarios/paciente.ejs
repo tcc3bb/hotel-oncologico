@@ -12,6 +12,63 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=EB+Garamond&family=Uncial+Antiqua&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/questionarios/style_paciente.css">
+    <style>
+        /* Estilo para os avisos de campo obrigatório */
+        .alert-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .alert-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 12px 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 500px;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .alert-message::before {
+            content: "⚠️";
+            font-size: 16px;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Marcar campos com erro */
+        .input-error {
+            border-color: #dc3545 !important;
+            background-color: #fff8f8 !important;
+        }
+
+        .label-error {
+            color: #dc3545 !important;
+            font-weight: bold !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -419,6 +476,110 @@
 
         hamburger.addEventListener("click", () => {
             document.querySelector(".nav-links").classList.toggle("active");
+        }); 
+    </script>
+
+    <script>
+        // Validação de campos obrigatórios para paciente
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Limpar erros anteriores
+            clearErrors();
+
+            // Campos obrigatórios (baseado nos campos com required no HTML)
+            const requiredFields = [
+                { id: 'paciente_nome', name: 'nome completo' },
+                { id: 'paciente_cpf', name: 'CPF' },
+                { id: 'paciente_contato_emergencia_1_nome', name: 'contato de emergência 1 - nome' },
+                { id: 'paciente_contato_emergencia_1_parentesco', name: 'contato de emergência 1 - parentesco' },
+                { id: 'paciente_contato_emergencia_1_telefone', name: 'contato de emergência 1 - telefone' }
+            ];
+
+            let hasError = false;
+            let firstErrorField = null;
+
+            // Verificar campos obrigatórios
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field.id);
+                if (!input || !input.value.trim()) {
+                    showError(field.id, field.name);
+                    hasError = true;
+                    if (!firstErrorField) firstErrorField = input;
+                }
+            });
+
+            // Se não houver erro, submeter o formulário
+            if (!hasError) {
+                this.submit();
+            } else {
+                // Focar no primeiro campo com erro
+                if (firstErrorField) {
+                    firstErrorField.focus();
+                }
+            }
+        });
+
+        function showError(fieldId, fieldName) {
+            const input = document.getElementById(fieldId);
+            const label = document.querySelector(`label[for="${fieldId}"]`);
+
+            if (input) {
+                input.classList.add('input-error');
+            }
+
+            if (label) {
+                label.classList.add('label-error');
+            }
+
+            // Criar ou atualizar alerta
+            let alertDiv = document.querySelector('.alert-wrapper');
+            if (!alertDiv) {
+                alertDiv = document.createElement('div');
+                alertDiv.className = 'alert-wrapper';
+                document.body.prepend(alertDiv);
+            }
+
+            alertDiv.innerHTML = `
+            <div class="alert-message">
+                Por favor, preencha o campo: ${fieldName}
+            </div>
+        `;
+
+            // Remover alerta após 5 segundos
+            setTimeout(() => {
+                if (alertDiv) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+
+        function clearErrors() {
+            // Remover classes de erro
+            document.querySelectorAll('.input-error').forEach(el => {
+                el.classList.remove('input-error');
+            });
+
+            document.querySelectorAll('.label-error').forEach(el => {
+                el.classList.remove('label-error');
+            });
+
+            // Remover alerta
+            const alertDiv = document.querySelector('.alert-wrapper');
+            if (alertDiv) {
+                alertDiv.remove();
+            }
+        }
+
+        // Remover erro quando o usuário começar a digitar
+        document.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('input', function () {
+                this.classList.remove('input-error');
+                const label = document.querySelector(`label[for="${this.id}"]`);
+                if (label) {
+                    label.classList.remove('label-error');
+                }
+            });
         });
     </script>
 

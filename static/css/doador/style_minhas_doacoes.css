@@ -814,35 +814,6 @@ tbody td {
     color: var(--verde-medio);
 }
 
-/* Ícones simples usando CSS (ou substitua por ícones reais se preferir) */
-.card-resumo::before {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 10px;
-    background-color: var(--verde-claro);
-    border-radius: 50%;
-    border: 3px solid var(--verde-medio);
-}
-
-.card-resumo:nth-child(1)::before {
-    /* Ícone para Mês - talvez um calendário simples */
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5IDNIMTVWMUgMTMuNVYySDEwLjVWMEg5VjJINUM0IDJDMi45IDEuOSAyIDIuOSAyIDRDMS45IDUuMSAyIDYuMSAyIDdWMjFDMiAyMi4xIDIuOSA0IDIuOSA0SDIxQzIyLjEgMjIgMjMgMjEuMSAyMyAyMFY3QzIzIDYuMSAyMi4xIDUgMjEgNUMyMi4xIDQuOSAyMiAzLjkgMjEgM0gxOVoiIGZpbGw9IiMyMzU0M2IiLz4KPHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjM1NDNiIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+');
-    background-size: cover;
-}
-
-.card-resumo:nth-child(2)::before {
-    /* Ícone para Ano - talvez um gráfico */
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5IDNIMTVWMUgMTMuNVYySDEwLjVWMEg5VjJINUM0IDJDMi45IDEuOSAyIDIuOSAyIDRDMS45IDUuMSAyIDYuMSAyIDdWMjFDMiAyMi4xIDIuOSA0IDIuOSA0SDIxQzIyLjEgMjIgMjMgMjEuMSAyMyAyMFY3QzIzIDYuMSAyMi4xIDUgMjEgNUMyMi4xIDQuOSAyMiAzLjkgMjEgM0gxOVoiIGZpbGw9IiMyMzU0M2IiLz4KPHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjM1NDNiIiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iMTIiIHk9IjEwIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMjM1NDNiIi8+Cjwvc3ZnPg==');
-    background-size: cover;
-}
-
-.card-resumo:nth-child(3)::before {
-    /* Ícone para Geral - talvez uma soma */
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDMTMuMSAyIDIuOSA0IDIuOSA0SDIxQzIyLjEgMjIgMjMgMjEuMSAyMyAyMFY3QzIzIDYuMSAyMi4xIDUgMjEgNUMyMi4xIDQuOSAyMiAzLjkgMjEgM0gxOVoiIGZpbGw9IiMyMzU0M2IiLz4KPHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjM1NDNiIiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iMTIiIHk9IjEwIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMjM1NDNiIi8+Cjwvc3ZnPg==');
-    background-size: cover;
-}
 
 
 /* -------------------- Campanhas Section -------------------- */
