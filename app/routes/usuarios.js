@@ -10,7 +10,12 @@ module.exports = () => {
 
     // Cadastro (já existente)
     router.get('/cadastro', (req, res) => {
-        res.render('usuarios/cadastro', { usuario: {}, user: req.session.user, action: '/usuarios/cadastro' });
+        res.render('usuarios/cadastro', {
+            usuario: {},
+            user: req.session.user,
+            action: '/usuarios/cadastro',
+            erro: null
+        });
     });
 
     router.post('/cadastro', (req, res) => {
@@ -34,11 +39,19 @@ module.exports = () => {
 
         usuariosDAO.buscarPorEmail(email, (err, results) => {
             if (err) {
-                return res.render('usuarios/cadastro', { erro: 'Erro ao consultar banco de dados.', usuario: req.body });
+                return res.render('usuarios/cadastro', {
+                    erro: 'Erro ao consultar banco de dados.',
+                    usuario: req.body,
+                    user: req.session.user
+                });
             }
 
             if (results.length > 0) {
-                return res.render('usuarios/cadastro', { erro: 'E-mail já cadastrado.', usuario: req.body });
+                return res.render('usuarios/cadastro', {
+                    erro: 'E-mail já cadastrado.',
+                    usuario: req.body,
+                    user: req.session.user
+                });
             }
 
             bcrypt.hash(senha, 10, (err, hash) => {
@@ -90,33 +103,55 @@ module.exports = () => {
     });
 
     // Login - POST
+    // Login - POST
     router.post('/login', (req, res) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.render('usuarios/login', { erro: 'Preencha e-mail e senha.', usuario: req.body, user: req.session.user, action: '/usuarios/login' });
+            return res.render('usuarios/login', {
+                erro: 'Preencha e-mail e senha.',
+                usuario: { email: email || '' },
+                user: req.session.user
+            });
         }
 
         usuariosDAO.buscarPorEmail(email, (err, results) => {
             if (err) {
-                return res.render('usuarios/login', { erro: 'Erro ao consultar banco de dados.', usuario: req.body, user: req.session.user, action: '/usuarios/login' });
+                console.error('Erro no login:', err);
+                return res.render('usuarios/login', {
+                    erro: 'Erro ao tentar fazer login. Tente novamente.',
+                    usuario: { email },
+                    user: req.session.user
+                });
             }
 
             if (results.length === 0) {
-                return res.render('usuarios/login', { erro: 'Usuário não encontrado.', usuario: req.body, user: req.session.user, action: '/usuarios/login' });
+                return res.render('usuarios/login', {
+                    erro: 'E-mail ou senha inválidos.',
+                    usuario: { email },
+                    user: req.session.user
+                });
             }
 
             const usuario = results[0];
 
             // Compara a senha com o hash armazenado
             bcrypt.compare(password, usuario.usuario_senha, (err, igual) => {
-
                 if (err) {
-                    return res.render('usuarios/login', { erro: 'Erro ao validar senha.', usuario: req.body, user: req.session.user, action: '/usuarios/login' });
+                    console.error('Erro ao comparar senha:', err);
+                    return res.render('usuarios/login', {
+                        erro: 'Erro ao validar senha.',
+                        usuario: { email },
+                        user: req.session.user
+                    });
                 }
 
                 if (!igual) {
-                    return res.render('usuarios/login', { erro: 'Senha incorreta.', usuario: req.body, user: req.session.user, action: '/usuarios/login' });
+                    return res.render('usuarios/login', {
+                        erro: 'E-mail ou senha inválidos.',
+                        usuario: { email },
+                        user: req.session.user
+                    });
                 }
 
                 // Login bem-sucedido: cria sessão
@@ -126,13 +161,12 @@ module.exports = () => {
                     tipo: usuario.usuario_tipo
                 };
 
-
                 // Atualiza o último login no banco
                 const agora = new Date();
                 const updateSql = `UPDATE usuario SET usuario_ultimo_login = ? WHERE usuario_id = ?`;
                 connection.query(updateSql, [agora, usuario.usuario_id], (err2) => {
                     if (err2) console.error('Erro ao atualizar último login:', err2);
-                }); 
+                });
 
                 res.redirect('/');
             });

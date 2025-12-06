@@ -195,7 +195,7 @@ module.exports = (connectionFactory) => {
             acompanhante_observacoes, 
             paciente_email
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    `; 
 
             connection.query(sqlInsert, [
                 id,
