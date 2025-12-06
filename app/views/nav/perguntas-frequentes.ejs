@@ -171,73 +171,85 @@
                                 </div>
                                 <% }) %>
             </div>
-        </div> 
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <!-- ========================= CARROSSEL DE AVALIAÇÕES ============================= -->
+        <!-- Substitua a seção de avaliações atual por esta versão melhorada -->
         <section class="avaliacoes-section">
             <h2>Avaliações dos Pacientes</h2>
 
-            <div class="swiper-wrapper">
-                <% avaliacoes.forEach(av=> { %>
-                    <div class="swiper-slide avaliacao-card">
+            <div class="avaliacoes-swiper-container">
+                <!-- Adicione essas divs de navegação -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
 
-                        <!-- ⭐ NOTA EM ESTRELAS -->
-                        <div class="avaliacao-estrelas">
-                            <% for(let i=1; i<=5; i++){ %>
-                                <% if(i <=av.nota){ %>
-                                    <span class="estrela cheia">★</span>
-                                    <% } else { %>
-                                        <span class="estrela vazia">☆</span>
-                                        <% } %>
-                                            <% } %>
-                        </div>
+                <div class="swiper avaliacao-swiper">
+                    <div class="swiper-wrapper">
+                        <% avaliacoes.forEach(av=> { %>
+                            <div class="swiper-slide avaliacao-card">
+                                <!-- ⭐ NOTA EM ESTRELAS -->
+                                <div class="avaliacao-estrelas">
+                                    <% for(let i=1; i<=5; i++){ %>
+                                        <% if(i <=av.nota){ %>
+                                            <span class="estrela cheia">★</span>
+                                            <% } else { %>
+                                                <span class="estrela vazia">☆</span>
+                                                <% } %>
+                                                    <% } %>
+                                </div>
 
-                        <!-- COMENTÁRIO -->
-                        <p class="avaliacao-texto">
-                            <%= av.comentario %>
-                        </p>
+                                <!-- COMENTÁRIO -->
+                                <p class="avaliacao-texto">
+                                    <%= av.comentario %>
+                                </p>
 
-                        <!-- AUTOR -->
-                        <h4 class="avaliacao-autor">
-                            <span class="icone-verde">🌿</span> — <%= av.nome_paciente || "Paciente" %>
-                        </h4>
-
+                                <!-- AUTOR -->
+                                <h4 class="avaliacao-autor">
+                                    <span class="icone-verde">🌿</span>
+                                    <%= av.nome_paciente || "Paciente" %>
+                                </h4>
+                            </div>
+                            <% }) %>
                     </div>
-                    <% }) %>
+
+                    <!-- Adicione a paginação -->
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
+        </section>
+        
+        <script>
+            new Swiper('.avaliacao-swiper', {
+                loop: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
 
-            <script>
-                new Swiper('.avaliacao-swiper', {
-                    loop: true,
-                    slidesPerView: 1,
-                    spaceBetween: 20,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                },
 
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev'
-                    },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
 
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true
-                    },
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false
+                },
 
-                    autoplay: {
-                        delay: 4000,
-                        disableOnInteraction: false
-                    },
+                centeredSlides: false,
 
-                    centeredSlides: false,
+                breakpoints: {
+                    640: { slidesPerView: 2 },
+                    900: { slidesPerView: 3 },
+                    1200: { slidesPerView: 4 }
+                }
+            });
 
-                    breakpoints: {
-                        640: { slidesPerView: 2 },
-                        900: { slidesPerView: 3 },
-                        1200: { slidesPerView: 4 }
-                    }
-                });
-
-            </script>
+        </script>
 
         </section>
 

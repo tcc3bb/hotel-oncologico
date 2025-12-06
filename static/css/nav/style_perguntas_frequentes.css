@@ -1005,124 +1005,272 @@ footer {
 
 
 
-/* ================================================== SECTION AVALIAÇÃO ===================================================== */
-
-.root{
---verde-escuro: #23543b;
---verde-claro: #cfe9d1;
---verde-medio: #3a7d55;
---vermelho: #d9534f;
---branco: #fff;
-}
-
-/* ====== Seção ====== */
+/* ==================================================== SEÇÃO DE AVALIAÇÕES (REVAMPED) ===================================================== */
 .avaliacoes-section {
-    margin-top: 4rem;
-    padding: 2rem 1rem;
-    text-align: center;
+    margin: 5rem auto 3rem;
+    padding: 3rem 1.5rem;
+    max-width: 1200px;
+    position: relative;
+    border-radius: var(--borda-arredondada-lg);
+    box-shadow: var(--sombra-elevada);
 }
 
-/* ====== Swiper Wrapper (para múltiplos slides) ====== */
-.swiper-wrapper {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem; /* Espaço entre cards */
+.avaliacoes-section h2 {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--cor-principal);
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
 }
 
-/* ====== Cartão ====== */
+.avaliacoes-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cor-acento-claro), var(--cor-secundaria));
+    border-radius: 2px;
+}
+
+/* Container do carrossel */
+.avaliacoes-swiper-container {
+    position: relative;
+    padding: 0 2.5rem;
+}
+
+/* Cartão de avaliação aprimorado */
 .avaliacao-card {
     background: var(--branco);
-    padding: 1.5rem; /* Reduzido para cards menores */
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-    transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
-    max-width: 300px; /* Limita largura para caber 3-4 na tela */
-    border: 2px solid var(--verde-claro); /* Detalhe verde: borda */
-    flex: 1; /* Permite ajuste automático em flex */
+    padding: 2rem 1.8rem;
+    border-radius: var(--borda-arredondada-lg);
+    box-shadow: 0 6px 20px rgba(35, 84, 59, 0.08);
+    border: 1px solid var(--cor-borda-suave);
+    height: auto;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transicao-rapida);
+    position: relative;
+    overflow: hidden;
+}
+
+.avaliacao-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--cor-secundaria), var(--cor-acento-claro));
 }
 
 .avaliacao-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
-    background: rgba(207, 233, 209, 0.1); /* Detalhe verde: fundo leve no hover */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(35, 84, 59, 0.15);
+    border-color: var(--cor-secundaria);
 }
 
-/* ====== Estrelas ====== */
+/* Estrelas aprimoradas */
 .avaliacao-estrelas {
-    margin-bottom: 1rem;
-    font-size: 1.4rem; /* Reduzido para cards menores */
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    gap: 3px;
 }
 
 .estrela {
-    margin: 0 2px;
-    transition: transform .3s ease;
+    transition: transform 0.2s ease, color 0.3s ease;
 }
 
 .estrela.cheia {
-    color: #f7c600; /* dourado */
-    text-shadow: 0 0 6px rgba(247,198,0,.6);
+    color: #FFC107;
+    text-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
 }
 
 .estrela.vazia {
-    color: #ccc;
+    color: #E0E0E0;
 }
 
 .avaliacao-card:hover .estrela.cheia {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
-/* ====== Texto ====== */
+/* Texto da avaliação */
 .avaliacao-texto {
-    font-size: 1rem; /* Reduzido para cards menores */
-    margin-bottom: 1rem;
-    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--cor-texto-escuro);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    font-style: italic;
+    padding: 0 0.5rem;
+    position: relative;
 }
 
-/* ====== Autor ====== */
+.avaliacao-texto::before,
+.avaliacao-texto::after {
+    content: '"';
+    color: var(--cor-secundaria);
+    font-size: 1.8rem;
+    font-family: 'Times New Roman', serif;
+    opacity: 0.7;
+}
+
+/* Autor da avaliação */
 .avaliacao-autor {
-    font-weight: bold;
-    color: var(--verde-medio);
-    margin-top: .5rem;
+    font-weight: 600;
+    color: var(--cor-principal);
+    font-size: 1rem;
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--cor-borda-suave);
+    margin-top: auto;
 }
 
 .icone-verde {
-    margin-right: 0.5rem;
-    font-size: 1.2rem;
-    color: var(--verde-medio); /* Detalhe verde: ícone */
+    color: var(--cor-secundaria);
+    font-size: 1.3rem;
 }
 
-/* ====== Swiper Arrows ====== */
+/* Navegação do carrossel */
 .swiper-button-next,
 .swiper-button-prev {
-    color: var(--verde-medio);
-    transition: .3s ease;
-    opacity: 0.8;
+    background: var(--branco);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: var(--cor-principal);
+    transition: var(--transicao-rapida);
+    border: 1px solid var(--cor-borda-suave);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    color: var(--verde-escuro);
-    transform: scale(1.15);
-    opacity: 1;
+    background: var(--cor-secundaria);
+    color: var(--branco);
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(35, 84, 59, 0.2);
 }
 
-/* ====== Paginação ====== */
+/* Paginação */
+.swiper-pagination {
+    position: relative;
+    margin-top: 2.5rem;
+}
+
 .swiper-pagination-bullet {
-    background: var(--verde-claro);
-    opacity: .7;
     width: 10px;
     height: 10px;
+    background: var(--cor-acento-claro);
+    opacity: 0.6;
+    transition: var(--transicao-rapida);
 }
 
 .swiper-pagination-bullet-active {
-    background: var(--verde-escuro);
-    width: 12px;
-    height: 12px;
+    background: var(--cor-secundaria);
     opacity: 1;
+    transform: scale(1.3);
 }
 
+
+
+/* Responsividade dos modais */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5vh auto;
+        max-height: 90vh;
+    }
+    
+    .modal-header {
+        padding: 1.8rem 1.5rem 1.2rem;
+    }
+    
+    .modal-titulo {
+        font-size: 1.8rem;
+    }
+    
+    .modal-subtitulo {
+        font-size: 1.1rem;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+        max-height: 60vh;
+    }
+    
+    .modal-meta {
+        gap: 0.8rem;
+    }
+    
+    .modal-meta span {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .avaliacoes-section {
+        padding: 2rem 1rem;
+    }
+    
+    .avaliacoes-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .avaliacao-card {
+        padding: 1.5rem;
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-titulo {
+        font-size: 1.5rem;
+    }
+    
+    .modal-subtitulo {
+        font-size: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1.2rem;
+    }
+    
+    .modal-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .avaliacao-card {
+        padding: 1.2rem;
+        min-height: 220px;
+    }
+    
+    .avaliacao-texto {
+        font-size: 0.95rem;
+    }
+    
+    .avaliacao-estrelas {
+        font-size: 1.4rem;
+    }
+}
 
 
 
