@@ -27,12 +27,10 @@
 }
 
 body {
-    font-family: 'Poppins', 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #f9f9f9 0%, #f0f7f1 100%);
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #444;
+    line-height: 1.6;
 }
 
 .reserva-container {
@@ -51,11 +49,12 @@ body {
     box-shadow: var(--sombra-elevada);
 }
 
-.title-header{
+.title-header {
     font-size: 2rem;
 }
 
 /* ======================================================= Menu ======================================================= */
+/* =========================================================== MENU ============================================================== */
 nav {
     background-color: #699b80;
     padding: 1rem 5rem;
@@ -66,10 +65,6 @@ nav {
     font-weight: 600;
     font-size: 0.9rem;
     max-width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 nav a {
@@ -87,6 +82,7 @@ nav a:hover {
     background-color: #83aa89;
 }
 
+/* LINKS DESKTOP */
 nav .nav-links {
     display: flex;
     gap: 1.2rem;
@@ -139,10 +135,55 @@ nav .nav-links {
     background-color: #c0392b;
 }
 
+/* HAMBURGUER MENU */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* =========================================================== MENU MOBILE =========================================================== */
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #699b80;
+        width: 100%;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 /* ======================================================= Section Reserva ======================================================= */
 
 /* Cabeçalho */
-.page-header{
+.page-header {
     background-color: green;
 }
 
@@ -153,7 +194,8 @@ nav .nav-links {
     border: 1px solid var(--verde-border);
 }
 
-.bg-verde-escuro, .bg-verde-medio  {
+.bg-verde-escuro,
+.bg-verde-medio {
     background: linear-gradient(135deg, var(--verde) 0%, var(--verde) 100%);
 }
 
@@ -231,7 +273,8 @@ nav .nav-links {
     opacity: 0.7;
 }
 
-.thumbnail-img:hover, .thumbnail-img.active {
+.thumbnail-img:hover,
+.thumbnail-img.active {
     opacity: 1;
     border-color: var(--branco);
     transform: scale(1.1);
@@ -451,11 +494,11 @@ footer {
     .reserva-wrapper {
         padding: 0 1rem;
     }
-    
+
     .page-header {
         padding: 1.5rem 1rem;
     }
-    
+
     .page-header h1 {
         font-size: 2rem;
     }
@@ -467,25 +510,28 @@ footer {
         padding: 0.8rem 1rem;
         gap: 0.5rem;
     }
-    
+
     nav a {
         padding: 0.4rem 0.8rem;
         font-size: 0.85rem;
     }
-    
+
     .img-logo {
         height: 40px;
     }
-    
+
     .tipo-quarto-card {
         margin-bottom: 1.5rem;
     }
-    
+
     .quarto-thumbnails {
-        display: none; 
+        display: none;
     }
-    
-    .btn-entrar, .btn-cadastrar, .btn-nav, .btn-logout {
+
+    .btn-entrar,
+    .btn-cadastrar,
+    .btn-nav,
+    .btn-logout {
         padding: 0.4rem 1rem;
         font-size: 0.85rem;
     }
@@ -495,28 +541,28 @@ footer {
     .reserva-container {
         padding: 1rem 0.5rem;
     }
-    
+
     .page-header {
         margin: 1rem auto;
         padding: 1.5rem 1rem;
     }
-    
+
     .page-header h1 {
         font-size: 1.5rem;
     }
-    
+
     .page-header p {
         font-size: 0.9rem;
     }
-    
+
     .quarto-img-container {
         height: 160px;
     }
-    
+
     .quarto-info {
         padding: 1rem;
     }
-    
+
     .btn-confirmar {
         padding: 0.8rem;
         font-size: 1rem;

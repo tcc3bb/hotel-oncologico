@@ -193,7 +193,7 @@ nav .nav-links {
 }
 
 .historia-texto {
-    position: absolute;
+    position: absolute; 
     background: #fff;
     padding: 0.6rem 1.2rem;
     border-radius: 0.75rem 0.75rem 2rem 0.25rem;
